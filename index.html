@@ -1236,10 +1236,26 @@ function openModal() {
 
 function closeModal() { document.getElementById('email-modal-overlay').classList.remove('show'); }
 
-function submitEmail(e) {
+async function submitEmail(e) {
   e.preventDefault();
   const email = document.getElementById('modal-email').value.trim();
   if(!email) return;
+
+  const btn = document.querySelector('.modal-submit');
+  const originalText = btn.textContent;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwjohYDbty2lzwFaCGOh97sqNxX2D1MRCCmd0haixoHt0jCsRuolWKsXg2UF4pe1cEugg/exec';
+
+  try {
+    // Use image trick — 100% works with Google Apps Script, bypasses CORS
+    const img = new Image();
+    img.src = SHEET_URL + '?email=' + encodeURIComponent(email) + '&t=' + Date.now();
+  } catch(err) {
+    console.log('err:', err);
+  }
+
   localStorage.setItem('vyxor_subscribed','1');
   localStorage.setItem('vyxor_email', email);
   document.getElementById('modal-form').style.display='none';
