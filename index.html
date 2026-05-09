@@ -1246,12 +1246,13 @@ async function submitEmail(e) {
   btn.textContent = 'Sending...';
   btn.disabled = true;
 
-  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbwjohYDbty2lzwFaCGOh97sqNxX2D1MRCCmd0haixoHt0jCsRuolWKsXg2UF4pe1cEugg/exec';
+  const SHEET_URL = 'https://script.google.com/macros/s/AKfycbzM3v6AA9ovWf-0dh3u_lg3DjIXvCg5--5rZGlEQbDEBsEmeAOzqJg6HmqrOqw6WWKoRA/exec';
 
   try {
     // Use image trick — 100% works with Google Apps Script, bypasses CORS
     const img = new Image();
-    img.src = SHEET_URL + '?email=' + encodeURIComponent(email) + '&t=' + Date.now();
+    img.src = SHEET_URL + '?email=' + encodeURIComponent(email) + '&source=vyxor&t=' + Date.now();
+    console.log('Sending to sheet:', email);
   } catch(err) {
     console.log('err:', err);
   }
