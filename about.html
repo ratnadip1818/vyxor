@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Vyxor — Free Trader Risk Management Platform</title>
+<meta name="description" content="Vyxor is a free institutional-grade risk management platform built by traders, for traders. Our mission is to give every trader the tools to survive markets.">
+<meta property="og:title" content="About Vyxor — Built for Traders"><meta property="og:description" content="Free risk management tools for serious traders. Position sizing, journals, psychology tracking and more.">
+<meta name="theme-color" content="#050816">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050816;--bg2:#0B1220;--border:rgba(255,255,255,0.06);--accent:#00F5A0;--accent-h:#00D98B;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;--card:rgba(15,23,42,0.72);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,160,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.018) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
+.glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);}
+.g1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,245,160,0.07) 0%,transparent 70%);top:-100px;right:-100px;}
+.g2{width:400px;height:400px;background:radial-gradient(circle,rgba(59,130,246,0.05) 0%,transparent 70%);bottom:10%;left:-100px;}
+@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:62px;background:rgba(5,8,22,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;text-decoration:none;color:var(--text);}
+.logo .v{color:var(--accent);}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 1px 6px;animation:pd 2s infinite;}
+.nl{display:flex;align-items:center;gap:2rem;list-style:none;}
+.nl a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nl a:hover,.nl a.act{color:var(--text);}
+.pill{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);padding:4px 14px;border-radius:99px;}
+.page{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:100px 2rem 5rem;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:1rem;animation:fu 0.6s ease both;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,5vw,60px);letter-spacing:-2px;line-height:1.0;margin-bottom:1.5rem;animation:fu 0.6s 0.1s ease both;}
+h1 span{color:var(--accent);}
+.lead{font-size:17px;color:var(--muted);line-height:1.8;font-weight:300;max-width:600px;margin-bottom:3rem;animation:fu 0.6s 0.2s ease both;}
+.divider{height:1px;background:var(--border);margin:2.5rem 0;}
+.section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.5px;margin-bottom:1rem;}
+.section-title span{color:var(--accent);}
+p{font-size:15px;color:var(--muted);line-height:1.8;font-weight:300;margin-bottom:1rem;}
+.mission-box{background:var(--card);border:1px solid rgba(0,245,160,0.15);border-radius:14px;padding:2rem;margin:2rem 0;backdrop-filter:blur(20px);}
+.mission-quote{font-family:'Syne',sans-serif;font-size:20px;font-weight:700;line-height:1.4;color:var(--text);margin-bottom:0.5rem;}
+.mission-quote span{color:var(--accent);}
+.values{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:2rem 0;}
+.val{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;backdrop-filter:blur(10px);transition:border-color 0.2s;}
+.val:hover{border-color:rgba(0,245,160,0.2);}
+.val-icon{font-size:24px;margin-bottom:8px;}
+.val-title{font-size:14px;font-weight:500;margin-bottom:4px;}
+.val-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+.stats-row{display:flex;gap:1px;margin:2rem 0;}
+.stat{flex:1;background:var(--card);border:1px solid var(--border);padding:1.25rem 1rem;text-align:center;backdrop-filter:blur(10px);}
+.stat:first-child{border-radius:10px 0 0 10px;}
+.stat:last-child{border-radius:0 10px 10px 0;}
+.stat-val{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;color:var(--accent);margin-bottom:3px;}
+.stat-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;}
+.roadmap{display:flex;flex-direction:column;gap:10px;margin:1.5rem 0;}
+.rm{display:flex;gap:14px;align-items:flex-start;padding:1rem 1.25rem;background:var(--card);border:1px solid var(--border);border-radius:10px;backdrop-filter:blur(10px);}
+.rm-icon{font-size:20px;flex-shrink:0;margin-top:2px;}
+.rm-title{font-size:14px;font-weight:500;margin-bottom:3px;}
+.rm-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+.rm-badge{margin-left:auto;font-size:10px;padding:3px 10px;border-radius:99px;white-space:nowrap;font-family:'DM Mono',monospace;flex-shrink:0;}
+.live{background:rgba(0,245,160,0.08);color:var(--accent);border:1px solid rgba(0,245,160,0.2);}
+.soon{background:rgba(255,176,32,0.08);color:#FFB020;border:1px solid rgba(255,176,32,0.2);}
+.planned{background:rgba(94,114,148,0.08);color:var(--muted);border:1px solid var(--border);}
+.cta-box{background:rgba(0,245,160,0.05);border:1px solid rgba(0,245,160,0.2);border-radius:14px;padding:2rem;text-align:center;margin-top:3rem;}
+.cta-title{font-family:'Syne',sans-serif;font-size:24px;font-weight:800;letter-spacing:-0.5px;margin-bottom:8px;}
+.cta-desc{font-size:14px;color:var(--muted);margin-bottom:1.5rem;}
+.cta-btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#020c12;padding:12px 28px;border-radius:8px;border:none;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;text-decoration:none;transition:all 0.2s;}
+.cta-btn:hover{background:var(--accent-h);transform:translateY(-1px);}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.fl{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
+.fl span{color:var(--accent);}
+.fc{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
+@media(max-width:600px){nav{padding:0 1.25rem;}.nl{display:none;}.stats-row{flex-wrap:wrap;}.stat{flex:1 1 40%;}.stat:first-child{border-radius:10px 0 0 0;}.stat:last-child{border-radius:0 0 10px 0;}}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+<nav>
+  <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
+  <ul class="nl">
+    <li><a href="/index.html">Calculator</a></li>
+    <li><a href="/journal.html">Journal</a></li>
+    <li><a href="/psychology.html">Psychology</a></li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/about.html" class="act">About</a></li>
+    <li><span class="pill">Free · vyxor.in</span></li>
+  </ul>
+</nav>
+<div class="page">
+  <div class="eyebrow">About Vyxor</div>
+  <h1>Built by traders.<br><span>For traders.</span></h1>
+  <p class="lead">Vyxor exists for one reason — most traders fail not because of bad strategies, but because of bad risk management. We're fixing that with free, institutional-grade tools for every trader.</p>
+
+  <div class="mission-box">
+    <div class="mission-quote">"<span>Every trader deserves</span> the same risk management tools that institutional traders use. Free. Forever."</div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title">Who we <span>are</span></div>
+  <p>Vyxor is an independent trading tools platform built and maintained by a small team of traders who got tired of paying for tools that should be free. We trade Forex, Futures and Crypto — and we built the tools we wished existed.</p>
+  <p>We are not a broker. We are not financial advisors. We do not sell signals or courses. We build tools that make traders better at managing risk — the most important skill in trading.</p>
+
+  <div class="divider"></div>
+  <div class="section-title">Our <span>numbers</span></div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-val">50+</div><div class="stat-lbl">Assets covered</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">Markets</div></div>
+    <div class="stat"><div class="stat-val">₹0</div><div class="stat-lbl">Cost to use</div></div>
+    <div class="stat"><div class="stat-val">∞</div><div class="stat-lbl">Free forever</div></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title">What we <span>believe</span></div>
+  <div class="values">
+    <div class="val"><div class="val-icon">🛡️</div><div class="val-title">Capital protection first</div><div class="val-desc">Surviving markets is more important than making money. You can't compound what you've blown up.</div></div>
+    <div class="val"><div class="val-icon">🆓</div><div class="val-title">Free forever</div><div class="val-desc">Core risk management tools should never be behind a paywall. Every trader deserves access.</div></div>
+    <div class="val"><div class="val-icon">🎯</div><div class="val-title">Precision over noise</div><div class="val-desc">No signals. No predictions. No hype. Just clean, accurate tools that do exactly what they say.</div></div>
+    <div class="val"><div class="val-icon">🧠</div><div class="val-title">Psychology matters</div><div class="val-desc">The best strategy fails without discipline. We build tools for the mental side of trading too.</div></div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="section-title">What's <span>coming</span></div>
+  <div class="roadmap">
+    <div class="rm"><div class="rm-icon">⚡</div><div><div class="rm-title">Position Size Calculator</div><div class="rm-desc">Forex, Futures (including Micros) and Crypto. 50+ assets with correct tick/pip values.</div></div><span class="rm-badge live">Live Now</span></div>
+    <div class="rm"><div class="rm-icon">📔</div><div><div class="rm-title">Trade Journal</div><div class="rm-desc">Log trades, tag emotions, find patterns. The free journal every serious trader needs.</div></div><span class="rm-badge soon">Coming Soon</span></div>
+    <div class="rm"><div class="rm-icon">🧠</div><div><div class="rm-title">Psychology Tracker</div><div class="rm-desc">Pre-trade mood checkin, FOMO detector, revenge trade warning, discipline score.</div></div><span class="rm-badge soon">Coming Soon</span></div>
+    <div class="rm"><div class="rm-icon">📊</div><div><div class="rm-title">Drawdown Dashboard</div><div class="rm-desc">Full account health — drawdown meter, daily loss tracker, equity curve.</div></div><span class="rm-badge planned">Planned</span></div>
+    <div class="rm"><div class="rm-icon">📰</div><div><div class="rm-title">Trading Blog</div><div class="rm-desc">Educational content on risk management, position sizing, and trader psychology.</div></div><span class="rm-badge soon">Coming Soon</span></div>
+  </div>
+
+  <div class="cta-box">
+    <div class="cta-title">Start managing risk properly</div>
+    <p class="cta-desc">Free. No signup. Works on mobile. 50+ assets.</p>
+    <a href="/index.html" class="cta-btn">Open Calculator →</a>
+  </div>
+</div>
+<footer><div class="fl"><span>V</span>yxor</div><div class="fc">© 2026 Vyxor · vyxor.in · Free forever</div></footer>
+</body>
+</html>

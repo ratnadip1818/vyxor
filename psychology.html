@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psychology Tracker — Coming Soon | Vyxor</title>
+<meta name="description" content="Beat FOMO and revenge trading with Vyxor Psychology Tracker. Coming soon.">
+<meta name="theme-color" content="#050816">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050816;--border:rgba(255,255,255,0.06);--accent:#00F5A0;--accent-h:#00D98B;--purple:#a78bfa;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,160,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.018) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
+.glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);}
+.g1{width:500px;height:500px;background:radial-gradient(circle,rgba(167,139,250,0.08) 0%,transparent 70%);top:-100px;right:-100px;}
+.g2{width:400px;height:400px;background:radial-gradient(circle,rgba(0,245,160,0.05) 0%,transparent 70%);bottom:10%;left:-100px;}
+@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:62px;background:rgba(5,8,22,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;text-decoration:none;color:var(--text);}
+.logo .v{color:var(--accent);}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 1px 6px;animation:pd 2s infinite;}
+.nl{display:flex;align-items:center;gap:2rem;list-style:none;}
+.nl a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nl a:hover,.nl a.act{color:var(--text);}
+.pill{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);padding:4px 14px;border-radius:99px;}
+main{flex:1;display:flex;align-items:center;justify-content:center;position:relative;z-index:1;padding:100px 2rem 4rem;}
+.box{text-align:center;max-width:560px;width:100%;}
+.ico{width:80px;height:80px;border-radius:20px;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 2rem;box-shadow:0 0 40px rgba(167,139,250,0.1);}
+.tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--purple);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:8px;}
+.tag::before,.tag::after{content:'';width:24px;height:1px;background:var(--purple);}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(30px,5vw,52px);letter-spacing:-2px;line-height:1.05;margin-bottom:1rem;}
+h1 span{color:var(--purple);}
+.desc{font-size:15px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:2rem;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:2rem;text-align:left;}
+.card{background:rgba(15,23,42,0.5);border:1px solid var(--border);border-radius:10px;padding:12px 14px;}
+.ci{font-size:18px;margin-bottom:6px;}
+.ct{font-size:13px;font-weight:500;margin-bottom:3px;}
+.cd{font-size:11px;color:var(--muted);line-height:1.5;}
+.nf{display:flex;gap:8px;max-width:400px;margin:0 auto 10px;}
+.ni{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:all 0.2s;}
+.ni::placeholder{color:var(--muted2);}
+.ni:focus{border-color:rgba(167,139,250,0.4);box-shadow:0 0 0 3px rgba(167,139,250,0.06);}
+.nb{padding:11px 20px;border-radius:8px;border:none;background:var(--purple);color:#0a0c0f;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.nb:hover{background:#c4b5fd;}
+.prv{font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;}
+.suc{display:none;background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.2);border-radius:8px;padding:12px 20px;font-size:13px;color:var(--purple);font-family:'DM Mono',monospace;margin-bottom:10px;}
+.bk{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted);text-decoration:none;margin-top:1.5rem;transition:color 0.2s;}
+.bk:hover{color:var(--text);}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.fl{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
+.fl span{color:var(--accent);}
+.fc{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
+@media(max-width:600px){nav{padding:0 1.25rem;}.nl{display:none;}.grid{grid-template-columns:1fr;}.nf{flex-direction:column;}}
+</style>
+</head>
+<body>
+<div class="glow g1"></div><div class="glow g2"></div>
+<nav>
+  <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
+  <ul class="nl">
+    <li><a href="/index.html">Calculator</a></li>
+    <li><a href="/journal.html">Journal</a></li>
+    <li><a href="/psychology.html" class="act">Psychology</a></li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><span class="pill">Free · vyxor.in</span></li>
+  </ul>
+</nav>
+<main>
+  <div class="box">
+    <div class="ico">🧠</div>
+    <div class="tag">Coming Soon</div>
+    <h1>Psychology <span>Tracker</span></h1>
+    <p class="desc">Your strategy is fine. Your mind is the problem. Vyxor Psychology Tracker checks your mental state before every trade and stops emotional decisions that destroy accounts.</p>
+    <div class="grid">
+      <div class="card"><div class="ci">😤</div><div class="ct">FOMO Detector</div><div class="cd">Pre-trade checkin that flags if you're chasing. FOMO detected — it tells you to wait.</div></div>
+      <div class="card"><div class="ci">🔁</div><div class="ct">Revenge Trade Warning</div><div class="cd">After a loss, it asks if you're trading to recover. Stops you before you blow up.</div></div>
+      <div class="card"><div class="ci">📈</div><div class="ct">Mood vs Performance</div><div class="cd">Track mood daily. See correlation between emotions and your win rate over time.</div></div>
+      <div class="card"><div class="ci">🎯</div><div class="ct">Daily Discipline Score</div><div class="cd">A score out of 100 based on your pre-trade checkins and rule following.</div></div>
+    </div>
+    <div class="nf" id="nf">
+      <input class="ni" id="em" type="email" placeholder="Get notified when it launches">
+      <button class="nb" onclick="go()">Notify Me</button>
+    </div>
+    <div class="suc" id="sc">✓ You're on the list! We'll notify you when Psychology Tracker launches. 🚀</div>
+    <p class="prv">🔒 No spam. Unsubscribe anytime.</p>
+    <a href="/index.html" class="bk">← Back to Calculator</a>
+  </div>
+</main>
+<footer><div class="fl"><span>V</span>yxor</div><div class="fc">© 2026 Vyxor · vyxor.in · Free forever</div></footer>
+<script>
+function go(){
+  const e=document.getElementById('em').value.trim();
+  if(!e)return;
+  try{new Image().src='https://script.google.com/macros/s/AKfycbzM3v6AA9ovWf-0dh3u_lg3DjIXvCg5--5rZGlEQbDEBsEmeAOzqJg6HmqrOqw6WWKoRA/exec?email='+encodeURIComponent(e)+'&source=psychology&t='+Date.now();}catch(x){}
+  localStorage.setItem('vyxor_subscribed','1');
+  document.getElementById('nf').style.display='none';
+  document.getElementById('sc').style.display='block';
+}
+</script>
+</body>
+</html>

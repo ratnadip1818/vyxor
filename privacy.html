@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy | Vyxor</title>
+<meta name="description" content="Vyxor privacy policy — how we handle your data. We collect minimal data and never sell it.">
+<meta name="theme-color" content="#050816">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050816;--border:rgba(255,255,255,0.06);--accent:#00F5A0;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;--card:rgba(15,23,42,0.72);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,160,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.018) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
+@keyframes pd{0%,100%{opacity:1}50%{opacity:0.4}}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:62px;background:rgba(5,8,22,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;text-decoration:none;color:var(--text);}
+.logo .v{color:var(--accent);}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 1px 6px;animation:pd 2s infinite;}
+.nl{display:flex;align-items:center;gap:2rem;list-style:none;}
+.nl a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nl a:hover{color:var(--text);}
+.pill{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);padding:4px 14px;border-radius:99px;}
+.page{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:100px 2rem 5rem;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-1.5px;margin-bottom:0.5rem;}
+.updated{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;margin-bottom:2.5rem;}
+.tl-dr{background:rgba(0,245,160,0.05);border:1px solid rgba(0,245,160,0.2);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:2.5rem;}
+.tl-dr-title{font-size:12px;font-weight:500;color:var(--accent);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;}
+.tl-dr ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.tl-dr li{font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:flex-start;}
+.tl-dr li::before{content:'✓';color:var(--accent);flex-shrink:0;font-weight:700;}
+h2{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.3px;margin:2rem 0 0.75rem;}
+p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:0.75rem;font-weight:300;}
+ul.list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;}
+ul.list li{font-size:14px;color:var(--muted);display:flex;gap:8px;padding-left:0;}
+ul.list li::before{content:'·';color:var(--accent);flex-shrink:0;}
+a{color:var(--accent);text-decoration:none;}
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.fl{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
+.fl span{color:var(--accent);}
+.fc{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
+@media(max-width:600px){nav{padding:0 1.25rem;}.nl{display:none;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
+  <ul class="nl">
+    <li><a href="/index.html">Calculator</a></li>
+    <li><a href="/blog.html">Blog</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/privacy.html">Privacy</a></li>
+    <li><span class="pill">Free · vyxor.in</span></li>
+  </ul>
+</nav>
+<div class="page">
+  <div class="eyebrow">Legal</div>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: May 9, 2026</p>
+
+  <div class="tl-dr">
+    <div class="tl-dr-title">TL;DR — Plain English</div>
+    <ul>
+      <li>We only collect your email if you voluntarily sign up for updates</li>
+      <li>We never sell your data to anyone, ever</li>
+      <li>All calculator inputs stay in your browser — we never see them</li>
+      <li>We may use Google Analytics to understand traffic (anonymous)</li>
+      <li>You can ask us to delete your email anytime</li>
+    </ul>
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>Vyxor ("we", "us", "our") operates the website vyxor.in — a free trading risk management platform. We are based in India. Contact: <a href="mailto:hello@vyxor.in">hello@vyxor.in</a></p>
+
+  <h2>2. What data we collect</h2>
+  <p>We collect only two types of data:</p>
+  <ul class="list">
+    <li><strong>Email address</strong> — only if you voluntarily enter it in our notification form to be notified about new tools. This is optional.</li>
+    <li><strong>Anonymous analytics</strong> — if we use Google Analytics, it collects anonymous browsing data (pages visited, country, device type). No personal identifiers.</li>
+  </ul>
+  <p>We do NOT collect: your name, trading data, calculator inputs, financial information, or payment details. All calculator inputs are processed in your browser only and never sent to our servers.</p>
+
+  <h2>3. How we use your data</h2>
+  <ul class="list">
+    <li>Email: to notify you when new Vyxor tools launch. We do not send marketing emails or spam.</li>
+    <li>Analytics: to understand how many people use Vyxor and which features are most used, so we can improve the platform.</li>
+  </ul>
+
+  <h2>4. Data storage</h2>
+  <p>Email addresses submitted through our notification form are stored in a private Google Sheet accessible only to the Vyxor team. We do not use third-party email marketing services.</p>
+
+  <h2>5. Data sharing</h2>
+  <p>We do not sell, trade, or transfer your personal data to any third parties. We do not share your data with advertisers, brokers, or any other party.</p>
+
+  <h2>6. Cookies</h2>
+  <p>Vyxor uses minimal local storage to remember your preference (e.g. if you have already subscribed to notifications). We do not use advertising cookies. If Google Analytics is enabled, it uses its standard anonymous cookies.</p>
+
+  <h2>7. Your rights</h2>
+  <p>You have the right to:</p>
+  <ul class="list">
+    <li>Request a copy of any data we hold about you</li>
+    <li>Request deletion of your email from our list at any time</li>
+    <li>Opt out of any future communications</li>
+  </ul>
+  <p>To exercise these rights, email us at <a href="mailto:hello@vyxor.in">hello@vyxor.in</a></p>
+
+  <h2>8. Children's privacy</h2>
+  <p>Vyxor is not intended for users under the age of 18. We do not knowingly collect data from minors.</p>
+
+  <h2>9. Changes to this policy</h2>
+  <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated date. Continued use of Vyxor after changes means you accept the updated policy.</p>
+
+  <h2>10. Contact</h2>
+  <p>For any privacy questions or requests: <a href="mailto:hello@vyxor.in">hello@vyxor.in</a><br>Website: <a href="https://vyxor.in">vyxor.in</a></p>
+</div>
+<footer><div class="fl"><span>V</span>yxor</div><div class="fc">© 2026 Vyxor · vyxor.in · Free forever</div></footer>
+</body>
+</html>
