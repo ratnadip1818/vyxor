@@ -261,6 +261,143 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:4r
   h1{letter-spacing:-2px;}
 }
 </style>
+
+<!-- FIREBASE SDK v10 -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDHzG49DUCbQ2RpR3ddgEElOZ7Qdop2MwE",
+  authDomain: "vyxor-3f94c.firebaseapp.com",
+  projectId: "vyxor-3f94c",
+  storageBucket: "vyxor-3f94c.firebasestorage.app",
+  messagingSenderId: "992136225540",
+  appId: "1:992136225540:web:3d8ad8fa511d0978346651",
+  measurementId: "G-LT4F4CFBSX"
+};
+
+const app  = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// ── HELPERS ──
+function showError(id, msg) {
+  let el = document.getElementById(id);
+  if (!el) {
+    el = document.createElement('div');
+    el.id = id;
+    el.style.cssText = 'color:#FF4D6D;font-size:12px;font-family:DM Mono,monospace;margin-bottom:8px;padding:8px 12px;background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.2);border-radius:6px;';
+    const btn = document.querySelector('#' + id.replace('err','') + ' .auth-submit');
+    if (btn) btn.parentNode.insertBefore(el, btn);
+  }
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function clearError(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'none';
+}
+function setLoading(btn, loading) {
+  btn.disabled = loading;
+  btn.textContent = loading ? '...' : btn.dataset.label;
+}
+function friendlyError(code) {
+  const map = {
+    'auth/user-not-found':        'No account found with this email.',
+    'auth/wrong-password':        'Incorrect password. Please try again.',
+    'auth/email-already-in-use':  'This email is already registered.',
+    'auth/weak-password':         'Password must be at least 6 characters.',
+    'auth/invalid-email':         'Please enter a valid email address.',
+    'auth/popup-closed-by-user':  'Sign-in window was closed. Please try again.',
+    'auth/invalid-credential':    'Incorrect email or password.',
+  };
+  return map[code] || 'Something went wrong. Please try again.';
+}
+
+// ── AUTH STATE ──
+onAuthStateChanged(auth, (user) => {
+  const signInBtn  = document.getElementById('nav-signin');
+  const signUpBtn  = document.getElementById('nav-signup');
+  const userInfo   = document.getElementById('nav-user');
+  const userName   = document.getElementById('nav-username');
+  const signOutBtn = document.getElementById('nav-signout');
+  if (!signInBtn) return;
+  if (user) {
+    signInBtn.style.display  = 'none';
+    signUpBtn.style.display  = 'none';
+    userInfo.style.display   = 'flex';
+    const first = (user.displayName || user.email || 'Trader').split(' ')[0];
+    userName.textContent = first;
+    closeAuth();
+  } else {
+    signInBtn.style.display  = '';
+    signUpBtn.style.display  = '';
+    userInfo.style.display   = 'none';
+  }
+});
+
+// ── GOOGLE AUTH ──
+window.googleSignIn = async function() {
+  const btns = document.querySelectorAll('.social-btn');
+  btns.forEach(b => { b.disabled = true; b.dataset.label = b.textContent; b.textContent = '...'; });
+  clearError('login-err'); clearError('signup-err');
+  try {
+    await signInWithPopup(auth, provider);
+  } catch(e) {
+    const msg = friendlyError(e.code);
+    showError('login-err', msg);
+    showError('signup-err', msg);
+  } finally {
+    btns.forEach(b => { b.disabled = false; b.textContent = b.dataset.label || b.textContent; });
+  }
+};
+
+// ── EMAIL LOGIN ──
+window.emailLogin = async function() {
+  const btn   = document.querySelector('#auth-login .auth-submit');
+  const email = document.querySelector('#auth-login input[type="email"]').value.trim();
+  const pass  = document.querySelector('#auth-login input[type="password"]').value;
+  clearError('login-err');
+  if (!email || !pass) { showError('login-err','Please enter your email and password.'); return; }
+  btn.dataset.label = btn.textContent;
+  setLoading(btn, true);
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch(e) {
+    showError('login-err', friendlyError(e.code));
+  } finally {
+    setLoading(btn, false);
+  }
+};
+
+// ── EMAIL SIGNUP ──
+window.emailSignup = async function() {
+  const btn   = document.querySelector('#auth-signup .auth-submit');
+  const name  = document.querySelector('#auth-signup input[type="text"]').value.trim();
+  const email = document.querySelector('#auth-signup input[type="email"]').value.trim();
+  const pass  = document.querySelector('#auth-signup input[type="password"]').value;
+  clearError('signup-err');
+  if (!name || !email || !pass) { showError('signup-err','Please fill in all fields.'); return; }
+  btn.dataset.label = btn.textContent;
+  setLoading(btn, true);
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    // Update display name
+    const { updateProfile } = await import("https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js");
+    await updateProfile(cred.user, { displayName: name });
+  } catch(e) {
+    showError('signup-err', friendlyError(e.code));
+  } finally {
+    setLoading(btn, false);
+  }
+};
+
+// ── SIGN OUT ──
+window.doSignOut = async function() {
+  await signOut(auth);
+};
+</script>
 </head>
 <body>
 
@@ -280,21 +417,21 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:4r
       <div id="auth-login">
         <div class="auth-title">Welcome back to <span>Vyxor</span></div>
         <p class="auth-sub">Sign in to access your trade journal and saved settings.</p>
-        <button class="social-btn" onclick="socialAuth('google')">
+        <button class="social-btn" onclick="googleSignIn()">
           <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Continue with Google
         </button>
         <div class="auth-or">or</div>
         <div class="auth-field"><label>Email</label><input class="auth-input" type="email" placeholder="you@email.com"></div>
         <div class="auth-field"><label>Password</label><input class="auth-input" type="password" placeholder="••••••••"></div>
-        <button class="auth-submit">Sign In to Vyxor</button>
+        <button class="auth-submit" onclick="emailLogin()">Sign In to Vyxor</button>
         <div class="auth-footer">No account? <a onclick="switchTab('signup')">Create one free</a></div>
         <p class="auth-note">🔒 Your data is private and never sold.</p>
       </div>
       <div id="auth-signup" style="display:none;">
         <div class="auth-title">Join <span>Vyxor</span></div>
         <p class="auth-sub">Create your account to save trades, track psychology and access all tools.</p>
-        <button class="social-btn" onclick="socialAuth('google')">
+        <button class="social-btn" onclick="googleSignIn()">
           <svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           Sign up with Google
         </button>
@@ -302,7 +439,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:4r
         <div class="auth-field"><label>Full Name</label><input class="auth-input" type="text" placeholder="Your name"></div>
         <div class="auth-field"><label>Email</label><input class="auth-input" type="email" placeholder="you@email.com"></div>
         <div class="auth-field"><label>Password</label><input class="auth-input" type="password" placeholder="Create a password"></div>
-        <button class="auth-submit">Create Account</button>
+        <button class="auth-submit" onclick="emailSignup()">Create Account</button>
         <div class="auth-footer">Already have an account? <a onclick="switchTab('login')">Sign in</a></div>
         <p class="auth-note">🔒 Your data is private and never sold.</p>
       </div>
@@ -315,14 +452,14 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:4r
   <a href="/home.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
   <ul class="nav-center">
     <li><a href="/journal.html">Journal</a></li>
-    <li><a href="/index.html">Calculator</a></li>
+    <li><a href="/position-size-calculator.html">Position Size Calculator</a></li>
     <li><a href="/psychology.html">Psychology</a></li>
     <li><a href="/blog.html">Blog</a></li>
     <li><a href="/about.html">About</a></li>
   </ul>
   <div class="nav-right">
-    <button class="btn-login" onclick="openAuth('login')">Sign In</button>
-    <button class="btn-signup" onclick="openAuth('signup')">Sign Up</button>
+    <button class="btn-login" id="nav-signin" onclick="openAuth('login')">Sign In</button>
+    <button class="btn-signup" id="nav-signup" onclick="openAuth('signup')">Sign Up</button><div id="nav-user" style="display:none;align-items:center;gap:8px;"><span id="nav-username" style="font-size:13px;color:var(--muted);font-weight:500;"></span><button class="btn-login" id="nav-signout" onclick="doSignOut()">Sign Out</button></div>
   </div>
 </nav>
 
@@ -359,7 +496,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:4r
             <div class="hv-tool-info"><div class="hv-tool-name">AI Trade Journal</div><div class="hv-tool-desc">Log, review, improve</div></div>
             <span class="hv-tool-status st-soon">Soon</span>
           </a>
-          <a href="/index.html" class="hv-tool">
+          <a href="/position-size-calculator.html" class="hv-tool">
             <div class="hv-tool-icon i-green">⚡</div>
             <div class="hv-tool-info"><div class="hv-tool-name">Position Calculator</div><div class="hv-tool-desc">Forex · Futures · Crypto</div></div>
             <span class="hv-tool-status st-live">Live</span>
@@ -421,7 +558,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:4r
     </a>
 
     <!-- CALCULATOR -->
-    <a href="/index.html" class="tc reveal">
+    <a href="/position-size-calculator.html" class="tc reveal">
       <div class="tc-icon i-green">⚡</div>
       <span class="tc-badge b-live">Live Now</span>
       <div class="tc-title">Position Size Calculator</div>
@@ -543,7 +680,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:4r
       <div class="fc-h">Tools</div>
       <ul class="fc-ul">
         <li><a href="/journal.html">AI Trade Journal</a></li>
-        <li><a href="/index.html">Position Calculator</a></li>
+        <li><a href="/position-size-calculator.html">Position Calculator</a></li>
         <li><a href="/psychology.html">Psychology Tracker</a></li>
         <li><a href="/about.html">Drawdown Dashboard</a></li>
       </ul>
@@ -618,10 +755,7 @@ document.getElementById('auth-modal').addEventListener('click',function(e){
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAuth();});
 
-function socialAuth(provider){
-  // Placeholder — connect Firebase/Supabase later
-  alert('Google Sign-In coming soon! For now use email signup.');
-}
+
 
 // NEWSLETTER
 async function subscribe(){
