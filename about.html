@@ -1,13 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Vyxor — Free Trader Risk Management Platform</title>
-<meta name="description" content="Vyxor is a free institutional-grade risk management platform built by traders, for traders. Our mission is to give every trader the tools to survive markets.">
-<meta property="og:title" content="About Vyxor — Built for Traders"><meta property="og:description" content="Free risk management tools for serious traders. Position sizing, journals, psychology tracking and more.">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Vyxor — Built by Traders, For Traders</title>
+<meta name="description" content="Vyxor is a free trading discipline platform built by traders, for traders. Our mission is to give every trader institutional-grade tools to survive markets.">
+<meta name="keywords" content="about vyxor, trading platform, free trading tools, risk management platform">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://vyxor.in/about.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vyxor.in/about.html">
+<meta property="og:title" content="About Vyxor — Built by Traders, For Traders">
+<meta property="og:description" content="Free risk management tools for serious traders.">
+<meta property="og:image" content="https://vyxor.in/og-image.png">
+<meta property="og:site_name" content="Vyxor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="About Vyxor — Built by Traders, For Traders">
+<meta name="twitter:description" content="Free risk management tools for serious traders.">
+<meta name="twitter:image" content="https://vyxor.in/og-image.png">
 <meta name="theme-color" content="#050816">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Organization","name":"Vyxor","url":"https://vyxor.in","logo":"https://vyxor.in/og-image.png","description":"Free trading discipline platform with position sizing, AI journal, psychology tracker and risk management tools.","email":"hello@vyxor.in","sameAs":["https://vyxor.in"]}
+</script>
+
 <style>
 :root{--bg:#050816;--bg2:#0B1220;--border:rgba(255,255,255,0.06);--accent:#00F5A0;--accent-h:#00D98B;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;--card:rgba(15,23,42,0.72);}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -26,7 +44,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nl a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
 .nl a:hover,.nl a.act{color:var(--text);}
 .pill{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);padding:4px 14px;border-radius:99px;}
-.page{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:100px 2rem 5rem;}
+.hamburger{display:none;background:transparent;border:none;color:var(--text);cursor:pointer;padding:8px;}
+.hamburger svg{width:24px;height:24px;}
+.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(5,8,22,0.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1rem 1.5rem;z-index:199;}
+.mobile-menu.open{display:flex;flex-direction:column;gap:0.5rem;}
+.mobile-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
+.mobile-menu a:last-of-type{border-bottom:none;}
+
+.page{position:relative;z-index:1;max-width:800px;margin:0 auto;padding:100px 2rem 5rem;width:100%;}
 .eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:1rem;animation:fu 0.6s ease both;}
 .eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
 h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(36px,5vw,60px);letter-spacing:-2px;line-height:1.0;margin-bottom:1.5rem;animation:fu 0.6s 0.1s ease both;}
@@ -69,7 +94,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.
 .fl{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
 .fl span{color:var(--accent);}
 .fc{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
-@media(max-width:600px){nav{padding:0 1.25rem;}.nl{display:none;}.stats-row{flex-wrap:wrap;}.stat{flex:1 1 40%;}.stat:first-child{border-radius:10px 0 0 0;}.stat:last-child{border-radius:0 0 10px 0;}}
+@media(max-width:768px){nav{padding:0 1.25rem;}.nl{display:none;}.hamburger{display:flex;}.stats-row{flex-wrap:wrap;}.stat{flex:1 1 40%;}.stat:first-child{border-radius:10px 0 0 0;}.stat:last-child{border-radius:0 0 10px 0;}.page{padding:90px 1.25rem 3rem;}}
 </style>
 </head>
 <body>
@@ -77,18 +102,29 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.
 <nav>
   <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
   <ul class="nl">
-    <li><a href="/index.html">Calculator</a></li>
     <li><a href="/journal.html">Journal</a></li>
+    <li><a href="/position-size-calculator.html">Calculator</a></li>
     <li><a href="/psychology.html">Psychology</a></li>
     <li><a href="/blog.html">Blog</a></li>
     <li><a href="/about.html" class="act">About</a></li>
     <li><span class="pill">Free · vyxor.in</span></li>
   </ul>
+  <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
 </nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/journal.html">Journal</a>
+  <a href="/position-size-calculator.html">Calculator</a>
+  <a href="/psychology.html">Psychology</a>
+  <a href="/blog.html">Blog</a>
+  <a href="/about.html">About</a>
+</div>
+
 <div class="page">
   <div class="eyebrow">About Vyxor</div>
   <h1>Built by traders.<br><span>For traders.</span></h1>
-  <p class="lead">Vyxor exists for one reason — most traders fail not because of bad strategies, but because of bad risk management. We're fixing that with free, institutional-grade tools for every trader.</p>
+  <p class="lead">Vyxor exists for one reason — most traders fail not because of bad strategies, but because of bad risk management and poor discipline. We're fixing that with free, institutional-grade tools for every trader.</p>
 
   <div class="mission-box">
     <div class="mission-quote">"<span>Every trader deserves</span> the same risk management tools that institutional traders use. Free. Forever."</div>
@@ -96,8 +132,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.
 
   <div class="divider"></div>
   <div class="section-title">Who we <span>are</span></div>
-  <p>Vyxor is an independent trading tools platform built and maintained by a small team of traders who got tired of paying for tools that should be free. We trade Forex, Futures and Crypto — and we built the tools we wished existed.</p>
-  <p>We are not a broker. We are not financial advisors. We do not sell signals or courses. We build tools that make traders better at managing risk — the most important skill in trading.</p>
+  <p>Vyxor is an independent trading discipline platform built and maintained by a small team of traders who got tired of paying for tools that should be free. We trade Forex, Futures and Crypto — and we built the tools we wished existed.</p>
+  <p>We are not a broker. We are not financial advisors. We do not sell signals or courses. We build tools that make traders better at managing risk, journaling trades, and controlling emotions — the three skills that actually decide if you survive in markets.</p>
 
   <div class="divider"></div>
   <div class="section-title">Our <span>numbers</span></div>
@@ -118,19 +154,19 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.
   </div>
 
   <div class="divider"></div>
-  <div class="section-title">What's <span>coming</span></div>
+  <div class="section-title">What's <span>here & coming</span></div>
   <div class="roadmap">
     <div class="rm"><div class="rm-icon">⚡</div><div><div class="rm-title">Position Size Calculator</div><div class="rm-desc">Forex, Futures (including Micros) and Crypto. 50+ assets with correct tick/pip values.</div></div><span class="rm-badge live">Live Now</span></div>
-    <div class="rm"><div class="rm-icon">📔</div><div><div class="rm-title">Trade Journal</div><div class="rm-desc">Log trades, tag emotions, find patterns. The free journal every serious trader needs.</div></div><span class="rm-badge soon">Coming Soon</span></div>
+    <div class="rm"><div class="rm-icon">📔</div><div><div class="rm-title">AI Trade Journal</div><div class="rm-desc">Log trades, tag emotions, get AI-powered pattern analysis. Synced to cloud.</div></div><span class="rm-badge live">Live Now</span></div>
     <div class="rm"><div class="rm-icon">🧠</div><div><div class="rm-title">Psychology Tracker</div><div class="rm-desc">Pre-trade mood checkin, FOMO detector, revenge trade warning, discipline score.</div></div><span class="rm-badge soon">Coming Soon</span></div>
     <div class="rm"><div class="rm-icon">📊</div><div><div class="rm-title">Drawdown Dashboard</div><div class="rm-desc">Full account health — drawdown meter, daily loss tracker, equity curve.</div></div><span class="rm-badge planned">Planned</span></div>
     <div class="rm"><div class="rm-icon">📰</div><div><div class="rm-title">Trading Blog</div><div class="rm-desc">Educational content on risk management, position sizing, and trader psychology.</div></div><span class="rm-badge soon">Coming Soon</span></div>
   </div>
 
   <div class="cta-box">
-    <div class="cta-title">Start managing risk properly</div>
-    <p class="cta-desc">Free. No signup. Works on mobile. 50+ assets.</p>
-    <a href="/index.html" class="cta-btn">Open Calculator →</a>
+    <div class="cta-title">Start trading with discipline</div>
+    <p class="cta-desc">Free. No signup needed for calculator. 50+ assets.</p>
+    <a href="/position-size-calculator.html" class="cta-btn">Open Calculator →</a>
   </div>
 </div>
 <footer><div class="fl"><span>V</span>yxor</div><div class="fc">© 2026 Vyxor · vyxor.in · Free forever</div></footer>
