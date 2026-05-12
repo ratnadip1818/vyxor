@@ -239,6 +239,24 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
 .modal-emo-tag{padding:5px 13px;border-radius:99px;border:1px solid var(--border);font-size:12px;color:var(--muted);}
 .modal-delete-btn{width:100%;padding:11px;border-radius:9px;border:1px solid rgba(255,77,109,0.3);background:rgba(255,77,109,0.05);color:var(--danger);font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;}
 .modal-delete-btn:hover{background:rgba(255,77,109,0.12);border-color:var(--danger);}
+.modal-edit-btn{width:100%;padding:11px;border-radius:9px;border:1px solid rgba(0,245,160,0.3);background:rgba(0,245,160,0.05);color:var(--accent);font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-bottom:8px;}
+.modal-edit-btn:hover{background:rgba(0,245,160,0.12);border-color:var(--accent);}
+.edit-modal{background:#0B1220;border:1px solid rgba(0,245,160,0.2);border-radius:20px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:0 40px 100px rgba(0,0,0,0.8);transform:scale(0.95);transition:transform 0.25s;position:relative;}
+.modal-overlay.open .edit-modal{transform:scale(1);}
+.edit-modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 1.75rem;border-bottom:1px solid var(--border);}
+.edit-modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.3px;}
+.edit-modal-title span{color:var(--accent);}
+.edit-modal-body{padding:1.75rem;}
+.edit-field{margin-bottom:14px;}
+.edit-field label{display:block;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.09em;margin-bottom:5px;font-family:'DM Mono',monospace;}
+.edit-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:14px;padding:10px 13px;outline:none;transition:all 0.2s;}
+.edit-input:focus{border-color:rgba(0,245,160,0.4);background:rgba(0,245,160,0.02);box-shadow:0 0 0 3px rgba(0,245,160,0.05);}
+.edit-input option{background:var(--bg2);}
+.edit-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.edit-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.edit-save-btn{width:100%;padding:13px;border-radius:10px;border:none;background:var(--accent);color:#020c12;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:0.5rem;}
+.edit-save-btn:hover{background:var(--ah);transform:translateY(-1px);}
+.edit-save-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 
 /* ── ANALYTICS ── */
 .analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem;}
@@ -502,12 +520,120 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
         <div class="modal-section-title">Notes</div>
         <div class="modal-notes" id="m-notes"></div>
       </div>
+      <button class="modal-edit-btn" id="m-edit-btn">✏️ Edit This Trade</button>
       <button class="modal-delete-btn" id="m-delete-btn">Delete This Trade</button>
     </div>
   </div>
 </div>
 
-<!-- ── NAV ── -->
+<!-- ── EDIT TRADE MODAL ── -->
+<div class="modal-overlay" id="edit-modal-overlay" onclick="closeEditModal(event)">
+  <div class="edit-modal">
+    <div class="edit-modal-header">
+      <div class="edit-modal-title">Edit <span>Trade</span></div>
+      <button class="modal-close" onclick="closeEditModal()">✕</button>
+    </div>
+    <div class="edit-modal-body">
+      <div class="edit-grid-2" style="margin-bottom:14px;">
+        <div class="edit-field">
+          <label>Date & Time</label>
+          <input class="edit-input" type="datetime-local" id="e-datetime">
+        </div>
+        <div class="edit-field">
+          <label>Asset / Symbol</label>
+          <input class="edit-input" type="text" id="e-asset" placeholder="e.g. NIFTY">
+        </div>
+      </div>
+      <div class="edit-grid-2" style="margin-bottom:14px;">
+        <div class="edit-field">
+          <label>Market</label>
+          <select class="edit-input" id="e-market">
+            <option value="NSE/BSE">NSE / BSE</option>
+            <option value="MCX">MCX</option>
+          </select>
+        </div>
+        <div class="edit-field">
+          <label>Instrument</label>
+          <select class="edit-input" id="e-instrument">
+            <option value="Futures">Futures</option>
+            <option value="Options CE">Options CE</option>
+            <option value="Options PE">Options PE</option>
+            <option value="Equity">Equity</option>
+            <option value="ETF">ETF</option>
+          </select>
+        </div>
+      </div>
+      <div class="edit-grid-3" style="margin-bottom:14px;">
+        <div class="edit-field">
+          <label>Direction</label>
+          <select class="edit-input" id="e-direction">
+            <option value="Long">↑ Long / Buy</option>
+            <option value="Short">↓ Short / Sell</option>
+          </select>
+        </div>
+        <div class="edit-field">
+          <label>Entry Price</label>
+          <input class="edit-input" type="number" id="e-entry" step="0.05" oninput="recalcEditPnl()">
+        </div>
+        <div class="edit-field">
+          <label>Exit Price</label>
+          <input class="edit-input" type="number" id="e-exit" step="0.05" oninput="recalcEditPnl()">
+        </div>
+      </div>
+      <div class="edit-grid-3" style="margin-bottom:14px;">
+        <div class="edit-field">
+          <label>Lots</label>
+          <input class="edit-input" type="number" id="e-lots" step="1" min="1" oninput="recalcEditPnl()">
+        </div>
+        <div class="edit-field">
+          <label>Gross P&L (₹)</label>
+          <input class="edit-input" type="number" id="e-pnl" step="0.01">
+        </div>
+        <div class="edit-field">
+          <label>Result</label>
+          <select class="edit-input" id="e-result">
+            <option>Win</option>
+            <option>Loss</option>
+            <option>Breakeven</option>
+          </select>
+        </div>
+      </div>
+      <div class="edit-grid-2" style="margin-bottom:14px;">
+        <div class="edit-field">
+          <label>Session</label>
+          <select class="edit-input" id="e-session">
+            <option>NSE (9:15am–3:30pm)</option>
+            <option>MCX Evening (5pm–11:30pm)</option>
+            <option>Pre-Market (9am–9:15am)</option>
+            <option>After-Hours</option>
+          </select>
+        </div>
+        <div class="edit-field">
+          <label>Setup / Strategy</label>
+          <input class="edit-input" type="text" id="e-setup" placeholder="e.g. Breakout, Reversal">
+        </div>
+      </div>
+      <div class="edit-grid-2" style="margin-bottom:14px;">
+        <div class="edit-field">
+          <label>Pre-Trade Emotion</label>
+          <input class="edit-input" type="text" id="e-preemo" placeholder="e.g. 😌 Calm">
+        </div>
+        <div class="edit-field">
+          <label>Post-Trade Emotion</label>
+          <input class="edit-input" type="text" id="e-postemo" placeholder="e.g. 😌 Satisfied">
+        </div>
+      </div>
+      <div class="edit-field" style="margin-bottom:14px;">
+        <label>Notes</label>
+        <textarea class="edit-input" id="e-notes" rows="3" style="resize:vertical;" placeholder="What happened? What would you do differently?"></textarea>
+      </div>
+      <div id="e-pnl-hint" style="font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;margin-bottom:14px;min-height:16px;"></div>
+      <button class="edit-save-btn" id="e-save-btn" onclick="saveEditedTrade()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+
 <nav>
   <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
   <ul class="nav-links">
@@ -995,7 +1121,9 @@ window.runAnalysis   = _noop; window.runStory   = _noop; window.setDir = _noop;
 window.setEmo        = _noop; window.autoPnl    = _noop; window.updateAssets = _noop;
 window.onAssetChange = _noop; window.importTrades = _noop; window.clearImport = _noop;
 window.fileSelected  = _noop; window.dragOver   = _noop; window.dragLeave = _noop;
-window.dropFile      = _noop; window.closeTradeModal = _noop;
+window.dropFile      = _noop; window.closeEditModal  = _noop;
+window.recalcEditPnl   = _noop;
+window.saveEditedTrade = _noop;
 window.handleScreenshotFile = _noop; window.handleScreenshotDrop = _noop;
 window.removeScreenshot = _noop;
 window.toggleMenu = () => document.getElementById('mobile-menu').classList.toggle('open');
@@ -1024,7 +1152,7 @@ import {
   signOut, onAuthStateChanged, updateProfile
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
-  getFirestore, collection, addDoc, deleteDoc, doc,
+  getFirestore, collection, addDoc, deleteDoc, doc, updateDoc,
   query, orderBy, onSnapshot, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -1596,8 +1724,113 @@ window.openTradeModal = function(id) {
     notesWrap.style.display = 'block';
   } else { notesWrap.style.display = 'none'; }
 
+  document.getElementById('m-edit-btn').onclick = () => openEditModal(id);
   document.getElementById('m-delete-btn').onclick = () => deleteTrade(id);
   document.getElementById('trade-modal').classList.add('open');
+};
+
+// ── EDIT TRADE MODAL ──────────────────────────────────
+window.openEditModal = function(id) {
+  const t = allTrades.find(x => x.id === id);
+  if (!t) return;
+  currentTradeId = id;
+
+  // Pre-fill all fields
+  document.getElementById('e-datetime').value  = t.datetime || '';
+  document.getElementById('e-asset').value     = t.asset || '';
+  document.getElementById('e-market').value    = t.market || 'NSE/BSE';
+  document.getElementById('e-instrument').value= t.instrument || 'Futures';
+  document.getElementById('e-direction').value = t.direction || 'Long';
+  document.getElementById('e-entry').value     = t.entry || '';
+  document.getElementById('e-exit').value      = t.exit || '';
+  document.getElementById('e-lots').value      = t.lots || t.size || 1;
+  document.getElementById('e-pnl').value       = t.pnl || '';
+  document.getElementById('e-result').value    = t.result || 'Win';
+  document.getElementById('e-session').value   = t.session || 'NSE (9:15am–3:30pm)';
+  document.getElementById('e-setup').value     = t.setup || '';
+  document.getElementById('e-preemo').value    = t.preEmo || '';
+  document.getElementById('e-postemo').value   = t.postEmo || '';
+  document.getElementById('e-notes').value     = t.notes || '';
+  document.getElementById('e-pnl-hint').textContent = '';
+
+  // Close view modal, open edit modal
+  document.getElementById('trade-modal').classList.remove('open');
+  document.getElementById('edit-modal-overlay').classList.add('open');
+};
+
+window.closeEditModal = function(e) {
+  if (e && e.target !== document.getElementById('edit-modal-overlay')) return;
+  document.getElementById('edit-modal-overlay').classList.remove('open');
+  currentTradeId = null;
+};
+
+window.recalcEditPnl = function() {
+  const entry = parseFloat(document.getElementById('e-entry').value);
+  const exit  = parseFloat(document.getElementById('e-exit').value);
+  const lots  = parseFloat(document.getElementById('e-lots').value) || 1;
+  const asset = document.getElementById('e-asset').value.trim();
+  const dir   = document.getElementById('e-direction').value;
+  const lotSize = getLotSize(asset);
+  const hint  = document.getElementById('e-pnl-hint');
+
+  if (!isNaN(entry) && !isNaN(exit) && entry && exit) {
+    const diff = dir === 'Short' ? entry - exit : exit - entry;
+    const pnl  = diff * lots * lotSize;
+    document.getElementById('e-pnl').value = pnl.toFixed(2);
+    document.getElementById('e-result').value = pnl > 0 ? 'Win' : pnl < 0 ? 'Loss' : 'Breakeven';
+    if (lotSize > 1) {
+      hint.textContent = `${diff > 0?'+':''}${diff.toFixed(2)} pts × ${lots} lot${lots>1?'s':''} × ${lotSize} units = ₹${pnl.toFixed(2)}`;
+    } else {
+      hint.textContent = `${diff > 0?'+':''}${diff.toFixed(2)} × ${lots} = ₹${pnl.toFixed(2)}`;
+    }
+    hint.style.color = pnl >= 0 ? 'var(--accent)' : 'var(--danger)';
+  }
+};
+
+window.saveEditedTrade = async function() {
+  if (!currentUser || !currentTradeId) return;
+  const btn = document.getElementById('e-save-btn');
+  btn.disabled = true; btn.textContent = 'Saving...';
+
+  const asset = document.getElementById('e-asset').value.trim();
+  const entry = parseFloat(document.getElementById('e-entry').value);
+  const exit  = parseFloat(document.getElementById('e-exit').value);
+  const pnl   = parseFloat(document.getElementById('e-pnl').value);
+
+  if (!asset)                    { toast('Enter an asset.', true); btn.disabled=false; btn.textContent='Save Changes'; return; }
+  if (isNaN(entry)||isNaN(exit)) { toast('Enter entry and exit prices.', true); btn.disabled=false; btn.textContent='Save Changes'; return; }
+  if (isNaN(pnl))                { toast('P&L is required.', true); btn.disabled=false; btn.textContent='Save Changes'; return; }
+
+  const updates = {
+    datetime:   document.getElementById('e-datetime').value,
+    market:     document.getElementById('e-market').value,
+    asset,
+    instrument: document.getElementById('e-instrument').value,
+    direction:  document.getElementById('e-direction').value,
+    entry, exit,
+    lots:       parseFloat(document.getElementById('e-lots').value) || 1,
+    lotSize:    getLotSize(asset),
+    pnl,
+    netPnl:     brokerCharges > 0 ? pnl - brokerCharges : pnl,
+    result:     document.getElementById('e-result').value,
+    session:    document.getElementById('e-session').value,
+    setup:      document.getElementById('e-setup').value.trim(),
+    preEmo:     document.getElementById('e-preemo').value.trim(),
+    postEmo:    document.getElementById('e-postemo').value.trim(),
+    notes:      document.getElementById('e-notes').value.trim(),
+  };
+
+  try {
+    await updateDoc(doc(db, 'users', currentUser.uid, 'trades', currentTradeId), updates);
+    toast('Trade updated ✓');
+    document.getElementById('edit-modal-overlay').classList.remove('open');
+    currentTradeId = null;
+  } catch(e) {
+    console.error(e);
+    toast('Update failed. Try again.', true);
+  } finally {
+    btn.disabled = false; btn.textContent = 'Save Changes';
+  }
 };
 
 window.closeTradeModal = function(e) {
