@@ -433,43 +433,42 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
 <script>
 // ── ASSET DATA ────────────────────────────────────────────────────────
 const ASSETS = {
-  // NSE/BSE — Indian Indices Futures & Options
   nse: [
-    // Index Futures & Options
-    {sym:'NIFTY',    full:'Nifty 50 Index',         lotSize:25,  cat:'Index',  type:'F&O',   exchange:'NSE'},
-    {sym:'BANKNIFTY',full:'Bank Nifty Index',        lotSize:15,  cat:'Index',  type:'F&O',   exchange:'NSE'},
-    {sym:'FINNIFTY', full:'Fin Nifty Index',         lotSize:40,  cat:'Index',  type:'F&O',   exchange:'NSE'},
-    {sym:'SENSEX',   full:'BSE Sensex Index',        lotSize:10,  cat:'Index',  type:'F&O',   exchange:'BSE'},
-    {sym:'MIDCPNIFTY',full:'Midcap Nifty Index',    lotSize:75,  cat:'Index',  type:'F&O',   exchange:'NSE'},
-    {sym:'BANKEX',   full:'BSE Bankex',              lotSize:15,  cat:'Index',  type:'F&O',   exchange:'BSE'},
-    // Stock Futures & Options
-    {sym:'RELIANCE', full:'Reliance Industries',     lotSize:250, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'TCS',      full:'Tata Consultancy Services',lotSize:150,cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'INFY',     full:'Infosys Ltd',             lotSize:400, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'HDFCBANK', full:'HDFC Bank Ltd',           lotSize:550, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'ICICIBANK',full:'ICICI Bank Ltd',          lotSize:700, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'SBI',      full:'State Bank of India',     lotSize:1500,cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'WIPRO',    full:'Wipro Ltd',               lotSize:1000,cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'ADANIENT', full:'Adani Enterprises',       lotSize:250, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'BAJFINANCE',full:'Bajaj Finance Ltd',      lotSize:125, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'TATAMOTORS',full:'Tata Motors Ltd',        lotSize:550, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'AXISBANK', full:'Axis Bank Ltd',           lotSize:625, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'MARUTI',   full:'Maruti Suzuki India',     lotSize:100, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'LT',       full:'Larsen and Toubro Ltd',   lotSize:150, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'KOTAKBANK',full:'Kotak Mahindra Bank',     lotSize:400, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'SUNPHARMA',full:'Sun Pharmaceutical',      lotSize:350, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'TITAN',    full:'Titan Company Ltd',       lotSize:375, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'HCLTECH',  full:'HCL Technologies',        lotSize:700, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'TECHM',    full:'Tech Mahindra Ltd',       lotSize:600, cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'ONGC',     full:'Oil and Natural Gas Corp',lotSize:1925,cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'NTPC',     full:'NTPC Ltd',                lotSize:2250,cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'POWERGRID',full:'Power Grid Corp of India',lotSize:2700,cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'COALINDIA',full:'Coal India Ltd',          lotSize:2100,cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    {sym:'IOC',      full:'Indian Oil Corporation',  lotSize:3375,cat:'Stock',  type:'F&O',   exchange:'NSE'},
-    // Equity (Cash)
-    {sym:'NESTLEIND',full:'Nestle India Ltd',        lotSize:1,   cat:'Equity', type:'EQ',    exchange:'NSE'},
-    {sym:'ULTRACEMCO',full:'UltraTech Cement',       lotSize:1,   cat:'Equity', type:'EQ',    exchange:'NSE'},
-    {sym:'ASIANPAINT',full:'Asian Paints Ltd',       lotSize:1,   cat:'Equity', type:'EQ',    exchange:'NSE'},
+    // ── Index — Futures + Options CE/PE available ──
+    {sym:'NIFTY',     full:'Nifty 50 Index',          lotSize:25,   cat:'Index',  type:'Index', exchange:'NSE'},
+    {sym:'BANKNIFTY', full:'Bank Nifty Index',         lotSize:15,   cat:'Index',  type:'Index', exchange:'NSE'},
+    {sym:'FINNIFTY',  full:'Fin Nifty Index',          lotSize:40,   cat:'Index',  type:'Index', exchange:'NSE'},
+    {sym:'SENSEX',    full:'BSE Sensex Index',         lotSize:10,   cat:'Index',  type:'Index', exchange:'BSE'},
+    {sym:'MIDCPNIFTY',full:'Midcap Nifty Index',       lotSize:75,   cat:'Index',  type:'Index', exchange:'NSE'},
+    {sym:'BANKEX',    full:'BSE Bankex',               lotSize:15,   cat:'Index',  type:'Index', exchange:'BSE'},
+    // ── Stock Futures — Futures only, no options sizing here ──
+    {sym:'RELIANCE',  full:'Reliance Industries',      lotSize:250,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'TCS',       full:'Tata Consultancy Services',lotSize:150,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'INFY',      full:'Infosys Ltd',              lotSize:400,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'HDFCBANK',  full:'HDFC Bank Ltd',            lotSize:550,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'ICICIBANK', full:'ICICI Bank Ltd',           lotSize:700,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'SBI',       full:'State Bank of India',      lotSize:1500, cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'WIPRO',     full:'Wipro Ltd',                lotSize:1000, cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'ADANIENT',  full:'Adani Enterprises',        lotSize:250,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'BAJFINANCE',full:'Bajaj Finance Ltd',        lotSize:125,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'TATAMOTORS',full:'Tata Motors Ltd',          lotSize:550,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'AXISBANK',  full:'Axis Bank Ltd',            lotSize:625,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'MARUTI',    full:'Maruti Suzuki India',      lotSize:100,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'LT',        full:'Larsen and Toubro Ltd',    lotSize:150,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'KOTAKBANK', full:'Kotak Mahindra Bank',      lotSize:400,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'SUNPHARMA', full:'Sun Pharmaceutical',       lotSize:350,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'TITAN',     full:'Titan Company Ltd',        lotSize:375,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'HCLTECH',   full:'HCL Technologies',         lotSize:700,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'TECHM',     full:'Tech Mahindra Ltd',        lotSize:600,  cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'ONGC',      full:'Oil and Natural Gas Corp', lotSize:1925, cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'NTPC',      full:'NTPC Ltd',                 lotSize:2250, cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'POWERGRID', full:'Power Grid Corp of India', lotSize:2700, cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'COALINDIA', full:'Coal India Ltd',           lotSize:2100, cat:'Stock',  type:'Stock', exchange:'NSE'},
+    {sym:'IOC',       full:'Indian Oil Corporation',   lotSize:3375, cat:'Stock',  type:'Stock', exchange:'NSE'},
+    // ── Equity Cash — no futures, no options ──
+    {sym:'NESTLEIND', full:'Nestle India Ltd',         lotSize:1,    cat:'Equity', type:'EQ',    exchange:'NSE'},
+    {sym:'ULTRACEMCO',full:'UltraTech Cement',         lotSize:1,    cat:'Equity', type:'EQ',    exchange:'NSE'},
+    {sym:'ASIANPAINT',full:'Asian Paints Ltd',         lotSize:1,    cat:'Equity', type:'EQ',    exchange:'NSE'},
   ],
 
   // MCX Commodities
@@ -639,19 +638,36 @@ function renderAssets(){
 // ── SELECT ASSET ──────────────────────────────────────────────────────
 function selectAsset(i){
   asset = ASSETS[market][i];
-  // Reset instrument type to Futures when new asset selected
-  if(market === 'nse' && asset.type === 'F&O'){
-    instrumentType = 'Futures';
-    document.querySelectorAll('.inst-btn').forEach(b => b.className = 'inst-btn');
-    document.getElementById('inst-fut').classList.add('sel-fut');
-    document.getElementById('options-extra').classList.remove('show');
-    document.getElementById('opt-type').value = '';
+  // Reset instrument state based on asset type
+  if(market === 'nse'){
+    if(asset.type === 'Index'){
+      // Index — default to Futures, allow options
+      instrumentType = 'Futures';
+      document.querySelectorAll('.inst-btn').forEach(b => b.className = 'inst-btn');
+      document.getElementById('inst-fut').classList.add('sel-fut');
+      document.getElementById('options-extra').classList.remove('show');
+      document.getElementById('opt-type').value = '';
+      document.getElementById('opt-premium').value = '';
+    } else if(asset.type === 'Stock'){
+      // Stock — Futures only, force reset
+      instrumentType = 'Futures';
+      document.querySelectorAll('.inst-btn').forEach(b => b.className = 'inst-btn');
+      document.getElementById('inst-fut').classList.add('sel-fut');
+      document.getElementById('options-extra').classList.remove('show');
+    } else {
+      // Equity cash
+      instrumentType = 'Equity';
+      document.getElementById('options-extra').classList.remove('show');
+    }
   }
+  // Mark active button
   const g = document.getElementById('asset-grid');
   g.querySelectorAll('.abtn').forEach(b => b.classList.remove('active'));
   g.querySelectorAll('.abtn').forEach(b => {
     if(b.textContent === asset.sym) b.classList.add('active');
   });
+  // Reset SL placeholder
+  document.getElementById('stoploss').placeholder = '—';
   updateUnits();
   showAssetInfo();
   clearInputs();
@@ -663,14 +679,40 @@ function showAssetInfo(){
   const box  = document.getElementById('asset-info-box');
   const ibox = document.getElementById('india-info');
   const instSel = document.getElementById('inst-selector');
+  const instFut = document.getElementById('inst-fut');
+  const instCe  = document.getElementById('inst-ce');
+  const instPe  = document.getElementById('inst-pe');
   if(!asset){ box.classList.remove('show'); ibox.classList.remove('show'); instSel.classList.remove('show'); return; }
 
   if(market === 'nse'){
-    const isFO = asset.type === 'F&O';
-    // Show/hide instrument selector
-    if(isFO){
+
+    if(asset.type === 'Index'){
+      // Index — show all 3: Futures + Options CE + Options PE
       instSel.classList.add('show');
+      instFut.style.display = 'inline-flex';
+      instCe.style.display  = 'inline-flex';
+      instPe.style.display  = 'inline-flex';
+      instFut.textContent = '📈 Futures';
+      instCe.textContent  = '🟢 Options Buy — CE (Call)';
+      instPe.textContent  = '🟢 Options Buy — PE (Put)';
+
+    } else if(asset.type === 'Stock'){
+      // Stock — Futures only, hide CE/PE options
+      instSel.classList.add('show');
+      instFut.style.display = 'inline-flex';
+      instCe.style.display  = 'none';
+      instPe.style.display  = 'none';
+      instFut.textContent = '📈 Stock Futures';
+      // Force to Futures if currently on options
+      if(instrumentType !== 'Futures'){
+        instrumentType = 'Futures';
+        document.querySelectorAll('.inst-btn').forEach(b => b.className = 'inst-btn');
+        instFut.classList.add('sel-fut');
+        document.getElementById('options-extra').classList.remove('show');
+      }
+
     } else {
+      // Equity cash — no instrument selector
       instSel.classList.remove('show');
       document.getElementById('options-extra').classList.remove('show');
       instrumentType = 'Equity';
@@ -678,32 +720,32 @@ function showAssetInfo(){
 
     // Build instrument tag
     let instTag = '';
-    if(isFO){
+    if(asset.type === 'Index' || asset.type === 'Stock'){
       if(instrumentType === 'Futures')    instTag = '<span class="inst-result-tag tag-fut">Futures</span>';
-      if(instrumentType === 'Options CE') instTag = '<span class="inst-result-tag tag-ce">Call (CE)</span>';
-      if(instrumentType === 'Options PE') instTag = '<span class="inst-result-tag tag-pe">Put (PE)</span>';
+      if(instrumentType === 'Options CE') instTag = '<span class="inst-result-tag tag-ce">Call CE — Buy</span>';
+      if(instrumentType === 'Options PE') instTag = '<span class="inst-result-tag tag-pe">Put PE — Buy</span>';
     }
 
-    // Options extra info
-    const strike  = document.getElementById('opt-strike')?.value;
-    const expiry  = document.getElementById('opt-expiry')?.value || 'Weekly';
-    const optLine = (instrumentType !== 'Futures' && strike)
+    // Options details line
+    const strike = document.getElementById('opt-strike')?.value;
+    const expiry = document.getElementById('opt-expiry')?.value || 'Weekly';
+    const optLine = (instrumentType !== 'Futures' && instrumentType !== 'Equity' && strike)
       ? '<br>Strike: <strong>' + strike + '</strong> &nbsp;·&nbsp; Expiry: <strong>' + expiry + '</strong> &nbsp;·&nbsp; Type: <strong>' + (instrumentType === 'Options CE' ? 'CE — Call' : 'PE — Put') + '</strong>'
       : '';
 
-    const calcLine = asset.type === 'EQ'
-      ? 'Equity: P&L = (Exit − Entry) × Quantity'
-      : instrumentType === 'Futures'
-        ? 'Futures: P&L = (Exit − Entry) × Lots × ' + asset.lotSize + ' units'
+    const calcLine = asset.type === 'EQ' || asset.type === 'Equity'
+      ? 'Equity Cash: P&L = (Exit − Entry) × Quantity'
+      : instrumentType === 'Futures' || asset.type === 'Stock'
+        ? (asset.type === 'Stock' ? 'Stock ' : '') + 'Futures: P&L = (Exit − Entry) × Lots × ' + asset.lotSize + ' units'
         : 'Options Buy: Risk = Premium × Lots × ' + asset.lotSize + ' units (max loss = premium paid)';
 
     ibox.innerHTML =
       '<strong>' + asset.sym + '</strong>' + instTag +
       ' — ' + asset.full +
       '<br>Exchange: <strong>' + asset.exchange + '</strong> &nbsp;·&nbsp; ' +
-      'Lot Size: <strong>' + asset.lotSize + ' units/lot</strong>' +
-      optLine +
-      '<br>' + calcLine;
+      'Type: <strong>' + (asset.type === 'Index' ? 'Index F&O' : asset.type === 'Stock' ? 'Stock Futures' : 'Equity Cash') + '</strong> &nbsp;·&nbsp; ' +
+      'Lot Size: <strong>' + asset.lotSize + (asset.type === 'EQ' ? ' share' : ' units') + '/lot</strong>' +
+      optLine + '<br>' + calcLine;
     ibox.classList.add('show'); box.classList.remove('show');
 
   } else if(market === 'mcx'){
@@ -836,58 +878,13 @@ function calculate(){
         rrRatio, profitAmt,
         acc, riskPct, riskAmt,
         dist.toFixed(2) + ' pts',
-        'Equity — qty × price',
+        'Equity cash — qty × price',
         shares + ' shares × ₹' + (entry||0) + ' = ₹' + exposure.toLocaleString('en-IN',{maximumFractionDigits:0}),
         alertMsg, '₹'
       );
 
-    } else if(instrumentType === 'Options CE' || instrumentType === 'Options PE'){
-      // ── Options Buy — Premium-based sizing ───────────────────────
-      // Risk = Premium paid × Lot Size × Lots
-      // No stop loss needed — max loss = premium paid
-      const premium = pf('opt-premium');
-      if(isNaN(premium) || premium <= 0){
-        showEmpty();
-        // Show hint in empty state
-        document.getElementById('empty-state').style.display = 'flex';
-        document.getElementById('empty-state').querySelector('.empty-text').textContent =
-          'Enter the option premium (current price) above to calculate lots';
-        return;
-      }
-      const costPerLot = premium * asset.lotSize;
-      const lots = Math.floor(riskAmt / costPerLot);
-      const totalPremium = lots * costPerLot;
-
-      // If exit premium entered as TP — calculate profit
-      if(tp && tp > premium){
-        const profitPerLot = (tp - premium) * asset.lotSize;
-        profitAmt = lots * profitPerLot;
-        rrRatio = (tp - premium) / premium; // reward vs risk ratio on premium
-      }
-
-      const strike  = document.getElementById('opt-strike')?.value || '—';
-      const expiry  = document.getElementById('opt-expiry')?.value || 'Weekly';
-      const optType = instrumentType === 'Options CE' ? 'CE' : 'PE';
-
-      alertMsg = lots < 1
-        ? {type:'warn', msg:'Need ₹' + costPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + ' for 1 lot (₹' + premium + ' × ' + asset.lotSize + ' units).'}
-        : {type:'ok',   msg:lots + ' lot' + (lots>1?'s':'') + ' · ₹' + premium + ' premium × ' + asset.lotSize + ' units = ₹' + costPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + '/lot'};
-
-      showResult(
-        lots, 'Lots',
-        asset.sym + ' ' + strike + ' ' + optType + ' · ' + expiry + ' · ₹' + totalPremium.toLocaleString('en-IN',{maximumFractionDigits:0}) + ' total premium',
-        totalPremium,
-        riskPct + '% of ₹' + acc.toLocaleString('en-IN') + ' · Max loss = premium paid',
-        profitAmt ? rrRatio : null, profitAmt,
-        acc, riskPct, totalPremium,
-        '₹' + premium + '/unit (premium)',
-        asset.lotSize + ' units/lot',
-        lots + ' lots × ₹' + premium + ' × ' + asset.lotSize + ' = ₹' + totalPremium.toLocaleString('en-IN',{maximumFractionDigits:0}),
-        alertMsg, '₹'
-      );
-
-    } else {
-      // ── Futures ──────────────────────────────────────────────────
+    } else if(asset.type === 'Stock'){
+      // ── Stock Futures — always Futures, no options ────────────────
       const dist = (!isNaN(distIn) && distIn > 0) ? distIn
                  : (!isNaN(entry) && !isNaN(sl) && entry && sl) ? Math.abs(entry - sl) : null;
       if(!dist || dist <= 0){ showEmpty(); return; }
@@ -901,7 +898,72 @@ function calculate(){
       }
       alertMsg = lots < 1
         ? {type:'warn', msg:'Need ₹' + riskPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + ' for 1 lot (' + asset.lotSize + ' units).'}
-        : {type:'ok',   msg:lots + ' lot' + (lots>1?'s':'') + ' [Futures] · ' + dist.toFixed(0) + ' pts × ' + asset.lotSize + ' units = ₹' + riskPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + '/lot'};
+        : {type:'ok',   msg:lots + ' lot' + (lots>1?'s':'') + ' [Stock Futures] · ' + dist.toFixed(0) + ' pts × ' + asset.lotSize + ' units = ₹' + riskPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + '/lot'};
+      showResult(
+        lots, 'Lots',
+        asset.lotSize + ' units/lot · Actual risk ₹' + actualRisk.toLocaleString('en-IN',{maximumFractionDigits:0}),
+        actualRisk || riskAmt, riskPct + '% of ₹' + acc.toLocaleString('en-IN'),
+        rrRatio, profitAmt,
+        acc, riskPct, riskAmt,
+        dist.toFixed(0) + ' pts',
+        asset.lotSize + ' units/lot',
+        (lots||0) + ' lots × ' + dist.toFixed(0) + ' pts × ' + asset.lotSize + ' = ₹' + actualRisk.toLocaleString('en-IN',{maximumFractionDigits:0}),
+        alertMsg, '₹'
+      );
+
+    } else if(asset.type === 'Index' && (instrumentType === 'Options CE' || instrumentType === 'Options PE')){
+      // ── Index Options Buy — Premium-based sizing ──────────────────
+      const premium = pf('opt-premium');
+      if(isNaN(premium) || premium <= 0){
+        showEmpty();
+        document.getElementById('empty-state').style.display = 'flex';
+        document.getElementById('empty-state').querySelector('.empty-text').textContent =
+          'Enter the option premium (current market price) above to calculate lots';
+        return;
+      }
+      const costPerLot = premium * asset.lotSize;
+      const lots = Math.floor(riskAmt / costPerLot);
+      const totalPremium = lots * costPerLot;
+      if(tp && tp > premium){
+        const profitPerLot = (tp - premium) * asset.lotSize;
+        profitAmt = lots * profitPerLot;
+        rrRatio = (tp - premium) / premium;
+      }
+      const strike = document.getElementById('opt-strike')?.value || '—';
+      const expiry = document.getElementById('opt-expiry')?.value || 'Weekly';
+      const optType = instrumentType === 'Options CE' ? 'CE' : 'PE';
+      alertMsg = lots < 1
+        ? {type:'warn', msg:'Need ₹' + costPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + ' for 1 lot (₹' + premium + ' × ' + asset.lotSize + ' units).'}
+        : {type:'ok',   msg:lots + ' lot' + (lots>1?'s':'') + ' · ₹' + premium + ' premium × ' + asset.lotSize + ' units = ₹' + costPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + '/lot'};
+      showResult(
+        lots, 'Lots',
+        asset.sym + ' ' + strike + ' ' + optType + ' · ' + expiry + ' · ₹' + totalPremium.toLocaleString('en-IN',{maximumFractionDigits:0}) + ' total',
+        totalPremium,
+        'Max loss = ₹' + totalPremium.toLocaleString('en-IN',{maximumFractionDigits:0}) + ' (premium paid)',
+        profitAmt ? rrRatio : null, profitAmt,
+        acc, riskPct, totalPremium,
+        '₹' + premium + '/unit (premium)',
+        asset.lotSize + ' units/lot',
+        lots + ' lots × ₹' + premium + ' × ' + asset.lotSize + ' = ₹' + totalPremium.toLocaleString('en-IN',{maximumFractionDigits:0}),
+        alertMsg, '₹'
+      );
+
+    } else {
+      // ── Index Futures ─────────────────────────────────────────────
+      const dist = (!isNaN(distIn) && distIn > 0) ? distIn
+                 : (!isNaN(entry) && !isNaN(sl) && entry && sl) ? Math.abs(entry - sl) : null;
+      if(!dist || dist <= 0){ showEmpty(); return; }
+      const riskPerLot = dist * asset.lotSize;
+      const lots = Math.floor(riskAmt / riskPerLot);
+      const actualRisk = lots * riskPerLot;
+      if(tp && entry && sl){
+        const tpDist = Math.abs(tp - entry);
+        rrRatio = tpDist / dist;
+        profitAmt = lots * tpDist * asset.lotSize;
+      }
+      alertMsg = lots < 1
+        ? {type:'warn', msg:'Need ₹' + riskPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + ' for 1 lot (' + asset.lotSize + ' units).'}
+        : {type:'ok',   msg:lots + ' lot' + (lots>1?'s':'') + ' [Index Futures] · ' + dist.toFixed(0) + ' pts × ' + asset.lotSize + ' units = ₹' + riskPerLot.toLocaleString('en-IN',{maximumFractionDigits:0}) + '/lot'};
       showResult(
         lots, 'Lots',
         asset.lotSize + ' units/lot · Actual risk ₹' + actualRisk.toLocaleString('en-IN',{maximumFractionDigits:0}),
