@@ -3,27 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vyxor Blog — Trading Risk Management & Psychology Resources</title>
-<meta name="description" content="Free educational resources on position sizing, risk management, trading psychology, forex, futures and crypto trading. Written by traders for traders.">
-<meta name="keywords" content="trading blog, risk management, position sizing, trading psychology, forex education, futures guide, crypto trading">
+<title>Vyxor Blog — Trading Risk Management & Discipline Resources</title>
+<meta name="description" content="Educational resources on position sizing, risk management, and trading discipline. Coming soon — subscribe for updates.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://vyxor.in/blog.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vyxor.in/blog.html">
-<meta property="og:title" content="Vyxor Blog — Resources for Serious Traders">
-<meta property="og:description" content="Risk management, psychology, and market education — written by traders for traders.">
+<meta property="og:title" content="Vyxor Blog — Trading Resources">
+<meta property="og:description" content="Educational resources on risk management and trading discipline.">
 <meta property="og:image" content="https://vyxor.in/og-image.png">
 <meta property="og:site_name" content="Vyxor">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Vyxor Blog — Resources for Serious Traders">
-<meta name="twitter:description" content="Risk management, psychology, and market education.">
+<meta name="twitter:title" content="Vyxor Blog">
+<meta name="twitter:description" content="Educational resources on risk management.">
 <meta name="twitter:image" content="https://vyxor.in/og-image.png">
 <meta name="theme-color" content="#050816">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Blog","name":"Vyxor Blog","url":"https://vyxor.in/blog.html","description":"Free educational resources on position sizing, risk management, trading psychology, forex, futures and crypto trading.","publisher":{"@type":"Organization","name":"Vyxor","url":"https://vyxor.in"}}
+{"@context":"https://schema.org","@type":"Blog","name":"Vyxor Blog","url":"https://vyxor.in/blog.html","description":"Educational resources on trading risk management and discipline.","publisher":{"@type":"Organization","name":"Vyxor","url":"https://vyxor.in"}}
 </script>
 
 <style>
@@ -51,49 +50,60 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .mobile-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
 .mobile-menu a:last-of-type{border-bottom:none;}
 
-.page{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:100px 2rem 5rem;width:100%;}
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:100px 2rem 5rem;width:100%;flex:1;}
 .header{margin-bottom:3rem;animation:fu 0.6s ease both;}
 .eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
 .eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
 h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);letter-spacing:-2px;line-height:1.05;margin-bottom:0.75rem;}
 h1 span{color:var(--accent);}
 .sub{font-size:15px;color:var(--muted);font-weight:300;}
-.cats{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:2rem;}
-.cat{padding:5px 14px;border-radius:99px;border:1px solid var(--border);background:transparent;color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:all 0.15s;}
-.cat:hover,.cat.active{border-color:var(--accent);color:var(--accent);background:rgba(0,245,160,0.06);}
-.coming-banner{background:rgba(0,245,160,0.05);border:1px solid rgba(0,245,160,0.2);border-radius:12px;padding:1.5rem 2rem;margin-bottom:2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
-.cb-text{font-size:14px;color:var(--muted);}
-.cb-text strong{color:var(--text);}
-.cb-btn{padding:8px 20px;border-radius:7px;border:none;background:var(--accent);color:#020c12;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;}
-.post-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.5rem;display:flex;flex-direction:column;gap:10px;backdrop-filter:blur(20px);transition:all 0.2s;cursor:pointer;text-decoration:none;color:inherit;}
-.post-card:hover{border-color:rgba(0,245,160,0.25);transform:translateY(-2px);}
-.post-tag{font-size:10px;font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;padding:3px 10px;border-radius:4px;display:inline-block;width:fit-content;}
-.tag-risk{background:rgba(0,245,160,0.08);color:var(--accent);}
-.tag-psych{background:rgba(167,139,250,0.08);color:#a78bfa;}
-.tag-forex{background:rgba(59,130,246,0.08);color:#3B82F6;}
-.tag-futures{background:rgba(255,176,32,0.08);color:#FFB020;}
-.tag-crypto{background:rgba(255,77,109,0.08);color:#FF4D6D;}
-.tag-india{background:rgba(255,153,51,0.1);color:#FF9933;}
-.post-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.3px;line-height:1.3;}
-.post-desc{font-size:12px;color:var(--muted);line-height:1.6;flex:1;}
-.post-meta{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;padding-top:8px;border-top:1px solid var(--border);}
-.post-soon{font-size:10px;background:rgba(255,176,32,0.08);color:#FFB020;border:1px solid rgba(255,176,32,0.2);padding:2px 8px;border-radius:4px;}
+
+.empty-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:4rem 2rem;text-align:center;backdrop-filter:blur(20px);animation:fu 0.6s 0.2s ease both;}
+.empty-icon{width:80px;height:80px;border-radius:20px;background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);display:flex;align-items:center;justify-content:center;font-size:36px;margin:0 auto 1.5rem;box-shadow:0 0 40px rgba(0,245,160,0.1);}
+.empty-title{font-family:'Syne',sans-serif;font-weight:800;font-size:28px;letter-spacing:-1px;margin-bottom:10px;}
+.empty-title span{color:var(--accent);}
+.empty-desc{font-size:15px;color:var(--muted);line-height:1.7;max-width:480px;margin:0 auto 2rem;font-weight:300;}
+
+.notify-form{display:flex;gap:8px;max-width:420px;margin:0 auto 12px;}
+.ninput{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:12px 14px;outline:none;transition:all 0.2s;}
+.ninput::placeholder{color:var(--muted2);}
+.ninput:focus{border-color:rgba(0,245,160,0.4);box-shadow:0 0 0 3px rgba(0,245,160,0.06);}
+.nbtn{padding:12px 24px;border-radius:8px;border:none;background:var(--accent);color:#020c12;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.nbtn:hover{background:var(--accent-h);}
+.privacy{font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;}
+.success{display:none;background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);border-radius:8px;padding:12px 20px;font-size:13px;color:var(--accent);font-family:'DM Mono',monospace;max-width:420px;margin:0 auto;}
+
+.topics-box{margin-top:3rem;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(20px);animation:fu 0.6s 0.3s ease both;}
+.topics-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;text-align:center;}
+.topics-list{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+.topic{padding:6px 14px;border:1px solid var(--border);border-radius:99px;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;}
+
+.related{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.r-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-decoration:none;color:inherit;transition:all 0.2s;}
+.r-card:hover{border-color:rgba(0,245,160,0.25);transform:translateY(-2px);}
+.r-icon{font-size:24px;margin-bottom:10px;}
+.r-title{font-family:'Syne',sans-serif;font-weight:600;font-size:16px;margin-bottom:5px;}
+.r-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+
 footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
 .fl{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
 .fl span{color:var(--accent);}
 .fc{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
-@media(max-width:768px){nav{padding:0 1.25rem;}.nl{display:none;}.hamburger{display:flex;}.grid{grid-template-columns:1fr;}.page{padding:90px 1.25rem 3rem;}}
+.f-links{display:flex;gap:1rem;}
+.f-links a{font-size:12px;color:var(--muted2);text-decoration:none;font-family:'DM Mono',monospace;}
+.f-links a:hover{color:var(--muted);}
+
+@media(max-width:768px){nav{padding:0 1.25rem;}.nl{display:none;}.hamburger{display:flex;}.page{padding:90px 1.25rem 3rem;}.notify-form{flex-direction:column;}.related{grid-template-columns:1fr;}.empty-card{padding:2.5rem 1.5rem;}}
 </style>
 </head>
 <body>
 <div class="glow g1"></div><div class="glow g2"></div>
+
 <nav>
   <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
   <ul class="nl">
     <li><a href="/journal.html">Journal</a></li>
     <li><a href="/position-size-calculator.html">Calculator</a></li>
-    <li><a href="/psychology.html">Psychology</a></li>
     <li><a href="/blog.html" class="act">Blog</a></li>
     <li><a href="/about.html">About</a></li>
     <li><span class="pill">Free · vyxor.in</span></li>
@@ -105,7 +115,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.
 <div class="mobile-menu" id="mobile-menu">
   <a href="/journal.html">Journal</a>
   <a href="/position-size-calculator.html">Calculator</a>
-  <a href="/psychology.html">Psychology</a>
   <a href="/blog.html">Blog</a>
   <a href="/about.html">About</a>
 </div>
@@ -114,35 +123,70 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.
   <div class="header">
     <div class="eyebrow">Vyxor Blog</div>
     <h1>Resources for <span>Serious Traders</span></h1>
-    <p class="sub">Risk management, position sizing, psychology and market education — written by traders for traders.</p>
+    <p class="sub">Risk management, position sizing, and trading discipline — written by traders for traders.</p>
   </div>
 
-  <div class="cats">
-    <button class="cat active">All</button>
-    <button class="cat">Risk Management</button>
-    <button class="cat">Psychology</button>
-    <button class="cat">Forex</button>
-    <button class="cat">Futures</button>
-    <button class="cat">India</button>
+  <div class="empty-card">
+    <div class="empty-icon">📝</div>
+    <div class="empty-title">First articles <span>coming soon</span></div>
+    <p class="empty-desc">We're writing in-depth, no-fluff articles on risk management, position sizing, and trading discipline. Drop your email and we'll let you know the moment they go live.</p>
+
+    <div class="notify-form" id="nform">
+      <input class="ninput" id="nemail" type="email" placeholder="your@email.com" autocomplete="email">
+      <button class="nbtn" onclick="notify()">Notify Me</button>
+    </div>
+    <div class="success" id="nsuccess">✓ You're on the list. We'll be in touch. 🚀</div>
+    <p class="privacy">🔒 No spam. Unsubscribe anytime.</p>
   </div>
 
-  <div class="coming-banner">
-    <div class="cb-text"><strong>Blog posts launching soon.</strong> Subscribe to get notified when we publish our first articles on risk management and trading psychology.</div>
-    <a href="/index.html#email" class="cb-btn">Notify Me</a>
+  <div class="topics-box">
+    <div class="topics-title">Topics we'll cover</div>
+    <div class="topics-list">
+      <span class="topic">Position Sizing</span>
+      <span class="topic">Risk Management</span>
+      <span class="topic">Trading Psychology</span>
+      <span class="topic">Futures Markets</span>
+      <span class="topic">Forex</span>
+      <span class="topic">Drawdown Control</span>
+      <span class="topic">Indian Traders Guide</span>
+    </div>
   </div>
 
-  <div class="grid">
-    <div class="post-card"><span class="post-tag tag-risk">Risk Management</span><div class="post-title">What is position sizing and why 90% of traders ignore it</div><div class="post-desc">The single most important concept in trading that nobody talks about enough.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
-    <div class="post-card"><span class="post-tag tag-risk">Risk Management</span><div class="post-title">The 1% risk rule — how to never blow your account</div><div class="post-desc">Why risking 1-2% per trade is not conservative — it's mathematical survival.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
-    <div class="post-card"><span class="post-tag tag-futures">Futures</span><div class="post-title">NQ futures tick value explained — complete beginner guide</div><div class="post-desc">Nasdaq-100 futures, tick size, tick value, point value — everything you need.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
-    <div class="post-card"><span class="post-tag tag-forex">Forex</span><div class="post-title">How to calculate forex lot size with a stop loss</div><div class="post-desc">Standard lots, mini lots, micro lots — and the exact formula to use.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
-    <div class="post-card"><span class="post-tag tag-risk">Risk Management</span><div class="post-title">Risk to reward ratio — why 2:1 is the minimum</div><div class="post-desc">The math behind R:R ratios and why 40% win rate at 2:1 beats 60% at 1:1.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
-    <div class="post-card"><span class="post-tag tag-psych">Psychology</span><div class="post-title">Trading psychology — how emotions destroy good strategies</div><div class="post-desc">FOMO, revenge trading, overconfidence — the psychological traps to avoid.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
-    <div class="post-card"><span class="post-tag tag-futures">Futures</span><div class="post-title">Micro vs standard futures — which is right for your account?</div><div class="post-desc">MNQ vs NQ, MES vs ES — tick values, margin, and account size matching.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
-    <div class="post-card"><span class="post-tag tag-risk">Risk Management</span><div class="post-title">Max drawdown — what it is and how to track it</div><div class="post-desc">Understanding drawdown and why limiting it to 10% is critical.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
-    <div class="post-card"><span class="post-tag tag-india">India</span><div class="post-title">How Indian traders can trade US Futures and Forex legally in 2026</div><div class="post-desc">LRS scheme, permitted brokers, tax implications — everything for Indian traders.</div><div class="post-meta"><span>Vyxor Team</span><span class="post-soon">Coming Soon</span></div></div>
+  <div class="related">
+    <a href="/position-size-calculator.html" class="r-card">
+      <div class="r-icon">⚡</div>
+      <div class="r-title">Position Size Calculator</div>
+      <div class="r-desc">Calculate exact position sizes for 50+ assets across Forex, Futures and Crypto.</div>
+    </a>
+    <a href="/journal.html" class="r-card">
+      <div class="r-icon">📔</div>
+      <div class="r-title">AI Trade Journal</div>
+      <div class="r-desc">Log every trade, track emotions, get AI-powered pattern analysis.</div>
+    </a>
   </div>
 </div>
-<footer><div class="fl"><span>V</span>yxor</div><div class="fc">© 2026 Vyxor · vyxor.in · Free forever</div></footer>
+
+<footer>
+  <div class="fl"><span>V</span>yxor</div>
+  <div class="f-links">
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/disclaimer.html">Disclaimer</a>
+  </div>
+  <div class="fc">© 2026 Vyxor · vyxor.in</div>
+</footer>
+
+<script>
+function notify(){
+  const e=document.getElementById('nemail').value.trim();
+  if(!e||!e.includes('@'))return;
+  const btn=document.querySelector('.nbtn');
+  btn.textContent='...';btn.disabled=true;
+  try{new Image().src='https://script.google.com/macros/s/AKfycbzM3v6AA9ovWf-0dh3u_lg3DjIXvCg5--5rZGlEQbDEBsEmeAOzqJg6HmqrOqw6WWKoRA/exec?email='+encodeURIComponent(e)+'&source=blog&t='+Date.now();}catch(x){}
+  localStorage.setItem('vyxor_subscribed','1');
+  document.getElementById('nform').style.display='none';
+  document.getElementById('nsuccess').style.display='block';
+}
+</script>
 </body>
 </html>
