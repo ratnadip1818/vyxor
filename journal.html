@@ -764,6 +764,16 @@ tbody td{padding:10px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
 <div class="toast" id="toast"></div>
 
 <!-- ── FIREBASE + APP LOGIC ── -->
+<!-- Non-module wrapper so window.* functions work from HTML onclick -->
+<script>
+// Stub functions defined before module loads — replaced when module initialises
+window.googleAuth  = () => console.warn('Firebase not ready yet');
+window.emailLogin  = () => console.warn('Firebase not ready yet');
+window.emailSignup = () => console.warn('Firebase not ready yet');
+window.doSignOut   = () => console.warn('Firebase not ready yet');
+window.authTab     = (t) => {};
+window.toggleMenu  = () => document.getElementById('mobile-menu').classList.toggle('open');
+</script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
@@ -856,8 +866,16 @@ window.authTab = function(tab) {
 };
 
 window.googleAuth = async function() {
-  try { await signInWithPopup(auth, gp); }
-  catch(e) { showAuthErr(friendlyAuthErr(e.code)); }
+  clearAuthErr('login-err');
+  clearAuthErr('signup-err');
+  try {
+    await signInWithPopup(auth, gp);
+  } catch(e) {
+    console.error('Google auth error:', e.code, e.message);
+    const msg = friendlyAuthErr(e.code);
+    showAuthErr(msg, 'login');
+    showAuthErr(msg, 'signup');
+  }
 };
 
 window.emailLogin = async function() {
