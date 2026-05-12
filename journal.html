@@ -1673,14 +1673,6 @@ window.clearImport = function(broker) {
   const fileInput = drop.querySelector('input[type="file"]');
   if (fileInput) fileInput.value = '';
 };
-  document.querySelectorAll('.jtab').forEach((t,i) =>
-    t.classList.toggle('active', tabs[i]===tab));
-  document.querySelectorAll('.panel').forEach(p =>
-    p.classList.remove('active'));
-  document.getElementById('panel-'+tab).classList.add('active');
-  if (tab==='analytics') renderAnalytics();
-  if (tab==='history')   renderHistory();
-};
 
 // ── MOBILE MENU ── FIX #3 ────────────────────────────
 window.toggleMenu = function() {
