@@ -3,50 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Free Position Size Calculator — Forex, Futures & Crypto | Vyxor</title>
 <meta name="description" content="Free position size calculator for Forex, Futures and Crypto. Calculate exact lot sizes, contracts, risk per trade and R:R ratio for 50+ assets instantly.">
 <meta name="keywords" content="position size calculator, forex risk calculator, futures position size, NQ tick value, ES tick value, lot size calculator, crypto position calculator, risk management, vyxor">
 <meta name="author" content="Vyxor">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://vyxor.in/position-size-calculator.html">
-
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vyxor.in/position-size-calculator.html">
 <meta property="og:title" content="Free Position Size Calculator — Forex, Futures & Crypto | Vyxor">
-<meta property="og:description" content="Calculate exact position sizes for 50+ assets. Free forever. No signup.">
+<meta property="og:description" content="Calculate exact position sizes for 50+ assets. Free. No signup.">
 <meta property="og:image" content="https://vyxor.in/og-image.png">
 <meta property="og:site_name" content="Vyxor">
 <meta property="og:locale" content="en_IN">
-
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://vyxor.in/position-size-calculator.html">
 <meta name="twitter:title" content="Free Position Size Calculator | Vyxor">
-<meta name="twitter:description" content="Calculate exact position sizes for Forex, Futures & Crypto. Free forever.">
+<meta name="twitter:description" content="Calculate exact position sizes for Forex, Futures & Crypto. Free.">
 <meta name="twitter:image" content="https://vyxor.in/og-image.png">
-
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
 <meta name="theme-color" content="#050816">
 <meta name="google-site-verification" content="T-LWekv5ALTXqxpudqGZ69j2nCAsQ2MRMUaV8SLk_3I" />
-
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vyxor Position Size Calculator","url":"https://vyxor.in/position-size-calculator.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free position size calculator for Forex, Futures and Crypto traders.","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","ratingCount":"127"}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"What is position sizing in trading?","acceptedAnswer":{"@type":"Answer","text":"Position sizing is the process of calculating how many units, lots, or contracts to trade based on your account size, the percentage of capital you're willing to risk, and the distance to your stop loss. Proper position sizing is the single most important factor in trader survival."}},
-{"@type":"Question","name":"How do I calculate forex lot size with a stop loss?","acceptedAnswer":{"@type":"Answer","text":"Forex lot size formula: (Account Balance × Risk %) ÷ (Stop Loss in Pips × Pip Value). For example, with a $10,000 account risking 1% ($100), trading EUR/USD with a 20-pip stop and $10 pip value: lot size = $100 ÷ (20 × $10) = 0.5 standard lots."}},
-{"@type":"Question","name":"What is the NQ futures tick value?","acceptedAnswer":{"@type":"Answer","text":"NQ (E-mini Nasdaq-100) futures have a tick size of 0.25 points and a tick value of $5.00 per contract. Each 1-point move equals $20. The micro version MNQ has the same 0.25 tick size but only $0.50 tick value."}},
-{"@type":"Question","name":"How many lots should I trade with a $1000 account?","acceptedAnswer":{"@type":"Answer","text":"With a $1,000 account risking 1% per trade ($10), and a 20-pip stop on EUR/USD: lot size = $10 ÷ (20 × $10) = 0.05 lots (5 micro lots). Smaller accounts should typically use micro lots."}},
-{"@type":"Question","name":"What is a good risk-reward ratio for trading?","acceptedAnswer":{"@type":"Answer","text":"A minimum 2:1 risk-reward ratio is recommended. This means you target $2 in profit for every $1 you risk. With 2:1 R:R, you only need a 33% win rate to break even."}},
-{"@type":"Question","name":"Is Vyxor position calculator free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Vyxor's position size calculator is 100% free forever with no signup required. We support 28 Forex pairs, 19 Futures contracts (including Micros), and 12 Crypto pairs."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is position sizing in trading?","acceptedAnswer":{"@type":"Answer","text":"Position sizing is the process of calculating how many units, lots, or contracts to trade based on your account size, the percentage of capital you are willing to risk, and the distance to your stop loss."}},{"@type":"Question","name":"How do I calculate forex lot size with a stop loss?","acceptedAnswer":{"@type":"Answer","text":"Forex lot size formula: (Account Balance x Risk %) divided by (Stop Loss in Pips x Pip Value)."}},{"@type":"Question","name":"What is the NQ futures tick value?","acceptedAnswer":{"@type":"Answer","text":"NQ futures have a tick size of 0.25 points and a tick value of $5.00 per contract. Each 1-point move equals $20."}},{"@type":"Question","name":"Is Vyxor position calculator free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Vyxor position size calculator is 100% free with no signup required."}}]}
 </script>
-
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#050816;--bg2:#0B1220;--card:rgba(15,23,42,0.72);--border:rgba(255,255,255,0.06);--accent:#00F5A0;--accent-h:#00D98B;--danger:#FF4D6D;--warn:#FFB020;--info:#3B82F6;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
 body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:400;min-height:100vh;overflow-x:hidden;}
 body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear-gradient(rgba(0,245,160,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.018) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;}
 .glow-orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);}
@@ -54,7 +41,6 @@ body::before{content:'';position:fixed;inset:0;z-index:0;background-image:linear
 .glow-2{width:400px;height:400px;background:radial-gradient(circle,rgba(59,130,246,0.06) 0%,transparent 70%);bottom:10%;left:-100px;}
 @keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.7)}}
 @keyframes fu{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
-
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:62px;background:rgba(5,8,22,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
 .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;display:flex;align-items:center;gap:2px;text-decoration:none;color:var(--text);}
 .nav-logo .v{color:var(--accent);}
@@ -69,7 +55,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .mobile-menu.open{display:flex;flex-direction:column;gap:0.5rem;}
 .mobile-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
 .mobile-menu a:last-of-type{border-bottom:none;}
-
 .section{position:relative;z-index:1;max-width:1000px;margin:0 auto;padding:0 2rem 4rem;}
 .calc-header{text-align:center;margin-bottom:2rem;padding-top:90px;}
 .calc-eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.14em;display:inline-flex;align-items:center;gap:8px;margin-bottom:8px;}
@@ -77,21 +62,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,4vw,44px);letter-spacing:-1.5px;margin-bottom:6px;}
 h1 span{color:var(--accent);}
 .calc-sub{font-size:14px;color:var(--muted);font-weight:300;}
-
 .calc-shell{background:rgba(11,18,32,0.8);backdrop-filter:blur(30px);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.5);animation:fu 0.6s ease both;}
 .market-tabs{display:flex;border-bottom:1px solid var(--border);}
 .mtab{flex:1;padding:16px 12px;background:transparent;border:none;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;font-size:13px;transition:all 0.2s;display:flex;flex-direction:column;align-items:center;gap:4px;border-bottom:2px solid transparent;margin-bottom:-1px;}
 .mtab:hover{color:var(--text);}
 .mtab.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(0,245,160,0.04);}
-.mtab-icon{font-size:20px;}
-.mtab-name{font-size:12px;}
+.mtab-icon{font-size:20px;}.mtab-name{font-size:12px;}
 .calc-body{padding:2rem;}
-
 .search-wrap{position:relative;margin-bottom:1.25rem;}
 .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:15px;pointer-events:none;}
 .search-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:10px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:11px 14px 11px 40px;outline:none;transition:all 0.2s;}
 .search-input:focus{border-color:rgba(0,245,160,0.35);box-shadow:0 0 0 3px rgba(0,245,160,0.06);}
-
 .asset-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;display:block;}
 .asset-scroll{display:flex;flex-wrap:wrap;gap:5px;max-height:106px;overflow-y:auto;margin-bottom:1.5rem;}
 .abtn{padding:5px 11px;border-radius:6px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
@@ -99,10 +80,8 @@ h1 span{color:var(--accent);}
 .abtn.active{border-color:var(--accent);background:rgba(0,245,160,0.08);color:var(--accent);}
 .abtn.hidden{display:none;}
 .no-results{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;padding:8px 0;}
-
 .futures-info{background:rgba(59,130,246,0.06);border:1px solid rgba(59,130,246,0.18);border-radius:8px;padding:10px 14px;font-size:12px;color:rgba(147,197,253,0.85);font-family:'DM Mono',monospace;line-height:1.7;margin-bottom:1.25rem;display:none;}
 .futures-info.show{display:block;}
-
 .inputs-section{margin-bottom:1.5rem;}
 .inputs-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;display:block;}
 .inputs-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
@@ -112,11 +91,9 @@ h1 span{color:var(--accent);}
 .field-wrap input{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Mono',monospace;font-size:14px;padding:11px 42px 11px 13px;outline:none;transition:all 0.2s;}
 .field-wrap input:focus{border-color:rgba(0,245,160,0.4);box-shadow:0 0 0 3px rgba(0,245,160,0.06);}
 .field-unit{position:absolute;right:12px;font-size:10px;color:var(--muted2);font-family:'DM Mono',monospace;pointer-events:none;}
-
 .inline-div{display:flex;align-items:center;gap:10px;margin:1.25rem 0;}
 .inline-div span{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;}
 .inline-div::before,.inline-div::after{content:'';flex:1;height:1px;background:var(--border);}
-
 .result-panel{background:rgba(5,8,22,0.6);border:1px solid var(--border);border-radius:14px;overflow:hidden;}
 .result-panel.has-result{border-color:rgba(0,245,160,0.2);box-shadow:0 0 40px rgba(0,245,160,0.06);}
 .result-top{display:flex;justify-content:space-between;padding:1rem 1.25rem;border-bottom:1px solid var(--border);background:rgba(0,245,160,0.03);}
@@ -126,39 +103,37 @@ h1 span{color:var(--accent);}
 .rcell{padding:1.25rem;border-right:1px solid var(--border);display:flex;flex-direction:column;gap:5px;}
 .rcell:last-child{border-right:none;}
 .rcell-val{font-family:'DM Mono',monospace;font-size:24px;font-weight:500;line-height:1;}
-.rcell-val.accent{color:var(--accent);}
-.rcell-val.danger{color:var(--danger);}
-.rcell-val.info{color:var(--info);}
+.rcell-val.accent{color:var(--accent);}.rcell-val.danger{color:var(--danger);}.rcell-val.info{color:var(--info);}
 .rcell-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
 .rcell-sub{font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;}
-
 .rr-bar-wrap{padding:1rem 1.25rem;border-bottom:1px solid var(--border);}
 .rr-bar-label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;}
 .rr-bar{display:flex;height:32px;border-radius:6px;overflow:hidden;gap:2px;}
 .rr-loss-seg{background:rgba(255,77,109,0.2);border:1px solid rgba(255,77,109,0.3);border-radius:4px 0 0 4px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--danger);font-family:'DM Mono',monospace;min-width:40px;transition:width 0.5s;}
 .rr-win-seg{background:rgba(0,245,160,0.12);border:1px solid rgba(0,245,160,0.25);border-radius:0 4px 4px 0;flex:1;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--accent);font-family:'DM Mono',monospace;}
-
 .breakdown{padding:1rem 1.25rem;}
 .brow{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.03);font-size:12px;}
-.brow:last-child{border-bottom:none;}
-.brow-lbl{color:var(--muted);}
+.brow:last-child{border-bottom:none;}.brow-lbl{color:var(--muted);}
 .brow-val{font-family:'DM Mono',monospace;color:var(--text);}
-.brow-val.green{color:var(--accent);}
-.brow-val.red{color:var(--danger);}
-
+.brow-val.green{color:var(--accent);}.brow-val.red{color:var(--danger);}
 .alert-box{margin:1rem 1.25rem;padding:10px 14px;border-radius:8px;font-size:12px;display:none;font-family:'DM Mono',monospace;}
 .alert-box.show{display:block;}
 .alert-box.ok{background:rgba(0,245,160,0.06);border:1px solid rgba(0,245,160,0.2);color:var(--accent);}
 .alert-box.warn{background:rgba(255,176,32,0.06);border:1px solid rgba(255,176,32,0.2);color:var(--warn);}
 .alert-box.err{background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.2);color:var(--danger);}
-
 .empty-state{padding:2.5rem 1.5rem;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;}
-.empty-icon{font-size:32px;opacity:0.3;}
-.empty-text{font-size:13px;color:var(--muted2);font-family:'DM Mono',monospace;}
+.empty-icon{font-size:32px;opacity:0.3;}.empty-text{font-size:13px;color:var(--muted2);font-family:'DM Mono',monospace;}
 .reset-btn{width:100%;margin-top:1rem;padding:11px;border-radius:8px;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:'Inter',sans-serif;font-size:13px;cursor:pointer;transition:all 0.2s;}
 .reset-btn:hover{border-color:var(--muted2);color:var(--text);}
-
-.how-to{margin-top:4rem;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(20px);}
+.journal-cta{background:linear-gradient(135deg,rgba(0,245,160,0.06),rgba(59,130,246,0.04));border:1px solid rgba(0,245,160,0.2);border-radius:16px;padding:1.75rem 2rem;margin-top:2.5rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;}
+.jcta-left{display:flex;align-items:center;gap:14px;}
+.jcta-icon{font-size:36px;flex-shrink:0;}
+.jcta-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.3px;margin-bottom:3px;}
+.jcta-title span{color:var(--accent);}
+.jcta-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+.jcta-btn{padding:12px 24px;border-radius:9px;background:var(--accent);color:#020c12;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;text-decoration:none;transition:all 0.2s;white-space:nowrap;flex-shrink:0;}
+.jcta-btn:hover{background:var(--accent-h);transform:translateY(-1px);}
+.how-to{margin-top:2.5rem;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(20px);}
 .how-to h2{font-family:'Syne',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.5px;margin-bottom:1.25rem;}
 .how-to h2 span{color:var(--accent);}
 .how-to-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
@@ -166,7 +141,6 @@ h1 span{color:var(--accent);}
 .htstep-n{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);margin-bottom:6px;}
 .htstep-t{font-family:'Syne',sans-serif;font-weight:600;font-size:15px;margin-bottom:6px;}
 .htstep-d{font-size:13px;color:var(--muted);line-height:1.6;}
-
 .faq-section{margin-top:3rem;padding:2rem;background:var(--card);border:1px solid var(--border);border-radius:16px;backdrop-filter:blur(20px);}
 .faq-section h2{font-family:'Syne',sans-serif;font-weight:700;font-size:24px;letter-spacing:-0.5px;margin-bottom:0.5rem;}
 .faq-section h2 span{color:var(--accent);}
@@ -179,50 +153,43 @@ h1 span{color:var(--accent);}
 .faq-item.open .faq-q-icon{transform:rotate(45deg);}
 .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease;font-size:14px;color:var(--muted);line-height:1.75;}
 .faq-item.open .faq-a{max-height:400px;padding-top:0.75rem;}
-
 .related-tools{margin-top:3rem;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
 .rt-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;text-decoration:none;color:inherit;transition:all 0.2s;}
 .rt-card:hover{border-color:rgba(0,245,160,0.25);transform:translateY(-2px);}
 .rt-icon{font-size:22px;margin-bottom:8px;}
 .rt-title{font-family:'Syne',sans-serif;font-weight:600;font-size:15px;margin-bottom:4px;}
 .rt-desc{font-size:12px;color:var(--muted);line-height:1.5;}
-
 footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;max-width:1200px;margin:0 auto;}
 .footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:18px;}
 .footer-logo span{color:var(--accent);}
-.footer-links{display:flex;gap:1.5rem;list-style:none;}
+.footer-links{display:flex;gap:1.5rem;list-style:none;flex-wrap:wrap;}
 .footer-links a{font-size:12px;color:var(--muted);text-decoration:none;}
 .footer-links a:hover{color:var(--text);}
 .footer-copy{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
-
 @media(max-width:768px){
-  nav{padding:0 1.25rem;}
-  .nav-links{display:none;}
-  .hamburger{display:flex;}
-  .section{padding:0 1.25rem 3rem;}
-  .calc-body{padding:1.25rem;}
+  nav{padding:0 1.25rem;}.nav-links{display:none;}.hamburger{display:flex;}
+  .section{padding:0 1.25rem 3rem;}.calc-body{padding:1.25rem;}
   .inputs-grid,.inputs-grid.three{grid-template-columns:1fr;}
   .result-main{grid-template-columns:1fr;}
   .rcell{border-right:none;border-bottom:1px solid var(--border);}
   .rcell:last-child{border-bottom:none;}
-  .how-to-steps{grid-template-columns:1fr;}
-  .related-tools{grid-template-columns:1fr;}
+  .how-to-steps,.related-tools{grid-template-columns:1fr;}
   .how-to,.faq-section{padding:1.5rem;}
   footer{flex-direction:column;text-align:center;}
+  .journal-cta{flex-direction:column;text-align:center;}
+  .jcta-left{flex-direction:column;text-align:center;}
+  .jcta-btn{width:100%;text-align:center;}
 }
 </style>
 </head>
 <body>
-
 <div class="glow-orb glow-1"></div>
 <div class="glow-orb glow-2"></div>
-
 <nav>
   <a href="/index.html" class="nav-logo"><span class="v">V</span>yxor<span class="dot"></span></a>
   <ul class="nav-links">
     <li><a href="/journal.html">Journal</a></li>
     <li><a href="/position-size-calculator.html" class="active">Calculator</a></li>
-    <li><a href="/psychology.html">Psychology</a></li>
     <li><a href="/blog.html">Blog</a></li>
     <li><a href="/about.html">About</a></li>
     <li><span class="nav-pill">Free · vyxor.in</span></li>
@@ -234,35 +201,29 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
 <div class="mobile-menu" id="mobile-menu">
   <a href="/journal.html">Journal</a>
   <a href="/position-size-calculator.html">Calculator</a>
-  <a href="/psychology.html">Psychology</a>
   <a href="/blog.html">Blog</a>
   <a href="/about.html">About</a>
 </div>
-
 <section class="section">
   <div class="calc-header">
     <p class="calc-eyebrow">Position Size Calculator</p>
     <h1>Calculate your <span>exact position size</span></h1>
     <p class="calc-sub">Forex · Futures · Crypto — 50+ assets with correct pip and tick values</p>
   </div>
-
   <div class="calc-shell">
     <div class="market-tabs">
       <button class="mtab active" onclick="switchMarket('forex',this)"><span class="mtab-icon">💱</span><span class="mtab-name">Forex</span></button>
       <button class="mtab" onclick="switchMarket('futures',this)"><span class="mtab-icon">📈</span><span class="mtab-name">Futures</span></button>
       <button class="mtab" onclick="switchMarket('crypto',this)"><span class="mtab-icon">₿</span><span class="mtab-name">Crypto</span></button>
     </div>
-
     <div class="calc-body">
       <div class="search-wrap">
         <span class="search-icon">⌕</span>
         <input class="search-input" id="asset-search" placeholder="Search asset — e.g. EUR, NQ, BTC..." oninput="filterAssets(this.value)">
       </div>
-
       <span class="asset-label" id="asset-label">Select Pair</span>
       <div class="asset-scroll" id="asset-grid"></div>
       <div class="futures-info" id="futures-info"></div>
-
       <div class="inputs-section">
         <span class="inputs-label">Account Settings</span>
         <div class="inputs-grid">
@@ -270,9 +231,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
           <div class="field"><label>Risk Per Trade</label><div class="field-wrap"><input type="number" id="riskpct" placeholder="1.0" step="0.1" min="0.1" max="10" oninput="calculate()"><span class="field-unit">%</span></div></div>
         </div>
       </div>
-
       <div class="inline-div"><span>Trade Details</span></div>
-
       <div class="inputs-section">
         <div class="inputs-grid three">
           <div class="field"><label>Entry Price</label><div class="field-wrap"><input type="number" id="entry" placeholder="—" step="0.00001" oninput="syncDistance();calculate()"><span class="field-unit" id="entry-unit"></span></div></div>
@@ -281,7 +240,6 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
           <div class="field"><label>Take Profit</label><div class="field-wrap"><input type="number" id="takeprofit" placeholder="— (optional)" step="0.00001" oninput="calculate()"><span class="field-unit" id="tp-unit"></span></div></div>
         </div>
       </div>
-
       <div class="result-panel" id="result-panel">
         <div class="empty-state" id="empty-state">
           <div class="empty-icon">⚡</div>
@@ -310,64 +268,59 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
           <div class="alert-box" id="alert-box"></div>
         </div>
       </div>
-
       <button class="reset-btn" onclick="resetAll()">↺ &nbsp; Reset Calculator</button>
     </div>
+  </div>
+
+  <div class="journal-cta">
+    <div class="jcta-left">
+      <div class="jcta-icon">📔</div>
+      <div>
+        <div class="jcta-title">Now log the trade in your <span>AI Journal</span></div>
+        <div class="jcta-desc">Track every trade, tag emotions, get AI pattern analysis. Find out which setups actually make you money.</div>
+      </div>
+    </div>
+    <a href="/journal.html" class="jcta-btn">Open Journal →</a>
   </div>
 
   <div class="how-to">
     <h2>How to use the <span>position size calculator</span></h2>
     <div class="how-to-steps">
-      <div class="htstep"><div class="htstep-n">STEP 01</div><div class="htstep-t">Pick your market & asset</div><div class="htstep-d">Choose Forex, Futures, or Crypto. Search and select the specific pair or contract you're trading.</div></div>
-      <div class="htstep"><div class="htstep-n">STEP 02</div><div class="htstep-t">Enter account & risk</div><div class="htstep-d">Type your account balance and the percentage you're willing to risk per trade. Most pros risk 0.5%–2%.</div></div>
-      <div class="htstep"><div class="htstep-n">STEP 03</div><div class="htstep-t">Add trade details</div><div class="htstep-d">Enter your entry, stop loss, and (optionally) take profit. Get exact lot size, dollar risk, and R:R instantly.</div></div>
+      <div class="htstep"><div class="htstep-n">STEP 01</div><div class="htstep-t">Pick your market and asset</div><div class="htstep-d">Choose Forex, Futures, or Crypto. Search and select the specific pair or contract you are trading.</div></div>
+      <div class="htstep"><div class="htstep-n">STEP 02</div><div class="htstep-t">Enter account and risk</div><div class="htstep-d">Type your account balance and the percentage you are willing to risk per trade. Most pros risk 0.5% to 2%.</div></div>
+      <div class="htstep"><div class="htstep-n">STEP 03</div><div class="htstep-t">Add trade details</div><div class="htstep-d">Enter your entry, stop loss, and optionally take profit. Get exact lot size, dollar risk, and R:R instantly.</div></div>
     </div>
   </div>
 
   <div class="faq-section">
     <h2>Frequently asked <span>questions</span></h2>
     <p class="faq-sub">Everything you need to know about position sizing and risk management.</p>
-
     <div class="faq-item" onclick="this.classList.toggle('open')">
       <div class="faq-q"><div class="faq-q-text">What is position sizing in trading?</div><span class="faq-q-icon">+</span></div>
-      <div class="faq-a">Position sizing is the process of calculating how many units, lots, or contracts to trade based on your account size, the percentage of capital you're willing to risk, and the distance to your stop loss. Proper position sizing is the single most important factor in trader survival — it determines whether you blow up your account or compound it over time. Two traders with the same strategy but different position sizing will get wildly different results.</div>
+      <div class="faq-a">Position sizing is the process of calculating how many units, lots, or contracts to trade based on your account size, the percentage of capital you are willing to risk, and the distance to your stop loss. Proper position sizing is the single most important factor in trader survival.</div>
     </div>
-
     <div class="faq-item" onclick="this.classList.toggle('open')">
       <div class="faq-q"><div class="faq-q-text">How do I calculate forex lot size with a stop loss?</div><span class="faq-q-icon">+</span></div>
-      <div class="faq-a">The forex lot size formula is: <strong>(Account Balance × Risk %) ÷ (Stop Loss in Pips × Pip Value)</strong>. For example, with a $10,000 account risking 1% ($100), trading EUR/USD with a 20-pip stop and $10 pip value: lot size = $100 ÷ (20 × $10) = 0.5 standard lots. Vyxor calculates this instantly for any pair.</div>
+      <div class="faq-a">The forex lot size formula is: (Account Balance x Risk %) divided by (Stop Loss in Pips x Pip Value). For example, with a $10,000 account risking 1% ($100), trading EUR/USD with a 20-pip stop and $10 pip value: lot size = $100 divided by (20 x $10) = 0.5 standard lots.</div>
     </div>
-
     <div class="faq-item" onclick="this.classList.toggle('open')">
       <div class="faq-q"><div class="faq-q-text">What is the NQ futures tick value?</div><span class="faq-q-icon">+</span></div>
-      <div class="faq-a">NQ (E-mini Nasdaq-100) futures have a tick size of 0.25 points and a tick value of $5.00 per contract. Each 1-point move equals $20. The micro version MNQ has the same 0.25 tick size but only $0.50 tick value, making it exactly 1/10th the size — better for smaller accounts.</div>
+      <div class="faq-a">NQ (E-mini Nasdaq-100) futures have a tick size of 0.25 points and a tick value of $5.00 per contract. Each 1-point move equals $20. The micro version MNQ has the same 0.25 tick size but only $0.50 tick value, making it exactly 1/10th the size.</div>
     </div>
-
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q"><div class="faq-q-text">How many lots should I trade with a $1000 account?</div><span class="faq-q-icon">+</span></div>
-      <div class="faq-a">With a $1,000 account risking 1% per trade ($10), and a 20-pip stop on EUR/USD: lot size = $10 ÷ (20 × $10) = 0.05 lots (5 micro lots). Smaller accounts should typically use micro lots (0.01) and consider increasing risk to 2% only if their strategy has a proven 50%+ win rate.</div>
-    </div>
-
     <div class="faq-item" onclick="this.classList.toggle('open')">
       <div class="faq-q"><div class="faq-q-text">What is a good risk-reward ratio for trading?</div><span class="faq-q-icon">+</span></div>
-      <div class="faq-a">A minimum 2:1 risk-reward ratio is recommended for most strategies. This means you target $2 in profit for every $1 you risk. With 2:1 R:R, you only need a 33% win rate to break even. With 3:1, you only need 25%.</div>
+      <div class="faq-a">A minimum 2:1 risk-reward ratio is recommended for most strategies. This means you target $2 in profit for every $1 you risk. With 2:1 R:R, you only need a 33% win rate to break even.</div>
     </div>
-
-    <div class="faq-item" onclick="this.classList.toggle('open')">
-      <div class="faq-q"><div class="faq-q-text">What's the difference between standard and micro futures?</div><span class="faq-q-icon">+</span></div>
-      <div class="faq-a">Micro futures are exactly 1/10th the size of standard futures. MNQ vs NQ, MES vs ES, MGC vs GC — same instrument, smaller risk. For example, NQ moves $20 per point while MNQ moves $2 per point. Micros are ideal for accounts under $10,000.</div>
-    </div>
-
     <div class="faq-item" onclick="this.classList.toggle('open')">
       <div class="faq-q"><div class="faq-q-text">Is Vyxor position calculator free?</div><span class="faq-q-icon">+</span></div>
-      <div class="faq-a">Yes. Vyxor's position size calculator is 100% free forever with no signup required. We support 28 Forex pairs, 19 Futures contracts (including Micros like MNQ, MES, MGC), and 12 Crypto pairs with accurate pip and tick values pre-loaded.</div>
+      <div class="faq-a">Yes. Vyxor position size calculator is 100% free with no signup required. We support 28 Forex pairs, 19 Futures contracts including Micros like MNQ, MES, MGC, and 12 Crypto pairs with accurate pip and tick values pre-loaded.</div>
     </div>
   </div>
 
   <div class="related-tools">
-    <a href="/journal.html" class="rt-card"><div class="rt-icon">📔</div><div class="rt-title">AI Trade Journal</div><div class="rt-desc">Log every trade, track emotions, find your patterns with AI analysis.</div></a>
-    <a href="/psychology.html" class="rt-card"><div class="rt-icon">🧠</div><div class="rt-title">Psychology Tracker</div><div class="rt-desc">Beat FOMO and revenge trading before you hit the button.</div></a>
-    <a href="/blog.html" class="rt-card"><div class="rt-icon">📰</div><div class="rt-title">Risk Management Guides</div><div class="rt-desc">Articles on position sizing, drawdown, and trader psychology.</div></a>
+    <a href="/journal.html" class="rt-card"><div class="rt-icon">📔</div><div class="rt-title">AI Trade Journal</div><div class="rt-desc">Log every trade, track emotions, find your patterns with AI analysis. Free, cloud-synced.</div></a>
+    <a href="/india.html" class="rt-card"><div class="rt-icon">🇮🇳</div><div class="rt-title">Indian Traders Guide</div><div class="rt-desc">Import from Zerodha, Groww, Angel One. NSE, BSE, MCX lot sizes pre-loaded.</div></a>
+    <a href="/blog.html" class="rt-card"><div class="rt-icon">📰</div><div class="rt-title">Trading Guides</div><div class="rt-desc">Articles on position sizing, risk management and trading discipline.</div></a>
   </div>
 </section>
 
@@ -376,11 +329,13 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:2r
   <ul class="footer-links">
     <li><a href="/position-size-calculator.html">Calculator</a></li>
     <li><a href="/journal.html">Journal</a></li>
+    <li><a href="/india.html">Indian Traders</a></li>
     <li><a href="/blog.html">Blog</a></li>
     <li><a href="/about.html">About</a></li>
     <li><a href="/privacy.html">Privacy</a></li>
+    <li><a href="/disclaimer.html">Disclaimer</a></li>
   </ul>
-  <div class="footer-copy">© 2026 Vyxor · vyxor.in · Free forever</div>
+  <div class="footer-copy">© 2026 Vyxor · vyxor.in</div>
 </footer>
 
 <script>
@@ -392,13 +347,13 @@ function renderAssets(){const g=document.getElementById('asset-grid');g.innerHTM
 function selectAsset(i){asset=ASSETS[market][i];document.querySelectorAll('.abtn').forEach((b,idx)=>b.classList.toggle('active',idx===i));updateUnits();updateFuturesInfo();clearInputs();calculate();}
 function filterAssets(q){const btns=document.querySelectorAll('.abtn');const list=ASSETS[market];let any=false;btns.forEach((b,i)=>{const a=list[i];const m=a.sym.toLowerCase().includes(q.toLowerCase())||a.full.toLowerCase().includes(q.toLowerCase())||(a.cat&&a.cat.toLowerCase().includes(q.toLowerCase()));b.classList.toggle('hidden',!m);if(m)any=true;});let nr=document.getElementById('no-results');if(!any){if(!nr){nr=document.createElement('div');nr.id='no-results';nr.className='no-results';nr.textContent='No assets found';document.getElementById('asset-grid').appendChild(nr);}}else if(nr)nr.remove();}
 function updateUnits(){const m=market;if(m==='forex'){set('entry-unit','');set('sl-unit','');set('tp-unit','');set('dist-unit','pips');set('dist-label','Stop in Pips');}else if(m==='futures'){set('entry-unit','');set('sl-unit','');set('tp-unit','');set('dist-unit','ticks');set('dist-label','Stop in Ticks');}else{set('entry-unit','USD');set('sl-unit','USD');set('tp-unit','USD');set('dist-unit','$');set('dist-label','Stop Distance $');}}
-function updateFuturesInfo(){const box=document.getElementById('futures-info');if(market==='futures'&&asset){const a=asset;const ptVal=(a.tickVal/a.tickSize).toFixed(2);box.innerHTML=`<strong>${a.sym} — ${a.full}</strong><br>Tick Size: <strong>${a.tickSize}</strong> &nbsp;·&nbsp; Tick Value: <strong>$${a.tickVal}</strong>/tick &nbsp;·&nbsp; Point Value: <strong>$${ptVal}</strong>/pt &nbsp;·&nbsp; Type: <strong>${a.cat}</strong>`;box.classList.add('show');}else box.classList.remove('show');}
+function updateFuturesInfo(){const box=document.getElementById('futures-info');if(market==='futures'&&asset){const a=asset;const ptVal=(a.tickVal/a.tickSize).toFixed(2);box.innerHTML='<strong>'+a.sym+' — '+a.full+'</strong><br>Tick Size: <strong>'+a.tickSize+'</strong> · Tick Value: <strong>$'+a.tickVal+'</strong>/tick · Point Value: <strong>$'+ptVal+'</strong>/pt · Type: <strong>'+a.cat+'</strong>';box.classList.add('show');}else box.classList.remove('show');}
 function syncDistance(){if(!asset)return;const e=pf('entry'),s=pf('stoploss');if(!isNaN(e)&&!isNaN(s)&&e&&s){const d=Math.abs(e-s);if(market==='forex')document.getElementById('sl-dist').value=(d/asset.pip).toFixed(1);else if(market==='futures')document.getElementById('sl-dist').value=(d/asset.tickSize).toFixed(1);else document.getElementById('sl-dist').value=d.toFixed(4);}}
 function calculate(){if(!asset){showEmpty();return;}const acc=pf('account'),riskPct=pf('riskpct'),entry=pf('entry'),sl=pf('stoploss'),tp=pf('takeprofit'),distIn=pf('sl-dist');if(!acc||!riskPct){showEmpty();return;}const riskDollar=acc*(riskPct/100);let alert={type:'',msg:''},rrRatio=null,profitDollar=null;
-  if(market==='forex'){let pips=(!isNaN(distIn)&&distIn>0)?distIn:(!isNaN(entry)&&!isNaN(sl)&&entry&&sl)?Math.abs(entry-sl)/asset.pip:null;if(!pips||pips<=0){showEmpty();return;}const lots=riskDollar/(pips*asset.pipVal);if(tp&&entry&&sl){const tpPips=Math.abs(tp-entry)/asset.pip;rrRatio=tpPips/pips;profitDollar=lots*tpPips*asset.pipVal;}if(lots<0.01)alert={type:'warn',msg:'⚠️ Position < 0.01 lots.'};else if(lots>50)alert={type:'err',msg:'🚫 Very large position.'};else alert={type:'ok',msg:`✓ Risking $${riskDollar.toFixed(2)} (${riskPct}%)`};showResult(lots.toFixed(2),'Lots',`${(lots*10).toFixed(1)} mini · ${Math.round(lots*100000).toLocaleString()} units`,riskDollar,`${riskPct}% of $${acc.toLocaleString()}`,rrRatio,profitDollar,acc,riskPct,riskDollar,pips.toFixed(1)+' pips',`$${asset.pipVal.toFixed(2)}/pip`,`${lots.toFixed(2)} lots`,alert);}
-  else if(market==='futures'){let ticks=(!isNaN(distIn)&&distIn>0)?distIn:(!isNaN(entry)&&!isNaN(sl)&&entry&&sl)?Math.abs(entry-sl)/asset.tickSize:null;if(!ticks||ticks<=0){showEmpty();return;}const rpc=ticks*asset.tickVal;const contracts=Math.floor(riskDollar/rpc);const actualRisk=contracts*rpc;if(tp&&entry&&sl){const tpTicks=Math.abs(tp-entry)/asset.tickSize;rrRatio=tpTicks/ticks;profitDollar=contracts*tpTicks*asset.tickVal;}if(contracts<1)alert={type:'warn',msg:`⚠️ Need $${rpc.toFixed(2)} for 1 contract.`};else if(contracts>50)alert={type:'err',msg:'🚫 Very large position.'};else alert={type:'ok',msg:`✓ ${contracts} contracts · Actual risk: $${actualRisk.toFixed(2)}`};showResult(contracts===0?'0':contracts,'Contracts',`$${rpc.toFixed(2)} risk/contract`,actualRisk||riskDollar,`$${rpc.toFixed(2)}/contract`,rrRatio,profitDollar,acc,riskPct,riskDollar,`${ticks.toFixed(1)} ticks`,`$${asset.tickVal}/tick`,`${contracts} contracts`,alert);}
-  else{let dist=(!isNaN(distIn)&&distIn>0)?distIn:(!isNaN(entry)&&!isNaN(sl)&&entry&&sl)?Math.abs(entry-sl):null;if(!dist||dist<=0){showEmpty();return;}const units=riskDollar/dist;const notional=units*(entry||0);const display=units<0.001?units.toFixed(6):units.toFixed(4);if(tp&&entry&&sl){const tpDist=Math.abs(tp-entry);rrRatio=tpDist/dist;profitDollar=units*tpDist;}alert={type:'ok',msg:`✓ Risking $${riskDollar.toFixed(2)} · ${display} ${asset.unit}`};showResult(display,asset.unit,`≈ $${notional.toLocaleString(undefined,{maximumFractionDigits:2})} notional`,riskDollar,`${riskPct}% of $${acc.toLocaleString()}`,rrRatio,profitDollar,acc,riskPct,riskDollar,`$${dist.toFixed(4)}`,`$${dist.toFixed(4)}/${asset.unit}`,`${display} ${asset.unit}`,alert);}}
-function showResult(size,lbl,sub,risk,riskSub,rr,profit,acc,pct,riskD,dist,unitV,posStr,alert){document.getElementById('empty-state').style.display='none';document.getElementById('result-content').style.display='block';document.getElementById('result-panel').classList.add('has-result');set('res-asset',asset.sym+' · '+asset.full);set('res-size',size);set('res-size-lbl',lbl);set('res-size-sub',sub);set('res-risk','$'+Number(risk).toFixed(2));set('res-risk-sub',riskSub);if(rr!==null&&rr!==undefined){set('res-rr',rr.toFixed(2)+' : 1');set('res-profit',profit?'Profit: $'+profit.toFixed(2):'');document.getElementById('rr-bar-wrap').style.display='block';const lossPct=Math.round((1/(1+rr))*100);document.getElementById('rr-loss-seg').style.width=lossPct+'%';set('rr-loss-lbl',`Risk $${riskD.toFixed(0)}`);set('rr-win-lbl',profit?`Reward $${profit.toFixed(0)}`:'Reward');document.getElementById('rr-win-seg').textContent=rr>=2?'✓ '+rr.toFixed(2)+'R':rr.toFixed(2)+'R';document.getElementById('bd-profit-row').style.display='flex';set('bd-profit',profit?'$'+profit.toFixed(2):'—');}else{set('res-rr','—');set('res-profit','Add TP to calculate');document.getElementById('rr-bar-wrap').style.display='none';document.getElementById('bd-profit-row').style.display='none';}set('bd-acc','$'+Number(acc).toLocaleString());set('bd-pct',pct+'%');set('bd-risk','$'+riskD.toFixed(2));set('bd-dist',dist);set('bd-val',unitV);set('bd-pos',posStr);const ab=document.getElementById('alert-box');ab.className='alert-box show '+alert.type;ab.textContent=alert.msg;}
+if(market==='forex'){let pips=(!isNaN(distIn)&&distIn>0)?distIn:(!isNaN(entry)&&!isNaN(sl)&&entry&&sl)?Math.abs(entry-sl)/asset.pip:null;if(!pips||pips<=0){showEmpty();return;}const lots=riskDollar/(pips*asset.pipVal);if(tp&&entry&&sl){const tpPips=Math.abs(tp-entry)/asset.pip;rrRatio=tpPips/pips;profitDollar=lots*tpPips*asset.pipVal;}if(lots<0.01)alert={type:'warn',msg:'Position less than 0.01 lots.'};else if(lots>50)alert={type:'err',msg:'Very large position.'};else alert={type:'ok',msg:'Risking $'+riskDollar.toFixed(2)+' ('+riskPct+'%)'};showResult(lots.toFixed(2),'Lots',(lots*10).toFixed(1)+' mini · '+Math.round(lots*100000).toLocaleString()+' units',riskDollar,riskPct+'% of $'+acc.toLocaleString(),rrRatio,profitDollar,acc,riskPct,riskDollar,pips.toFixed(1)+' pips','$'+asset.pipVal.toFixed(2)+'/pip',lots.toFixed(2)+' lots',alert);}
+else if(market==='futures'){let ticks=(!isNaN(distIn)&&distIn>0)?distIn:(!isNaN(entry)&&!isNaN(sl)&&entry&&sl)?Math.abs(entry-sl)/asset.tickSize:null;if(!ticks||ticks<=0){showEmpty();return;}const rpc=ticks*asset.tickVal;const contracts=Math.floor(riskDollar/rpc);const actualRisk=contracts*rpc;if(tp&&entry&&sl){const tpTicks=Math.abs(tp-entry)/asset.tickSize;rrRatio=tpTicks/ticks;profitDollar=contracts*tpTicks*asset.tickVal;}if(contracts<1)alert={type:'warn',msg:'Need $'+rpc.toFixed(2)+' for 1 contract.'};else if(contracts>50)alert={type:'err',msg:'Very large position.'};else alert={type:'ok',msg:contracts+' contracts · Actual risk: $'+actualRisk.toFixed(2)};showResult(contracts===0?'0':contracts,'Contracts','$'+rpc.toFixed(2)+' risk/contract',actualRisk||riskDollar,'$'+rpc.toFixed(2)+'/contract',rrRatio,profitDollar,acc,riskPct,riskDollar,ticks.toFixed(1)+' ticks','$'+asset.tickVal+'/tick',contracts+' contracts',alert);}
+else{let dist=(!isNaN(distIn)&&distIn>0)?distIn:(!isNaN(entry)&&!isNaN(sl)&&entry&&sl)?Math.abs(entry-sl):null;if(!dist||dist<=0){showEmpty();return;}const units=riskDollar/dist;const notional=units*(entry||0);const display=units<0.001?units.toFixed(6):units.toFixed(4);if(tp&&entry&&sl){const tpDist=Math.abs(tp-entry);rrRatio=tpDist/dist;profitDollar=units*tpDist;}alert={type:'ok',msg:'Risking $'+riskDollar.toFixed(2)+' · '+display+' '+asset.unit};showResult(display,asset.unit,'approx $'+notional.toLocaleString(undefined,{maximumFractionDigits:2})+' notional',riskDollar,riskPct+'% of $'+acc.toLocaleString(),rrRatio,profitDollar,acc,riskPct,riskDollar,'$'+dist.toFixed(4),'$'+dist.toFixed(4)+'/'+asset.unit,display+' '+asset.unit,alert);}}
+function showResult(size,lbl,sub,risk,riskSub,rr,profit,acc,pct,riskD,dist,unitV,posStr,alert){document.getElementById('empty-state').style.display='none';document.getElementById('result-content').style.display='block';document.getElementById('result-panel').classList.add('has-result');set('res-asset',asset.sym+' · '+asset.full);set('res-size',size);set('res-size-lbl',lbl);set('res-size-sub',sub);set('res-risk','$'+Number(risk).toFixed(2));set('res-risk-sub',riskSub);if(rr!==null&&rr!==undefined){set('res-rr',rr.toFixed(2)+' : 1');set('res-profit',profit?'Profit: $'+profit.toFixed(2):'');document.getElementById('rr-bar-wrap').style.display='block';const lossPct=Math.round((1/(1+rr))*100);document.getElementById('rr-loss-seg').style.width=lossPct+'%';set('rr-loss-lbl','Risk $'+riskD.toFixed(0));set('rr-win-lbl',profit?'Reward $'+profit.toFixed(0):'Reward');document.getElementById('rr-win-seg').textContent=rr>=2?'✓ '+rr.toFixed(2)+'R':rr.toFixed(2)+'R';document.getElementById('bd-profit-row').style.display='flex';set('bd-profit',profit?'$'+profit.toFixed(2):'—');}else{set('res-rr','—');set('res-profit','Add TP to calculate');document.getElementById('rr-bar-wrap').style.display='none';document.getElementById('bd-profit-row').style.display='none';}set('bd-acc','$'+Number(acc).toLocaleString());set('bd-pct',pct+'%');set('bd-risk','$'+riskD.toFixed(2));set('bd-dist',dist);set('bd-val',unitV);set('bd-pos',posStr);const ab=document.getElementById('alert-box');ab.className='alert-box show '+alert.type;ab.textContent=alert.msg;}
 function showEmpty(){document.getElementById('empty-state').style.display='flex';document.getElementById('result-content').style.display='none';document.getElementById('result-panel').classList.remove('has-result');document.getElementById('alert-box').className='alert-box';}
 function resetAll(){['account','riskpct','entry','stoploss','takeprofit','sl-dist'].forEach(id=>document.getElementById(id).value='');showEmpty();}
 function clearInputs(){['entry','stoploss','takeprofit','sl-dist'].forEach(id=>document.getElementById(id).value='');showEmpty();}
