@@ -3,270 +3,825 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vyxor — Free AI Trade Journal & Position Size Calculator for Traders</title>
-<meta name="description" content="Vyxor is a free AI-powered trade journal and position size calculator. Built by a trader who couldn't afford the tools. Free forever for every trader.">
-<meta name="keywords" content="free trade journal, position size calculator, AI trading journal, forex calculator, futures calculator, trading discipline, vyxor">
-<meta name="author" content="Vyxor">
+<title>Vyxor — AI-Powered Trading Discipline for Indian Traders</title>
+<meta name="description" content="Vyxor is a free AI-powered trade journal and position size calculator built for Indian traders. NSE, BSE, MCX. Import from Zerodha, Groww, Angel One. Free to start.">
+<meta name="keywords" content="vyxor, trade journal india, position size calculator, nifty journal, zerodha journal, ai trading journal, free trade journal india">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://vyxor.in/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://vyxor.in/">
-<meta property="og:title" content="Vyxor — Free AI Trade Journal & Position Calculator">
-<meta property="og:description" content="Free AI-powered trade journal and position size calculator. Built by a trader, for traders.">
+<meta property="og:title" content="Vyxor — AI-Powered Trading Discipline for Indian Traders">
+<meta property="og:description" content="Free AI trade journal and position calculator. NSE, BSE, MCX. Import Zerodha, Groww, Angel One. Built by a trader who couldn't afford the tools.">
 <meta property="og:image" content="https://vyxor.in/og-image.png">
-<meta property="og:site_name" content="Vyxor">
 <meta property="og:locale" content="en_IN">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:url" content="https://vyxor.in/">
-<meta name="twitter:title" content="Vyxor — Free AI Trade Journal & Position Calculator">
-<meta name="twitter:description" content="Free AI-powered trade journal and position size calculator.">
+<meta name="twitter:title" content="Vyxor — AI Trading Discipline Platform">
+<meta name="twitter:description" content="Free AI trade journal for Indian traders. NSE, BSE, MCX support.">
 <meta name="twitter:image" content="https://vyxor.in/og-image.png">
 <meta name="google-site-verification" content="T-LWekv5ALTXqxpudqGZ69j2nCAsQ2MRMUaV8SLk_3I">
-<meta name="theme-color" content="#050816">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Bricolage+Grotesque:wght@300;400;500;600;700&family=Spectral:wght@400;600&display=swap" rel="stylesheet">
-
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","name":"Vyxor","url":"https://vyxor.in","description":"Free AI-powered trade journal and position size calculator for traders."}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vyxor","url":"https://vyxor.in","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Free AI trade journal and position calculator. Built by a trader, for traders."}
-</script>
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Vyxor","url":"https://vyxor.in","logo":"https://vyxor.in/og-image.png","email":"hello@vyxor.in","founder":{"@type":"Person","name":"Ratnadip"}}
-</script>
-
+<meta name="theme-color" content="#060816">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23060816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Vyxor","url":"https://vyxor.in","description":"Free AI-powered trade journal and position size calculator for Indian traders."}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vyxor","url":"https://vyxor.in","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"Free AI trade journal and position calculator for NSE, BSE, MCX Indian traders."}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050816;--bg2:#0B1220;--card:rgba(15,23,42,0.7);--border:rgba(255,255,255,0.06);--accent:#00F5A0;--ah:#00D98B;--blue:#3B82F6;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;}
-*{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-weight:400;min-height:100vh;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,160,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.018) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
-.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(100px);}
-.o1{width:650px;height:650px;background:radial-gradient(circle,rgba(0,245,160,0.07) 0%,transparent 70%);top:-200px;right:-200px;}
-.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,0.06) 0%,transparent 70%);bottom:-150px;left:-150px;}
-@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.2;transform:scale(0.5)}}
-@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-@keyframes slideR{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}
-
-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 3rem;background:rgba(5,8,22,0.85);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);transition:all 0.3s;}
-nav.scrolled{background:rgba(5,8,22,0.97);box-shadow:0 4px 40px rgba(0,0,0,0.5);}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;letter-spacing:-0.5px;text-decoration:none;color:var(--text);display:flex;align-items:center;}
-.logo .v{color:var(--accent);}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 1px 8px;animation:pd 2s infinite;}
-.nav-center{display:flex;align-items:center;gap:2.5rem;list-style:none;}
-.nav-center a{font-family:'Spectral',serif;font-size:15px;color:var(--muted);text-decoration:none;font-weight:400;transition:color 0.2s;letter-spacing:0.02em;}
-.nav-center a:hover{color:var(--text);}
-.nav-right{display:flex;align-items:center;gap:10px;}
-.btn-login{background:transparent;border:1px solid var(--border);color:var(--muted);padding:8px 18px;border-radius:7px;font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;}
-.btn-login:hover{border-color:var(--muted);color:var(--text);}
-.btn-signup{background:var(--accent);color:#020c12;padding:8px 18px;border-radius:7px;font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:all 0.2s;}
-.btn-signup:hover{background:var(--ah);transform:translateY(-1px);}
-.hamburger{display:none;background:transparent;border:none;color:var(--text);cursor:pointer;padding:8px;}
-.hamburger svg{width:24px;height:24px;}
-.mobile-menu{display:none;position:fixed;top:66px;left:0;right:0;background:rgba(5,8,22,0.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1rem 1.5rem;z-index:299;}
-.mobile-menu.open{display:flex;flex-direction:column;gap:0.5rem;}
-.mobile-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
-.mobile-menu a:last-of-type{border-bottom:none;}
-
-.hero{position:relative;z-index:1;min-height:96vh;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;padding:8rem 3rem 5rem;max-width:1280px;margin:0 auto;}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;border:1px solid rgba(0,245,160,0.2);background:rgba(0,245,160,0.05);padding:5px 14px;border-radius:99px;margin-bottom:2rem;animation:fu 0.6s ease both;}
-.hero-tag .live{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pd 1.8s infinite;}
-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(44px,5.5vw,78px);line-height:0.95;letter-spacing:-3.5px;margin-bottom:1.75rem;animation:fu 0.6s 0.1s ease both;}
-h1 em{font-style:normal;color:var(--accent);text-shadow:0 0 60px rgba(0,245,160,0.25);}
-h1 .dim{color:rgba(248,250,252,0.22);}
-.hero-desc{font-size:17px;color:var(--muted);line-height:1.75;font-weight:300;margin-bottom:2.5rem;max-width:480px;animation:fu 0.6s 0.2s ease both;}
-.hero-ctas{display:flex;gap:10px;flex-wrap:wrap;animation:fu 0.6s 0.3s ease both;}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:#020c12;padding:13px 28px;border-radius:9px;font-size:15px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all 0.25s;box-shadow:0 0 28px rgba(0,245,160,0.22);}
-.btn-primary:hover{background:var(--ah);box-shadow:0 0 50px rgba(0,245,160,0.38);transform:translateY(-2px);}
-.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--muted);padding:13px 28px;border-radius:9px;font-size:15px;font-weight:500;text-decoration:none;border:1px solid var(--border);cursor:pointer;transition:all 0.25s;}
-.btn-outline:hover{border-color:var(--muted2);color:var(--text);}
-
-.hero-right{animation:slideR 0.8s 0.3s ease both;position:relative;}
-.hv-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.5rem;backdrop-filter:blur(20px);animation:float 5s ease-in-out infinite;}
-.hv-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;}
-.hv-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;}
-.hv-badge{font-size:10px;background:rgba(0,245,160,0.1);color:var(--accent);border:1px solid rgba(0,245,160,0.2);padding:3px 10px;border-radius:99px;font-family:'DM Mono',monospace;}
-.hv-tools{display:flex;flex-direction:column;gap:10px;}
-.hv-tool{display:flex;align-items:center;gap:14px;padding:14px 16px;background:rgba(5,8,22,0.6);border:1px solid var(--border);border-radius:10px;transition:border-color 0.2s;text-decoration:none;color:inherit;}
-.hv-tool:hover{border-color:rgba(0,245,160,0.2);}
-.hv-tool-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
-.hv-tool-info{flex:1;}
-.hv-tool-name{font-size:14px;font-weight:600;margin-bottom:3px;}
-.hv-tool-desc{font-size:12px;color:var(--muted);}
-.hv-tool-status{font-size:10px;font-family:'DM Mono',monospace;padding:3px 10px;border-radius:4px;flex-shrink:0;background:rgba(0,245,160,0.08);color:var(--accent);border:1px solid rgba(0,245,160,0.2);}
-.i-blue{background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);}
-.i-green{background:rgba(0,245,160,0.1);border:1px solid rgba(0,245,160,0.2);}
-
-section{position:relative;z-index:1;}
-.sec{max-width:1200px;margin:0 auto;padding:6rem 3rem;}
-.sec-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.14em;display:flex;align-items:center;gap:10px;margin-bottom:1rem;}
-.sec-label::before{content:'';width:20px;height:1px;background:var(--accent);}
-.sec-h{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,3.8vw,46px);letter-spacing:-2px;margin-bottom:0.75rem;line-height:1.05;}
-.sec-h span{color:var(--accent);}
-.sec-p{font-size:16px;color:var(--muted);font-weight:300;line-height:1.7;max-width:500px;margin-bottom:3rem;}
-
-.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-.tc{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;backdrop-filter:blur(20px);transition:all 0.3s;text-decoration:none;color:inherit;display:flex;flex-direction:column;}
-.tc:hover{border-color:rgba(0,245,160,0.22);transform:translateY(-4px);box-shadow:0 24px 60px rgba(0,0,0,0.4);}
-.tc-icon{width:54px;height:54px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:1.25rem;}
-.tc-badge{font-family:'DM Mono',monospace;font-size:10px;padding:3px 10px;border-radius:4px;display:inline-block;margin-bottom:10px;width:fit-content;background:rgba(0,245,160,0.08);color:var(--accent);border:1px solid rgba(0,245,160,0.18);}
-.tc-title{font-family:'Syne',sans-serif;font-weight:700;font-size:22px;letter-spacing:-0.3px;margin-bottom:8px;}
-.tc-desc{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:1.25rem;flex:1;}
-.tc-feats{display:flex;flex-direction:column;gap:5px;margin-bottom:1.25rem;}
-.tf{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:7px;}
-.tf::before{content:'→';color:var(--accent);font-size:11px;flex-shrink:0;margin-top:1px;}
-.tc-link{font-size:14px;font-weight:600;color:var(--accent);display:inline-flex;align-items:center;gap:5px;transition:gap 0.2s;}
-.tc-link:hover{gap:9px;}
-
-.story-bg{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%);}
-.story-card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:3rem;backdrop-filter:blur(20px);max-width:760px;margin:0 auto;}
-.story-quote{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(20px,2.5vw,28px);letter-spacing:-0.5px;line-height:1.4;margin-bottom:1.5rem;}
-.story-quote span{color:var(--accent);}
-.story-attr{font-size:13px;color:var(--muted);font-family:'DM Mono',monospace;}
-.story-attr strong{color:var(--text);font-weight:500;}
-
-.nl-wrap{background:linear-gradient(135deg,rgba(0,245,160,0.05) 0%,rgba(59,130,246,0.04) 100%);border:1px solid rgba(0,245,160,0.18);border-radius:20px;padding:4rem;text-align:center;}
-.nl-h{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(24px,3.5vw,40px);letter-spacing:-1.5px;margin-bottom:10px;}
-.nl-h span{color:var(--accent);}
-.nl-p{font-size:15px;color:var(--muted);font-weight:300;margin-bottom:2rem;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.7;}
-.nl-form{display:flex;gap:8px;max-width:420px;margin:0 auto 10px;}
-.nl-in{flex:1;background:rgba(5,8,22,0.8);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:14px;padding:13px 16px;outline:none;transition:all 0.2s;}
-.nl-in:focus{border-color:rgba(0,245,160,0.35);box-shadow:0 0 0 3px rgba(0,245,160,0.06);}
-.nl-btn{padding:13px 22px;border-radius:9px;border:none;background:var(--accent);color:#020c12;font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
-.nl-btn:hover{background:var(--ah);}
-.nl-prv{font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;}
-.nl-ok{display:none;background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);border-radius:8px;padding:12px 20px;font-size:14px;color:var(--accent);font-family:'DM Mono',monospace;}
-
-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:4rem 3rem 2rem;}
-.fi{max-width:1200px;margin:0 auto;}
-.ft{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:3rem;}
-.fb-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;margin-bottom:10px;}
-.fb-logo span{color:var(--accent);}
-.fb-desc{font-size:13px;color:var(--muted);line-height:1.7;max-width:280px;font-weight:300;}
-.fc-h{font-family:'Spectral',serif;font-size:13px;color:var(--muted2);letter-spacing:0.06em;font-weight:600;margin-bottom:14px;}
-.fc-ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
-.fc-ul a{font-family:'Spectral',serif;font-size:14px;color:var(--muted);text-decoration:none;transition:color 0.2s;font-weight:400;}
-.fc-ul a:hover{color:var(--text);}
-.fb-line{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem;}
-.fb-copy{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
-
-.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(5,8,22,0.88);backdrop-filter:blur(12px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity 0.3s;}
-.modal-overlay.open{opacity:1;pointer-events:all;}
-.auth-box{background:#0B1220;border:1px solid rgba(0,245,160,0.2);border-radius:20px;max-width:420px;width:100%;box-shadow:0 40px 100px rgba(0,0,0,0.7);overflow:hidden;transform:scale(0.95);transition:transform 0.3s;position:relative;}
-.modal-overlay.open .auth-box{transform:scale(1);}
-.auth-tabs{display:flex;border-bottom:1px solid var(--border);}
-.auth-tab{flex:1;padding:1rem;background:transparent;border:none;color:var(--muted);font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
-.auth-tab.active{color:var(--accent);border-bottom-color:var(--accent);background:rgba(0,245,160,0.03);}
-.auth-body{padding:2rem;}
-.auth-close{position:absolute;top:1rem;right:1rem;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer;line-height:1;}
-.auth-title{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;margin-bottom:6px;}
-.auth-title span{color:var(--accent);}
-.auth-sub{font-size:13px;color:var(--muted);margin-bottom:1.75rem;line-height:1.6;}
-.social-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:11px;border-radius:9px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:14px;font-weight:500;cursor:pointer;margin-bottom:8px;}
-.social-btn:hover{border-color:var(--muted2);background:rgba(255,255,255,0.05);}
-.social-btn svg{width:18px;height:18px;}
-.auth-or{display:flex;align-items:center;gap:12px;margin:1.25rem 0;font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
-.auth-or::before,.auth-or::after{content:'';flex:1;height:1px;background:var(--border);}
-.auth-field{margin-bottom:12px;}
-.auth-field label{display:block;font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;font-family:'DM Mono',monospace;}
-.auth-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Bricolage Grotesque',sans-serif;font-size:14px;padding:11px 14px;outline:none;}
-.auth-input:focus{border-color:rgba(0,245,160,0.4);box-shadow:0 0 0 3px rgba(0,245,160,0.06);}
-.auth-submit{width:100%;padding:12px;border-radius:9px;border:none;background:var(--accent);color:#020c12;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:4px;}
-.auth-submit:hover{background:var(--ah);}
-.auth-footer{font-size:12px;color:var(--muted2);text-align:center;margin-top:1rem;font-family:'DM Mono',monospace;}
-.auth-footer a{color:var(--accent);cursor:pointer;}
-.auth-note{font-size:11px;color:var(--muted2);text-align:center;margin-top:10px;font-family:'DM Mono',monospace;}
-
-@media(max-width:960px){
-  nav{padding:0 1.5rem;}
-  .nav-center{display:none;}
-  .hamburger{display:flex;}
-  .nav-right .btn-login,.nav-right .btn-signup{display:none;}
-  .hero{grid-template-columns:1fr;padding:7rem 1.5rem 4rem;gap:2.5rem;min-height:auto;}
-  .hero-right{order:-1;}
-  .sec{padding:5rem 1.5rem;}
-  .tools-grid{grid-template-columns:1fr;}
-  .story-card{padding:2rem;}
-  .ft{grid-template-columns:1fr 1fr;}
-  footer{padding:3rem 1.5rem 2rem;}
+/* ── DESIGN SYSTEM ─────────────────────────────────────────────────── */
+:root {
+  --bg:       #060816;
+  --bg2:      #0B1020;
+  --bg3:      #0F1728;
+  --surface:  rgba(15,23,42,0.6);
+  --border:   rgba(255,255,255,0.06);
+  --border2:  rgba(255,255,255,0.1);
+  --accent:   #00F5A0;
+  --accent2:  #00C87A;
+  --blue:     #3B82F6;
+  --indigo:   #6366F1;
+  --purple:   #8B5CF6;
+  --danger:   #F43F5E;
+  --warn:     #F59E0B;
+  --text:     #F1F5F9;
+  --text2:    #94A3B8;
+  --text3:    #475569;
+  --r4:4px; --r8:8px; --r12:12px; --r16:16px; --r20:20px; --r24:24px;
 }
-@media(max-width:600px){.nl-form{flex-direction:column;}h1{letter-spacing:-2px;}}
-</style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Outfit', sans-serif;
+  overflow-x:hidden;
+  line-height:1.6;
+}
 
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-const firebaseConfig = {apiKey:"AIzaSyDHzG49DUCbQ2RpR3ddgEElOZ7Qdop2MwE",authDomain:"vyxor-3f94c.firebaseapp.com",projectId:"vyxor-3f94c",storageBucket:"vyxor-3f94c.firebasestorage.app",messagingSenderId:"992136225540",appId:"1:992136225540:web:3d8ad8fa511d0978346651",measurementId:"G-LT4F4CFBSX"};
-const app=initializeApp(firebaseConfig);const auth=getAuth(app);const provider=new GoogleAuthProvider();
-function friendlyError(c){const m={'auth/user-not-found':'No account found.','auth/wrong-password':'Incorrect password.','auth/email-already-in-use':'Email already registered.','auth/weak-password':'Password must be 6+ chars.','auth/invalid-email':'Invalid email.','auth/popup-closed-by-user':'Sign-in cancelled.','auth/invalid-credential':'Incorrect email or password.'};return m[c]||'Something went wrong.';}
-function showError(id,msg){let el=document.getElementById(id);if(!el){el=document.createElement('div');el.id=id;el.style.cssText='color:#FF4D6D;font-size:12px;font-family:DM Mono,monospace;margin-bottom:8px;padding:8px 12px;background:rgba(255,77,109,0.08);border:1px solid rgba(255,77,109,0.2);border-radius:6px;';const btn=document.querySelector('#auth-'+id.replace('-err','')+' .auth-submit');if(btn)btn.parentNode.insertBefore(el,btn);}el.textContent=msg;el.style.display='block';}
-function clearError(id){const el=document.getElementById(id);if(el)el.style.display='none';}
-onAuthStateChanged(auth,(user)=>{const si=document.getElementById('nav-signin');const su=document.getElementById('nav-signup');const ui=document.getElementById('nav-user');const un=document.getElementById('nav-username');if(!si)return;if(user){si.style.display='none';su.style.display='none';ui.style.display='flex';un.textContent=(user.displayName||user.email||'Trader').split(' ')[0];closeAuth();}else{si.style.display='';su.style.display='';ui.style.display='none';}});
-window.googleSignIn=async function(){clearError('login-err');clearError('signup-err');try{await signInWithPopup(auth,provider);}catch(e){const m=friendlyError(e.code);showError('login-err',m);showError('signup-err',m);}};
-window.emailLogin=async function(){const em=document.querySelector('#auth-login input[type="email"]').value.trim();const pa=document.querySelector('#auth-login input[type="password"]').value;clearError('login-err');if(!em||!pa){showError('login-err','Enter email and password.');return;}try{await signInWithEmailAndPassword(auth,em,pa);}catch(e){showError('login-err',friendlyError(e.code));}};
-window.emailSignup=async function(){const nm=document.querySelector('#auth-signup input[type="text"]').value.trim();const em=document.querySelector('#auth-signup input[type="email"]').value.trim();const pa=document.querySelector('#auth-signup input[type="password"]').value;clearError('signup-err');if(!nm||!em||!pa){showError('signup-err','Fill in all fields.');return;}try{const c=await createUserWithEmailAndPassword(auth,em,pa);await updateProfile(c.user,{displayName:nm});}catch(e){showError('signup-err',friendlyError(e.code));}};
-window.doSignOut=async function(){await signOut(auth);};
-</script>
+/* ── NOISE TEXTURE OVERLAY ── */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  opacity:0.4;
+}
+
+/* ── GRID OVERLAY ── */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(0,245,160,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,245,160,0.012) 1px, transparent 1px);
+  background-size:60px 60px;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ── GLOW ORBS ── */
+.orb {
+  position:fixed;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:0;
+  filter:blur(100px);
+  animation:orbFloat 8s ease-in-out infinite;
+}
+.orb-1 { width:700px;height:700px;background:radial-gradient(circle,rgba(0,245,160,0.07) 0%,transparent 70%);top:-200px;right:-200px;animation-delay:0s; }
+.orb-2 { width:600px;height:600px;background:radial-gradient(circle,rgba(99,102,241,0.06) 0%,transparent 70%);bottom:10%;left:-200px;animation-delay:-3s; }
+.orb-3 { width:400px;height:400px;background:radial-gradient(circle,rgba(59,130,246,0.05) 0%,transparent 70%);top:40%;right:10%;animation-delay:-5s; }
+@keyframes orbFloat {
+  0%,100% { transform:translateY(0) scale(1); }
+  50% { transform:translateY(-30px) scale(1.05); }
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp   { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn   { from{opacity:0}to{opacity:1} }
+@keyframes pulse    { 0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.3;transform:scale(0.5)} }
+@keyframes shimmer  { 0%{background-position:200% 0}100%{background-position:-200% 0} }
+@keyframes rotate   { to{transform:rotate(360deg)} }
+@keyframes float    { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
+@keyframes glow     { 0%,100%{box-shadow:0 0 20px rgba(0,245,160,0.2)}50%{box-shadow:0 0 50px rgba(0,245,160,0.5)} }
+
+/* ── TYPOGRAPHY ── */
+h1,h2,h3,h4 { font-family:'Syne', sans-serif; font-weight:800; letter-spacing:-0.03em; line-height:1.05; }
+.mono { font-family:'DM Mono', monospace; }
+
+/* ── NAV ── */
+nav {
+  position:fixed;
+  top:0; left:0; right:0;
+  z-index:200;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 2.5rem;
+  height:64px;
+  background:rgba(6,8,22,0.8);
+  backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border);
+  transition:all 0.3s;
+}
+nav.scrolled { background:rgba(6,8,22,0.95); box-shadow:0 4px 40px rgba(0,0,0,0.4); }
+.logo {
+  font-family:'Syne', sans-serif;
+  font-weight:800;
+  font-size:22px;
+  letter-spacing:-0.05em;
+  text-decoration:none;
+  color:var(--text);
+  display:flex;
+  align-items:center;
+  gap:2px;
+}
+.logo .v { color:var(--accent); }
+.logo-dot {
+  width:5px; height:5px;
+  border-radius:50%;
+  background:var(--accent);
+  display:inline-block;
+  margin:0 1px 8px;
+  animation:pulse 2s infinite;
+}
+.nav-links { display:flex; align-items:center; gap:2rem; list-style:none; }
+.nav-links a { font-size:13px; color:var(--text2); text-decoration:none; transition:color 0.2s; font-weight:400; }
+.nav-links a:hover { color:var(--text); }
+.nav-right { display:flex; align-items:center; gap:10px; }
+.nav-tag {
+  font-size:11px;
+  font-family:'DM Mono', monospace;
+  color:var(--accent);
+  background:rgba(0,245,160,0.08);
+  border:1px solid rgba(0,245,160,0.2);
+  padding:4px 12px;
+  border-radius:99px;
+}
+.btn-primary {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:10px 20px;
+  border-radius:var(--r8);
+  background:var(--accent);
+  color:#020c12;
+  font-size:13px;
+  font-weight:700;
+  text-decoration:none;
+  border:none;
+  cursor:pointer;
+  transition:all 0.2s;
+  font-family:'Outfit', sans-serif;
+}
+.btn-primary:hover { background:var(--accent2); transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,245,160,0.3); }
+.hamburger { display:none; background:transparent; border:none; color:var(--text); cursor:pointer; padding:8px; }
+.hamburger svg { width:22px; height:22px; }
+.mobile-menu { display:none; position:fixed; top:64px; left:0; right:0; background:rgba(6,8,22,0.98); backdrop-filter:blur(24px); border-bottom:1px solid var(--border); padding:1rem 1.5rem; z-index:199; }
+.mobile-menu.open { display:flex; flex-direction:column; gap:0.5rem; }
+.mobile-menu a { font-size:15px; color:var(--text2); text-decoration:none; padding:10px 0; border-bottom:1px solid var(--border); }
+.mobile-menu a:last-of-type { border-bottom:none; }
+
+/* ── HERO ── */
+.hero {
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:120px 2rem 80px;
+  overflow:hidden;
+}
+.hero-eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-family:'DM Mono', monospace;
+  font-size:11px;
+  color:var(--accent);
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  background:rgba(0,245,160,0.06);
+  border:1px solid rgba(0,245,160,0.2);
+  padding:6px 16px;
+  border-radius:99px;
+  margin-bottom:2rem;
+  animation:fadeUp 0.6s ease both;
+}
+.hero-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.5s infinite; }
+.hero h1 {
+  font-size:clamp(48px,7vw,96px);
+  letter-spacing:-0.04em;
+  line-height:0.95;
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.6s 0.1s ease both;
+  max-width:900px;
+}
+.hero h1 .line-accent { color:var(--accent); display:block; }
+.hero h1 .line-dim { color:rgba(241,245,249,0.2); display:block; }
+.hero-desc {
+  font-size:clamp(15px,2vw,18px);
+  color:var(--text2);
+  max-width:520px;
+  margin:0 auto 2.5rem;
+  line-height:1.7;
+  font-weight:300;
+  animation:fadeUp 0.6s 0.2s ease both;
+}
+.hero-ctas {
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:3rem;
+  animation:fadeUp 0.6s 0.3s ease both;
+}
+.btn-hero-primary {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:15px 32px;
+  border-radius:var(--r12);
+  background:var(--accent);
+  color:#020c12;
+  font-size:15px;
+  font-weight:700;
+  text-decoration:none;
+  transition:all 0.25s;
+  font-family:'Outfit', sans-serif;
+  box-shadow:0 0 40px rgba(0,245,160,0.25);
+}
+.btn-hero-primary:hover { background:var(--accent2); transform:translateY(-2px); box-shadow:0 0 60px rgba(0,245,160,0.4); }
+.btn-hero-secondary {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:15px 28px;
+  border-radius:var(--r12);
+  background:transparent;
+  color:var(--text2);
+  font-size:15px;
+  font-weight:500;
+  text-decoration:none;
+  border:1px solid var(--border2);
+  transition:all 0.25s;
+  font-family:'Outfit', sans-serif;
+}
+.btn-hero-secondary:hover { border-color:rgba(255,255,255,0.25); color:var(--text); }
+.hero-trust {
+  display:flex;
+  align-items:center;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+  animation:fadeUp 0.6s 0.4s ease both;
+}
+.trust-item {
+  display:flex;
+  align-items:center;
+  gap:6px;
+  font-size:12px;
+  color:var(--text3);
+  font-family:'DM Mono', monospace;
+}
+.trust-check { color:var(--accent); font-size:14px; }
+
+/* ── STAT STRIP ── */
+.stat-strip {
+  position:relative;
+  z-index:1;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  background:linear-gradient(90deg, transparent, rgba(0,245,160,0.03), transparent);
+  padding:2.5rem 2rem;
+}
+.stat-strip-inner {
+  max-width:960px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:2rem;
+  text-align:center;
+}
+.stat-item {}
+.stat-num {
+  font-family:'Syne', sans-serif;
+  font-size:clamp(28px,4vw,40px);
+  font-weight:800;
+  letter-spacing:-0.04em;
+  color:var(--accent);
+  margin-bottom:4px;
+  line-height:1;
+}
+.stat-lbl { font-size:12px; color:var(--text3); font-family:'DM Mono', monospace; text-transform:uppercase; letter-spacing:0.1em; }
+
+/* ── SECTION BASE ── */
+section { position:relative; z-index:1; }
+.section-inner { max-width:1200px; margin:0 auto; padding:6rem 2rem; }
+.section-eyebrow {
+  font-family:'DM Mono', monospace;
+  font-size:11px;
+  color:var(--accent);
+  text-transform:uppercase;
+  letter-spacing:0.14em;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:1rem;
+}
+.section-eyebrow::before { content:''; width:20px; height:1px; background:var(--accent); }
+.section-title { font-size:clamp(32px,4vw,52px); letter-spacing:-0.04em; margin-bottom:1rem; line-height:1.05; }
+.section-title span { color:var(--accent); }
+.section-desc { font-size:16px; color:var(--text2); max-width:500px; line-height:1.7; font-weight:300; }
+
+/* ── FEATURES GRID ── */
+.features-bg { background:linear-gradient(180deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%); }
+.features-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r20); overflow:hidden; margin-top:3.5rem; }
+.feat {
+  background:var(--bg2);
+  padding:2rem;
+  transition:background 0.3s;
+  position:relative;
+  overflow:hidden;
+}
+.feat::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at 20% 20%, rgba(0,245,160,0.04) 0%, transparent 60%);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.feat:hover { background:var(--bg3); }
+.feat:hover::before { opacity:1; }
+.feat-icon {
+  width:48px; height:48px;
+  border-radius:var(--r12);
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px;
+  margin-bottom:1.25rem;
+  border:1px solid var(--border);
+}
+.feat-icon.g { background:rgba(0,245,160,0.08); border-color:rgba(0,245,160,0.2); }
+.feat-icon.b { background:rgba(59,130,246,0.08); border-color:rgba(59,130,246,0.2); }
+.feat-icon.p { background:rgba(99,102,241,0.08); border-color:rgba(99,102,241,0.2); }
+.feat-icon.w { background:rgba(245,158,11,0.08); border-color:rgba(245,158,11,0.2); }
+.feat-icon.r { background:rgba(244,63,94,0.08); border-color:rgba(244,63,94,0.2); }
+.feat-title { font-family:'Syne', sans-serif; font-weight:700; font-size:17px; letter-spacing:-0.03em; margin-bottom:8px; }
+.feat-desc { font-size:13px; color:var(--text2); line-height:1.65; }
+.feat-tag {
+  display:inline-flex;
+  align-items:center;
+  margin-top:1rem;
+  font-size:10px;
+  font-family:'DM Mono', monospace;
+  color:var(--accent);
+  background:rgba(0,245,160,0.06);
+  border:1px solid rgba(0,245,160,0.15);
+  padding:2px 8px;
+  border-radius:99px;
+}
+
+/* ── TOOLS SECTION ── */
+.tools-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:3.5rem; }
+.tool-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r20);
+  padding:2.5rem;
+  backdrop-filter:blur(20px);
+  transition:all 0.3s;
+  text-decoration:none;
+  color:inherit;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+}
+.tool-card::after {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg, transparent, rgba(0,245,160,0.4), transparent);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.tool-card:hover { border-color:rgba(0,245,160,0.2); transform:translateY(-4px); box-shadow:0 24px 60px rgba(0,0,0,0.4); }
+.tool-card:hover::after { opacity:1; }
+.tool-badge {
+  font-size:10px;
+  font-family:'DM Mono', monospace;
+  padding:3px 10px;
+  border-radius:99px;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  margin-bottom:1.5rem;
+  width:fit-content;
+}
+.badge-live { background:rgba(0,245,160,0.08); color:var(--accent); border:1px solid rgba(0,245,160,0.2); }
+.tool-icon { font-size:36px; margin-bottom:1.25rem; }
+.tool-title { font-family:'Syne', sans-serif; font-weight:800; font-size:clamp(22px,3vw,30px); letter-spacing:-0.04em; margin-bottom:10px; }
+.tool-desc { font-size:14px; color:var(--text2); line-height:1.7; margin-bottom:1.5rem; flex:1; font-weight:300; }
+.tool-features { display:flex; flex-direction:column; gap:7px; margin-bottom:1.75rem; }
+.tool-feat { font-size:13px; color:var(--text2); display:flex; align-items:flex-start; gap:8px; }
+.tool-feat::before { content:'→'; color:var(--accent); font-size:11px; flex-shrink:0; margin-top:1px; }
+.tool-link { font-size:14px; font-weight:600; color:var(--accent); display:inline-flex; align-items:center; gap:5px; transition:gap 0.2s; }
+.tool-link:hover { gap:9px; }
+
+/* ── BROKERS ── */
+.brokers-section { background:var(--bg2); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+.brokers-inner { max-width:1200px; margin:0 auto; padding:5rem 2rem; }
+.brokers-label { font-size:11px; color:var(--text3); font-family:'DM Mono', monospace; text-transform:uppercase; letter-spacing:0.14em; text-align:center; margin-bottom:2.5rem; }
+.brokers-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; max-width:900px; margin:0 auto; }
+.broker-card {
+  background:var(--bg3);
+  border:1px solid var(--border);
+  border-radius:var(--r16);
+  padding:2rem 1.5rem;
+  text-align:center;
+  transition:all 0.3s;
+  position:relative;
+  overflow:hidden;
+}
+.broker-card:hover { transform:translateY(-4px); box-shadow:0 20px 50px rgba(0,0,0,0.4); }
+.broker-card.zd:hover { border-color:rgba(255,100,0,0.3); }
+.broker-card.gw:hover { border-color:rgba(0,179,134,0.3); }
+.broker-card.ao:hover { border-color:rgba(232,170,0,0.3); }
+.broker-name { font-family:'Syne', sans-serif; font-weight:800; font-size:22px; margin-bottom:4px; }
+.broker-name.zd { color:#FF6400; }
+.broker-name.gw { color:#00B386; }
+.broker-name.ao { color:#E8AA00; }
+.broker-sub { font-size:11px; color:var(--text3); font-family:'DM Mono', monospace; margin-bottom:1.25rem; }
+.broker-steps { text-align:left; display:flex; flex-direction:column; gap:8px; }
+.broker-step { font-size:12px; color:var(--text2); display:flex; gap:8px; align-items:flex-start; line-height:1.5; }
+.broker-step-n { font-size:10px; background:rgba(0,245,160,0.08); color:var(--accent); border:1px solid rgba(0,245,160,0.2); border-radius:4px; padding:1px 6px; font-family:'DM Mono', monospace; flex-shrink:0; margin-top:1px; }
+.broker-badge { margin-top:1.25rem; font-size:11px; color:var(--accent); font-family:'DM Mono', monospace; }
+
+/* ── FOUNDER SECTION ── */
+.founder-section { background:linear-gradient(180deg,var(--bg2) 0%,var(--bg) 100%); }
+.founder-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r24);
+  padding:3.5rem;
+  backdrop-filter:blur(20px);
+  max-width:780px;
+  margin:0 auto;
+  position:relative;
+  overflow:hidden;
+}
+.founder-card::before {
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(0,245,160,0.5),transparent);
+}
+.founder-quote {
+  font-family:'Syne', sans-serif;
+  font-weight:700;
+  font-size:clamp(20px,2.5vw,28px);
+  letter-spacing:-0.03em;
+  line-height:1.4;
+  margin-bottom:1.5rem;
+  color:var(--text);
+}
+.founder-quote span { color:var(--accent); }
+.founder-meta { display:flex; align-items:center; gap:14px; }
+.founder-avatar {
+  width:44px; height:44px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--accent),var(--blue));
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Syne', sans-serif;
+  font-weight:800;
+  font-size:18px;
+  color:#020c12;
+  flex-shrink:0;
+}
+.founder-name { font-size:15px; font-weight:600; margin-bottom:2px; }
+.founder-role { font-size:12px; color:var(--text3); font-family:'DM Mono', monospace; }
+
+/* ── COMPARISON ── */
+.compare-table {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r20);
+  overflow:hidden;
+  backdrop-filter:blur(20px);
+  margin-top:3.5rem;
+}
+.compare-head { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02); }
+.ch { padding:16px 20px; font-size:11px; font-weight:500; color:var(--text3); font-family:'DM Mono', monospace; text-transform:uppercase; letter-spacing:0.1em; }
+.ch.vyxor { color:var(--accent); }
+.compare-row { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; border-bottom:1px solid rgba(255,255,255,0.03); transition:background 0.15s; }
+.compare-row:hover { background:rgba(255,255,255,0.02); }
+.compare-row:last-child { border-bottom:none; }
+.cr { padding:14px 20px; font-size:13px; color:var(--text2); display:flex; align-items:center; }
+.cr.feat { font-weight:500; color:var(--text); }
+.cr.yes { color:var(--accent); }
+.cr.no { color:var(--text3); }
+.cr.paid { color:var(--warn); }
+
+/* ── PRICING ── */
+.pricing-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:3.5rem; max-width:900px; margin-left:auto; margin-right:auto; }
+.price-card {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:var(--r20);
+  padding:2rem;
+  backdrop-filter:blur(20px);
+  transition:all 0.3s;
+  position:relative;
+}
+.price-card.featured {
+  border-color:rgba(0,245,160,0.3);
+  background:rgba(0,245,160,0.04);
+}
+.price-card.featured::before {
+  content:'Most Popular';
+  position:absolute;
+  top:-12px; left:50%; transform:translateX(-50%);
+  font-size:10px;
+  font-family:'DM Mono', monospace;
+  color:#020c12;
+  background:var(--accent);
+  padding:3px 12px;
+  border-radius:99px;
+}
+.price-card:hover { transform:translateY(-4px); }
+.price-plan { font-size:12px; font-family:'DM Mono', monospace; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px; }
+.price-amount { font-family:'Syne', sans-serif; font-weight:800; font-size:42px; letter-spacing:-0.05em; margin-bottom:4px; line-height:1; }
+.price-period { font-size:12px; color:var(--text3); font-family:'DM Mono', monospace; margin-bottom:1.5rem; }
+.price-desc { font-size:13px; color:var(--text2); margin-bottom:1.5rem; line-height:1.6; }
+.price-features { display:flex; flex-direction:column; gap:8px; margin-bottom:2rem; }
+.pf { font-size:13px; color:var(--text2); display:flex; align-items:flex-start; gap:8px; }
+.pf.yes::before { content:'✓'; color:var(--accent); flex-shrink:0; }
+.pf.no::before  { content:'—'; color:var(--text3); flex-shrink:0; }
+.price-cta {
+  display:block;
+  width:100%;
+  padding:12px;
+  border-radius:var(--r8);
+  text-align:center;
+  font-family:'Outfit', sans-serif;
+  font-size:14px;
+  font-weight:600;
+  text-decoration:none;
+  transition:all 0.2s;
+  cursor:pointer;
+  border:none;
+}
+.price-cta.primary { background:var(--accent); color:#020c12; }
+.price-cta.primary:hover { background:var(--accent2); }
+.price-cta.outline { background:transparent; color:var(--text2); border:1px solid var(--border2); }
+.price-cta.outline:hover { border-color:rgba(255,255,255,0.3); color:var(--text); }
+.price-cta.dim { background:rgba(255,255,255,0.04); color:var(--text3); border:1px solid var(--border); cursor:not-allowed; }
+
+/* ── NEWSLETTER ── */
+.nl-section { background:var(--bg2); border-top:1px solid var(--border); }
+.nl-box {
+  background:linear-gradient(135deg,rgba(0,245,160,0.05) 0%,rgba(99,102,241,0.04) 100%);
+  border:1px solid rgba(0,245,160,0.18);
+  border-radius:var(--r24);
+  padding:4rem;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  max-width:680px;
+  margin:0 auto;
+}
+.nl-box::before {
+  content:'🇮🇳';
+  position:absolute;
+  font-size:180px;
+  right:-20px;
+  bottom:-40px;
+  opacity:0.04;
+  pointer-events:none;
+}
+.nl-title { font-size:clamp(24px,3.5vw,40px); letter-spacing:-0.04em; margin-bottom:10px; }
+.nl-title span { color:var(--accent); }
+.nl-desc { font-size:15px; color:var(--text2); margin-bottom:2rem; line-height:1.7; font-weight:300; }
+.nl-form { display:flex; gap:8px; max-width:420px; margin:0 auto 10px; }
+.nl-input {
+  flex:1;
+  background:rgba(6,8,22,0.8);
+  border:1px solid var(--border2);
+  border-radius:var(--r8);
+  color:var(--text);
+  font-family:'Outfit', sans-serif;
+  font-size:14px;
+  padding:12px 16px;
+  outline:none;
+  transition:all 0.2s;
+}
+.nl-input:focus { border-color:rgba(0,245,160,0.4); box-shadow:0 0 0 3px rgba(0,245,160,0.06); }
+.nl-btn {
+  padding:12px 22px;
+  border-radius:var(--r8);
+  border:none;
+  background:var(--accent);
+  color:#020c12;
+  font-family:'Outfit', sans-serif;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.2s;
+  white-space:nowrap;
+}
+.nl-btn:hover { background:var(--accent2); }
+.nl-note { font-size:11px; color:var(--text3); font-family:'DM Mono', monospace; }
+.nl-ok { display:none; font-size:13px; color:var(--accent); font-family:'DM Mono', monospace; }
+
+/* ── FOOTER ── */
+footer {
+  position:relative;
+  z-index:1;
+  border-top:1px solid var(--border);
+  padding:4rem 2rem 2rem;
+}
+.footer-inner { max-width:1200px; margin:0 auto; }
+.footer-top { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; margin-bottom:3rem; }
+.footer-brand { font-family:'Syne', sans-serif; font-weight:800; font-size:22px; margin-bottom:10px; letter-spacing:-0.05em; }
+.footer-brand span { color:var(--accent); }
+.footer-tagline { font-size:13px; color:var(--text3); line-height:1.7; max-width:260px; font-weight:300; }
+.footer-col-title { font-size:11px; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:14px; font-family:'DM Mono', monospace; }
+.footer-col-links { display:flex; flex-direction:column; gap:9px; }
+.footer-col-links a { font-size:13px; color:var(--text2); text-decoration:none; transition:color 0.2s; }
+.footer-col-links a:hover { color:var(--text); }
+.footer-bottom { display:flex; justify-content:space-between; align-items:center; padding-top:2rem; border-top:1px solid var(--border); flex-wrap:wrap; gap:1rem; }
+.footer-copy { font-size:12px; color:var(--text3); font-family:'DM Mono', monospace; }
+.footer-disc { font-size:11px; color:var(--text3); font-family:'DM Mono', monospace; max-width:580px; line-height:1.6; }
+
+/* ── AUTH MODAL ── */
+.modal-overlay {
+  position:fixed; inset:0; z-index:1000;
+  background:rgba(6,8,22,0.88);
+  backdrop-filter:blur(16px);
+  display:flex; align-items:center; justify-content:center;
+  padding:1rem;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.3s;
+}
+.modal-overlay.open { opacity:1; pointer-events:all; }
+.auth-box {
+  background:#0B1020;
+  border:1px solid rgba(0,245,160,0.2);
+  border-radius:var(--r20);
+  max-width:420px;
+  width:100%;
+  padding:2.5rem 2rem;
+  box-shadow:0 40px 100px rgba(0,0,0,0.7);
+  transform:scale(0.95);
+  transition:transform 0.3s;
+}
+.modal-overlay.open .auth-box { transform:scale(1); }
+.auth-title { font-family:'Syne', sans-serif; font-weight:800; font-size:22px; letter-spacing:-0.05em; text-align:center; margin-bottom:6px; }
+.auth-title span { color:var(--accent); }
+.auth-sub { font-size:13px; color:var(--text2); text-align:center; margin-bottom:1.5rem; }
+.auth-tabs { display:flex; background:rgba(255,255,255,0.03); border-radius:var(--r8); padding:3px; gap:3px; margin-bottom:1.5rem; }
+.auth-tab { flex:1; padding:8px; border-radius:var(--r8); border:none; background:transparent; color:var(--text2); font-family:'Outfit', sans-serif; font-size:13px; cursor:pointer; transition:all 0.2s; }
+.auth-tab.active { background:rgba(0,245,160,0.1); color:var(--accent); border:1px solid rgba(0,245,160,0.2); }
+.google-btn {
+  width:100%; display:flex; align-items:center; justify-content:center; gap:10px;
+  padding:12px; border-radius:var(--r8);
+  border:1px solid var(--border2);
+  background:rgba(255,255,255,0.04);
+  color:var(--text);
+  font-family:'Outfit', sans-serif; font-size:14px; font-weight:500;
+  cursor:pointer; transition:all 0.2s; margin-bottom:12px;
+}
+.google-btn:hover { background:rgba(255,255,255,0.07); }
+.auth-or { display:flex; align-items:center; gap:12px; margin:10px 0; font-size:11px; color:var(--text3); font-family:'DM Mono', monospace; text-transform:uppercase; letter-spacing:0.1em; }
+.auth-or::before,.auth-or::after { content:''; flex:1; height:1px; background:var(--border); }
+.auth-input {
+  width:100%; background:rgba(255,255,255,0.03); border:1px solid var(--border);
+  border-radius:var(--r8); color:var(--text);
+  font-family:'Outfit', sans-serif; font-size:14px; padding:11px 14px;
+  outline:none; transition:all 0.2s; margin-bottom:8px;
+}
+.auth-input:focus { border-color:rgba(0,245,160,0.4); box-shadow:0 0 0 3px rgba(0,245,160,0.06); }
+.auth-submit {
+  width:100%; padding:12px; border-radius:var(--r8); border:none;
+  background:var(--accent); color:#020c12;
+  font-family:'Outfit', sans-serif; font-size:15px; font-weight:700;
+  cursor:pointer; margin-top:4px; transition:all 0.2s;
+}
+.auth-submit:hover { background:var(--accent2); }
+.auth-err { font-size:12px; color:var(--danger); font-family:'DM Mono', monospace; margin-bottom:8px; padding:8px 12px; background:rgba(244,63,94,0.07); border:1px solid rgba(244,63,94,0.2); border-radius:var(--r8); display:none; }
+.auth-switch { font-size:12px; color:var(--text3); text-align:center; margin-top:10px; font-family:'DM Mono', monospace; }
+.auth-switch a { color:var(--accent); cursor:pointer; }
+.modal-close { position:absolute; top:1rem; right:1rem; background:transparent; border:1px solid var(--border); border-radius:6px; color:var(--text2); cursor:pointer; padding:5px 9px; font-size:16px; line-height:1; transition:all 0.2s; }
+.modal-close:hover { color:var(--text); border-color:var(--border2); }
+
+/* ── CTA SECTION ── */
+.cta-section { background:linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%); }
+.cta-inner { text-align:center; padding:6rem 2rem; max-width:700px; margin:0 auto; }
+.cta-title { font-size:clamp(32px,5vw,60px); letter-spacing:-0.04em; margin-bottom:1rem; }
+.cta-title span { color:var(--accent); }
+.cta-desc { font-size:16px; color:var(--text2); margin-bottom:2.5rem; line-height:1.7; font-weight:300; }
+
+/* ── NAV USER ── */
+.nav-user { display:none; align-items:center; gap:8px; }
+.nav-username { font-size:13px; color:var(--text2); font-weight:500; }
+.btn-sm { padding:7px 14px; border-radius:var(--r8); font-family:'Outfit', sans-serif; font-size:13px; font-weight:500; cursor:pointer; transition:all 0.2s; border:1px solid var(--border); background:transparent; color:var(--text2); }
+.btn-sm:hover { color:var(--text); border-color:var(--border2); }
+
+/* ── RESPONSIVE ── */
+@media(max-width:1024px) {
+  .features-grid { grid-template-columns:1fr 1fr; }
+  .footer-top { grid-template-columns:1fr 1fr; }
+  .pricing-grid { grid-template-columns:1fr; max-width:400px; }
+}
+@media(max-width:768px) {
+  nav { padding:0 1.25rem; }
+  .nav-links { display:none; }
+  .nav-tag { display:none; }
+  .hamburger { display:flex; }
+  .hero h1 { letter-spacing:-0.03em; }
+  .hero-ctas { flex-direction:column; align-items:center; }
+  .btn-hero-primary,.btn-hero-secondary { width:100%; justify-content:center; }
+  .stat-strip-inner { grid-template-columns:1fr 1fr; }
+  .features-grid { grid-template-columns:1fr; }
+  .tools-grid { grid-template-columns:1fr; }
+  .brokers-grid { grid-template-columns:1fr; }
+  .compare-head,.compare-row { grid-template-columns:2fr 1fr 1fr; }
+  .ch:last-child,.cr:last-child { display:none; }
+  .footer-top { grid-template-columns:1fr; }
+  .footer-bottom { flex-direction:column; text-align:center; }
+  .nl-form { flex-direction:column; }
+  .nl-btn { width:100%; }
+  .section-inner { padding:4rem 1.25rem; }
+  .founder-card { padding:2rem; }
+  .nl-box { padding:2.5rem 1.5rem; }
+}
+</style>
 </head>
 <body>
 
-<div class="orb o1"></div><div class="orb o2"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
 
+<!-- ── AUTH MODAL ── -->
 <div class="modal-overlay" id="auth-modal">
-  <div class="auth-box">
-    <button class="auth-close" onclick="closeAuth()">✕</button>
+  <div class="auth-box" style="position:relative;">
+    <button class="modal-close" onclick="closeAuth()">✕</button>
+    <div class="auth-title">Welcome to <span>Vyxor</span></div>
+    <p class="auth-sub">Sign in to access your trade journal</p>
     <div class="auth-tabs">
-      <button class="auth-tab active" onclick="switchTab('login')">Sign In</button>
-      <button class="auth-tab" onclick="switchTab('signup')">Create Account</button>
+      <button class="auth-tab active" onclick="authTab('login')">Sign In</button>
+      <button class="auth-tab" onclick="authTab('signup')">Sign Up</button>
     </div>
-    <div class="auth-body">
-      <div id="auth-login">
-        <div class="auth-title">Welcome back to <span>Vyxor</span></div>
-        <p class="auth-sub">Sign in to access your trade journal.</p>
-        <button class="social-btn" onclick="googleSignIn()">
-          <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Continue with Google
-        </button>
-        <div class="auth-or">or</div>
-        <div class="auth-field"><label>Email</label><input class="auth-input" type="email" placeholder="you@email.com"></div>
-        <div class="auth-field"><label>Password</label><input class="auth-input" type="password" placeholder="••••••••"></div>
-        <button class="auth-submit" onclick="emailLogin()">Sign In to Vyxor</button>
-        <div class="auth-footer">No account? <a onclick="switchTab('signup')">Create one free</a></div>
-        <p class="auth-note">🔒 Your data is private and never sold.</p>
-      </div>
-      <div id="auth-signup" style="display:none;">
-        <div class="auth-title">Join <span>Vyxor</span></div>
-        <p class="auth-sub">Create an account to save your trade journal.</p>
-        <button class="social-btn" onclick="googleSignIn()">
-          <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-          Sign up with Google
-        </button>
-        <div class="auth-or">or</div>
-        <div class="auth-field"><label>Full Name</label><input class="auth-input" type="text" placeholder="Your name"></div>
-        <div class="auth-field"><label>Email</label><input class="auth-input" type="email" placeholder="you@email.com"></div>
-        <div class="auth-field"><label>Password</label><input class="auth-input" type="password" placeholder="Create a password"></div>
-        <button class="auth-submit" onclick="emailSignup()">Create Account</button>
-        <div class="auth-footer">Already have an account? <a onclick="switchTab('login')">Sign in</a></div>
-        <p class="auth-note">🔒 Your data is private and never sold.</p>
-      </div>
+    <button class="google-btn" onclick="googleSignIn()">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+      Continue with Google
+    </button>
+    <div class="auth-or">or</div>
+    <div id="login-form">
+      <div class="auth-err" id="login-err"></div>
+      <input class="auth-input" type="email" id="login-email" placeholder="Email" autocomplete="email">
+      <input class="auth-input" type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
+      <button class="auth-submit" onclick="emailLogin()">Sign In</button>
+      <p class="auth-switch">New here? <a onclick="authTab('signup')">Create account</a></p>
     </div>
+    <div id="signup-form" style="display:none;">
+      <div class="auth-err" id="signup-err"></div>
+      <input class="auth-input" type="text" id="signup-name" placeholder="Your name" autocomplete="name">
+      <input class="auth-input" type="email" id="signup-email" placeholder="Email" autocomplete="email">
+      <input class="auth-input" type="password" id="signup-pass" placeholder="Password (min 6 chars)" autocomplete="new-password">
+      <button class="auth-submit" onclick="emailSignup()">Create Account</button>
+      <p class="auth-switch">Already have an account? <a onclick="authTab('login')">Sign in</a></p>
+    </div>
+    <p style="font-size:11px;color:var(--text3);text-align:center;margin-top:12px;font-family:'DM Mono',monospace;">🔒 Private. Cloud synced. Never sold.</p>
   </div>
 </div>
 
+<!-- ── NAV ── -->
 <nav id="nav">
-  <a href="/" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
-  <ul class="nav-center">
+  <a href="/" class="logo"><span class="v">V</span>yxor<span class="logo-dot"></span></a>
+  <ul class="nav-links">
     <li><a href="/journal.html">Journal</a></li>
-    <li><a href="/position-size-calculator.html">Position Size Calculator</a></li>
+    <li><a href="/position-size-calculator.html">Calculator</a></li>
+    <li><a href="/india.html">🇮🇳 Indian Traders</a></li>
     <li><a href="/blog.html">Blog</a></li>
     <li><a href="/about.html">About</a></li>
   </ul>
   <div class="nav-right">
-    <button class="btn-login" id="nav-signin" onclick="openAuth('login')">Sign In</button>
-    <button class="btn-signup" id="nav-signup" onclick="openAuth('signup')">Sign Up</button>
-    <div id="nav-user" style="display:none;align-items:center;gap:8px;"><span id="nav-username" style="font-size:13px;color:var(--muted);font-weight:500;"></span><button class="btn-login" onclick="doSignOut()">Sign Out</button></div>
+    <span class="nav-tag">Free to start</span>
+    <div class="nav-user" id="nav-user">
+      <span class="nav-username" id="nav-username"></span>
+      <button class="btn-sm" onclick="doSignOut()">Sign Out</button>
+    </div>
+    <a href="/journal.html" class="btn-primary" id="nav-signin-btn">Open Journal →</a>
     <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -274,147 +829,434 @@ window.doSignOut=async function(){await signOut(auth);};
 </nav>
 <div class="mobile-menu" id="mobile-menu">
   <a href="/journal.html">Journal</a>
-  <a href="/position-size-calculator.html">Position Size Calculator</a>
+  <a href="/position-size-calculator.html">Calculator</a>
+  <a href="/india.html">🇮🇳 Indian Traders</a>
   <a href="/blog.html">Blog</a>
   <a href="/about.html">About</a>
 </div>
 
+<!-- ── HERO ── -->
 <section>
 <div class="hero">
-  <div class="hero-left">
-    <div class="hero-tag"><span class="live"></span>Built by a trader · Free forever</div>
-    <h1>Trade with<br><em>discipline.</em><br><span class="dim">Not emotion.</span></h1>
-    <p class="hero-desc">Vyxor was built by a futures trader who couldn't afford the journals everyone said he needed. So he built his own. Now it's free for every trader.</p>
-    <div class="hero-ctas">
-      <a href="/journal.html" class="btn-primary">Open Journal →</a>
-      <a href="/position-size-calculator.html" class="btn-outline">Use Calculator</a>
-    </div>
+  <div class="hero-eyebrow"><span class="hero-dot"></span>Built in India · Free forever</div>
+  <h1>
+    Trade with<br>
+    <span class="line-accent">discipline.</span>
+    <span class="line-dim">Not emotion.</span>
+  </h1>
+  <p class="hero-desc">The only free AI trade journal built for Indian traders. NSE, BSE, MCX. Import from Zerodha, Groww, Angel One. AI analysis. Cloud sync. ₹0 to start.</p>
+  <div class="hero-ctas">
+    <a href="/journal.html" class="btn-hero-primary">Start Journaling Free →</a>
+    <a href="/position-size-calculator.html" class="btn-hero-secondary">Position Calculator</a>
   </div>
-  <div class="hero-right">
-    <div class="hv-card">
-      <div class="hv-card-top">
-        <span class="hv-title">Vyxor Tools</span>
-        <span class="hv-badge">2 live</span>
-      </div>
-      <div class="hv-tools">
-        <a href="/journal.html" class="hv-tool">
-          <div class="hv-tool-icon i-blue">📔</div>
-          <div class="hv-tool-info"><div class="hv-tool-name">AI Trade Journal</div><div class="hv-tool-desc">Log, analyze, improve</div></div>
-          <span class="hv-tool-status">Live</span>
-        </a>
-        <a href="/position-size-calculator.html" class="hv-tool">
-          <div class="hv-tool-icon i-green">⚡</div>
-          <div class="hv-tool-info"><div class="hv-tool-name">Position Calculator</div><div class="hv-tool-desc">Forex · Futures · Crypto</div></div>
-          <span class="hv-tool-status">Live</span>
-        </a>
-      </div>
-    </div>
+  <div class="hero-trust">
+    <div class="trust-item"><span class="trust-check">✓</span> No credit card</div>
+    <div class="trust-item"><span class="trust-check">✓</span> 30 free trades/month</div>
+    <div class="trust-item"><span class="trust-check">✓</span> NSE · BSE · MCX</div>
+    <div class="trust-item"><span class="trust-check">✓</span> Not SEBI advisor</div>
   </div>
 </div>
 </section>
 
-<section id="tools">
-<div class="sec">
-  <div class="sec-label">Trading Tools</div>
-  <div class="sec-h">Two free tools.<br><span>That's all you need.</span></div>
-  <p class="sec-p">Every trader needs to size positions correctly and review their trades. That's it. We built both. Free.</p>
-  <div class="tools-grid">
-    <a href="/journal.html" class="tc">
-      <div class="tc-icon i-blue">📔</div>
-      <span class="tc-badge">Live Now</span>
-      <div class="tc-title">AI Trade Journal</div>
-      <div class="tc-desc">Log every trade, tag your emotional state, and let AI analyze your patterns. The journal I built for myself when I couldn't afford one.</div>
-      <div class="tc-feats">
-        <div class="tf">Log trades with entry, exit, SL, TP, notes and emotion tags</div>
-        <div class="tf">AI pattern detection — find your best and worst habits automatically</div>
-        <div class="tf">Win rate analysis by pair, session, day and emotional state</div>
-        <div class="tf">Cloud sync — your data follows you across devices</div>
-      </div>
-      <span class="tc-link">Open Journal →</span>
-    </a>
-    <a href="/position-size-calculator.html" class="tc">
-      <div class="tc-icon i-green">⚡</div>
-      <span class="tc-badge">Live Now</span>
-      <div class="tc-title">Position Size Calculator</div>
-      <div class="tc-desc">Know exactly how many lots or contracts to trade before you enter. Built for Forex, Futures (including Micros) and Crypto with correct values pre-loaded.</div>
-      <div class="tc-feats">
-        <div class="tf">28 Forex pairs with correct pip values</div>
-        <div class="tf">19 Futures contracts including MNQ, MES, MGC</div>
-        <div class="tf">R:R ratio and Take Profit calculation</div>
-        <div class="tf">No signup required — open and use</div>
-      </div>
-      <span class="tc-link">Open Calculator →</span>
-    </a>
+<!-- ── STAT STRIP ── -->
+<div class="stat-strip">
+  <div class="stat-strip-inner">
+    <div class="stat-item"><div class="stat-num">₹0</div><div class="stat-lbl">Cost to start</div></div>
+    <div class="stat-item"><div class="stat-num">30+</div><div class="stat-lbl">Indian instruments</div></div>
+    <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Broker imports</div></div>
+    <div class="stat-item"><div class="stat-num">AI</div><div class="stat-lbl">Pattern analysis</div></div>
   </div>
 </div>
-</section>
 
-<section class="story-bg">
-<div class="sec">
-  <div class="story-card">
-    <div class="sec-label">The Story</div>
-    <p class="story-quote">"Every online trade journal wanted ₹2,000 to ₹8,000 a year. I was a trader still figuring things out — I didn't have that kind of money. So I built my own. <span>That was Vyxor.</span> Now it's free for everyone."</p>
-    <p class="story-attr">— <strong>Ratnadip</strong>, Founder · Futures Trader · Ahilyanagar, Maharashtra</p>
-  </div>
-</div>
-</section>
-
+<!-- ── TOOLS ── -->
 <section>
-<div class="sec" style="padding-top:0;">
-  <div class="nl-wrap">
-    <div class="nl-h">Get updates when we <span>ship new tools</span></div>
-    <p class="nl-p">No spam. Just an email when there's something genuinely new and useful for traders.</p>
-    <div class="nl-form" id="nl-form">
-      <input class="nl-in" id="nl-email" type="email" placeholder="your@email.com" autocomplete="email">
-      <button class="nl-btn" onclick="subscribe()">Notify Me</button>
-    </div>
-    <div class="nl-ok" id="nl-ok">✓ You're on the list. 🚀</div>
-    <p class="nl-prv">🔒 No spam. Unsubscribe anytime.</p>
+<div class="section-inner">
+  <div class="section-eyebrow">Core Tools</div>
+  <div class="section-title">Two tools.<br><span>Everything you need.</span></div>
+  <p class="section-desc" style="margin-bottom:0;">Every trader needs to size positions correctly and review their trades. We built both. Free.</p>
+  <div class="tools-grid">
+    <a href="/journal.html" class="tool-card">
+      <span class="tool-badge badge-live">● Live</span>
+      <div class="tool-icon">📔</div>
+      <div class="tool-title">AI Trade Journal</div>
+      <div class="tool-desc">Log every trade, tag emotions, and let AI analyse your patterns. Find out exactly which habits are costing you money and which setups actually work.</div>
+      <div class="tool-features">
+        <div class="tool-feat">Import from Zerodha, Groww, Angel One — one click</div>
+        <div class="tool-feat">AI pattern detection powered by Claude</div>
+        <div class="tool-feat">Emotion tracking — pre and post trade</div>
+        <div class="tool-feat">Screenshot per trade, cloud synced across devices</div>
+        <div class="tool-feat">Instrument type — Futures, Options CE/PE, Equity</div>
+      </div>
+      <span class="tool-link">Open Journal →</span>
+    </a>
+    <a href="/position-size-calculator.html" class="tool-card">
+      <span class="tool-badge badge-live">● Live</span>
+      <div class="tool-icon">⚡</div>
+      <div class="tool-title">Position Size Calculator</div>
+      <div class="tool-desc">Calculate exact lots before you enter. NSE, BSE, MCX with correct lot sizes. Futures, Options Buy, Equity. P&L breakdown with full formula.</div>
+      <div class="tool-features">
+        <div class="tool-feat">NIFTY · BANKNIFTY · FINNIFTY · SENSEX · MCX Gold</div>
+        <div class="tool-feat">Options Buy — premium-based sizing, max loss = premium</div>
+        <div class="tool-feat">Stock futures — 25+ instruments with correct lot sizes</div>
+        <div class="tool-feat">Forex, US Futures, Crypto — global markets too</div>
+        <div class="tool-feat">No signup required — open and use instantly</div>
+      </div>
+      <span class="tool-link">Open Calculator →</span>
+    </a>
   </div>
 </div>
 </section>
 
-<footer>
-<div class="fi">
-  <div class="ft">
-    <div>
-      <div class="fb-logo"><span>V</span>yxor</div>
-      <p class="fb-desc">Free trading tools built by a trader from Ahilyanagar who couldn't afford the existing ones. Now free for everyone.</p>
+<!-- ── FEATURES ── -->
+<section class="features-bg">
+<div class="section-inner">
+  <div class="section-eyebrow">Platform Features</div>
+  <div class="section-title">Built for the way<br><span>Indian traders actually trade</span></div>
+  <div class="features-grid">
+    <div class="feat">
+      <div class="feat-icon g">📊</div>
+      <div class="feat-title">Correct Lot Sizes</div>
+      <div class="feat-desc">NIFTY = 25, BANKNIFTY = 15, FINNIFTY = 40, GOLD = 100, SILVER = 30. P&L calculated with exact precision — not just price difference × quantity.</div>
+      <span class="feat-tag">30+ instruments</span>
     </div>
-    <div>
-      <div class="fc-h">Tools</div>
-      <ul class="fc-ul">
-        <li><a href="/journal.html">AI Trade Journal</a></li>
-        <li><a href="/position-size-calculator.html">Position Calculator</a></li>
-        <li><a href="/blog.html">Blog</a></li>
-      </ul>
+    <div class="feat">
+      <div class="feat-icon b">🤖</div>
+      <div class="feat-title">AI Pattern Analysis</div>
+      <div class="feat-desc">Claude AI reads all your trades and tells you which emotions lead to losses, which sessions you perform best in, and what your actual edge is.</div>
+      <span class="feat-tag">Powered by Claude</span>
     </div>
-    <div>
-      <div class="fc-h">Company</div>
-      <ul class="fc-ul">
-        <li><a href="/about.html">About</a></li>
-        <li><a href="/privacy.html">Privacy Policy</a></li>
-        <li><a href="/terms.html">Terms of Service</a></li>
-        <li><a href="/disclaimer.html">Risk Disclaimer</a></li>
-        <li><a href="mailto:hello@vyxor.in">Contact</a></li>
-      </ul>
+    <div class="feat">
+      <div class="feat-icon p">📥</div>
+      <div class="feat-title">Broker CSV Import</div>
+      <div class="feat-desc">Download your tradebook from Zerodha Console, Groww, or Angel One and upload it. All trades imported automatically — buy/sell legs matched.</div>
+      <span class="feat-tag">3 brokers</span>
+    </div>
+    <div class="feat">
+      <div class="feat-icon w">😌</div>
+      <div class="feat-title">Emotion Tracking</div>
+      <div class="feat-desc">Log your pre and post trade emotion on every entry. FOMO, Calm, Revenge, Focused. See which emotional states lead to your worst trades.</div>
+      <span class="feat-tag">7 states tracked</span>
+    </div>
+    <div class="feat">
+      <div class="feat-icon g">📸</div>
+      <div class="feat-title">Trade Screenshots</div>
+      <div class="feat-desc">Attach your TradingView chart to every trade. Review setups visually. See exactly what the market looked like before your entry and exit.</div>
+      <span class="feat-tag">Stored in cloud</span>
+    </div>
+    <div class="feat">
+      <div class="feat-icon b">☁️</div>
+      <div class="feat-title">Real-time Sync</div>
+      <div class="feat-desc">Log a NIFTY trade on your phone during market hours. Review analytics on desktop in the evening. All data synced instantly across devices.</div>
+      <span class="feat-tag">Firebase powered</span>
     </div>
   </div>
-  <div class="fb-line">
-    <div class="fb-copy">© 2026 Vyxor · vyxor.in · Built in Ahilyanagar, India</div>
+</div>
+</section>
+
+<!-- ── BROKERS ── -->
+<div class="brokers-section">
+<div class="brokers-inner">
+  <div class="brokers-label">Import directly from your broker — zero manual entry</div>
+  <div class="brokers-grid">
+    <div class="broker-card zd">
+      <div class="broker-name zd">Zerodha</div>
+      <div class="broker-sub">India's largest broker</div>
+      <div class="broker-steps">
+        <div class="broker-step"><span class="broker-step-n">1</span>Go to console.zerodha.com</div>
+        <div class="broker-step"><span class="broker-step-n">2</span>Reports → Tradebook → Download</div>
+        <div class="broker-step"><span class="broker-step-n">3</span>Upload CSV → all trades imported</div>
+      </div>
+      <div class="broker-badge">✓ Buy/sell legs auto-matched</div>
+    </div>
+    <div class="broker-card gw">
+      <div class="broker-name gw">Groww</div>
+      <div class="broker-sub">10M+ active investors</div>
+      <div class="broker-steps">
+        <div class="broker-step"><span class="broker-step-n">1</span>Open Groww App or groww.in</div>
+        <div class="broker-step"><span class="broker-step-n">2</span>Profile → Reports → Trade History</div>
+        <div class="broker-step"><span class="broker-step-n">3</span>Export CSV → upload to Vyxor</div>
+      </div>
+      <div class="broker-badge">✓ P&L auto-calculated in ₹</div>
+    </div>
+    <div class="broker-card ao">
+      <div class="broker-name ao">Angel One</div>
+      <div class="broker-sub">5M+ active clients</div>
+      <div class="broker-steps">
+        <div class="broker-step"><span class="broker-step-n">1</span>Login to angelone.in</div>
+        <div class="broker-step"><span class="broker-step-n">2</span>Reports → Trade Book → Export CSV</div>
+        <div class="broker-step"><span class="broker-step-n">3</span>Upload CSV → all trades imported</div>
+      </div>
+      <div class="broker-badge">✓ Lot sizes pre-loaded</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ── COMPARISON ── -->
+<section>
+<div class="section-inner">
+  <div class="section-eyebrow">Comparison</div>
+  <div class="section-title">₹0 vs <span>₹2,000–₹8,000/year</span></div>
+  <p class="section-desc">Every existing journal charges more than most Indian traders make in a good month. Vyxor is free.</p>
+  <div class="compare-table">
+    <div class="compare-head">
+      <div class="ch">Feature</div>
+      <div class="ch vyxor">Vyxor</div>
+      <div class="ch">TradeZella</div>
+      <div class="ch">Tradervue</div>
+    </div>
+    <div class="compare-row"><div class="cr feat">Price</div><div class="cr yes">Free to start</div><div class="cr paid">$29/month</div><div class="cr paid">$30/month</div></div>
+    <div class="compare-row"><div class="cr feat">Zerodha CSV import</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
+    <div class="compare-row"><div class="cr feat">NSE / BSE / MCX</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
+    <div class="compare-row"><div class="cr feat">Indian lot sizes</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
+    <div class="compare-row"><div class="cr feat">₹ currency default</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
+    <div class="compare-row"><div class="cr feat">AI analysis</div><div class="cr yes">✓ Yes</div><div class="cr paid">Paid only</div><div class="cr no">✗ No</div></div>
+    <div class="compare-row"><div class="cr feat">Emotion tracking</div><div class="cr yes">✓ Yes</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div></div>
+    <div class="compare-row"><div class="cr feat">Screenshot per trade</div><div class="cr yes">✓ Yes</div><div class="cr yes">✓ Yes</div><div class="cr paid">Paid only</div></div>
+  </div>
+</div>
+</section>
+
+<!-- ── FOUNDER ── -->
+<section class="founder-section">
+<div class="section-inner" style="padding-top:2rem;">
+  <div style="max-width:780px;margin:0 auto;">
+    <div class="section-eyebrow">The Story</div>
+    <div class="section-title" style="margin-bottom:2rem;">Why Vyxor <span>exists</span></div>
+    <div class="founder-card">
+      <div class="founder-quote">
+        "Every online trade journal wanted ₹2,000 to ₹8,000 a year. I was a futures trader still figuring things out — I didn't have that money. So I built my own. <span>That was Vyxor.</span> Now it's free for every Indian trader."
+      </div>
+      <div class="founder-meta">
+        <div class="founder-avatar">R</div>
+        <div>
+          <div class="founder-name">Ratnadip</div>
+          <div class="founder-role">Founder · Futures Trader · Ahilyanagar, Maharashtra</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── PRICING ── -->
+<section>
+<div class="section-inner">
+  <div class="section-eyebrow">Pricing</div>
+  <div class="section-title">Simple, <span>honest pricing</span></div>
+  <p class="section-desc">Start free. Upgrade when you're ready. No tricks.</p>
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-plan">Free</div>
+      <div class="price-amount">₹0</div>
+      <div class="price-period">forever</div>
+      <div class="price-desc">For traders getting started. Everything you need to begin journaling.</div>
+      <div class="price-features">
+        <div class="pf yes">30 trade entries/month</div>
+        <div class="pf yes">Position size calculator</div>
+        <div class="pf yes">AI trade analysis</div>
+        <div class="pf yes">CSV import (Zerodha, Groww, Angel One)</div>
+        <div class="pf yes">Screenshot per trade</div>
+        <div class="pf yes">Cloud sync across devices</div>
+        <div class="pf no">Unlimited trades</div>
+        <div class="pf no">PDF export</div>
+      </div>
+      <a href="/journal.html" class="price-cta outline">Start Free →</a>
+    </div>
+    <div class="price-card featured">
+      <div class="price-plan">Pro</div>
+      <div class="price-amount">₹199</div>
+      <div class="price-period">per month · coming soon</div>
+      <div class="price-desc">For serious traders who trade every day and need unlimited tracking.</div>
+      <div class="price-features">
+        <div class="pf yes">Unlimited trade entries</div>
+        <div class="pf yes">Everything in Free</div>
+        <div class="pf yes">PDF trade report export</div>
+        <div class="pf yes">Weekly AI email digest</div>
+        <div class="pf yes">Advanced analytics</div>
+        <div class="pf yes">Priority AI analysis</div>
+        <div class="pf yes">Trade editing</div>
+        <div class="pf yes">Broker charges auto-deduction</div>
+      </div>
+      <button class="price-cta dim">Coming Soon</button>
+    </div>
+    <div class="price-card">
+      <div class="price-plan">Prop Firm</div>
+      <div class="price-amount">₹499</div>
+      <div class="price-period">per month · coming soon</div>
+      <div class="price-desc">For funded traders managing prop firm challenges.</div>
+      <div class="price-features">
+        <div class="pf yes">Everything in Pro</div>
+        <div class="pf yes">Prop firm challenge tracker</div>
+        <div class="pf yes">Daily loss limit alerts</div>
+        <div class="pf yes">Max drawdown warnings</div>
+        <div class="pf yes">FTMO, Apex, MyFundedFx support</div>
+        <div class="pf yes">Challenge progress dashboard</div>
+      </div>
+      <button class="price-cta dim">Coming Soon</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- ── NEWSLETTER / CTA ── -->
+<div class="nl-section">
+<div class="section-inner">
+  <div class="nl-box">
+    <div class="nl-title">Start trading with<br><span>discipline today</span></div>
+    <p class="nl-desc">Free to start. No credit card. Built by a trader who couldn't afford the alternatives — now free for every Indian trader.</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
+      <a href="/journal.html" class="btn-hero-primary">Open Journal — Free →</a>
+      <a href="/position-size-calculator.html" class="btn-hero-secondary">Position Calculator</a>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:2rem;margin-top:0;">
+      <p style="font-size:14px;color:var(--text2);margin-bottom:1rem;">Get notified when Pro launches</p>
+      <div class="nl-form" id="nl-form">
+        <input class="nl-input" id="nl-email" type="email" placeholder="your@email.com" autocomplete="email">
+        <button class="nl-btn" onclick="subscribe()">Notify Me</button>
+      </div>
+      <div class="nl-ok" id="nl-ok">✓ You're on the list 🚀</div>
+      <p class="nl-note">🔒 No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+<div class="footer-inner">
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand"><span>V</span>yxor</div>
+      <p class="footer-tagline">Free AI-powered trading discipline platform. Built in Ahilyanagar, Maharashtra for Indian traders who couldn't afford the alternatives.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Tools</div>
+      <div class="footer-col-links">
+        <a href="/journal.html">AI Trade Journal</a>
+        <a href="/position-size-calculator.html">Position Calculator</a>
+        <a href="/india.html">Indian Traders Guide</a>
+        <a href="/blog.html">Blog</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-col-links">
+        <a href="/about.html">About</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/terms.html">Terms of Service</a>
+        <a href="/disclaimer.html">Risk Disclaimer</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <div class="footer-col-links">
+        <a href="mailto:hello@vyxor.in">hello@vyxor.in</a>
+        <a href="https://github.com/ratnadip1818/vyxor" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Vyxor · vyxor.in · Made in India 🇮🇳</div>
+    <div class="footer-disc">Not a SEBI registered investment advisor. Not financial advice. Trading involves substantial risk. All tools are for educational purposes only.</div>
   </div>
 </div>
 </footer>
 
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, onAuthStateChanged, updateProfile } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+const app  = initializeApp({ apiKey:"AIzaSyDHzG49DUCbQ2RpR3ddgEElOZ7Qdop2MwE", authDomain:"vyxor-3f94c.firebaseapp.com", projectId:"vyxor-3f94c", storageBucket:"vyxor-3f94c.firebasestorage.app", messagingSenderId:"992136225540", appId:"1:992136225540:web:3d8ad8fa511d0978346651" });
+const auth = getAuth(app);
+const gp   = new GoogleAuthProvider();
+
+function fe(code){ const m={'auth/user-not-found':'No account found.','auth/wrong-password':'Incorrect password.','auth/email-already-in-use':'Email already registered.','auth/weak-password':'Password must be 6+ chars.','auth/invalid-email':'Invalid email.','auth/popup-closed-by-user':'Cancelled.','auth/invalid-credential':'Incorrect email or password.'}; return m[code]||'Something went wrong.'; }
+function showErr(id,msg){ const el=document.getElementById(id); if(el){el.textContent=msg;el.style.display='block';} }
+function clearErr(id){ const el=document.getElementById(id); if(el){el.textContent='';el.style.display='none';} }
+
+onAuthStateChanged(auth, user => {
+  const nu = document.getElementById('nav-user');
+  const nb = document.getElementById('nav-signin-btn');
+  if(user){
+    if(nu) nu.style.display='flex';
+    if(nb) nb.style.display='none';
+    const un = document.getElementById('nav-username');
+    if(un) un.textContent = (user.displayName||user.email||'Trader').split(' ')[0];
+    closeAuth();
+  } else {
+    if(nu) nu.style.display='none';
+    if(nb) nb.style.display='flex';
+  }
+});
+
+window.googleSignIn = async () => {
+  clearErr('login-err'); clearErr('signup-err');
+  try { await signInWithPopup(auth, gp); }
+  catch(e){ const m=fe(e.code); showErr('login-err',m); showErr('signup-err',m); }
+};
+window.emailLogin = async () => {
+  const em=document.getElementById('login-email').value.trim();
+  const pa=document.getElementById('login-pass').value;
+  clearErr('login-err');
+  if(!em||!pa){showErr('login-err','Enter email and password.');return;}
+  try{ await signInWithEmailAndPassword(auth,em,pa); }
+  catch(e){ showErr('login-err',fe(e.code)); }
+};
+window.emailSignup = async () => {
+  const nm=document.getElementById('signup-name').value.trim();
+  const em=document.getElementById('signup-email').value.trim();
+  const pa=document.getElementById('signup-pass').value;
+  clearErr('signup-err');
+  if(!nm||!em||!pa){showErr('signup-err','Fill in all fields.');return;}
+  try{ const c=await createUserWithEmailAndPassword(auth,em,pa); await updateProfile(c.user,{displayName:nm}); }
+  catch(e){ showErr('signup-err',fe(e.code)); }
+};
+window.doSignOut = async () => { await signOut(auth); };
+</script>
+
 <script>
-window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50));
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const t=document.querySelector(a.getAttribute('href'));if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth'});}});});
-function openAuth(tab){document.getElementById('auth-modal').classList.add('open');switchTab(tab);document.body.style.overflow='hidden';}
-function closeAuth(){document.getElementById('auth-modal').classList.remove('open');document.body.style.overflow='';}
-function switchTab(tab){document.querySelectorAll('.auth-tab').forEach((t,i)=>t.classList.toggle('active',['login','signup'][i]===tab));document.getElementById('auth-login').style.display=tab==='login'?'block':'none';document.getElementById('auth-signup').style.display=tab==='signup'?'block':'none';}
-document.getElementById('auth-modal').addEventListener('click',function(e){if(e.target===this)closeAuth();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAuth();});
-async function subscribe(){const email=document.getElementById('nl-email').value.trim();if(!email||!email.includes('@'))return;const btn=document.querySelector('.nl-btn');btn.textContent='...';btn.disabled=true;try{new Image().src='https://script.google.com/macros/s/AKfycbzM3v6AA9ovWf-0dh3u_lg3DjIXvCg5--5rZGlEQbDEBsEmeAOzqJg6HmqrOqw6WWKoRA/exec?email='+encodeURIComponent(email)+'&source=homepage&t='+Date.now();}catch(x){}localStorage.setItem('vyxor_subscribed','1');document.getElementById('nl-form').style.display='none';document.getElementById('nl-ok').style.display='block';}
+// Stubs
+const _n=()=>{};
+window.googleSignIn=window.googleSignIn||_n;
+window.emailLogin=window.emailLogin||_n;
+window.emailSignup=window.emailSignup||_n;
+window.doSignOut=window.doSignOut||_n;
+
+// Nav scroll
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50));
+
+// Auth modal
+window.openAuth = (tab) => { document.getElementById('auth-modal').classList.add('open'); authTab(tab||'login'); document.body.style.overflow='hidden'; };
+window.closeAuth = () => { document.getElementById('auth-modal').classList.remove('open'); document.body.style.overflow=''; };
+window.authTab = (tab) => {
+  ['login','signup'].forEach((t,i)=>{ document.querySelectorAll('.auth-tab')[i].classList.toggle('active',t===tab); document.getElementById(t+'-form').style.display=t===tab?'block':'none'; });
+};
+document.getElementById('auth-modal').addEventListener('click',e=>{ if(e.target===document.getElementById('auth-modal')) closeAuth(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeAuth(); });
+
+// Newsletter
+async function subscribe(){
+  const email=document.getElementById('nl-email').value.trim();
+  if(!email||!email.includes('@'))return;
+  const btn=document.querySelector('.nl-btn');
+  btn.textContent='...'; btn.disabled=true;
+  try{ new Image().src='https://script.google.com/macros/s/AKfycbzM3v6AA9ovWf-0dh3u_lg3DjIXvCg5--5rZGlEQbDEBsEmeAOzqJg6HmqrOqw6WWKoRA/exec?email='+encodeURIComponent(email)+'&source=homepage&t='+Date.now(); }catch(x){}
+  localStorage.setItem('vyxor_subscribed','1');
+  document.getElementById('nl-form').style.display='none';
+  document.getElementById('nl-ok').style.display='block';
+}
+
+// Scroll animations
+const obs = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
+},{threshold:0.1});
+document.querySelectorAll('.feat,.tool-card,.broker-card,.price-card,.stat-item,.founder-card').forEach(el=>{
+  el.style.opacity='0';
+  el.style.transform='translateY(20px)';
+  el.style.transition='opacity 0.5s ease, transform 0.5s ease';
+  obs.observe(el);
+});
 </script>
 </body>
 </html>
