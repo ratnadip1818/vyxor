@@ -1230,15 +1230,24 @@ window.renderAnalytics = function() {
   const best  = sorted[0];
   const worst = sorted[sorted.length-1];
   const c = allTrades[0]?.currency || '₹';
+
   if (best) {
+    const bestPnl = parseFloat(best.pnl);
     document.getElementById('bw-best-asset').textContent = best.asset;
     document.getElementById('bw-best-detail').textContent = best.direction+' · '+best.session;
-    document.getElementById('bw-best-pnl').textContent = '+'+c+Math.abs(parseFloat(best.pnl)).toFixed(2);
+    document.getElementById('bw-best-pnl').textContent =
+      (bestPnl >= 0 ? '+' : '-') + c + Math.abs(bestPnl).toFixed(2);
+    document.getElementById('bw-best-pnl').className =
+      'bw-pnl ' + (bestPnl >= 0 ? 'td-p' : 'td-n');
   }
   if (worst) {
+    const worstPnl = parseFloat(worst.pnl);
     document.getElementById('bw-worst-asset').textContent = worst.asset;
     document.getElementById('bw-worst-detail').textContent = worst.direction+' · '+worst.session;
-    document.getElementById('bw-worst-pnl').textContent = '-'+c+Math.abs(parseFloat(worst.pnl)).toFixed(2);
+    document.getElementById('bw-worst-pnl').textContent =
+      (worstPnl >= 0 ? '+' : '-') + c + Math.abs(worstPnl).toFixed(2);
+    document.getElementById('bw-worst-pnl').className =
+      'bw-pnl ' + (worstPnl >= 0 ? 'td-p' : 'td-n');
   }
 
   if (typeof Chart === 'undefined') { setTimeout(renderAnalytics, 400); return; }
