@@ -764,15 +764,45 @@ tbody td{padding:10px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
 <div class="toast" id="toast"></div>
 
 <!-- ── FIREBASE + APP LOGIC ── -->
-<!-- Non-module wrapper so window.* functions work from HTML onclick -->
 <script>
-// Stub functions defined before module loads — replaced when module initialises
-window.googleAuth  = () => console.warn('Firebase not ready yet');
-window.emailLogin  = () => console.warn('Firebase not ready yet');
-window.emailSignup = () => console.warn('Firebase not ready yet');
-window.doSignOut   = () => console.warn('Firebase not ready yet');
-window.authTab     = (t) => {};
-window.toggleMenu  = () => document.getElementById('mobile-menu').classList.toggle('open');
+// All functions stubbed here first so HTML onclick="" works immediately.
+// The module below overwrites these with real implementations once loaded.
+const _noop = () => {};
+window.googleAuth    = _noop;
+window.emailLogin    = _noop;
+window.emailSignup   = _noop;
+window.doSignOut     = _noop;
+window.authTab       = _noop;
+window.saveTrade     = _noop;
+window.deleteTrade   = _noop;
+window.exportCSV     = _noop;
+window.renderHistory = _noop;
+window.renderAnalytics = _noop;
+window.runAnalysis   = _noop;
+window.runStory      = _noop;
+window.setDir        = _noop;
+window.setEmo        = _noop;
+window.autoPnl       = _noop;
+window.updateAssets  = _noop;
+window.importTrades  = _noop;
+window.clearImport   = _noop;
+window.fileSelected  = _noop;
+window.dragOver      = _noop;
+window.dragLeave     = _noop;
+window.dropFile      = _noop;
+window.toggleMenu    = () => document.getElementById('mobile-menu').classList.toggle('open');
+window.switchTab     = (tab) => {
+  const tabs = ['log','history','analytics','ai','import'];
+  document.querySelectorAll('.jtab').forEach((t,i) =>
+    t.classList.toggle('active', tabs[i]===tab));
+  document.querySelectorAll('.panel').forEach(p =>
+    p.classList.remove('active'));
+  const panel = document.getElementById('panel-'+tab);
+  if (panel) panel.classList.add('active');
+  // These will be overwritten by module — call via window so latest version runs
+  if (tab==='analytics') window.renderAnalytics();
+  if (tab==='history')   window.renderHistory();
+};
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
