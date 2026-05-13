@@ -363,7 +363,25 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
 
 /* ── NET P&L display (kept for history compatibility) ── */
 
-/* ── TOAST ── */
+/* ── WEEKLY REPORT HISTORY ── */
+.reports-section{margin-top:1.5rem;}
+.reports-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.3px;margin-bottom:1rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+.reports-title span{color:var(--accent);}
+.reports-empty{font-size:13px;color:var(--muted2);font-family:'DM Mono',monospace;padding:1rem 0;}
+.report-card{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;margin-bottom:10px;overflow:hidden;transition:border-color 0.2s;}
+.report-card:hover{border-color:rgba(0,245,160,0.2);}
+.report-card-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.25rem;cursor:pointer;user-select:none;}
+.report-card-week{font-family:'DM Mono',monospace;font-size:13px;color:var(--text);font-weight:500;}
+.report-card-stats{display:flex;align-items:center;gap:12px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);}
+.report-stat-pnl.pos{color:var(--accent);}
+.report-stat-pnl.neg{color:var(--danger);}
+.report-card-arrow{font-size:12px;color:var(--muted);transition:transform 0.25s;}
+.report-card.open .report-card-arrow{transform:rotate(180deg);}
+.report-card-body{max-height:0;overflow:hidden;transition:max-height 0.35s ease;}
+.report-card.open .report-card-body{max-height:600px;}
+.report-card-text{padding:0 1.25rem 1.25rem;font-size:14px;color:var(--muted);line-height:1.85;white-space:pre-wrap;border-top:1px solid var(--border);}
+.report-this-week{background:rgba(0,245,160,0.04);border-color:rgba(0,245,160,0.2);}
+.report-new-badge{font-size:10px;font-family:'DM Mono',monospace;color:#020c12;background:var(--accent);padding:2px 8px;border-radius:99px;margin-left:8px;}
 .toast{position:fixed;bottom:2rem;right:2rem;z-index:1000;background:#0B1220;border:1px solid rgba(0,245,160,0.3);border-radius:11px;padding:12px 20px;font-size:13px;color:var(--accent);font-family:'DM Mono',monospace;box-shadow:0 20px 60px rgba(0,0,0,0.6);transform:translateY(120px);opacity:0;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);max-width:90vw;}
 .toast.show{transform:translateY(0);opacity:1;}
 .toast.err{border-color:rgba(255,77,109,0.3);color:var(--danger);}
@@ -935,7 +953,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
       <p class="ai-desc">The AI reads all your trades and finds patterns you can't see yourself — which emotions cost you money, which sessions you perform best in, what habits are holding you back. The more trades you log, the sharper the insights.</p>
       <div class="ai-btns">
         <button class="ai-btn" id="ai-btn" onclick="runAnalysis()">🤖 Analyse My Trades</button>
-        <button class="ai-btn story" id="story-btn" onclick="runStory()">📖 Weekly Story</button>
+        <button class="ai-btn story" id="story-btn" onclick="runStory()">📖 This Week's Report</button>
       </div>
       <div class="ai-loading" id="ai-loading">
         <div class="spinner"></div>
@@ -945,6 +963,14 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
         <div class="ai-result-title" id="ai-result-title">Your Trading Analysis</div>
         <div class="ai-result-text" id="ai-result-text"></div>
       </div>
+    </div>
+
+    <!-- ── WEEKLY REPORT HISTORY ── -->
+    <div class="ai-card" style="margin-top:1rem;">
+      <div class="ai-title" style="font-size:18px;">Past <span>Weekly Reports</span></div>
+      <p class="ai-sub">Your previous reports — saved automatically</p>
+      <div id="reports-loading" style="font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;padding:0.5rem 0;">Loading reports...</div>
+      <div id="reports-list"></div>
     </div>
   </div>
 
@@ -1097,6 +1123,7 @@ window.switchTab = (tab) => {
   if (panel) panel.classList.add('active');
   if (tab==='analytics') window.renderAnalytics();
   if (tab==='history')   window.renderHistory();
+  if (tab==='ai')        { if(typeof loadWeeklyReports==='function') loadWeeklyReports(); }
 };
 </script>
 
@@ -1109,7 +1136,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
   getFirestore, collection, addDoc, deleteDoc, doc, updateDoc, getDoc, setDoc,
-  query, orderBy, onSnapshot, serverTimestamp
+  query, orderBy, limit, getDocs, onSnapshot, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -2057,41 +2084,184 @@ Be direct. Use ₹. Use their numbers.`;
   finally { btn.disabled=false; btn.textContent='🤖 Analyse My Trades'; loading.style.display='none'; }
 };
 
+// ── WEEKLY REPORT HELPERS ────────────────────────────
+function getWeekId(date) {
+  // Returns "2026-W20" style ID — Monday-based week
+  const d = date ? new Date(date) : new Date();
+  const day = d.getDay(); // 0=Sun
+  const diff = d.getDate() - day + (day === 0 ? -6 : 1); // Monday
+  const monday = new Date(d.setDate(diff));
+  const year = monday.getFullYear();
+  const startOfYear = new Date(year, 0, 1);
+  const weekNum = Math.ceil(((monday - startOfYear) / 86400000 + startOfYear.getDay() + 1) / 7);
+  return `${year}-W${String(weekNum).padStart(2,'0')}`;
+}
+
+function getWeekLabel(weekId) {
+  // "2026-W20" → "12 May – 18 May 2026"
+  const [year, w] = weekId.split('-W');
+  const jan1 = new Date(year, 0, 1);
+  const days = (parseInt(w) - 1) * 7;
+  const monday = new Date(jan1.getTime() + days * 86400000);
+  const d = monday.getDay();
+  monday.setDate(monday.getDate() - d + (d === 0 ? -6 : 1));
+  const sunday = new Date(monday.getTime() + 6 * 86400000);
+  const fmt = (dt) => dt.toLocaleDateString('en-IN', { day:'numeric', month:'short' });
+  return `${fmt(monday)} – ${fmt(sunday)} ${sunday.getFullYear()}`;
+}
+
 window.runStory = async function() {
   if (!allTrades.length) { toast('Log some trades first.', true); return; }
-  const weekAgo=new Date(); weekAgo.setDate(weekAgo.getDate()-7);
-  const wt=allTrades.filter(t=>new Date(t.datetime)>=weekAgo);
-  if (!wt.length) { toast('No trades this week.', true); return; }
+  if (trialExpired) { showUpgradeModal(); return; }
 
-  const btn=document.getElementById('story-btn'), loading=document.getElementById('ai-loading'), result=document.getElementById('ai-result');
-  btn.disabled=true; btn.textContent='Writing...';
-  loading.style.display='flex'; result.style.display='none';
-  document.getElementById('ai-loading-text').textContent = 'Writing your weekly story...';
+  const weekAgo = new Date(); weekAgo.setDate(weekAgo.getDate() - 7);
+  const wt = allTrades.filter(t => new Date(t.datetime) >= weekAgo);
+  if (!wt.length) { toast('No trades this week yet.', true); return; }
 
-  const wins=wt.filter(t=>t.result==='Win').length;
-  const totalPnl=wt.reduce((s,t)=>s+(parseFloat(t.pnl)||0),0);
+  const btn = document.getElementById('story-btn');
+  const loading = document.getElementById('ai-loading');
+  const result = document.getElementById('ai-result');
+  const weekId = getWeekId();
+
+  // ── Check if this week's report already exists ──────────
+  if (currentUser) {
+    try {
+      const existingDoc = await getDoc(doc(db, 'users', currentUser.uid, 'weeklyReports', weekId));
+      if (existingDoc.exists()) {
+        const data = existingDoc.data();
+        document.getElementById('ai-result-title').textContent = `📖 Week of ${getWeekLabel(weekId)}`;
+        document.getElementById('ai-result-text').textContent = data.report;
+        result.style.display = 'block';
+        toast('Loaded this week\'s saved report ✓');
+        return;
+      }
+    } catch(e) { /* proceed to generate */ }
+  }
+
+  // ── Generate new report ─────────────────────────────────
+  btn.disabled = true; btn.textContent = 'Writing...';
+  loading.style.display = 'flex'; result.style.display = 'none';
+  document.getElementById('ai-loading-text').textContent = 'Writing your weekly report...';
+
+  const wins = wt.filter(t => t.result === 'Win').length;
+  const losses = wt.filter(t => t.result === 'Loss').length;
+  const totalPnl = wt.reduce((s, t) => s + (parseFloat(t.pnl) || 0), 0);
+  const winRate = ((wins / wt.length) * 100).toFixed(0);
 
   const prompt = `Write a 200-250 word weekly trading narrative for an Indian trader.
 
-Week: ${wt.length} trades | ${wins} wins | ${(wins/wt.length*100).toFixed(0)}% win rate | P&L: ₹${totalPnl.toFixed(2)}
+Week: ${wt.length} trades | ${wins} wins | ${losses} losses | ${winRate}% win rate | P&L: ₹${totalPnl.toFixed(2)}
 
 Trades:
-${wt.map(t=>`${t.asset} ${t.direction} ${t.result} ₹${t.pnl} (${t.preEmo||'—'})`).join('\n')}
+${wt.map(t => `${t.asset} ${t.direction} ${t.result} ₹${t.pnl} (${t.preEmo || '—'})`).join('\n')}
 
-Include: overall tone, best + worst moment, one defining pattern, one thing for next week.
-Second person ("You..."). Honest, coach-like, specific. Mention ₹ values.`;
+Include: overall tone of the week, best + worst moment, one defining pattern you noticed, one specific thing to focus on next week.
+Second person ("You..."). Honest, coach-like, specific. Mention ₹ values. Reference Indian markets (NSE/BSE/MCX).`;
 
   try {
-    const text = await callAI(prompt,800);
-    document.getElementById('ai-result-title').textContent = 'Your Weekly Trading Story';
+    const text = await callAI(prompt, 800);
+
+    // ── Save to Firestore ────────────────────────────────
+    if (currentUser) {
+      try {
+        await setDoc(doc(db, 'users', currentUser.uid, 'weeklyReports', weekId), {
+          weekId,
+          weekLabel: getWeekLabel(weekId),
+          generatedAt: serverTimestamp(),
+          report: text,
+          stats: {
+            trades: wt.length,
+            wins,
+            losses,
+            winRate: parseInt(winRate),
+            pnl: parseFloat(totalPnl.toFixed(2))
+          }
+        });
+        toast('Weekly report saved ✓');
+      } catch(e) { console.error('Failed to save report:', e); }
+    }
+
+    document.getElementById('ai-result-title').textContent = `📖 Week of ${getWeekLabel(weekId)}`;
     document.getElementById('ai-result-text').textContent = text;
-    result.style.display='block';
-    toast('Weekly story ready 📖');
-  } catch(e) { toast(e.message||'Failed.', true); }
-  finally { btn.disabled=false; btn.textContent='📖 Weekly Story'; loading.style.display='none'; }
+    result.style.display = 'block';
+
+    // Refresh history
+    loadWeeklyReports();
+
+  } catch(e) { toast(e.message || 'Failed.', true); }
+  finally { btn.disabled = false; btn.textContent = '📖 This Week\'s Report'; loading.style.display = 'none'; }
 };
 
-// ── TAB SWITCHING ───────────────────────────────────────
+// ── LOAD WEEKLY REPORT HISTORY ───────────────────────────
+async function loadWeeklyReports() {
+  if (!currentUser) return;
+  const listEl = document.getElementById('reports-list');
+  const loadingEl = document.getElementById('reports-loading');
+  if (!listEl) return;
+
+  try {
+    const q = query(
+      collection(db, 'users', currentUser.uid, 'weeklyReports'),
+      orderBy('generatedAt', 'desc'),
+      limit(12)
+    );
+    const snap = await getDocs(q);
+
+    if (loadingEl) loadingEl.style.display = 'none';
+
+    if (snap.empty) {
+      listEl.innerHTML = '<div style="font-size:13px;color:var(--muted2);font-family:\'DM Mono\',monospace;padding:0.5rem 0;">No reports yet. Click "This Week\'s Report" to generate your first one.</div>';
+      return;
+    }
+
+    const currentWeekId = getWeekId();
+    listEl.innerHTML = snap.docs.map(d => {
+      const r = d.data();
+      const isThisWeek = r.weekId === currentWeekId;
+      const pnl = r.stats?.pnl || 0;
+      const pnlClass = pnl >= 0 ? 'pos' : 'neg';
+      const pnlStr = (pnl >= 0 ? '+₹' : '-₹') + Math.abs(pnl).toLocaleString('en-IN', { maximumFractionDigits: 0 });
+      return `
+        <div class="report-card ${isThisWeek ? 'report-this-week' : ''}" id="rc-${r.weekId}">
+          <div class="report-card-header" onclick="toggleReport('${r.weekId}')">
+            <div class="report-card-week">
+              ${r.weekLabel || getWeekLabel(r.weekId)}
+              ${isThisWeek ? '<span class="report-new-badge">This week</span>' : ''}
+            </div>
+            <div class="report-card-stats">
+              <span>${r.stats?.trades || 0} trades</span>
+              <span>${r.stats?.winRate || 0}% win</span>
+              <span class="report-stat-pnl ${pnlClass}">${pnlStr}</span>
+              <span class="report-card-arrow">▼</span>
+            </div>
+          </div>
+          <div class="report-card-body">
+            <div class="report-card-text">${r.report || ''}</div>
+          </div>
+        </div>`;
+    }).join('');
+
+    // Auto-open this week's report if it exists
+    const thisWeekCard = document.getElementById(`rc-${currentWeekId}`);
+    if (thisWeekCard) toggleReport(currentWeekId);
+
+  } catch(e) {
+    console.error('Failed to load reports:', e);
+    if (loadingEl) loadingEl.style.display = 'none';
+    if (listEl) listEl.innerHTML = '<div style="font-size:12px;color:var(--muted2);font-family:\'DM Mono\',monospace;">Could not load reports.</div>';
+  }
+}
+
+window.toggleReport = function(weekId) {
+  const card = document.getElementById(`rc-${weekId}`);
+  if (!card) return;
+  const wasOpen = card.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.report-card.open').forEach(c => c.classList.remove('open'));
+  // Toggle clicked
+  if (!wasOpen) card.classList.add('open');
+};
+
 window.switchTab = function(tab) {
   const tabs = ['log','history','analytics','ai','import'];
   document.querySelectorAll('.jtab').forEach((t,i) => t.classList.toggle('active', tabs[i]===tab));
@@ -2100,6 +2270,7 @@ window.switchTab = function(tab) {
   if (panel) panel.classList.add('active');
   if (tab==='analytics') window.renderAnalytics();
   if (tab==='history')   window.renderHistory();
+  if (tab==='ai')        loadWeeklyReports();
 };
 
 // ── MOBILE MENU ─────────────────────────────────────────
