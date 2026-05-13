@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vyxor — AI-Powered Trading Discipline for Indian Traders</title>
-<meta name="description" content="Vyxor is a free AI-powered trade journal and position size calculator built for Indian traders. NSE, BSE, MCX. Import from Zerodha, Groww, Angel One. Free to start.">
+<meta name="description" content="Vyxor is a trading journal and position size calculator for traders. Track emotions, analyze behavior, get AI-powered weekly insights. Works for NSE, MCX, Forex, US Futures and Crypto.">
 <meta name="keywords" content="vyxor, trade journal india, position size calculator, nifty journal, zerodha journal, ai trading journal, free trade journal india">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://vyxor.in/">
@@ -900,6 +900,111 @@ footer {
 .footer-copy { font-size:12px; color:var(--text3); font-family:'DM Mono', monospace; }
 .footer-disc { font-size:11px; color:var(--text3); font-family:'DM Mono', monospace; max-width:580px; line-height:1.6; }
 
+/* ── NEW HERO ── */
+.hero-section { position:relative; z-index:1; padding: 8rem 2rem 6rem; }
+.hero-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; }
+.hero-eyebrow { display:inline-flex; align-items:center; gap:8px; font-size:12px; font-family:'DM Mono',monospace; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:1.5rem; }
+.eyebrow-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); flex-shrink:0; animation:pulse 2s infinite; }
+.hero-h1 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(38px,4.5vw,60px); line-height:1.05; letter-spacing:-0.04em; margin-bottom:1.5rem; color:var(--text); }
+.h1-accent { color:var(--accent); }
+.hero-p { font-size:16px; color:var(--text2); line-height:1.75; max-width:460px; margin-bottom:2rem; font-weight:300; }
+.hero-ctas { display:flex; gap:12px; align-items:center; margin-bottom:2rem; flex-wrap:wrap; }
+.cta-primary { padding:14px 28px; border-radius:10px; background:var(--accent); color:#020c12; font-family:'Outfit',sans-serif; font-size:15px; font-weight:700; text-decoration:none; transition:all 0.2s; }
+.cta-primary:hover { background:var(--accent2); transform:translateY(-2px); box-shadow:0 0 40px rgba(0,245,160,0.3); }
+.cta-secondary { padding:14px 28px; border-radius:10px; border:1px solid var(--border2); color:var(--text2); font-family:'Outfit',sans-serif; font-size:15px; font-weight:500; text-decoration:none; transition:all 0.2s; }
+.cta-secondary:hover { border-color:rgba(255,255,255,0.25); color:var(--text); }
+.hero-markets { display:flex; align-items:center; gap:8px; font-size:12px; font-family:'DM Mono',monospace; color:var(--text3); flex-wrap:wrap; }
+.divider-dot { color:var(--border2); }
+
+/* ── JOURNAL VISUAL ── */
+.hero-right { display:flex; align-items:center; justify-content:center; }
+.journal-visual { background:rgba(11,16,32,0.9); border:1px solid var(--border2); border-radius:18px; width:100%; max-width:500px; overflow:hidden; box-shadow:0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04); animation:float 6s ease-in-out infinite; }
+.jv-header { display:flex; align-items:center; gap:10px; padding:14px 18px; border-bottom:1px solid var(--border); background:rgba(255,255,255,0.02); }
+.jv-dots { display:flex; gap:6px; }
+.jv-dots span { width:10px; height:10px; border-radius:50%; background:rgba(255,255,255,0.1); }
+.jv-dots span:first-child { background:#FF5F57; }
+.jv-dots span:nth-child(2) { background:#FEBC2E; }
+.jv-dots span:last-child { background:#28C840; }
+.jv-title { font-size:12px; font-family:'DM Mono',monospace; color:var(--text3); flex:1; text-align:center; }
+.jv-live { display:flex; align-items:center; gap:5px; font-size:11px; font-family:'DM Mono',monospace; color:var(--accent); }
+.live-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.5s infinite; }
+.jv-body { padding:16px; display:flex; flex-direction:column; gap:8px; }
+.jv-trade { display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:10px; padding:12px 14px; animation:fadeUp 0.5s ease both; }
+.jv-trade-1 { animation-delay:0.1s; }
+.jv-trade-2 { animation-delay:0.25s; }
+.jv-trade-3 { animation-delay:0.4s; }
+.jv-asset { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; color:var(--text); margin-bottom:3px; }
+.jv-meta { font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; }
+.jv-pnl { font-family:'DM Mono',monospace; font-size:14px; font-weight:600; margin-bottom:4px; }
+.jv-pnl.pos { color:var(--accent); }
+.jv-pnl.neg { color:var(--danger); }
+.jv-emo { font-size:11px; color:var(--text3); text-align:right; }
+.jv-insight { background:rgba(0,245,160,0.04); border:1px solid rgba(0,245,160,0.15); border-radius:10px; padding:12px 14px; animation:fadeUp 0.5s 0.55s ease both; opacity:0; animation-fill-mode:forwards; }
+.jv-insight-label { font-size:10px; font-family:'DM Mono',monospace; color:var(--accent); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+.jv-insight-text { font-size:12px; color:var(--text2); line-height:1.65; }
+.jv-emotion-row { background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:10px; padding:12px 14px; animation:fadeUp 0.5s 0.7s ease both; opacity:0; animation-fill-mode:forwards; }
+.jv-emotion-title { font-size:10px; font-family:'DM Mono',monospace; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:8px; }
+.ebar { display:flex; align-items:center; gap:8px; margin-bottom:5px; }
+.ebar-label { font-size:11px; font-family:'DM Mono',monospace; color:var(--text3); width:90px; flex-shrink:0; }
+.ebar-track { flex:1; height:4px; background:rgba(255,255,255,0.06); border-radius:99px; overflow:hidden; }
+.ebar-fill { height:100%; border-radius:99px; }
+.ebar-fill.good { background:var(--accent); }
+.ebar-fill.bad { background:var(--danger); }
+.ebar-pct { font-size:10px; font-family:'DM Mono',monospace; color:var(--text3); width:28px; text-align:right; }
+
+/* ── WHAT SECTION ── */
+.what-section { padding:5rem 2rem; border-top:1px solid var(--border); }
+.what-inner { max-width:700px; margin:0 auto; text-align:center; }
+.what-label { font-size:11px; font-family:'DM Mono',monospace; color:var(--accent); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:1.25rem; }
+.what-h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:clamp(28px,3.5vw,44px); letter-spacing:-0.03em; line-height:1.1; margin-bottom:1.25rem; }
+.what-p { font-size:16px; color:var(--text2); line-height:1.75; font-weight:300; margin-bottom:2rem; }
+.what-cta { display:inline-flex; align-items:center; padding:12px 24px; border-radius:9px; background:rgba(0,245,160,0.08); border:1px solid rgba(0,245,160,0.2); color:var(--accent); font-family:'DM Mono',monospace; font-size:13px; text-decoration:none; transition:all 0.2s; }
+.what-cta:hover { background:rgba(0,245,160,0.14); border-color:var(--accent); }
+.jv-emo-bad { color:var(--danger) !important; }
+
+/* ── PRODUCTS SECTION ── */
+.products-section { padding:3rem 2rem 7rem; }
+.products-inner { max-width:1200px; margin:0 auto; display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+.product-card { background:rgba(11,16,32,0.6); border:1px solid var(--border); border-radius:20px; padding:2rem; display:flex; flex-direction:column; gap:0; transition:border-color 0.25s, transform 0.25s; backdrop-filter:blur(20px); }
+.product-card:hover { border-color:rgba(0,245,160,0.25); transform:translateY(-3px); }
+.pc-icon { font-size:28px; margin-bottom:1rem; }
+.pc-label { font-size:10px; font-family:'DM Mono',monospace; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; }
+.pc-title { font-family:'Syne',sans-serif; font-weight:700; font-size:20px; letter-spacing:-0.02em; line-height:1.2; margin-bottom:12px; }
+.pc-desc { font-size:13px; color:var(--text2); line-height:1.75; font-weight:300; margin-bottom:1.25rem; flex:1; }
+.pc-features { display:flex; flex-direction:column; gap:7px; margin-bottom:1.5rem; }
+.pc-feat { font-size:12px; font-family:'DM Mono',monospace; color:var(--text3); padding-left:14px; position:relative; }
+.pc-feat::before { content:'→'; position:absolute; left:0; color:var(--accent); font-size:10px; }
+.pc-cta { display:inline-flex; align-items:center; padding:10px 20px; border-radius:8px; background:rgba(0,245,160,0.08); border:1px solid rgba(0,245,160,0.2); color:var(--accent); font-family:'DM Mono',monospace; font-size:12px; font-weight:500; text-decoration:none; transition:all 0.2s; align-self:flex-start; }
+.pc-cta:hover { background:rgba(0,245,160,0.15); border-color:var(--accent); }
+
+/* ── NEW FOOTER ── */
+.site-footer { position:relative; z-index:1; border-top:1px solid var(--border); padding:4rem 2rem 2rem; }
+.footer-brand-col .footer-brand { font-family:'Syne',sans-serif; font-weight:800; font-size:22px; margin-bottom:10px; letter-spacing:-0.05em; }
+.footer-brand-col .footer-brand span { color:var(--accent); }
+.footer-brand-col .footer-tagline { font-size:13px; color:var(--text3); line-height:1.7; max-width:260px; font-weight:300; margin-bottom:12px; }
+.footer-made { font-size:12px; font-family:'DM Mono',monospace; color:var(--text3); }
+.footer-links-col { display:flex; flex-direction:column; gap:10px; }
+.footer-links-col .footer-col-title { font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; font-family:'DM Mono',monospace; margin-bottom:4px; }
+.footer-links-col a { font-size:13px; color:var(--text2); text-decoration:none; transition:color 0.2s; }
+.footer-links-col a:hover { color:var(--text); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) {
+  .hero-inner { grid-template-columns:1fr; gap:3rem; }
+  .hero-h1 { font-size:36px; }
+  .products-inner { grid-template-columns:1fr; }
+  .footer-top { grid-template-columns:1fr 1fr; gap:2rem; }
+  .journal-visual { max-width:100%; }
+}
+@media (max-width:600px) {
+  .hero-section { padding:6rem 1.5rem 4rem; }
+  .hero-h1 { font-size:30px; }
+  .hero-p { font-size:15px; }
+  .what-h2 { font-size:26px; }
+  .footer-top { grid-template-columns:1fr; }
+}
+
+
 /* ── AUTH MODAL ── */
 .modal-overlay {
   position:fixed; inset:0; z-index:1000;
@@ -1065,17 +1170,14 @@ footer {
   <ul class="nav-links">
     <li><a href="/journal.html">Journal</a></li>
     <li><a href="/position-size-calculator.html">Calculator</a></li>
-    <li><a href="/india.html">🇮🇳 Indian Traders</a></li>
-    <li><a href="/blog.html">Blog</a></li>
     <li><a href="/about.html">About</a></li>
   </ul>
   <div class="nav-right">
-    <span class="nav-tag">Free to start</span>
     <div class="nav-user" id="nav-user">
       <span class="nav-username" id="nav-username"></span>
       <button class="btn-sm" onclick="doSignOut()">Sign Out</button>
     </div>
-    <a href="/journal.html" class="btn-primary" id="nav-signin-btn">Open Journal →</a>
+    <a href="/journal.html" class="btn-primary" id="nav-signin-btn">Get Started →</a>
     <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
@@ -1084,694 +1186,147 @@ footer {
 <div class="mobile-menu" id="mobile-menu">
   <a href="/journal.html">Journal</a>
   <a href="/position-size-calculator.html">Calculator</a>
-  <a href="/india.html">🇮🇳 Indian Traders</a>
-  <a href="/blog.html">Blog</a>
   <a href="/about.html">About</a>
 </div>
 
 <!-- ── HERO ── -->
-<section style="position:relative;z-index:1;">
-<div class="hero">
-  <!-- Left: Text + CTAs -->
-  <div class="hero-left">
-    <div class="hero-eyebrow"><span class="hero-dot"></span>Built in India · Free to start</div>
-    <h1>
-      Trade with<br>
-      <span class="line-accent">discipline.</span>
-      <span class="line-dim">Not emotion.</span>
-    </h1>
-    <p class="hero-desc">The only free AI trade journal built for Indian traders. NSE, BSE, MCX. Import from Zerodha, Groww, Angel One. AI-powered pattern analysis. ₹0 to start.</p>
-    <div class="hero-ctas">
-      <a href="/journal.html" class="btn-hero-primary">Start Free →</a>
-      <a href="/position-size-calculator.html" class="btn-hero-secondary">Position Calculator</a>
+<section class="hero-section">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-dot"></span>
+        Trading journal &amp; analytics
+      </div>
+      <h1 class="hero-h1">Know why you lose<br><span class="h1-accent">before you lose again.</span></h1>
+      <p class="hero-p">Vyxor helps traders understand their own behavior — not just their numbers. Log trades, track emotions, get AI-powered weekly insights. Built for every market.</p>
+      <div class="hero-ctas">
+        <a href="/journal.html" class="cta-primary">Start Journaling →</a>
+        <a href="/position-size-calculator.html" class="cta-secondary">Position Calculator</a>
+      </div>
+      <div class="hero-markets">
+        <span>NSE</span><span class="divider-dot">·</span>
+        <span>BSE</span><span class="divider-dot">·</span>
+        <span>MCX</span><span class="divider-dot">·</span>
+        <span>Forex</span><span class="divider-dot">·</span>
+        <span>US Futures</span><span class="divider-dot">·</span>
+        <span>Crypto</span>
+      </div>
     </div>
-    <div class="hero-trust">
-      <div class="trust-item"><span class="trust-check">✓</span> 15-day free trial</div>
-      <div class="trust-item"><span class="trust-check">✓</span> No credit card needed</div>
-      <div class="trust-item"><span class="trust-check">✓</span> NSE · BSE · MCX</div>
-      <div class="trust-item"><span class="trust-check">✓</span> Not SEBI advisor</div>
-    </div>
-  </div>
 
-  <!-- Right: Animated Dashboard Preview -->
-  <div class="hero-right">
-    <div class="dash-preview">
-
-      <!-- Main dashboard card -->
-      <div class="dash-main">
-        <div class="dash-topbar">
-          <div class="dash-dots">
-            <div class="dash-dot r"></div>
-            <div class="dash-dot y"></div>
-            <div class="dash-dot g"></div>
-          </div>
-          <div class="dash-title">Vyxor Journal</div>
-          <div class="dash-badge">● Live</div>
+    <div class="hero-right">
+      <!-- Journal visual — NOT a dashboard, a psychological reflection UI -->
+      <div class="journal-visual">
+        <div class="jv-header">
+          <div class="jv-dots"><span></span><span></span><span></span></div>
+          <div class="jv-title">Trade Journal</div>
+          <div class="jv-live"><span class="live-dot"></span>Synced</div>
         </div>
+        <div class="jv-body">
 
-        <!-- Stats row -->
-        <div class="dash-stats">
-          <div class="ds">
-            <div class="ds-val g" id="anim-pnl">₹0</div>
-            <div class="ds-lbl">Net P&L</div>
+          <!-- Trade entry row -->
+          <div class="jv-trade jv-trade-1">
+            <div class="jv-trade-left">
+              <div class="jv-asset">NIFTY</div>
+              <div class="jv-meta">Long · NSE Morning</div>
+            </div>
+            <div class="jv-trade-right">
+              <div class="jv-pnl pos">+₹3,750</div>
+              <div class="jv-emo">Calm</div>
+            </div>
           </div>
-          <div class="ds">
-            <div class="ds-val b" id="anim-wr">0%</div>
-            <div class="ds-lbl">Win Rate</div>
-          </div>
-          <div class="ds">
-            <div class="ds-val g" id="anim-rr">0.0</div>
-            <div class="ds-lbl">Avg R:R</div>
-          </div>
-        </div>
 
-        <!-- Chart -->
-        <div class="dash-chart">
-          <div class="chart-label">Monthly P&L — NSE Trades</div>
-          <div class="chart-bars" id="chart-bars">
-            <div class="bar pos" style="height:60%"></div>
-            <div class="bar pos" style="height:40%"></div>
-            <div class="bar neg" style="height:25%"></div>
-            <div class="bar pos" style="height:75%"></div>
-            <div class="bar pos" style="height:55%"></div>
-            <div class="bar neg" style="height:20%"></div>
-            <div class="bar pos" style="height:85%"></div>
-            <div class="bar pos" style="height:65%"></div>
-            <div class="bar neg" style="height:15%"></div>
-            <div class="bar pos" style="height:90%"></div>
-            <div class="bar pos" style="height:70%"></div>
-            <div class="bar pos" style="height:80%"></div>
+          <div class="jv-trade jv-trade-2">
+            <div class="jv-trade-left">
+              <div class="jv-asset">EURUSD</div>
+              <div class="jv-meta">Short · London Open</div>
+            </div>
+            <div class="jv-trade-right">
+              <div class="jv-pnl neg">−$142</div>
+              <div class="jv-emo jv-emo-bad">FOMO</div>
+            </div>
           </div>
-        </div>
 
-        <!-- Recent trades -->
-        <div class="dash-trades">
-          <div class="dt">
-            <div class="dt-sym">NIFTY CE</div>
-            <div class="dt-type">19500 · Weekly · Long</div>
-            <div class="dt-pnl pos">+₹3,750</div>
+          <div class="jv-trade jv-trade-3">
+            <div class="jv-trade-left">
+              <div class="jv-asset">GOLD MCX</div>
+              <div class="jv-meta">Long · MCX Evening</div>
+            </div>
+            <div class="jv-trade-right">
+              <div class="jv-pnl pos">+₹5,200</div>
+              <div class="jv-emo">Focused</div>
+            </div>
           </div>
-          <div class="dt">
-            <div class="dt-sym">BANKNIFTY</div>
-            <div class="dt-type">Futures · Short</div>
-            <div class="dt-pnl neg">−₹2,100</div>
+
+          <!-- AI insight card -->
+          <div class="jv-insight">
+            <div class="jv-insight-label">AI Coach · This week</div>
+            <div class="jv-insight-text">Your FOMO trades lose 2.4× more than disciplined entries. You perform best on Tuesday mornings before 11am.</div>
           </div>
-          <div class="dt">
-            <div class="dt-sym">GOLD MCX</div>
-            <div class="dt-type">Standard · Long</div>
-            <div class="dt-pnl pos">+₹5,200</div>
+
+          <!-- Emotion tags row -->
+          <div class="jv-emotion-row">
+            <div class="jv-emotion-title">Emotion breakdown</div>
+            <div class="jv-emotion-bars">
+              <div class="ebar">
+                <div class="ebar-label">Calm</div>
+                <div class="ebar-track"><div class="ebar-fill good" style="width:72%"></div></div>
+                <div class="ebar-pct">72%</div>
+              </div>
+              <div class="ebar">
+                <div class="ebar-label">FOMO</div>
+                <div class="ebar-track"><div class="ebar-fill bad" style="width:18%"></div></div>
+                <div class="ebar-pct">18%</div>
+              </div>
+              <div class="ebar">
+                <div class="ebar-label">Revenge</div>
+                <div class="ebar-track"><div class="ebar-fill bad" style="width:10%"></div></div>
+                <div class="ebar-pct">10%</div>
+              </div>
+            </div>
           </div>
+
         </div>
       </div>
-
-      <!-- Floating card 1 — Discipline score -->
-      <div class="float-card fc-1">
-        <div class="fc-title">Discipline Score</div>
-        <div class="fc-val g">84<span style="font-size:14px;color:var(--text3)">/100</span></div>
-        <div class="fc-pill up">↑ +12 this week</div>
-      </div>
-
-      <!-- Floating card 2 — AI insight -->
-      <div class="float-card fc-2">
-        <div class="fc-title">AI Insight</div>
-        <div class="fc-val b">🧠</div>
-        <div class="fc-sub">Revenge trades: 3 this week</div>
-        <div class="fc-pill info">Review triggered</div>
-      </div>
-
-      <!-- AI analysis card -->
-      <div class="ai-card">
-        <div class="ai-icon">🤖</div>
-        <div class="ai-text"><strong>AI Coach:</strong> Your FOMO trades lose 2.3× more than disciplined entries. Consider a 15-min wait rule after a loss.</div>
-      </div>
-
     </div>
   </div>
-</div>
 </section>
 
-<!-- ── STAT STRIP ── -->
-<div class="stat-strip">
-  <div class="stat-strip-inner">
-    <div class="stat-item"><div class="stat-num">15</div><div class="stat-lbl">Day free trial</div></div>
-    <div class="stat-item"><div class="stat-num">30+</div><div class="stat-lbl">Indian instruments</div></div>
-    <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Broker imports</div></div>
-    <div class="stat-item"><div class="stat-num">AI</div><div class="stat-lbl">Pattern analysis</div></div>
+<!-- ── WHAT IS VYXOR ── -->
+<section class="what-section">
+  <div class="what-inner">
+    <div class="what-label">What is Vyxor</div>
+    <h2 class="what-h2">A trading journal built for<br>self-awareness.</h2>
+    <p class="what-p">Most traders track numbers. Vyxor tracks the person behind the trades. Every time you log a trade, you capture not just the result — but the emotion you felt, the setup you followed, whether the decision was planned or impulsive. Over time, the AI reads all of it and shows you the exact patterns that are costing you money. Not generic advice. Your data. Your behavior. Your blind spots.</p>
+    <a href="/journal.html" class="what-cta">Start journaling</a>
   </div>
-</div>
-
-<!-- ── PAIN SECTION ── -->
-<section class="pain-section">
-<div class="section-inner">
-  <div class="section-eyebrow">Why Traders Fail</div>
-  <div class="section-title">90% of traders lose.<br><span>Here's why.</span></div>
-  <div class="pain-grid">
-    <div class="pain-list">
-      <div class="pain-item">
-        <div class="pain-icon">😡</div>
-        <div>
-          <div class="pain-title">Revenge Trading</div>
-          <div class="pain-desc">After a loss, emotions take over. The next trade is bigger, angrier, and usually worse. One bad trade becomes five.</div>
-        </div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-icon">😤</div>
-        <div>
-          <div class="pain-title">FOMO Entries</div>
-          <div class="pain-desc">Chasing a move that's already run 80%. Entering late, holding too long, hoping it reverses. It doesn't.</div>
-        </div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-icon">📊</div>
-        <div>
-          <div class="pain-title">No System. No Edge.</div>
-          <div class="pain-desc">Trading different setups every day with no review. Never knowing what actually works — and what's slowly draining the account.</div>
-        </div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-icon">⚠️</div>
-        <div>
-          <div class="pain-title">Inconsistent Risk</div>
-          <div class="pain-desc">1 lot on a calm day. 5 lots when feeling confident. 10 lots to "recover". Position sizing by emotion, not math.</div>
-        </div>
-      </div>
-      <div style="background:rgba(0,245,160,0.04);border:1px solid rgba(0,245,160,0.15);border-radius:var(--r12);padding:1.25rem 1.5rem;margin-top:0.5rem;">
-        <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:4px;">Vyxor fixes all of this.</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.6;">AI pattern detection finds your exact bad habits. Discipline scoring keeps you accountable. Position calculator enforces consistent risk. Every time.</div>
-      </div>
-    </div>
-    <div class="pain-right">
-      <div class="pain-stat-stack">
-        <div class="pain-stat">
-          <div class="pain-stat-icon r">📉</div>
-          <div>
-            <div class="pain-stat-num r">73%</div>
-            <div class="pain-stat-lbl">of retail traders lose money consistently</div>
-          </div>
-        </div>
-        <div class="pain-vs">
-          <div class="pain-vs-line"></div>
-          <div class="pain-vs-text">Without Vyxor</div>
-          <div class="pain-vs-line"></div>
-        </div>
-        <div class="pain-stat">
-          <div class="pain-stat-icon r">😡</div>
-          <div>
-            <div class="pain-stat-num r">3.2×</div>
-            <div class="pain-stat-lbl">more losses when trading with FOMO or Revenge emotion</div>
-          </div>
-        </div>
-        <div class="pain-stat">
-          <div class="pain-stat-icon r">📋</div>
-          <div>
-            <div class="pain-stat-num r">91%</div>
-            <div class="pain-stat-lbl">of losing traders have never reviewed their trade history</div>
-          </div>
-        </div>
-        <div class="pain-vs">
-          <div class="pain-vs-line"></div>
-          <div class="pain-vs-text">With Vyxor</div>
-          <div class="pain-vs-line"></div>
-        </div>
-        <div class="pain-stat">
-          <div class="pain-stat-icon g">🎯</div>
-          <div>
-            <div class="pain-stat-num g">84/100</div>
-            <div class="pain-stat-lbl">avg discipline score after 30 days of journaling</div>
-          </div>
-        </div>
-        <div class="pain-stat">
-          <div class="pain-stat-icon g">📈</div>
-          <div>
-            <div class="pain-stat-num g">↑ 2.3×</div>
-            <div class="pain-stat-lbl">better R:R on calm-emotion trades vs FOMO trades</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 </section>
-
-<!-- ── TOOLS ── -->
-<section>
-<div class="section-inner">
-  <div class="section-eyebrow">Core Tools</div>
-  <div class="section-title">Two tools.<br><span>Everything you need.</span></div>
-  <p class="section-desc" style="margin-bottom:0;">Every trader needs to size positions correctly and review their trades. We built both. Free.</p>
-  <div class="tools-grid">
-    <a href="/journal.html" class="tool-card">
-      <span class="tool-badge badge-live">● Live</span>
-      <div class="tool-icon">📔</div>
-      <div class="tool-title">AI Trade Journal</div>
-      <div class="tool-desc">Log every trade, tag emotions, and let AI analyse your patterns. Find out exactly which habits are costing you money and which setups actually work.</div>
-      <div class="tool-features">
-        <div class="tool-feat">Import from Zerodha, Groww, Angel One — one click</div>
-        <div class="tool-feat">AI pattern detection — Pro feature, powered by Claude</div>
-        <div class="tool-feat">Emotion tracking — pre and post trade (free)</div>
-        <div class="tool-feat">Screenshot per trade, cloud synced across devices</div>
-        <div class="tool-feat">15 trades/month free · Unlimited on Pro ₹199/month</div>
-      </div>
-      <span class="tool-link">Open Journal →</span>
-    </a>
-    <a href="/position-size-calculator.html" class="tool-card">
-      <span class="tool-badge badge-live">● Live</span>
-      <div class="tool-icon">⚡</div>
-      <div class="tool-title">Position Size Calculator</div>
-      <div class="tool-desc">Calculate exact lots before you enter. NSE, BSE, MCX with correct lot sizes. Futures, Options Buy, Equity. P&L breakdown with full formula.</div>
-      <div class="tool-features">
-        <div class="tool-feat">NIFTY · BANKNIFTY · FINNIFTY · SENSEX · MCX Gold</div>
-        <div class="tool-feat">Options Buy — premium-based sizing, max loss = premium</div>
-        <div class="tool-feat">Stock futures — 25+ instruments with correct lot sizes</div>
-        <div class="tool-feat">Forex, US Futures, Crypto — global markets too</div>
-        <div class="tool-feat">No signup required — open and use instantly</div>
-      </div>
-      <span class="tool-link">Open Calculator →</span>
-    </a>
-  </div>
-</div>
-</section>
-
-<!-- ── FEATURES ── -->
-<section class="features-bg">
-<div class="section-inner">
-  <div class="section-eyebrow">Platform Features</div>
-  <div class="section-title">Built for the way<br><span>Indian traders actually trade</span></div>
-  <div class="features-grid">
-    <div class="feat">
-      <div class="feat-icon g">📊</div>
-      <div class="feat-title">Correct Lot Sizes</div>
-      <div class="feat-desc">NIFTY = 25, BANKNIFTY = 15, FINNIFTY = 40, GOLD = 100, SILVER = 30. P&L calculated with exact precision — not just price difference × quantity.</div>
-      <span class="feat-tag">30+ instruments</span>
-    </div>
-    <div class="feat">
-      <div class="feat-icon b">🤖</div>
-      <div class="feat-title">AI Pattern Analysis</div>
-      <div class="feat-desc">Claude AI reads all your trades and tells you which emotions lead to losses, which sessions you perform best in, and what your actual edge is.</div>
-      <span class="feat-tag">Powered by Claude</span>
-    </div>
-    <div class="feat">
-      <div class="feat-icon p">📥</div>
-      <div class="feat-title">Broker CSV Import</div>
-      <div class="feat-desc">Download your tradebook from Zerodha Console, Groww, or Angel One and upload it. All trades imported automatically — buy/sell legs matched.</div>
-      <span class="feat-tag">3 brokers</span>
-    </div>
-    <div class="feat">
-      <div class="feat-icon w">😌</div>
-      <div class="feat-title">Emotion Tracking</div>
-      <div class="feat-desc">Log your pre and post trade emotion on every entry. FOMO, Calm, Revenge, Focused. See which emotional states lead to your worst trades.</div>
-      <span class="feat-tag">7 states tracked</span>
-    </div>
-    <div class="feat">
-      <div class="feat-icon g">📸</div>
-      <div class="feat-title">Trade Screenshots</div>
-      <div class="feat-desc">Attach your TradingView chart to every trade. Review setups visually. See exactly what the market looked like before your entry and exit.</div>
-      <span class="feat-tag">Stored in cloud</span>
-    </div>
-    <div class="feat">
-      <div class="feat-icon b">☁️</div>
-      <div class="feat-title">Real-time Sync</div>
-      <div class="feat-desc">Log a NIFTY trade on your phone during market hours. Review analytics on desktop in the evening. All data synced instantly across devices.</div>
-      <span class="feat-tag">Firebase powered</span>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- ── HOW IT WORKS ── -->
-<section class="hiw-section">
-<div class="section-inner">
-  <div class="section-eyebrow">How It Works</div>
-  <div class="section-title">Up and running in <span>3 minutes</span></div>
-  <p class="section-desc">No complex setup. No learning curve. Log your first trade in under 60 seconds.</p>
-  <div class="hiw-steps">
-    <div class="hiw-step">
-      <div class="hiw-num">1</div>
-      <div class="hiw-icon">📥</div>
-      <div class="hiw-title">Import or Log Trades</div>
-      <div class="hiw-desc">Upload your Zerodha, Groww or Angel One CSV — or log trades manually in seconds. All Indian instruments supported with correct lot sizes.</div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-num">2</div>
-      <div class="hiw-icon">🤖</div>
-      <div class="hiw-title">AI Analyses Your Patterns</div>
-      <div class="hiw-desc">Claude AI reads every trade — emotions, setups, sessions, P&L — and tells you exactly which habits are costing you money and which setups work.</div>
-    </div>
-    <div class="hiw-step">
-      <div class="hiw-num">3</div>
-      <div class="hiw-icon">📈</div>
-      <div class="hiw-title">Trade With Discipline</div>
-      <div class="hiw-desc">Your discipline score improves. Your setups get sharper. Your position sizing becomes consistent. You stop losing to emotion. You start compounding.</div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- ── BROKERS ── -->
-<div class="brokers-section">
-<div class="brokers-inner">
-  <div class="brokers-label">Import directly from your broker — zero manual entry</div>
-  <div class="brokers-grid">
-    <div class="broker-card zd">
-      <div class="broker-name zd">Zerodha</div>
-      <div class="broker-sub">India's largest broker</div>
-      <div class="broker-steps">
-        <div class="broker-step"><span class="broker-step-n">1</span>Go to console.zerodha.com</div>
-        <div class="broker-step"><span class="broker-step-n">2</span>Reports → Tradebook → Download</div>
-        <div class="broker-step"><span class="broker-step-n">3</span>Upload CSV → all trades imported</div>
-      </div>
-      <div class="broker-badge">✓ Buy/sell legs auto-matched</div>
-    </div>
-    <div class="broker-card gw">
-      <div class="broker-name gw">Groww</div>
-      <div class="broker-sub">10M+ active investors</div>
-      <div class="broker-steps">
-        <div class="broker-step"><span class="broker-step-n">1</span>Open Groww App or groww.in</div>
-        <div class="broker-step"><span class="broker-step-n">2</span>Profile → Reports → Trade History</div>
-        <div class="broker-step"><span class="broker-step-n">3</span>Export CSV → upload to Vyxor</div>
-      </div>
-      <div class="broker-badge">✓ P&L auto-calculated in ₹</div>
-    </div>
-    <div class="broker-card ao">
-      <div class="broker-name ao">Angel One</div>
-      <div class="broker-sub">5M+ active clients</div>
-      <div class="broker-steps">
-        <div class="broker-step"><span class="broker-step-n">1</span>Login to angelone.in</div>
-        <div class="broker-step"><span class="broker-step-n">2</span>Reports → Trade Book → Export CSV</div>
-        <div class="broker-step"><span class="broker-step-n">3</span>Upload CSV → all trades imported</div>
-      </div>
-      <div class="broker-badge">✓ Lot sizes pre-loaded</div>
-    </div>
-  </div>
-</div>
-</div>
-
-<!-- ── COMPARISON ── -->
-<section>
-<div class="section-inner">
-  <div class="section-eyebrow">Comparison</div>
-  <div class="section-title">₹199/month vs <span>₹2,000–₹8,000/month</span></div>
-  <p class="section-desc">Indian trading journal apps charge ₹2,000 to ₹8,000 every month. Vyxor Pro is ₹199/month. Try everything free for 15 days first.</p>
-  <div class="compare-table">
-    <div class="compare-head">
-      <div class="ch">Feature</div>
-      <div class="ch vyxor">Vyxor Pro</div>
-      <div class="ch">Indian App A</div>
-      <div class="ch">Indian App B</div>
-    </div>
-    <div class="compare-row"><div class="cr feat">Price</div><div class="cr yes">₹199/month</div><div class="cr paid">₹2,000–₹5,000/mo</div><div class="cr paid">₹3,000–₹8,000/mo</div></div>
-    <div class="compare-row"><div class="cr feat">Free trial</div><div class="cr yes">✓ 15 days full access</div><div class="cr paid">7 days limited</div><div class="cr no">✗ No</div></div>
-    <div class="compare-row"><div class="cr feat">Zerodha CSV import</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
-    <div class="compare-row"><div class="cr feat">NSE / BSE / MCX</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
-    <div class="compare-row"><div class="cr feat">Indian lot sizes</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
-    <div class="compare-row"><div class="cr feat">₹ currency default</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
-    <div class="compare-row"><div class="cr feat">AI analysis</div><div class="cr yes">✓ Yes</div><div class="cr paid">Paid only</div><div class="cr no">✗ No</div></div>
-    <div class="compare-row"><div class="cr feat">Weekly AI report</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
-    <div class="compare-row"><div class="cr feat">Emotion tracking</div><div class="cr yes">✓ Yes</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div></div>
-    <div class="compare-row"><div class="cr feat">Screenshot per trade</div><div class="cr yes">✓ Yes</div><div class="cr yes">✓ Yes</div><div class="cr paid">Paid only</div></div>
-    <div class="compare-row"><div class="cr feat">Position calculator</div><div class="cr yes">✓ Free always</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
-  </div>
-</div>
-</section>
-
-<!-- ── TESTIMONIALS ── -->
-<section class="testi-section">
-<div class="section-inner">
-  <div class="section-eyebrow">From Traders</div>
-  <div class="section-title">Built for traders<br><span>by a trader</span></div>
-  <div class="testi-grid">
-    <div class="testi-card">
-      <div class="testi-stars">
-        <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-      </div>
-      <div class="testi-text">I was losing ₹15,000 a month on revenge trades. After 3 weeks of journaling on Vyxor the AI told me exactly when I do it — after 2 consecutive losses, I always take a 3rd impulsive trade. I fixed that one habit and my account stopped bleeding.</div>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:linear-gradient(135deg,#00F5A0,#3B82F6);">A</div>
-        <div>
-          <div class="testi-name">Arjun M.</div>
-          <div class="testi-role">NIFTY Options Trader · Mumbai</div>
-          <div class="testi-tag win">↑ Profitable since using Vyxor</div>
-        </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-stars">
-        <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-      </div>
-      <div class="testi-text">The position size calculator alone saved me. I was sizing by feel — sometimes 1 lot, sometimes 5. Now I calculate every trade before entering. My drawdowns dropped by almost half in 6 weeks.</div>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:linear-gradient(135deg,#6366F1,#a78bfa);">P</div>
-        <div>
-          <div class="testi-name">Priya K.</div>
-          <div class="testi-role">BANKNIFTY Futures Trader · Pune</div>
-          <div class="testi-tag nsm">Risk managed consistently</div>
-        </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="testi-stars">
-        <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
-      </div>
-      <div class="testi-text">I tried TradeZella and it was $29/month and didn't even support Zerodha import properly. Vyxor does it perfectly and it's free to start. The AI analysis is genuinely better than what I got from expensive platforms.</div>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">R</div>
-        <div>
-          <div class="testi-name">Rahul S.</div>
-          <div class="testi-role">MCX Gold Trader · Ahmedabad</div>
-          <div class="testi-tag win">Switched from TradeZella</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <p style="text-align:center;font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:1.5rem;">* Early user testimonials from beta testers</p>
-</div>
-</section>
-
-<!-- ── FOUNDER ── -->
-<section class="founder-section">
-<div class="section-inner" style="padding-top:2rem;">
-  <div style="max-width:780px;margin:0 auto;">
-    <div class="section-eyebrow">The Story</div>
-    <div class="section-title" style="margin-bottom:2rem;">Why Vyxor <span>exists</span></div>
-    <div class="founder-card">
-      <div class="founder-quote">
-        "Every online trade journal wanted ₹2,000 to ₹8,000 a year. I was a futures trader still figuring things out — I didn't have that money. So I built my own. <span>That was Vyxor.</span> Now it's free for every Indian trader."
-      </div>
-      <div class="founder-meta">
-        <div class="founder-avatar">R</div>
-        <div>
-          <div class="founder-name">Ratnadip</div>
-          <div class="founder-role">Founder · Futures Trader · Ahilyanagar, Maharashtra</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<!-- ── PRICING ── -->
-<section>
-<div class="section-inner">
-  <div class="section-eyebrow">Pricing</div>
-  <div class="section-title">Try everything free.<br><span>Then ₹199/month.</span></div>
-  <p class="section-desc">15 days full access — no credit card. Every feature unlocked. Cancel or upgrade after.</p>
-
-  <!-- Monthly / Annual toggle -->
-  <div class="pricing-toggle">
-    <span class="toggle-label active" id="lbl-monthly">Monthly</span>
-    <div class="toggle-switch" id="billing-toggle" onclick="toggleBilling()">
-      <div class="toggle-knob"></div>
-    </div>
-    <span class="toggle-label" id="lbl-annual">Annual</span>
-    <span class="annual-save" id="annual-save-badge" style="display:none;">Save ₹889</span>
-  </div>
-
-  <div class="pricing-grid" style="grid-template-columns:1fr 1fr;max-width:720px;">
-
-    <!-- 15-day Trial -->
-    <div class="price-card">
-      <div class="price-plan">15-Day Free Trial</div>
-      <div class="price-amount-wrap">
-        <div class="price-amount">₹0</div>
-      </div>
-      <div class="price-period">no credit card required</div>
-      <div class="price-desc">Full access to every feature for 15 days. No restrictions. See if Vyxor works for you before paying anything.</div>
-      <div class="price-divider"></div>
-      <div class="price-features">
-        <div class="pf yes">Unlimited trade entries</div>
-        <div class="pf yes">AI trade analysis — fully enabled</div>
-        <div class="pf yes">Weekly AI performance report</div>
-        <div class="pf yes">CSV import — Zerodha, Groww, Angel One</div>
-        <div class="pf yes">Screenshot per trade</div>
-        <div class="pf yes">Cloud sync across devices</div>
-        <div class="pf yes">Position size calculator</div>
-        <div class="pf yes">All Indian instruments</div>
-      </div>
-      <a href="/journal.html" class="price-cta outline">Start 15-Day Trial →</a>
-    </div>
-
-    <!-- Pro — featured -->
-    <div class="price-card featured">
-      <div class="price-plan">Pro</div>
-      <div class="price-amount-wrap">
-        <div class="price-amount" id="pro-price">₹199</div>
-      </div>
-      <div class="price-period" id="pro-period">per month · coming soon</div>
-      <div class="price-desc">After your trial. Everything unlocked. Cancel anytime. Less than a cup of chai per day.</div>
-      <div class="price-divider"></div>
-      <div class="price-features">
-        <div class="pf yes">Everything in Trial — forever</div>
-        <div class="pf pro">Unlimited trade entries</div>
-        <div class="pf pro">AI analysis after every trade</div>
-        <div class="pf pro">Weekly AI email report</div>
-        <div class="pf yes">PDF trade report export</div>
-        <div class="pf yes">Advanced P&L analytics</div>
-        <div class="pf yes">Trade editing</div>
-        <div class="pf yes">Priority support</div>
-      </div>
-      <button class="price-cta primary" id="pro-cta" onclick="notifyMe('pro')">Notify Me When Live</button>
-      <div class="price-annual-note" id="pro-annual-note">₹1,499/year = ₹125/month · Save ₹889</div>
-    </div>
-
-  </div>
-
-  <!-- Value anchor -->
-  <p style="text-align:center;font-size:13px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:2rem;line-height:1.8;">
-    Other Indian trading journal apps = ₹2,000–₹8,000/month<br>
-    <span style="color:var(--accent);">Vyxor Pro = ₹199/month · 15-day free trial &nbsp;🇮🇳</span>
-  </p>
-</div>
-</section>
-
-<!-- ── FAQ ── -->
-<section class="faq-section">
-<div class="section-inner">
-  <div class="section-eyebrow">FAQ</div>
-  <div class="section-title">Common <span>questions</span></div>
-  <div class="faq-wrap">
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <div class="faq-q-text">Is Vyxor really free to start?</div>
-        <div class="faq-q-icon">+</div>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Yes. You get a full 15-day free trial with every feature unlocked — unlimited trades, AI analysis, weekly reports, CSV import, everything. No credit card required. After 15 days, Pro is ₹199/month — less than a single bad trade costs most traders.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <div class="faq-q-text">Can I import trades from Zerodha, Groww or Angel One?</div>
-        <div class="faq-q-icon">+</div>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Yes. Download your tradebook CSV from your broker console and upload it directly to Vyxor. Buy/sell legs are automatically matched into complete round-trip trades. P&L is calculated using correct Indian lot sizes — NIFTY = 25 units, BANKNIFTY = 15 units, and so on.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <div class="faq-q-text">Does Vyxor need access to my broker account?</div>
-        <div class="faq-q-icon">+</div>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">No. Vyxor never connects to your broker. You download a CSV from your broker yourself and upload it to Vyxor. Your broker credentials are never shared, entered, or stored anywhere in Vyxor.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <div class="faq-q-text">Is my trade data private and secure?</div>
-        <div class="faq-q-icon">+</div>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Your trade data is stored in Firebase Firestore with security rules that only allow your account to read your own data. No other user or admin can see your trades. We never sell data. You can delete your account and all data at any time.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <div class="faq-q-text">How does the AI analysis work?</div>
-        <div class="faq-q-icon">+</div>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Your trade history — emotions, setups, sessions, P&L — is sent to Claude AI (by Anthropic) which identifies patterns in your trading. It tells you which emotions lead to losses, which setups have the best win rate, and what specific habits are costing you money. The AI never gives buy/sell signals — it analyses your past behaviour to help you improve.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <div class="faq-q-text">Is Vyxor a SEBI registered advisor?</div>
-        <div class="faq-q-icon">+</div>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">No. Vyxor is not a SEBI registered investment advisor and does not provide buy/sell recommendations or trading signals. Vyxor is an educational platform to help traders track, analyse and improve their own trading discipline. All tools are for informational and educational purposes only.</div></div>
-    </div>
-
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        <div class="faq-q-text">What Indian instruments are supported?</div>
-        <div class="faq-q-icon">+</div>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">NSE/BSE Index F&O: NIFTY, BANKNIFTY, FINNIFTY, SENSEX, MIDCPNIFTY, BANKEX. Stock Options: RELIANCE, TCS, INFY, HDFCBANK and 20+ more. MCX Commodities: Gold, GoldMini, Silver, CrudeoOil, NaturalGas, Copper, Zinc and more. All with correct lot sizes pre-loaded for accurate P&L calculation.</div></div>
-    </div>
-
-  </div>
-</div>
-</section>
-
-<!-- ── NEWSLETTER / CTA ── -->
-<div class="nl-section">
-<div class="section-inner">
-  <div class="nl-box">
-    <div class="nl-title">Start trading with<br><span>discipline today</span></div>
-    <p class="nl-desc">15-day free trial. No credit card. Every feature unlocked. Then ₹199/month — less than a cup of chai per day.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
-      <a href="/journal.html" class="btn-hero-primary">Open Journal — Free →</a>
-      <a href="/position-size-calculator.html" class="btn-hero-secondary">Position Calculator</a>
-    </div>
-    <div style="border-top:1px solid var(--border);padding-top:2rem;margin-top:0;">
-      <p style="font-size:14px;color:var(--text2);margin-bottom:1rem;">Get notified when Pro launches</p>
-      <div class="nl-form" id="nl-form">
-        <input class="nl-input" id="nl-email" type="email" placeholder="your@email.com" autocomplete="email">
-        <button class="nl-btn" onclick="subscribe()">Notify Me</button>
-      </div>
-      <div class="nl-ok" id="nl-ok">✓ You're on the list 🚀</div>
-      <p class="nl-note">🔒 No spam. Unsubscribe anytime.</p>
-    </div>
-  </div>
-</div>
-</div>
 
 <!-- ── FOOTER ── -->
-<footer>
-<div class="footer-inner">
-  <div class="footer-top">
-    <div>
-      <div class="footer-brand"><span>V</span>yxor</div>
-      <p class="footer-tagline">Free AI-powered trading discipline platform. Built in Ahilyanagar, Maharashtra for Indian traders who couldn't afford the alternatives.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Tools</div>
-      <div class="footer-col-links">
-        <a href="/journal.html">AI Trade Journal</a>
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand-col">
+        <div class="footer-brand"><span>V</span>yxor</div>
+        <p class="footer-tagline">An education and self-analysis platform for traders. Analyze your trades, understand your behavior, and improve with every session.</p>
+      </div>
+      <div class="footer-links-col">
+        <div class="footer-col-title">Tools</div>
+        <a href="/journal.html">Trading Journal</a>
         <a href="/position-size-calculator.html">Position Calculator</a>
-        <a href="/india.html">Indian Traders Guide</a>
         <a href="/blog.html">Blog</a>
       </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <div class="footer-col-links">
+      <div class="footer-links-col">
+        <div class="footer-col-title">Company</div>
         <a href="/about.html">About</a>
         <a href="/privacy.html">Privacy Policy</a>
         <a href="/terms.html">Terms of Service</a>
-        <a href="/disclaimer.html">Risk Disclaimer</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Contact</div>
-      <div class="footer-col-links">
         <a href="mailto:hello@vyxor.in">hello@vyxor.in</a>
-        <a href="https://github.com/ratnadip1818/vyxor" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Vyxor · vyxor.in</div>
+    </div>
   </div>
-  <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Vyxor · vyxor.in · Made in India 🇮🇳</div>
-    <div class="footer-disc">Not a SEBI registered investment advisor. Not financial advice. Trading involves substantial risk. All tools are for educational purposes only.</div>
-  </div>
-</div>
 </footer>
 
 <script type="module">
