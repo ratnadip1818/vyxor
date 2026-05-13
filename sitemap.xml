@@ -48,7 +48,19 @@
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
-</urlset><url>
+<url>
+    <loc>https://vyxor.in/disclaimer.html</loc>
+    ...
+  </url>
+
+  <url>
+    <loc>https://vyxor.in/blog/nifty-lot-size-complete-guide-2026.html</loc>
+    <lastmod>2026-05-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset></urlset><url>
   <loc>https://vyxor.in/india.html</loc>
   <lastmod>2026-05-12</lastmod>
   <changefreq>monthly</changefreq>
