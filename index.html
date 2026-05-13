@@ -190,12 +190,24 @@ nav.scrolled { background:rgba(6,8,22,0.95); box-shadow:0 4px 40px rgba(0,0,0,0.
   z-index:1;
   min-height:100vh;
   display:flex;
-  flex-direction:column;
+  align-items:center;
+  padding:100px 2rem 60px;
+  max-width:1300px;
+  margin:0 auto;
+  gap:4rem;
+  overflow:hidden;
+}
+.hero-left {
+  flex:0 0 520px;
+  max-width:520px;
+}
+.hero-right {
+  flex:1;
+  position:relative;
+  min-height:500px;
+  display:flex;
   align-items:center;
   justify-content:center;
-  text-align:center;
-  padding:120px 2rem 80px;
-  overflow:hidden;
 }
 .hero-eyebrow {
   display:inline-flex;
@@ -210,42 +222,40 @@ nav.scrolled { background:rgba(6,8,22,0.95); box-shadow:0 4px 40px rgba(0,0,0,0.
   border:1px solid rgba(0,245,160,0.2);
   padding:6px 16px;
   border-radius:99px;
-  margin-bottom:2rem;
+  margin-bottom:1.75rem;
   animation:fadeUp 0.6s ease both;
 }
 .hero-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 1.5s infinite; }
 .hero h1 {
-  font-size:clamp(48px,7vw,96px);
+  font-size:clamp(40px,5.5vw,72px);
   letter-spacing:-0.04em;
   line-height:0.95;
   margin-bottom:1.5rem;
   animation:fadeUp 0.6s 0.1s ease both;
-  max-width:900px;
 }
 .hero h1 .line-accent { color:var(--accent); display:block; }
 .hero h1 .line-dim { color:rgba(241,245,249,0.2); display:block; }
 .hero-desc {
-  font-size:clamp(15px,2vw,18px);
+  font-size:16px;
   color:var(--text2);
-  max-width:520px;
-  margin:0 auto 2.5rem;
-  line-height:1.7;
+  max-width:460px;
+  margin:0 0 2rem;
+  line-height:1.75;
   font-weight:300;
   animation:fadeUp 0.6s 0.2s ease both;
 }
 .hero-ctas {
   display:flex;
-  gap:12px;
-  justify-content:center;
+  gap:10px;
   flex-wrap:wrap;
-  margin-bottom:3rem;
+  margin-bottom:2rem;
   animation:fadeUp 0.6s 0.3s ease both;
 }
 .btn-hero-primary {
   display:inline-flex;
   align-items:center;
   gap:8px;
-  padding:15px 32px;
+  padding:14px 28px;
   border-radius:var(--r12);
   background:var(--accent);
   color:#020c12;
@@ -261,7 +271,7 @@ nav.scrolled { background:rgba(6,8,22,0.95); box-shadow:0 4px 40px rgba(0,0,0,0.
   display:inline-flex;
   align-items:center;
   gap:8px;
-  padding:15px 28px;
+  padding:14px 24px;
   border-radius:var(--r12);
   background:transparent;
   color:var(--text2);
@@ -276,8 +286,7 @@ nav.scrolled { background:rgba(6,8,22,0.95); box-shadow:0 4px 40px rgba(0,0,0,0.
 .hero-trust {
   display:flex;
   align-items:center;
-  gap:20px;
-  justify-content:center;
+  gap:16px;
   flex-wrap:wrap;
   animation:fadeUp 0.6s 0.4s ease both;
 }
@@ -290,6 +299,97 @@ nav.scrolled { background:rgba(6,8,22,0.95); box-shadow:0 4px 40px rgba(0,0,0,0.
   font-family:'DM Mono', monospace;
 }
 .trust-check { color:var(--accent); font-size:14px; }
+
+/* ── DASHBOARD PREVIEW ── */
+.dash-preview {
+  position:relative;
+  width:100%;
+  max-width:580px;
+  animation:fadeUp 0.8s 0.3s ease both;
+}
+.dash-main {
+  background:rgba(11,16,32,0.95);
+  border:1px solid rgba(255,255,255,0.1);
+  border-radius:20px;
+  padding:1.25rem;
+  backdrop-filter:blur(30px);
+  box-shadow:0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(0,245,160,0.08);
+}
+.dash-topbar {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:1rem;
+  padding-bottom:0.75rem;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+.dash-dots { display:flex; gap:5px; }
+.dash-dot { width:8px; height:8px; border-radius:50%; }
+.dash-dot.r { background:#FF5F56; }
+.dash-dot.y { background:#FFBD2E; }
+.dash-dot.g { background:#27C93F; }
+.dash-title { font-size:12px; color:var(--text3); font-family:'DM Mono',monospace; }
+.dash-badge { font-size:10px; color:var(--accent); background:rgba(0,245,160,0.08); border:1px solid rgba(0,245,160,0.2); padding:2px 8px; border-radius:99px; font-family:'DM Mono',monospace; }
+.dash-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-bottom:1rem; }
+.ds { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.06); border-radius:10px; padding:10px 12px; }
+.ds-val { font-family:'DM Mono',monospace; font-size:18px; font-weight:500; line-height:1; margin-bottom:3px; }
+.ds-val.g { color:var(--accent); }
+.ds-val.r { color:var(--danger); }
+.ds-val.b { color:var(--blue); }
+.ds-lbl { font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; }
+.dash-chart { background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:12px; margin-bottom:1rem; height:90px; position:relative; overflow:hidden; }
+.chart-label { font-size:10px; color:var(--text3); font-family:'DM Mono',monospace; margin-bottom:8px; }
+.chart-bars { display:flex; align-items:flex-end; gap:4px; height:56px; }
+.bar { border-radius:3px 3px 0 0; flex:1; transition:height 0.5s ease; }
+.bar.pos { background:linear-gradient(180deg, rgba(0,245,160,0.8), rgba(0,245,160,0.3)); }
+.bar.neg { background:linear-gradient(180deg, rgba(244,63,94,0.8), rgba(244,63,94,0.3)); }
+.dash-trades { display:flex; flex-direction:column; gap:6px; }
+.dt { display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.04); border-radius:8px; padding:8px 10px; }
+.dt-sym { font-family:'DM Mono',monospace; font-size:12px; font-weight:500; color:var(--text); min-width:80px; }
+.dt-type { font-size:10px; color:var(--text3); flex:1; }
+.dt-pnl { font-family:'DM Mono',monospace; font-size:13px; font-weight:500; }
+.dt-pnl.pos { color:var(--accent); }
+.dt-pnl.neg { color:var(--danger); }
+
+/* Floating cards */
+.float-card {
+  position:absolute;
+  background:rgba(11,16,32,0.95);
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:14px;
+  padding:12px 16px;
+  backdrop-filter:blur(20px);
+  box-shadow:0 20px 50px rgba(0,0,0,0.5);
+  animation:float 4s ease-in-out infinite;
+}
+.fc-1 { bottom:-20px; left:-40px; animation-delay:0s; }
+.fc-2 { top:20px; right:-40px; animation-delay:-2s; }
+.fc-title { font-size:10px; color:var(--text3); font-family:'DM Mono',monospace; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:5px; }
+.fc-val { font-family:'Syne',sans-serif; font-weight:800; font-size:20px; letter-spacing:-0.05em; }
+.fc-val.g { color:var(--accent); }
+.fc-val.b { color:var(--blue); }
+.fc-sub { font-size:11px; color:var(--text3); font-family:'DM Mono',monospace; margin-top:2px; }
+.fc-pill { display:inline-flex; align-items:center; gap:4px; font-size:10px; margin-top:6px; padding:2px 8px; border-radius:99px; font-family:'DM Mono',monospace; }
+.fc-pill.up { background:rgba(0,245,160,0.1); color:var(--accent); border:1px solid rgba(0,245,160,0.2); }
+.fc-pill.info { background:rgba(59,130,246,0.1); color:var(--blue); border:1px solid rgba(59,130,246,0.2); }
+
+/* AI insight card */
+.ai-card {
+  position:absolute;
+  bottom:-30px;
+  right:-20px;
+  background:rgba(99,102,241,0.12);
+  border:1px solid rgba(99,102,241,0.3);
+  border-radius:14px;
+  padding:12px 14px;
+  backdrop-filter:blur(20px);
+  max-width:220px;
+  animation:float 5s ease-in-out infinite;
+  animation-delay:-1s;
+}
+.ai-icon { font-size:16px; margin-bottom:5px; }
+.ai-text { font-size:11px; color:rgba(167,139,250,0.9); line-height:1.5; }
+.ai-text strong { color:#a78bfa; }
 
 /* ── STAT STRIP ── */
 .stat-strip {
@@ -737,6 +837,15 @@ footer {
 
 /* ── RESPONSIVE ── */
 @media(max-width:1024px) {
+  .hero { flex-direction:column; text-align:center; padding:100px 2rem 60px; gap:3rem; }
+  .hero-left { flex:unset; max-width:100%; }
+  .hero-desc { margin:0 auto 2rem; }
+  .hero-ctas { justify-content:center; }
+  .hero-trust { justify-content:center; }
+  .hero-right { width:100%; max-width:520px; margin:0 auto; min-height:400px; }
+  .fc-1 { left:-10px; bottom:-10px; }
+  .fc-2 { right:-10px; top:10px; }
+  .ai-card { right:-5px; bottom:-20px; max-width:180px; }
   .features-grid { grid-template-columns:1fr 1fr; }
   .footer-top { grid-template-columns:1fr 1fr; }
   .pricing-grid { grid-template-columns:1fr; max-width:400px; }
@@ -746,9 +855,13 @@ footer {
   .nav-links { display:none; }
   .nav-tag { display:none; }
   .hamburger { display:flex; }
-  .hero h1 { letter-spacing:-0.03em; }
+  .hero { padding:80px 1.25rem 50px; gap:2.5rem; }
+  .hero h1 { letter-spacing:-0.03em; font-size:clamp(36px,10vw,52px); }
   .hero-ctas { flex-direction:column; align-items:center; }
   .btn-hero-primary,.btn-hero-secondary { width:100%; justify-content:center; }
+  .dash-main { padding:1rem; }
+  .fc-1,.fc-2 { display:none; }
+  .ai-card { display:none; }
   .stat-strip-inner { grid-template-columns:1fr 1fr; }
   .features-grid { grid-template-columns:1fr; }
   .tools-grid { grid-template-columns:1fr; }
@@ -836,24 +949,122 @@ footer {
 </div>
 
 <!-- ── HERO ── -->
-<section>
+<section style="position:relative;z-index:1;">
 <div class="hero">
-  <div class="hero-eyebrow"><span class="hero-dot"></span>Built in India · Free forever</div>
-  <h1>
-    Trade with<br>
-    <span class="line-accent">discipline.</span>
-    <span class="line-dim">Not emotion.</span>
-  </h1>
-  <p class="hero-desc">The only free AI trade journal built for Indian traders. NSE, BSE, MCX. Import from Zerodha, Groww, Angel One. AI analysis. Cloud sync. ₹0 to start.</p>
-  <div class="hero-ctas">
-    <a href="/journal.html" class="btn-hero-primary">Start Journaling Free →</a>
-    <a href="/position-size-calculator.html" class="btn-hero-secondary">Position Calculator</a>
+  <!-- Left: Text + CTAs -->
+  <div class="hero-left">
+    <div class="hero-eyebrow"><span class="hero-dot"></span>Built in India · Free to start</div>
+    <h1>
+      Trade with<br>
+      <span class="line-accent">discipline.</span>
+      <span class="line-dim">Not emotion.</span>
+    </h1>
+    <p class="hero-desc">The only free AI trade journal built for Indian traders. NSE, BSE, MCX. Import from Zerodha, Groww, Angel One. AI-powered pattern analysis. ₹0 to start.</p>
+    <div class="hero-ctas">
+      <a href="/journal.html" class="btn-hero-primary">Start Free →</a>
+      <a href="/position-size-calculator.html" class="btn-hero-secondary">Position Calculator</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item"><span class="trust-check">✓</span> No credit card</div>
+      <div class="trust-item"><span class="trust-check">✓</span> 30 free trades/month</div>
+      <div class="trust-item"><span class="trust-check">✓</span> NSE · BSE · MCX</div>
+      <div class="trust-item"><span class="trust-check">✓</span> Not SEBI advisor</div>
+    </div>
   </div>
-  <div class="hero-trust">
-    <div class="trust-item"><span class="trust-check">✓</span> No credit card</div>
-    <div class="trust-item"><span class="trust-check">✓</span> 30 free trades/month</div>
-    <div class="trust-item"><span class="trust-check">✓</span> NSE · BSE · MCX</div>
-    <div class="trust-item"><span class="trust-check">✓</span> Not SEBI advisor</div>
+
+  <!-- Right: Animated Dashboard Preview -->
+  <div class="hero-right">
+    <div class="dash-preview">
+
+      <!-- Main dashboard card -->
+      <div class="dash-main">
+        <div class="dash-topbar">
+          <div class="dash-dots">
+            <div class="dash-dot r"></div>
+            <div class="dash-dot y"></div>
+            <div class="dash-dot g"></div>
+          </div>
+          <div class="dash-title">Vyxor Journal</div>
+          <div class="dash-badge">● Live</div>
+        </div>
+
+        <!-- Stats row -->
+        <div class="dash-stats">
+          <div class="ds">
+            <div class="ds-val g" id="anim-pnl">₹0</div>
+            <div class="ds-lbl">Net P&L</div>
+          </div>
+          <div class="ds">
+            <div class="ds-val b" id="anim-wr">0%</div>
+            <div class="ds-lbl">Win Rate</div>
+          </div>
+          <div class="ds">
+            <div class="ds-val g" id="anim-rr">0.0</div>
+            <div class="ds-lbl">Avg R:R</div>
+          </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="dash-chart">
+          <div class="chart-label">Monthly P&L — NSE Trades</div>
+          <div class="chart-bars" id="chart-bars">
+            <div class="bar pos" style="height:60%"></div>
+            <div class="bar pos" style="height:40%"></div>
+            <div class="bar neg" style="height:25%"></div>
+            <div class="bar pos" style="height:75%"></div>
+            <div class="bar pos" style="height:55%"></div>
+            <div class="bar neg" style="height:20%"></div>
+            <div class="bar pos" style="height:85%"></div>
+            <div class="bar pos" style="height:65%"></div>
+            <div class="bar neg" style="height:15%"></div>
+            <div class="bar pos" style="height:90%"></div>
+            <div class="bar pos" style="height:70%"></div>
+            <div class="bar pos" style="height:80%"></div>
+          </div>
+        </div>
+
+        <!-- Recent trades -->
+        <div class="dash-trades">
+          <div class="dt">
+            <div class="dt-sym">NIFTY CE</div>
+            <div class="dt-type">19500 · Weekly · Long</div>
+            <div class="dt-pnl pos">+₹3,750</div>
+          </div>
+          <div class="dt">
+            <div class="dt-sym">BANKNIFTY</div>
+            <div class="dt-type">Futures · Short</div>
+            <div class="dt-pnl neg">−₹2,100</div>
+          </div>
+          <div class="dt">
+            <div class="dt-sym">GOLD MCX</div>
+            <div class="dt-type">Standard · Long</div>
+            <div class="dt-pnl pos">+₹5,200</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating card 1 — Discipline score -->
+      <div class="float-card fc-1">
+        <div class="fc-title">Discipline Score</div>
+        <div class="fc-val g">84<span style="font-size:14px;color:var(--text3)">/100</span></div>
+        <div class="fc-pill up">↑ +12 this week</div>
+      </div>
+
+      <!-- Floating card 2 — AI insight -->
+      <div class="float-card fc-2">
+        <div class="fc-title">AI Insight</div>
+        <div class="fc-val b">🧠</div>
+        <div class="fc-sub">Revenge trades: 3 this week</div>
+        <div class="fc-pill info">Review triggered</div>
+      </div>
+
+      <!-- AI analysis card -->
+      <div class="ai-card">
+        <div class="ai-icon">🤖</div>
+        <div class="ai-text"><strong>AI Coach:</strong> Your FOMO trades lose 2.3× more than disciplined entries. Consider a 15-min wait rule after a loss.</div>
+      </div>
+
+    </div>
   </div>
 </div>
 </section>
@@ -1247,7 +1458,56 @@ async function subscribe(){
   document.getElementById('nl-ok').style.display='block';
 }
 
-// Scroll animations
+// Animated counters for dashboard preview
+function animateCounter(el, target, prefix, suffix, duration) {
+  if(!el) return;
+  const start = 0;
+  const startTime = performance.now();
+  function update(currentTime) {
+    const elapsed = currentTime - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = Math.floor(start + (target - start) * eased);
+    el.textContent = prefix + current.toLocaleString('en-IN') + suffix;
+    if(progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+// Trigger when hero is visible
+const heroObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      setTimeout(() => {
+        animateCounter(document.getElementById('anim-pnl'), 18430, '₹', '', 1800);
+        animateCounter(document.getElementById('anim-wr'), 68, '', '%', 1500);
+        animateCounter(document.getElementById('anim-rr'), 2.4, '', '', 1200);
+      }, 400);
+      // Animate chart bars
+      const bars = document.querySelectorAll('.bar');
+      bars.forEach((bar, i) => {
+        const h = bar.style.height;
+        bar.style.height = '0%';
+        setTimeout(() => { bar.style.height = h; bar.style.transition = 'height 0.6s ease'; }, 200 + i * 80);
+      });
+      heroObs.disconnect();
+    }
+  });
+}, {threshold:0.3});
+const dashPreview = document.querySelector('.dash-preview');
+if(dashPreview) heroObs.observe(dashPreview);
+
+// Custom anim for RR (decimal)
+setTimeout(() => {
+  const rrEl = document.getElementById('anim-rr');
+  if(!rrEl) return;
+  let v = 0;
+  const int = setInterval(() => {
+    v = Math.min(v + 0.1, 2.4);
+    rrEl.textContent = v.toFixed(1);
+    if(v >= 2.4) clearInterval(int);
+  }, 80);
+}, 1800);
 const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
 },{threshold:0.1});
