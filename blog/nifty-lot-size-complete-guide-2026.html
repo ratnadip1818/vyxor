@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vyxor Blog — Trading Risk Management & Discipline Resources</title>
+<meta name="description" content="Educational resources on position sizing, risk management, and trading discipline for Indian traders. NIFTY lot sizes, position sizing guides, and more.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://vyxor.in/blog.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vyxor.in/blog.html">
+<meta property="og:title" content="Vyxor Blog — Trading Resources for Indian Traders">
+<meta property="og:description" content="Educational resources on risk management and trading discipline for Indian traders.">
+<meta property="og:image" content="https://vyxor.in/og-image.png">
+<meta property="og:site_name" content="Vyxor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vyxor Blog">
+<meta name="twitter:description" content="Educational resources on risk management for Indian traders.">
+<meta name="twitter:image" content="https://vyxor.in/og-image.png">
+<meta name="theme-color" content="#050816">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Blog","name":"Vyxor Blog","url":"https://vyxor.in/blog.html","description":"Educational resources on trading risk management and discipline for Indian traders.","publisher":{"@type":"Organization","name":"Vyxor","url":"https://vyxor.in"}}
+</script>
+
+<style>
+:root{--bg:#050816;--border:rgba(255,255,255,0.06);--accent:#00F5A0;--accent-h:#00D98B;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;--card:rgba(15,23,42,0.72);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,160,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.018) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
+.glow{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(80px);}
+.g1{width:500px;height:500px;background:radial-gradient(circle,rgba(0,245,160,0.07) 0%,transparent 70%);top:-100px;right:-100px;}
+.g2{width:400px;height:400px;background:radial-gradient(circle,rgba(59,130,246,0.05) 0%,transparent 70%);bottom:10%;left:-100px;}
+@keyframes pd{0%,100%{opacity:1}50%{opacity:0.4}}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:62px;background:rgba(5,8,22,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;text-decoration:none;color:var(--text);}
+.logo .v{color:var(--accent);}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 1px 6px;animation:pd 2s infinite;}
+.nl{display:flex;align-items:center;gap:2rem;list-style:none;}
+.nl a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.nl a:hover,.nl a.act{color:var(--text);}
+.pill{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);padding:4px 14px;border-radius:99px;}
+.hamburger{display:none;background:transparent;border:none;color:var(--text);cursor:pointer;padding:8px;}
+.hamburger svg{width:24px;height:24px;}
+.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(5,8,22,0.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1rem 1.5rem;z-index:199;}
+.mobile-menu.open{display:flex;flex-direction:column;gap:0.5rem;}
+.mobile-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
+.mobile-menu a:last-of-type{border-bottom:none;}
+
+.page{position:relative;z-index:1;max-width:900px;margin:0 auto;padding:100px 2rem 5rem;width:100%;flex:1;}
+.header{margin-bottom:2.5rem;animation:fu 0.6s ease both;}
+.eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
+h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,5vw,52px);letter-spacing:-2px;line-height:1.05;margin-bottom:0.75rem;}
+h1 span{color:var(--accent);}
+.sub{font-size:15px;color:var(--muted);font-weight:300;}
+
+/* ── ARTICLE CARDS ── */
+.articles-grid{display:flex;flex-direction:column;gap:16px;margin-bottom:3rem;animation:fu 0.6s 0.15s ease both;}
+.section-label{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;}
+
+.article-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:1.75rem;backdrop-filter:blur(20px);text-decoration:none;color:inherit;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center;transition:all 0.3s;position:relative;overflow:hidden;}
+.article-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,245,160,0.4),transparent);opacity:0;transition:opacity 0.3s;}
+.article-card:hover{border-color:rgba(0,245,160,0.22);transform:translateY(-2px);box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+.article-card:hover::before{opacity:1;}
+.ac-body{}
+.ac-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-family:'DM Mono',monospace;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.18);padding:3px 10px;border-radius:99px;margin-bottom:10px;}
+.ac-title{font-family:'Syne',sans-serif;font-weight:700;font-size:clamp(17px,2.5vw,22px);letter-spacing:-0.04em;color:var(--text);margin-bottom:8px;line-height:1.2;}
+.ac-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:1rem;max-width:580px;}
+.ac-meta{display:flex;align-items:center;gap:14px;font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;flex-wrap:wrap;}
+.ac-meta-dot{width:3px;height:3px;border-radius:50%;background:var(--muted2);}
+.ac-highlights{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.ac-hl{font-size:11px;font-family:'DM Mono',monospace;color:var(--muted2);background:rgba(255,255,255,0.03);border:1px solid var(--border);padding:2px 8px;border-radius:4px;}
+.ac-arrow{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px solid rgba(0,245,160,0.2);background:rgba(0,245,160,0.06);color:var(--accent);font-size:18px;flex-shrink:0;transition:all 0.2s;}
+.article-card:hover .ac-arrow{background:rgba(0,245,160,0.15);border-color:var(--accent);}
+
+/* ── COMING SOON ── */
+.coming-soon-box{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:2rem;backdrop-filter:blur(20px);text-align:center;animation:fu 0.6s 0.3s ease both;}
+.cs-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.04em;margin-bottom:8px;}
+.cs-title span{color:var(--accent);}
+.cs-desc{font-size:14px;color:var(--muted);margin-bottom:1.5rem;line-height:1.7;max-width:460px;margin-left:auto;margin-right:auto;}
+.notify-form{display:flex;gap:8px;max-width:400px;margin:0 auto 10px;}
+.ninput{flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'Inter',sans-serif;font-size:14px;padding:11px 14px;outline:none;transition:all 0.2s;}
+.ninput::placeholder{color:var(--muted2);}
+.ninput:focus{border-color:rgba(0,245,160,0.4);box-shadow:0 0 0 3px rgba(0,245,160,0.06);}
+.nbtn{padding:11px 22px;border-radius:8px;border:none;background:var(--accent);color:#020c12;font-family:'Inter',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.nbtn:hover{background:var(--accent-h);}
+.privacy{font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;}
+.success{display:none;background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);border-radius:8px;padding:12px 20px;font-size:13px;color:var(--accent);font-family:'DM Mono',monospace;max-width:400px;margin:0 auto;}
+
+/* ── UPCOMING TOPICS ── */
+.topics-box{margin-top:2rem;padding:1.5rem;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;animation:fu 0.6s 0.4s ease both;}
+.topics-title{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:1rem;}
+.topics-list{display:flex;flex-wrap:wrap;gap:6px;}
+.topic{padding:4px 12px;border:1px solid var(--border);border-radius:99px;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;transition:all 0.2s;}
+
+/* ── TOOLS ── */
+.related{margin-top:3rem;display:grid;grid-template-columns:1fr 1fr;gap:12px;animation:fu 0.6s 0.5s ease both;}
+.r-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-decoration:none;color:inherit;transition:all 0.2s;}
+.r-card:hover{border-color:rgba(0,245,160,0.25);transform:translateY(-2px);}
+.r-icon{font-size:24px;margin-bottom:10px;}
+.r-title{font-family:'Syne',sans-serif;font-weight:600;font-size:15px;margin-bottom:5px;}
+.r-desc{font-size:13px;color:var(--muted);line-height:1.5;}
+
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.fl{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
+.fl span{color:var(--accent);}
+.fc{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
+.f-links{display:flex;gap:1rem;}
+.f-links a{font-size:12px;color:var(--muted2);text-decoration:none;font-family:'DM Mono',monospace;}
+.f-links a:hover{color:var(--muted);}
+
+@media(max-width:768px){
+  nav{padding:0 1.25rem;}.nl{display:none;}.hamburger{display:flex;}
+  .page{padding:90px 1.25rem 3rem;}
+  .article-card{grid-template-columns:1fr;}
+  .ac-arrow{display:none;}
+  .notify-form{flex-direction:column;}
+  .related{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+<div class="glow g1"></div>
+<div class="glow g2"></div>
+
+<nav>
+  <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
+  <ul class="nl">
+    <li><a href="/journal.html">Journal</a></li>
+    <li><a href="/position-size-calculator.html">Calculator</a></li>
+    <li><a href="/blog.html" class="act">Blog</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><span class="pill">Free · vyxor.in</span></li>
+  </ul>
+  <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobile-menu">
+  <a href="/journal.html">Journal</a>
+  <a href="/position-size-calculator.html">Calculator</a>
+  <a href="/blog.html">Blog</a>
+  <a href="/about.html">About</a>
+</div>
+
+<div class="page">
+
+  <div class="header">
+    <div class="eyebrow">Vyxor Blog</div>
+    <h1>Resources for <span>Serious Traders</span></h1>
+    <p class="sub">Risk management, position sizing, and trading discipline — written by traders for traders.</p>
+  </div>
+
+  <!-- ── ARTICLES ── -->
+  <div class="articles-grid">
+    <div class="section-label">Latest Articles</div>
+
+    <a href="/blog/nifty-lot-size-complete-guide-2026.html" class="article-card">
+      <div class="ac-body">
+        <div class="ac-tag">📚 Trading Education</div>
+        <div class="ac-title">NIFTY Lot Size Complete Guide 2026 — All Index & Stock F&O Lot Sizes</div>
+        <div class="ac-desc">NIFTY lot size is 25 units per lot. BANKNIFTY = 15 units. FINNIFTY = 40 units. Complete guide to every NSE/BSE index and stock F&O lot size with P&L calculation examples and position sizing formula.</div>
+        <div class="ac-meta">
+          <span>✍️ Ratnadip</span>
+          <span class="ac-meta-dot"></span>
+          <span>📅 May 13, 2026</span>
+          <span class="ac-meta-dot"></span>
+          <span>⏱ 8 min read</span>
+          <span class="ac-meta-dot"></span>
+          <span>🇮🇳 NSE · BSE · MCX</span>
+        </div>
+        <div class="ac-highlights">
+          <span class="ac-hl">NIFTY = 25 units</span>
+          <span class="ac-hl">BANKNIFTY = 15 units</span>
+          <span class="ac-hl">FINNIFTY = 40 units</span>
+          <span class="ac-hl">SENSEX = 10 units</span>
+          <span class="ac-hl">P&L Formula</span>
+          <span class="ac-hl">Position Sizing</span>
+        </div>
+      </div>
+      <div class="ac-arrow">→</div>
+    </a>
+
+  </div>
+
+  <!-- ── MORE COMING SOON ── -->
+  <div class="coming-soon-box">
+    <div class="cs-title">More articles <span>coming soon</span></div>
+    <p class="cs-desc">We're writing in-depth, no-fluff guides on position sizing, trading psychology, and risk management for Indian traders. Get notified when new articles go live.</p>
+    <div class="notify-form" id="nform">
+      <input class="ninput" id="nemail" type="email" placeholder="your@email.com" autocomplete="email">
+      <button class="nbtn" onclick="notify()">Notify Me</button>
+    </div>
+    <div class="success" id="nsuccess">✓ You're on the list. We'll be in touch. 🚀</div>
+    <p class="privacy" style="margin-top:8px;">🔒 No spam. Unsubscribe anytime.</p>
+
+    <div class="topics-box">
+      <div class="topics-title">Upcoming topics</div>
+      <div class="topics-list">
+        <span class="topic">How to Import Zerodha Trades</span>
+        <span class="topic">BANKNIFTY Position Sizing Guide</span>
+        <span class="topic">Trading Psychology for Indian Traders</span>
+        <span class="topic">MCX Gold Lot Size Guide</span>
+        <span class="topic">Options Buying vs Selling Risk</span>
+        <span class="topic">How to Stop Revenge Trading</span>
+        <span class="topic">Drawdown Control for F&O Traders</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TOOLS ── -->
+  <div class="related">
+    <a href="/position-size-calculator.html" class="r-card">
+      <div class="r-icon">⚡</div>
+      <div class="r-title">Position Size Calculator</div>
+      <div class="r-desc">Calculate exact lots for NIFTY, BANKNIFTY, MCX and 50+ more assets. All lot sizes pre-loaded. Free.</div>
+    </a>
+    <a href="/journal.html" class="r-card">
+      <div class="r-icon">📔</div>
+      <div class="r-title">AI Trade Journal</div>
+      <div class="r-desc">Log every trade, track emotions, get AI-powered pattern analysis. 15-day free trial.</div>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <div class="fl"><span>V</span>yxor</div>
+  <div class="f-links">
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/disclaimer.html">Disclaimer</a>
+  </div>
+  <div class="fc">© 2026 Vyxor · vyxor.in</div>
+</footer>
+
+<script>
+function notify(){
+  const e=document.getElementById('nemail').value.trim();
+  if(!e||!e.includes('@'))return;
+  const btn=document.querySelector('.nbtn');
+  btn.textContent='...';btn.disabled=true;
+  try{new Image().src='https://script.google.com/macros/s/AKfycbzM3v6AA9ovWf-0dh3u_lg3DjIXvCg5--5rZGlEQbDEBsEmeAOzqJg6HmqrOqw6WWKoRA/exec?email='+encodeURIComponent(e)+'&source=blog&t='+Date.now();}catch(x){}
+  localStorage.setItem('vyxor_subscribed','1');
+  document.getElementById('nform').style.display='none';
+  document.getElementById('nsuccess').style.display='block';
+}
+</script>
+</body>
+</html>
