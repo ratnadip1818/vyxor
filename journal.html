@@ -350,38 +350,18 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
 .add-tag-btn{padding:6px 12px;border-radius:7px;border:1px solid rgba(59,130,246,0.3);background:rgba(59,130,246,0.08);color:var(--blue);font-size:12px;cursor:pointer;font-family:'DM Mono',monospace;white-space:nowrap;}
 .add-tag-btn:hover{background:rgba(59,130,246,0.15);}
 
+/* ── SETUP STRATEGY TAGS ── */
+.setup-tags-wrap{display:flex;flex-wrap:wrap;gap:5px;}
+.setup-tag{padding:4px 10px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:11px;cursor:pointer;transition:all 0.15s;font-family:'DM Mono',monospace;white-space:nowrap;}
+.setup-tag:hover{border-color:var(--accent);color:var(--accent);}
+.setup-tag.sel{border-color:var(--accent);background:rgba(0,245,160,0.08);color:var(--accent);}
+
 /* ── RR FIELDS ── */
 .rr-display{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:9px;padding:10px 13px;font-size:13px;font-family:'DM Mono',monospace;color:var(--muted);min-height:42px;display:flex;align-items:center;}
 .rr-display.good{color:var(--accent);border-color:rgba(0,245,160,0.2);}
 .rr-display.bad{color:var(--danger);border-color:rgba(255,77,109,0.2);}
 
-/* ── CHARGES BANNER ── */
-.charges-banner{background:rgba(255,176,32,0.04);border:1px solid rgba(255,176,32,0.15);border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;margin-top:10px;flex-wrap:wrap;gap:8px;}
-.charges-text{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;}
-.charges-text span{color:var(--warn);font-weight:500;}
-.charges-setup-btn{font-size:11px;padding:4px 10px;border-radius:6px;border:1px solid rgba(255,176,32,0.3);background:rgba(255,176,32,0.08);color:var(--warn);cursor:pointer;font-family:'DM Mono',monospace;transition:all 0.2s;white-space:nowrap;}
-.charges-setup-btn:hover{background:rgba(255,176,32,0.15);}
-
-/* ── CHARGES SETTINGS MODAL ── */
-.charges-modal{background:#0B1220;border:1px solid rgba(255,176,32,0.2);border-radius:18px;max-width:460px;width:100%;padding:2rem;box-shadow:0 40px 100px rgba(0,0,0,0.7);}
-.charges-modal-title{font-family:'Syne',sans-serif;font-weight:700;font-size:20px;letter-spacing:-0.4px;margin-bottom:6px;}
-.charges-modal-title span{color:var(--warn);}
-.charges-modal-sub{font-size:13px;color:var(--muted);margin-bottom:1.5rem;line-height:1.6;}
-.charges-row{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border);}
-.charges-row:last-of-type{border-bottom:none;}
-.charges-row-label{font-size:13px;color:var(--text);}
-.charges-row-sub{font-size:11px;color:var(--muted2);margin-top:2px;font-family:'DM Mono',monospace;}
-.charges-input{width:100px;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'DM Mono',monospace;font-size:14px;padding:8px 11px;outline:none;text-align:right;}
-.charges-input:focus{border-color:rgba(255,176,32,0.4);}
-.charges-save-btn{width:100%;padding:12px;border-radius:10px;border:none;background:var(--warn);color:#020c12;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;cursor:pointer;margin-top:1.5rem;transition:all 0.2s;}
-.charges-save-btn:hover{background:#d4920d;transform:translateY(-1px);}
-
-/* ── NET P&L display ── */
-.net-pnl-row{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:9px;padding:10px 14px;margin-top:8px;}
-.net-pnl-label{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;}
-.net-pnl-val{font-size:16px;font-weight:500;font-family:'DM Mono',monospace;}
-.net-pnl-val.pos{color:var(--accent);}
-.net-pnl-val.neg{color:var(--danger);}
+/* ── NET P&L display (kept for history compatibility) ── */
 
 /* ── TOAST ── */
 .toast{position:fixed;bottom:2rem;right:2rem;z-index:1000;background:#0B1220;border:1px solid rgba(0,245,160,0.3);border-radius:11px;padding:12px 20px;font-size:13px;color:var(--accent);font-family:'DM Mono',monospace;box-shadow:0 20px 60px rgba(0,0,0,0.6);transform:translateY(120px);opacity:0;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);max-width:90vw;}
@@ -454,39 +434,6 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
   </div>
 </div>
 
-<!-- ── CHARGES SETTINGS MODAL ── -->
-<div class="modal-overlay" id="charges-modal-overlay" onclick="closeChargesModal(event)">
-  <div class="charges-modal">
-    <div class="charges-modal-title">Broker <span>Charges</span></div>
-    <p class="charges-modal-sub">Set your flat brokerage per trade. This will be auto-deducted from every P&L to show your real net profit.</p>
-    <div class="charges-row">
-      <div>
-        <div class="charges-row-label">Brokerage per trade</div>
-        <div class="charges-row-sub">Zerodha: ₹20 · Angel One: ₹20 · Groww: ₹20</div>
-      </div>
-      <input class="charges-input" type="number" id="c-brokerage" placeholder="20" min="0" step="0.01">
-    </div>
-    <div class="charges-row">
-      <div>
-        <div class="charges-row-label">STT per trade (approx)</div>
-        <div class="charges-row-sub">Futures sell side: 0.01% of trade value</div>
-      </div>
-      <input class="charges-input" type="number" id="c-stt" placeholder="0" min="0" step="0.01">
-    </div>
-    <div class="charges-row">
-      <div>
-        <div class="charges-row-label">Other charges per trade</div>
-        <div class="charges-row-sub">Exchange + SEBI + GST (approx ₹5–15)</div>
-      </div>
-      <input class="charges-input" type="number" id="c-other" placeholder="10" min="0" step="0.01">
-    </div>
-    <div style="background:rgba(255,176,32,0.05);border:1px solid rgba(255,176,32,0.15);border-radius:8px;padding:10px 14px;margin-top:1rem;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;line-height:1.7;">
-      Total per trade: <span id="c-total-preview" style="color:var(--warn);font-weight:500;">₹30</span><br>
-      This amount is deducted from gross P&L to show <strong style="color:var(--text);">Net P&L</strong>.
-    </div>
-    <button class="charges-save-btn" onclick="saveCharges()">Save Charges</button>
-  </div>
-</div>
 
 
 <div class="modal-overlay" id="trade-modal" onclick="closeTradeModal(event)">
@@ -690,7 +637,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
     <div class="stat-card"><div class="stat-val blue" id="s-pnl">₹0</div><div class="stat-lbl">Total P&L</div></div>
     <div class="stat-card"><div class="stat-val green" id="s-avgwin">—</div><div class="stat-lbl">Avg Win</div></div>
     <div class="stat-card"><div class="stat-val red" id="s-avgloss">—</div><div class="stat-lbl">Avg Loss</div></div>
-    <div class="stat-card"><div class="stat-val warn" id="s-pf">—</div><div class="stat-lbl">Profit Factor</div></div>
+    <div class="stat-card" title="Discipline Score: Based on win rate, emotion quality, R:R consistency and revenge/FOMO trades"><div class="stat-val warn" id="s-discipline">—</div><div class="stat-lbl">Discipline Score</div></div>
   </div>
 
   <!-- TABS -->
@@ -794,12 +741,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
           </div>
         </div>
 
-        <!-- Planned RR + Actual RR + Net P&L -->
-        <div class="form-row three" style="margin-bottom:12px;">
-          <div class="field">
-            <label>Planned R:R</label>
-            <input type="text" id="f-planned-rr" placeholder="e.g. 1:2" oninput="updateActualRR()">
-          </div>
+        <div class="form-row three">
           <div class="field">
             <label>Actual R:R <span class="auto-tag">Auto</span></label>
             <div class="rr-display" id="actual-rr-display">Enter SL to calculate</div>
@@ -808,31 +750,29 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
             <label>Stop Loss Price</label>
             <input type="number" id="f-sl" step="0.05" placeholder="0.00" oninput="updateActualRR()">
           </div>
-        </div>
-
-        <!-- Net P&L after charges -->
-        <div class="net-pnl-row" id="net-pnl-row" style="display:none;">
-          <div>
-            <div class="net-pnl-label">Net P&L after charges</div>
-            <div style="font-size:10px;color:var(--muted2);font-family:'DM Mono',monospace;margin-top:2px;" id="net-pnl-charges-detail"></div>
-          </div>
-          <div class="net-pnl-val" id="net-pnl-val">₹0</div>
-        </div>
-        <div class="charges-banner" id="charges-banner">
-          <div class="charges-text">Broker charges: <span id="charges-display">not set</span> per trade</div>
-          <button class="charges-setup-btn" onclick="openChargesModal()">⚙ Set Charges</button>
-        </div>
-
-        <div class="form-row three">
           <div class="field">
             <label>Result</label>
             <select id="f-result">
               <option>Win</option><option>Loss</option><option>Breakeven</option>
             </select>
           </div>
-          <div class="field" style="grid-column:span 2;">
-            <label>Setup / Strategy</label>
-            <input type="text" id="f-setup" placeholder="e.g. Breakout, Reversal, OI buildup, Support bounce, Options sell">
+        </div>
+
+        <!-- Setup / Strategy with preset tags -->
+        <div class="field" style="margin-top:12px;">
+          <label>Setup / Strategy</label>
+          <input type="text" id="f-setup" placeholder="e.g. Breakout, Reversal, OI buildup..." style="margin-bottom:8px;">
+          <div class="setup-tags-wrap" id="setup-tags-wrap">
+            <button class="setup-tag" onclick="setSetup('Breakout',this)">Breakout</button>
+            <button class="setup-tag" onclick="setSetup('Reversal',this)">Reversal</button>
+            <button class="setup-tag" onclick="setSetup('Support Bounce',this)">Support Bounce</button>
+            <button class="setup-tag" onclick="setSetup('Resistance Reject',this)">Resistance Reject</button>
+            <button class="setup-tag" onclick="setSetup('OI Buildup',this)">OI Buildup</button>
+            <button class="setup-tag" onclick="setSetup('Trend Follow',this)">Trend Follow</button>
+            <button class="setup-tag" onclick="setSetup('Scalp',this)">Scalp</button>
+            <button class="setup-tag" onclick="setSetup('Opening Range',this)">Opening Range</button>
+            <button class="setup-tag" onclick="setSetup('Gap Fill',this)">Gap Fill</button>
+            <button class="setup-tag" onclick="setSetup('News Play',this)">News Play</button>
           </div>
         </div>
       </div>
@@ -1200,16 +1140,8 @@ let screenshotBase64 = '';
 let currentTradeId = null;
 let instrumentType = 'Futures';
 let selectedTags = [];
-let brokerCharges = 0;
+// ── State variables ────────────────────────────────────
 
-function loadCharges() {
-  const saved = localStorage.getItem('vyxor_charges');
-  if (saved) { brokerCharges = parseFloat(saved)||0; updateChargesDisplay(); }
-}
-function updateChargesDisplay() {
-  const el = document.getElementById('charges-display');
-  if (el) el.textContent = brokerCharges > 0 ? '₹'+brokerCharges.toFixed(2) : 'not set';
-}
 
 window.setInstrument = function(type, btn) {
   instrumentType = type;
@@ -1237,6 +1169,12 @@ window.toggleTag = function(tag, btn) {
   }
 };
 
+window.setSetup = function(val, btn) {
+  document.getElementById('f-setup').value = val;
+  document.querySelectorAll('.setup-tag').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+};
+
 window.addCustomTag = function() {
   const input = document.getElementById('new-tag-input');
   const tag = input.value.trim();
@@ -1256,58 +1194,17 @@ window.updateActualRR = function() {
   const exit  = parseFloat(document.getElementById('f-exit').value);
   const sl    = parseFloat(document.getElementById('f-sl').value);
   const display = document.getElementById('actual-rr-display');
-  const planned = document.getElementById('f-planned-rr').value.trim();
   if (!isNaN(entry)&&!isNaN(exit)&&!isNaN(sl)&&entry&&exit&&sl) {
     const risk=Math.abs(entry-sl), reward=Math.abs(exit-entry);
     if (risk===0) { display.textContent='— (SL = Entry)'; display.className='rr-display'; return; }
     const ratio=(reward/risk).toFixed(2);
     const isGood=parseFloat(ratio)>=1.5;
-    let txt='1 : '+ratio;
-    if (planned) {
-      const parts=planned.split(':');
-      const pr=parts.length===2?parseFloat(parts[1])/parseFloat(parts[0]):parseFloat(planned);
-      if (!isNaN(pr)&&parseFloat(ratio)<pr*0.8) txt+=' ⚠ Below plan';
-    }
-    display.textContent=txt;
+    display.textContent='1 : '+ratio+(parseFloat(ratio)<1?' ⚠ Below 1:1':'');
     display.className='rr-display '+(isGood?'good':'bad');
   } else {
     display.textContent='Enter entry, exit & SL';
     display.className='rr-display';
   }
-  autoPnl();
-};
-
-window.openChargesModal = function() {
-  const saved = localStorage.getItem('vyxor_charges_detail');
-  const d = saved ? JSON.parse(saved) : {brokerage:20,stt:0,other:10};
-  document.getElementById('c-brokerage').value = d.brokerage||20;
-  document.getElementById('c-stt').value = d.stt||0;
-  document.getElementById('c-other').value = d.other||10;
-  updateChargesTotalPreview();
-  ['c-brokerage','c-stt','c-other'].forEach(id => { document.getElementById(id).oninput = updateChargesTotalPreview; });
-  document.getElementById('charges-modal-overlay').classList.add('open');
-};
-function updateChargesTotalPreview() {
-  const b=parseFloat(document.getElementById('c-brokerage').value)||0;
-  const s=parseFloat(document.getElementById('c-stt').value)||0;
-  const o=parseFloat(document.getElementById('c-other').value)||0;
-  const el=document.getElementById('c-total-preview');
-  if(el) el.textContent='₹'+(b+s+o).toFixed(2);
-}
-window.closeChargesModal = function(e) {
-  if (e&&e.target!==document.getElementById('charges-modal-overlay')) return;
-  document.getElementById('charges-modal-overlay').classList.remove('open');
-};
-window.saveCharges = function() {
-  const b=parseFloat(document.getElementById('c-brokerage').value)||0;
-  const s=parseFloat(document.getElementById('c-stt').value)||0;
-  const o=parseFloat(document.getElementById('c-other').value)||0;
-  brokerCharges=b+s+o;
-  localStorage.setItem('vyxor_charges', brokerCharges.toString());
-  localStorage.setItem('vyxor_charges_detail', JSON.stringify({brokerage:b,stt:s,other:o}));
-  updateChargesDisplay();
-  document.getElementById('charges-modal-overlay').classList.remove('open');
-  toast('Charges saved — ₹'+brokerCharges.toFixed(2)+' per trade ✓');
   autoPnl();
 };
 
@@ -1603,42 +1500,23 @@ window.autoPnl = function() {
   const lotSize = getLotSize(asset);
   const pnlEl  = document.getElementById('f-pnl');
   const hint   = document.getElementById('pnl-hint');
-  const netRow = document.getElementById('net-pnl-row');
-  const netVal = document.getElementById('net-pnl-val');
-  const netDetail = document.getElementById('net-pnl-charges-detail');
 
   if (!isNaN(entry) && !isNaN(exit) && entry && exit) {
     const diff = direction === 'Short' ? entry - exit : exit - entry;
     const grossPnl = diff * lots * lotSize;
     pnlEl.value = grossPnl.toFixed(2);
     pnlEl.classList.add('auto-calc');
-
-    // Auto-set result
     document.getElementById('f-result').value = grossPnl > 0 ? 'Win' : grossPnl < 0 ? 'Loss' : 'Breakeven';
-
-    // Breakdown hint
     if (lotSize > 1) {
       hint.textContent = `${diff > 0 ? '+' : ''}${diff.toFixed(2)} pts × ${lots} lot${lots>1?'s':''} × ${lotSize} units = ₹${grossPnl.toFixed(2)}`;
     } else {
       hint.textContent = `${diff > 0 ? '+' : ''}${diff.toFixed(2)} × ${lots} = ₹${grossPnl.toFixed(2)}`;
     }
     hint.className = 'pnl-hint ' + (grossPnl >= 0 ? 'pos' : 'neg');
-
-    // Net P&L after charges
-    if (brokerCharges > 0) {
-      const netPnl = grossPnl - brokerCharges;
-      netRow.style.display = 'flex';
-      netVal.textContent = (netPnl >= 0 ? '+' : '') + '₹' + netPnl.toFixed(2);
-      netVal.className = 'net-pnl-val ' + (netPnl >= 0 ? 'pos' : 'neg');
-      netDetail.textContent = '₹'+grossPnl.toFixed(2)+' gross − ₹'+brokerCharges.toFixed(2)+' charges';
-    } else {
-      netRow.style.display = 'none';
-    }
   } else {
     pnlEl.classList.remove('auto-calc');
     hint.textContent = '';
     hint.className = 'pnl-hint';
-    netRow.style.display = 'none';
   }
 };
 
@@ -1703,15 +1581,13 @@ window.saveTrade = async function() {
     lots:     parseFloat(document.getElementById('f-size').value) || 1,
     lotSize:  getLotSize(asset),
     pnl,
-    netPnl:   brokerCharges > 0 ? pnl - brokerCharges : pnl,
-    charges:  brokerCharges,
+    netPnl:   pnl,
     currency: '₹',
     result:   document.getElementById('f-result').value,
     session:  document.getElementById('f-session').value,
     setup:    document.getElementById('f-setup').value.trim(),
-    tags:     [...selectedTags],
-    plannedRR: document.getElementById('f-planned-rr').value.trim(),
     sl:       parseFloat(document.getElementById('f-sl').value) || 0,
+    tags:     [...selectedTags],
     strike:   parseFloat(document.getElementById('f-strike').value) || 0,
     expiry:   document.getElementById('f-expiry').value || '',
     preEmo, postEmo,
@@ -1736,7 +1612,7 @@ window.saveTrade = async function() {
 
 function clearForm() {
   ['f-entry','f-exit','f-size','f-pnl','f-asset','f-setup','f-notes',
-   'f-planned-rr','f-sl','f-strike','f-expiry'].forEach(id => {
+   'f-sl','f-strike','f-expiry'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = '';
   });
   document.getElementById('f-size').value = '1';
@@ -1744,7 +1620,6 @@ function clearForm() {
   document.getElementById('pnl-hint').textContent = '';
   document.getElementById('pnl-hint').className = 'pnl-hint';
   document.getElementById('lot-size-tag').textContent = '1 lot = ? units';
-  document.getElementById('net-pnl-row').style.display = 'none';
   document.getElementById('actual-rr-display').textContent = 'Enter entry, exit & SL';
   document.getElementById('actual-rr-display').className = 'rr-display';
   document.getElementById('options-fields').classList.remove('show');
@@ -1755,6 +1630,8 @@ function clearForm() {
   // Reset tags
   selectedTags = [];
   document.querySelectorAll('.trade-tag').forEach(b => b.classList.remove('sel'));
+  // Reset setup tags
+  document.querySelectorAll('.setup-tag').forEach(b => b.classList.remove('sel'));
   direction=''; preEmo=''; postEmo='';
   document.querySelectorAll('.dir-btn,.etag').forEach(b => b.classList.remove('sel'));
   document.getElementById('f-datetime').value = new Date().toISOString().slice(0,16);
@@ -1904,7 +1781,7 @@ window.saveEditedTrade = async function() {
     lots:       parseFloat(document.getElementById('e-lots').value) || 1,
     lotSize:    getLotSize(asset),
     pnl,
-    netPnl:     brokerCharges > 0 ? pnl - brokerCharges : pnl,
+    netPnl:     pnl,
     result:     document.getElementById('e-result').value,
     session:    document.getElementById('e-session').value,
     setup:      document.getElementById('e-setup').value.trim(),
@@ -1961,15 +1838,52 @@ function renderStats() {
   const totalPnl = allTrades.reduce((s,t) => s+(parseFloat(t.pnl)||0), 0);
   const avgWin  = wins.length   ? wins.reduce((s,t)=>s+(parseFloat(t.pnl)||0),0)/wins.length   : null;
   const avgLoss = losses.length ? losses.reduce((s,t)=>s+(parseFloat(t.pnl)||0),0)/losses.length : null;
-  const pf      = avgLoss && avgLoss !== 0 && avgWin ? Math.abs(avgWin/avgLoss).toFixed(2) : null;
 
   document.getElementById('s-trades').textContent = total;
   document.getElementById('s-winrate').textContent = total ? ((wins.length/total)*100).toFixed(0)+'%' : '0%';
   document.getElementById('s-pnl').textContent = (totalPnl>=0?'+':'')+'₹'+Math.abs(totalPnl).toLocaleString('en-IN',{maximumFractionDigits:0});
   document.getElementById('s-pnl').className = 'stat-val '+(totalPnl>=0?'green':'red');
-  document.getElementById('s-avgwin').textContent  = avgWin  !== null ? '+₹'+Math.abs(avgWin).toFixed(0) : '—';
+  document.getElementById('s-avgwin').textContent  = avgWin  !== null ? '+₹'+Math.abs(avgWin).toFixed(0)  : '—';
   document.getElementById('s-avgloss').textContent = avgLoss !== null ? '-₹'+Math.abs(avgLoss).toFixed(0) : '—';
-  document.getElementById('s-pf').textContent = pf || '—';
+
+  // ── Discipline Score (0-100) ───────────────────────────
+  // Formula: winRate(30) + emotionQuality(25) + rrConsistency(25) + noRevenge(20)
+  if (total >= 3) {
+    let score = 0;
+
+    // 1. Win rate component (0-30)
+    const wr = wins.length / total;
+    score += Math.min(wr * 60, 30);
+
+    // 2. Emotion quality — calm/focused trades vs FOMO/revenge (0-25)
+    const goodEmos = ['😌 Calm','🎯 Focused','💪 Confident'];
+    const badEmos  = ['😤 FOMO','😡 Revenge','😰 Anxious'];
+    const withEmo  = allTrades.filter(t => t.preEmo);
+    if (withEmo.length > 0) {
+      const goodCount = withEmo.filter(t => goodEmos.some(e => t.preEmo.includes(e.split(' ')[1]))).length;
+      const badCount  = withEmo.filter(t => badEmos.some(e => t.preEmo.includes(e.split(' ')[1]))).length;
+      score += Math.min((goodCount / withEmo.length) * 25, 25);
+      score -= Math.min((badCount  / withEmo.length) * 15, 15);
+    } else {
+      score += 12; // neutral if no emotions logged
+    }
+
+    // 3. R:R consistency — trades with SL set (0-25)
+    const withSL = allTrades.filter(t => t.sl && parseFloat(t.sl) > 0);
+    score += Math.min((withSL.length / total) * 25, 25);
+
+    // 4. No revenge trading bonus (0-20)
+    const revengeTrades = allTrades.filter(t => t.preEmo && t.preEmo.includes('Revenge')).length;
+    score += Math.max(0, 20 - (revengeTrades / total) * 40);
+
+    const finalScore = Math.min(100, Math.max(0, Math.round(score)));
+    const scoreEl = document.getElementById('s-discipline');
+    scoreEl.textContent = finalScore + '/100';
+    scoreEl.className = 'stat-val ' + (finalScore >= 70 ? 'green' : finalScore >= 50 ? 'warn' : 'red');
+  } else {
+    document.getElementById('s-discipline').textContent = 'Log 3+ trades';
+    document.getElementById('s-discipline').className = 'stat-val warn';
+  }
 }
 
 // Trial UI updated in updateTrialUI()
@@ -2011,22 +1925,29 @@ window.renderHistory = function() {
 window.renderAnalytics = function() {
   if (!allTrades.length) return;
 
-  const sorted = [...allTrades].sort((a,b)=>parseFloat(b.pnl)-parseFloat(a.pnl));
-  const best = sorted[0], worst = sorted[sorted.length-1];
+  // Best trade = highest PnL trade overall
+  // Worst trade = lowest PnL trade overall (most negative)
+  const sorted = [...allTrades].sort((a,b) => (parseFloat(b.pnl)||0) - (parseFloat(a.pnl)||0));
+  const best  = sorted[0];
+  const worst = sorted[sorted.length - 1];
 
   if (best) {
-    const bp = parseFloat(best.pnl);
-    document.getElementById('bw-best-asset').textContent = best.asset;
-    document.getElementById('bw-best-detail').textContent = best.direction+' · '+best.session;
-    document.getElementById('bw-best-pnl').textContent = (bp>=0?'+':'-')+'₹'+Math.abs(bp).toFixed(2);
-    document.getElementById('bw-best-pnl').className = 'bw-pnl '+(bp>=0?'td-p':'td-n');
+    const bp = parseFloat(best.pnl) || 0;
+    document.getElementById('bw-best-asset').textContent  = best.asset || '—';
+    document.getElementById('bw-best-detail').textContent = (best.instrument||best.direction||'') + ' · ' + ((best.session||'').split('(')[0].trim()||'—');
+    document.getElementById('bw-best-pnl').textContent    = (bp >= 0 ? '+₹' : '-₹') + Math.abs(bp).toLocaleString('en-IN',{maximumFractionDigits:0});
+    document.getElementById('bw-best-pnl').className      = 'bw-pnl ' + (bp >= 0 ? 'td-p' : 'td-n');
   }
-  if (worst) {
-    const wp = parseFloat(worst.pnl);
-    document.getElementById('bw-worst-asset').textContent = worst.asset;
-    document.getElementById('bw-worst-detail').textContent = worst.direction+' · '+worst.session;
-    document.getElementById('bw-worst-pnl').textContent = (wp>=0?'+':'-')+'₹'+Math.abs(wp).toFixed(2);
-    document.getElementById('bw-worst-pnl').className = 'bw-pnl '+(wp>=0?'td-p':'td-n');
+  if (worst && worst !== best) {
+    const wp = parseFloat(worst.pnl) || 0;
+    document.getElementById('bw-worst-asset').textContent  = worst.asset || '—';
+    document.getElementById('bw-worst-detail').textContent = (worst.instrument||worst.direction||'') + ' · ' + ((worst.session||'').split('(')[0].trim()||'—');
+    document.getElementById('bw-worst-pnl').textContent    = (wp >= 0 ? '+₹' : '-₹') + Math.abs(wp).toLocaleString('en-IN',{maximumFractionDigits:0});
+    document.getElementById('bw-worst-pnl').className      = 'bw-pnl ' + (wp >= 0 ? 'td-p' : 'td-n');
+  } else if (worst === best) {
+    document.getElementById('bw-worst-asset').textContent  = 'Log more trades';
+    document.getElementById('bw-worst-detail').textContent = 'Need 2+ trades to compare';
+    document.getElementById('bw-worst-pnl').textContent    = '—';
   }
 
   if (typeof Chart === 'undefined') { setTimeout(window.renderAnalytics, 400); return; }
@@ -2377,7 +2298,7 @@ window.clearImport = function(broker) {
 // ── INIT ────────────────────────────────────────────────
 document.getElementById('f-datetime').value = new Date().toISOString().slice(0,16);
 updateAssets();
-loadCharges();
+// Init complete
 // Set Futures as default selected instrument
 const futBtn = document.getElementById('inst-fut');
 if (futBtn) futBtn.classList.add('sel-fut');
