@@ -363,6 +363,36 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
 
 /* ── NET P&L display (kept for history compatibility) ── */
 
+/* ── CUSTOM TAG SYSTEM ── */
+.custom-tag-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;min-height:32px;}
+.custom-tag{display:inline-flex;align-items:center;gap:5px;padding:5px 12px;border-radius:99px;border:1px solid var(--border);background:rgba(255,255,255,0.03);color:var(--muted);font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;transition:all 0.15s;}
+.custom-tag:hover{border-color:var(--accent);color:var(--accent);}
+.custom-tag.sel{background:rgba(0,245,160,0.1);border-color:var(--accent);color:var(--accent);}
+.custom-tag.sel .tag-del{opacity:1;}
+.tag-del{font-size:10px;opacity:0;color:var(--muted2);transition:opacity 0.15s;margin-left:2px;cursor:pointer;}
+.custom-tag:hover .tag-del{opacity:0.6;}
+.tag-add-row{display:flex;gap:6px;align-items:center;}
+.tag-add-input{flex:1;padding:7px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--text);font-size:13px;font-family:'DM Mono',monospace;}
+.tag-add-input::placeholder{color:var(--muted2);}
+.tag-add-input:focus{outline:none;border-color:var(--accent);}
+.tag-add-btn{padding:7px 14px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;transition:all 0.15s;white-space:nowrap;}
+.tag-add-btn:hover{border-color:var(--accent);color:var(--accent);}
+.tag-empty{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;padding:4px 0;}
+/* ── SELF AWARENESS SECTION ── */
+.awareness-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.awareness-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.07em;font-family:'DM Mono',monospace;margin-bottom:6px;}
+.toggle-btns{display:flex;gap:6px;flex-wrap:wrap;}
+.toggle-btn{padding:6px 14px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--muted);font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;transition:all 0.15s;}
+.toggle-btn:hover{border-color:rgba(255,255,255,0.2);color:var(--text);}
+.toggle-btn.sel-plan{background:rgba(0,245,160,0.1);border-color:var(--accent);color:var(--accent);}
+.toggle-btn.sel-imp{background:rgba(255,77,109,0.1);border-color:var(--danger);color:var(--danger);}
+.toggle-btn.sel-yes{background:rgba(0,245,160,0.1);border-color:var(--accent);color:var(--accent);}
+.toggle-btn.sel-partial{background:rgba(251,191,36,0.1);border-color:#FBB024;color:#FBB024;}
+.toggle-btn.sel-no{background:rgba(255,77,109,0.1);border-color:var(--danger);color:var(--danger);}
+.toggle-btn.sel-mkt{background:rgba(139,92,246,0.1);border-color:#8B5CF6;color:#8B5CF6;}
+.lesson-input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--text);font-size:13px;font-family:'DM Mono',monospace;resize:none;transition:border 0.15s;}
+.lesson-input::placeholder{color:var(--muted2);}
+.lesson-input:focus{outline:none;border-color:rgba(139,92,246,0.5);}
 /* ── WEEKLY REPORT HISTORY ── */
 .reports-section{margin-top:1.5rem;}
 .reports-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;letter-spacing:-0.3px;margin-bottom:1rem;padding-top:1.5rem;border-top:1px solid var(--border);}
@@ -466,14 +496,14 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
     <div class="modal-body">
       <div class="modal-grid">
         <div class="modal-field"><div class="modal-field-lbl">Direction</div><div class="modal-field-val" id="m-dir">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Market</div><div class="modal-field-val" id="m-market">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Entry Price</div><div class="modal-field-val" id="m-entry">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Exit Price</div><div class="modal-field-val" id="m-exit">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Quantity</div><div class="modal-field-val" id="m-qty">—</div></div>
         <div class="modal-field"><div class="modal-field-lbl">P&L</div><div class="modal-field-val" id="m-pnl">—</div></div>
         <div class="modal-field"><div class="modal-field-lbl">Result</div><div class="modal-field-val" id="m-result">—</div></div>
         <div class="modal-field"><div class="modal-field-lbl">Session</div><div class="modal-field-val" id="m-session">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Planned / Impulsive</div><div class="modal-field-val" id="m-intent">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Followed Rules</div><div class="modal-field-val" id="m-rules">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Market Condition</div><div class="modal-field-val" id="m-mktcond">—</div></div>
         <div class="modal-field" style="grid-column:1/-1"><div class="modal-field-lbl">Setup</div><div class="modal-field-val" id="m-setup">—</div></div>
+        <div class="modal-field" id="m-lesson-wrap" style="grid-column:1/-1;display:none;"><div class="modal-field-lbl">Lesson learned</div><div class="modal-field-val" id="m-lesson" style="font-size:13px;line-height:1.6;font-weight:400;">—</div></div>
       </div>
       <div class="modal-section-title">Emotions</div>
       <div class="modal-emotions" id="m-emotions"></div>
@@ -506,26 +536,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
         </div>
         <div class="edit-field">
           <label>Asset / Symbol</label>
-          <input class="edit-input" type="text" id="e-asset" placeholder="e.g. NIFTY">
-        </div>
-      </div>
-      <div class="edit-grid-2" style="margin-bottom:14px;">
-        <div class="edit-field">
-          <label>Market</label>
-          <select class="edit-input" id="e-market">
-            <option value="NSE/BSE">NSE / BSE</option>
-            <option value="MCX">MCX</option>
-          </select>
-        </div>
-        <div class="edit-field">
-          <label>Instrument</label>
-          <select class="edit-input" id="e-instrument">
-            <option value="Futures">Futures</option>
-            <option value="Options CE">Options CE</option>
-            <option value="Options PE">Options PE</option>
-            <option value="Equity">Equity</option>
-            <option value="ETF">ETF</option>
-          </select>
+          <input class="edit-input" type="text" id="e-asset" placeholder="e.g. NIFTY, EURUSD, GOLD">
         </div>
       </div>
       <div class="edit-grid-3" style="margin-bottom:14px;">
@@ -537,45 +548,24 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
           </select>
         </div>
         <div class="edit-field">
-          <label>Entry Price</label>
-          <input class="edit-input" type="number" id="e-entry" step="0.05" oninput="recalcEditPnl()">
-        </div>
-        <div class="edit-field">
-          <label>Exit Price</label>
-          <input class="edit-input" type="number" id="e-exit" step="0.05" oninput="recalcEditPnl()">
-        </div>
-      </div>
-      <div class="edit-grid-3" style="margin-bottom:14px;">
-        <div class="edit-field">
-          <label>Lots</label>
-          <input class="edit-input" type="number" id="e-lots" step="1" min="1" oninput="recalcEditPnl()">
-        </div>
-        <div class="edit-field">
-          <label>Gross P&L (₹)</label>
-          <input class="edit-input" type="number" id="e-pnl" step="0.01">
+          <label>P&L (₹)</label>
+          <input class="edit-input" type="number" id="e-pnl" step="0.01" placeholder="Type P&L" oninput="editAutoResult()">
         </div>
         <div class="edit-field">
           <label>Result</label>
           <select class="edit-input" id="e-result">
-            <option>Win</option>
-            <option>Loss</option>
-            <option>Breakeven</option>
+            <option>Win</option><option>Loss</option><option>Breakeven</option>
           </select>
         </div>
       </div>
       <div class="edit-grid-2" style="margin-bottom:14px;">
         <div class="edit-field">
           <label>Session</label>
-          <select class="edit-input" id="e-session">
-            <option>NSE (9:15am–3:30pm)</option>
-            <option>MCX Evening (5pm–11:30pm)</option>
-            <option>Pre-Market (9am–9:15am)</option>
-            <option>After-Hours</option>
-          </select>
+          <input class="edit-input" type="text" id="e-session" placeholder="e.g. NSE Morning">
         </div>
         <div class="edit-field">
           <label>Setup / Strategy</label>
-          <input class="edit-input" type="text" id="e-setup" placeholder="e.g. Breakout, Reversal">
+          <input class="edit-input" type="text" id="e-setup" placeholder="e.g. Breakout">
         </div>
       </div>
       <div class="edit-grid-2" style="margin-bottom:14px;">
@@ -585,14 +575,17 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
         </div>
         <div class="edit-field">
           <label>Post-Trade Emotion</label>
-          <input class="edit-input" type="text" id="e-postemo" placeholder="e.g. 😌 Satisfied">
+          <input class="edit-input" type="text" id="e-postemo" placeholder="e.g. 🏆 Proud">
         </div>
       </div>
       <div class="edit-field" style="margin-bottom:14px;">
-        <label>Notes</label>
-        <textarea class="edit-input" id="e-notes" rows="3" style="resize:vertical;" placeholder="What happened? What would you do differently?"></textarea>
+        <label>Lesson learned</label>
+        <input class="edit-input" type="text" id="e-lesson" placeholder="What did this trade teach you?">
       </div>
-      <div id="e-pnl-hint" style="font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;margin-bottom:14px;min-height:16px;"></div>
+      <div class="edit-field" style="margin-bottom:14px;">
+        <label>Notes</label>
+        <textarea class="edit-input" id="e-notes" rows="3" style="resize:vertical;" placeholder="Any extra context..."></textarea>
+      </div>
       <button class="edit-save-btn" id="e-save-btn" onclick="saveEditedTrade()">Save Changes</button>
     </div>
   </div>
@@ -672,6 +665,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
     <div class="form-card">
       <div class="form-title">Log a <span>Trade</span></div>
 
+      <!-- SECTION 1: TRADE DETAILS -->
       <div class="form-section">
         <div class="form-section-label">Trade Details</div>
         <div class="form-row three" style="margin-bottom:12px;">
@@ -680,93 +674,22 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
             <input type="datetime-local" id="f-datetime">
           </div>
           <div class="field">
-            <label>Market</label>
-            <select id="f-market" onchange="updateAssets()">
-              <option value="NSE/BSE">NSE / BSE (India)</option>
-              <option value="MCX">MCX (India)</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Session</label>
-            <select id="f-session">
-              <option>NSE (9:15am–3:30pm)</option>
-              <option>MCX Evening (5pm–11:30pm)</option>
-              <option>Pre-Market (9am–9:15am)</option>
-              <option>After-Hours</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row two" style="margin-bottom:12px;">
-          <div class="field">
             <label>Asset / Symbol</label>
-            <input type="text" id="f-asset" list="asset-list" placeholder="e.g. NIFTY, BANKNIFTY, RELIANCE" oninput="onAssetChange()">
-            <datalist id="asset-list"></datalist>
+            <input type="text" id="f-asset" placeholder="e.g. NIFTY, EURUSD, GOLD">
           </div>
           <div class="field">
-            <label>Instrument Type</label>
-            <div class="instrument-tabs">
-              <button class="inst-btn" id="inst-fut" onclick="setInstrument('Futures',this)">Futures</button>
-              <button class="inst-btn" id="inst-ce" onclick="setInstrument('Options CE',this)">Options CE</button>
-              <button class="inst-btn" id="inst-pe" onclick="setInstrument('Options PE',this)">Options PE</button>
-              <button class="inst-btn" id="inst-eq" onclick="setInstrument('Equity',this)">Equity</button>
-              <button class="inst-btn" id="inst-etf" onclick="setInstrument('ETF',this)">ETF</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Options extra fields — shown only for CE/PE -->
-        <div class="options-fields" id="options-fields">
-          <div class="field">
-            <label>Strike Price</label>
-            <input type="number" id="f-strike" placeholder="e.g. 19500" step="50">
-          </div>
-          <div class="field">
-            <label>Expiry Date</label>
-            <input type="date" id="f-expiry">
-          </div>
-          <div class="field">
-            <label>Option Type</label>
-            <input type="text" id="f-option-type" placeholder="CE or PE" readonly style="color:var(--muted);">
-          </div>
-        </div>
-
-        <div class="field" style="margin-bottom:12px;">
-          <label>Direction</label>
-          <div class="dir-toggle">
-            <button class="dir-btn long" id="dir-long" onclick="setDir('Long',this)">↑ LONG / BUY</button>
-            <button class="dir-btn short" id="dir-short" onclick="setDir('Short',this)">↓ SHORT / SELL</button>
-          </div>
-        </div>
-
-        <div class="form-row four" style="margin-bottom:12px;">
-          <div class="field">
-            <label>Entry Price</label>
-            <input type="number" id="f-entry" step="0.05" placeholder="0.00" oninput="autoPnl()">
-          </div>
-          <div class="field">
-            <label>Exit Price</label>
-            <input type="number" id="f-exit" step="0.05" placeholder="0.00" oninput="autoPnl()">
-          </div>
-          <div class="field">
-            <label>Lots <span class="lot-tag" id="lot-size-tag">1 lot = ? units</span></label>
-            <input type="number" id="f-size" step="1" placeholder="1" value="1" oninput="autoPnl()">
-          </div>
-          <div class="field">
-            <label>Gross P&L (₹) <span class="auto-tag">Auto</span></label>
-            <input type="number" id="f-pnl" step="0.01" placeholder="Auto-calculated">
+            <label>P&L (₹)</label>
+            <input type="number" id="f-pnl" step="0.01" placeholder="Type your P&L" oninput="autoResult()">
             <div class="pnl-hint" id="pnl-hint"></div>
           </div>
         </div>
-
-        <div class="form-row three">
+        <div class="form-row two" style="margin-bottom:12px;">
           <div class="field">
-            <label>Actual R:R <span class="auto-tag">Auto</span></label>
-            <div class="rr-display" id="actual-rr-display">Enter SL to calculate</div>
-          </div>
-          <div class="field">
-            <label>Stop Loss Price</label>
-            <input type="number" id="f-sl" step="0.05" placeholder="0.00" oninput="updateActualRR()">
+            <label>Direction</label>
+            <div class="dir-toggle">
+              <button class="dir-btn long" id="dir-long" onclick="setDir('Long',this)">↑ LONG / BUY</button>
+              <button class="dir-btn short" id="dir-short" onclick="setDir('Short',this)">↓ SHORT / SELL</button>
+            </div>
           </div>
           <div class="field">
             <label>Result</label>
@@ -775,48 +698,68 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
             </select>
           </div>
         </div>
-
-        <!-- Setup / Strategy with preset tags -->
-        <div class="field" style="margin-top:12px;">
-          <label>Setup / Strategy</label>
-          <input type="text" id="f-setup" placeholder="e.g. Breakout, Reversal, OI buildup..." style="margin-bottom:8px;">
-          <div class="setup-tags-wrap" id="setup-tags-wrap">
-            <button class="setup-tag" onclick="setSetup('Breakout',this)">Breakout</button>
-            <button class="setup-tag" onclick="setSetup('Reversal',this)">Reversal</button>
-            <button class="setup-tag" onclick="setSetup('Support Bounce',this)">Support Bounce</button>
-            <button class="setup-tag" onclick="setSetup('Resistance Reject',this)">Resistance Reject</button>
-            <button class="setup-tag" onclick="setSetup('OI Buildup',this)">OI Buildup</button>
-            <button class="setup-tag" onclick="setSetup('Trend Follow',this)">Trend Follow</button>
-            <button class="setup-tag" onclick="setSetup('Scalp',this)">Scalp</button>
-            <button class="setup-tag" onclick="setSetup('Opening Range',this)">Opening Range</button>
-            <button class="setup-tag" onclick="setSetup('Gap Fill',this)">Gap Fill</button>
-            <button class="setup-tag" onclick="setSetup('News Play',this)">News Play</button>
-          </div>
-        </div>
       </div>
 
+      <!-- SECTION 2: SESSION (custom tags) -->
       <div class="form-section">
-        <div class="form-section-label">Tags</div>
-        <div class="field">
-          <div class="tags-wrap" id="tags-wrap">
-            <button class="trade-tag" onclick="toggleTag('Expiry Day',this)">Expiry Day</button>
-            <button class="trade-tag" onclick="toggleTag('Gap Up',this)">Gap Up</button>
-            <button class="trade-tag" onclick="toggleTag('Gap Down',this)">Gap Down</button>
-            <button class="trade-tag" onclick="toggleTag('Budget Day',this)">Budget Day</button>
-            <button class="trade-tag" onclick="toggleTag('High OI',this)">High OI</button>
-            <button class="trade-tag" onclick="toggleTag('Trending',this)">Trending</button>
-            <button class="trade-tag" onclick="toggleTag('Sideways',this)">Sideways</button>
-            <button class="trade-tag" onclick="toggleTag('News Trade',this)">News Trade</button>
-            <button class="trade-tag" onclick="toggleTag('Scalp',this)">Scalp</button>
-            <button class="trade-tag" onclick="toggleTag('Swing',this)">Swing</button>
-          </div>
-          <div class="add-tag-wrap">
-            <input class="add-tag-input" type="text" id="new-tag-input" placeholder="Add custom tag..." onkeydown="if(event.key==='Enter')addCustomTag()">
-            <button class="add-tag-btn" onclick="addCustomTag()">+ Add</button>
-          </div>
+        <div class="form-section-label">Session</div>
+        <div class="custom-tag-wrap" id="session-tags-wrap">
+          <span class="tag-empty" id="session-empty">No sessions yet — add yours below</span>
+        </div>
+        <div class="tag-add-row">
+          <input class="tag-add-input" type="text" id="new-session-input" placeholder="e.g. NSE Morning, London Open, MCX Evening..." onkeydown="if(event.key==='Enter')addSessionTag()">
+          <button class="tag-add-btn" onclick="addSessionTag()">+ Add</button>
         </div>
       </div>
 
+      <!-- SECTION 3: SETUP / STRATEGY (personal tags) -->
+      <div class="form-section">
+        <div class="form-section-label">Setup / Strategy</div>
+        <div class="custom-tag-wrap" id="setup-tags-wrap">
+          <span class="tag-empty" id="setup-empty">No setups yet — add yours below</span>
+        </div>
+        <div class="tag-add-row">
+          <input class="tag-add-input" type="text" id="new-setup-input" placeholder="e.g. Breakout, Support bounce, OI reversal..." onkeydown="if(event.key==='Enter')addSetupTag()">
+          <button class="tag-add-btn" onclick="addSetupTag()">+ Add</button>
+        </div>
+      </div>
+
+      <!-- SECTION 4: SELF AWARENESS -->
+      <div class="form-section">
+        <div class="form-section-label">Self Awareness</div>
+        <div class="awareness-grid">
+          <div>
+            <div class="awareness-label">Was this trade planned or impulsive?</div>
+            <div class="toggle-btns">
+              <button class="toggle-btn" id="aw-planned" onclick="setAwareness('planned',this)">✓ Planned</button>
+              <button class="toggle-btn" id="aw-impulsive" onclick="setAwareness('impulsive',this)">⚡ Impulsive</button>
+            </div>
+          </div>
+          <div>
+            <div class="awareness-label">Did you follow your rules?</div>
+            <div class="toggle-btns">
+              <button class="toggle-btn" id="aw-yes" onclick="setRules('yes',this)">Yes</button>
+              <button class="toggle-btn" id="aw-partial" onclick="setRules('partial',this)">Partially</button>
+              <button class="toggle-btn" id="aw-no" onclick="setRules('no',this)">No</button>
+            </div>
+          </div>
+        </div>
+        <div style="margin-bottom:12px;">
+          <div class="awareness-label">Market condition</div>
+          <div class="toggle-btns">
+            <button class="toggle-btn" id="mkt-trending" onclick="setMarketCondition('Trending',this)">📈 Trending</button>
+            <button class="toggle-btn" id="mkt-sideways" onclick="setMarketCondition('Sideways',this)">↔ Sideways</button>
+            <button class="toggle-btn" id="mkt-volatile" onclick="setMarketCondition('Volatile',this)">⚡ Volatile</button>
+            <button class="toggle-btn" id="mkt-news" onclick="setMarketCondition('News Day',this)">📰 News Day</button>
+          </div>
+        </div>
+        <div>
+          <div class="awareness-label">One lesson from this trade</div>
+          <textarea class="lesson-input" id="f-lesson" rows="2" placeholder="What did this trade teach you?"></textarea>
+        </div>
+      </div>
+
+      <!-- SECTION 5: EMOTIONS -->
       <div class="form-section">
         <div class="form-section-label">Emotions</div>
         <div class="form-row two">
@@ -845,6 +788,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
         </div>
       </div>
 
+      <!-- SECTION 6: SCREENSHOT & NOTES -->
       <div class="form-section">
         <div class="form-section-label">Screenshot & Notes</div>
         <div class="form-row two">
@@ -863,7 +807,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
           </div>
           <div class="field">
             <label>Notes</label>
-            <textarea id="f-notes" placeholder="What happened? Why did you take this trade? What would you do differently? Any key observations..." style="min-height:160px;"></textarea>
+            <textarea id="f-notes" placeholder="What happened? Any extra context..." style="min-height:160px;"></textarea>
           </div>
         </div>
       </div>
@@ -1167,73 +1111,150 @@ let screenshotBase64 = '';
 let currentTradeId = null;
 let instrumentType = 'Futures';
 let selectedTags = [];
+let selectedSession = '';
+let selectedSetup = '';
+let tradeIntent = '';
+let rulesFollowed = '';
+let marketCondition = '';
+let userSessionTags = [];
+let userSetupTags = [];
 // ── State variables ────────────────────────────────────
 
 
-window.setInstrument = function(type, btn) {
-  instrumentType = type;
-  document.querySelectorAll('.inst-btn').forEach(b => b.className = 'inst-btn');
-  const cls = type==='Futures'?'sel-fut':type==='Options CE'?'sel-ce':type==='Options PE'?'sel-pe':type==='Equity'?'sel-eq':'sel-etf';
-  btn.classList.add(cls);
-  const optFields = document.getElementById('options-fields');
-  if (type==='Options CE'||type==='Options PE') {
-    optFields.classList.add('show');
-    document.getElementById('f-option-type').value = type==='Options CE'?'CE':'PE';
-  } else {
-    optFields.classList.remove('show');
-    document.getElementById('f-option-type').value = '';
-  }
-  autoPnl();
-};
-
-window.toggleTag = function(tag, btn) {
-  if (selectedTags.includes(tag)) {
-    selectedTags = selectedTags.filter(t=>t!==tag);
-    btn.classList.remove('sel');
-  } else {
-    selectedTags.push(tag);
-    btn.classList.add('sel');
+// ── AUTO RESULT FROM P&L ─────────────────────────────
+window.autoResult = function() {
+  const pnl = parseFloat(document.getElementById('f-pnl').value);
+  if (!isNaN(pnl)) {
+    document.getElementById('f-result').value = pnl > 0 ? 'Win' : pnl < 0 ? 'Loss' : 'Breakeven';
+    const hint = document.getElementById('pnl-hint');
+    hint.textContent = pnl > 0 ? '✓ Win' : pnl < 0 ? '✗ Loss' : '— Breakeven';
+    hint.className = 'pnl-hint ' + (pnl > 0 ? 'pos' : pnl < 0 ? 'neg' : '');
   }
 };
 
-window.setSetup = function(val, btn) {
-  document.getElementById('f-setup').value = val;
-  document.querySelectorAll('.setup-tag').forEach(b => b.classList.remove('sel'));
-  btn.classList.add('sel');
+// ── AWARENESS TOGGLES ────────────────────────────────
+window.setAwareness = function(val, btn) {
+  tradeIntent = tradeIntent === val ? '' : val;
+  document.getElementById('aw-planned').className   = 'toggle-btn' + (tradeIntent==='planned'  ? ' sel-plan' : '');
+  document.getElementById('aw-impulsive').className = 'toggle-btn' + (tradeIntent==='impulsive' ? ' sel-imp'  : '');
 };
 
-window.addCustomTag = function() {
-  const input = document.getElementById('new-tag-input');
+window.setRules = function(val, btn) {
+  rulesFollowed = rulesFollowed === val ? '' : val;
+  document.getElementById('aw-yes').className     = 'toggle-btn' + (rulesFollowed==='yes'     ? ' sel-yes'     : '');
+  document.getElementById('aw-partial').className = 'toggle-btn' + (rulesFollowed==='partial' ? ' sel-partial' : '');
+  document.getElementById('aw-no').className      = 'toggle-btn' + (rulesFollowed==='no'      ? ' sel-no'      : '');
+};
+
+window.setMarketCondition = function(val, btn) {
+  marketCondition = marketCondition === val ? '' : val;
+  ['mkt-trending','mkt-sideways','mkt-volatile','mkt-news'].forEach(id => {
+    document.getElementById(id).className = 'toggle-btn';
+  });
+  if (marketCondition) btn.classList.add('sel-mkt');
+};
+
+// ── SESSION CUSTOM TAGS ──────────────────────────────
+function renderSessionTags() {
+  const wrap = document.getElementById('session-tags-wrap');
+  const empty = document.getElementById('session-empty');
+  if (!wrap) return;
+  const tags = userSessionTags.map(tag => {
+    const isSel = selectedSession === tag;
+    return `<span class="custom-tag${isSel?' sel':''}" onclick="pickSessionTag('${tag.replace(/'/g,"\\'")}')">
+      ${tag}<span class="tag-del" onclick="event.stopPropagation();deleteSessionTag('${tag.replace(/'/g,"\\'")}')">✕</span>
+    </span>`;
+  }).join('');
+  wrap.innerHTML = tags || '';
+  if (empty) empty.style.display = userSessionTags.length ? 'none' : 'block';
+  if (!wrap.contains(empty) && empty) wrap.appendChild(empty);
+}
+
+window.pickSessionTag = function(tag) {
+  selectedSession = selectedSession === tag ? '' : tag;
+  renderSessionTags();
+};
+
+window.deleteSessionTag = async function(tag) {
+  userSessionTags = userSessionTags.filter(t => t !== tag);
+  if (selectedSession === tag) selectedSession = '';
+  renderSessionTags();
+  if (currentUser) await saveUserTags();
+};
+
+window.addSessionTag = async function() {
+  const input = document.getElementById('new-session-input');
   const tag = input.value.trim();
-  if (!tag||selectedTags.includes(tag)) { input.value=''; return; }
-  selectedTags.push(tag);
-  const wrap = document.getElementById('tags-wrap');
-  const btn = document.createElement('button');
-  btn.className = 'trade-tag sel';
-  btn.textContent = tag;
-  btn.onclick = function(){ window.toggleTag(tag, this); };
-  wrap.appendChild(btn);
+  if (!tag || userSessionTags.includes(tag)) { input.value = ''; return; }
+  userSessionTags.push(tag);
+  selectedSession = tag;
+  renderSessionTags();
   input.value = '';
+  if (currentUser) await saveUserTags();
 };
 
-window.updateActualRR = function() {
-  const entry = parseFloat(document.getElementById('f-entry').value);
-  const exit  = parseFloat(document.getElementById('f-exit').value);
-  const sl    = parseFloat(document.getElementById('f-sl').value);
-  const display = document.getElementById('actual-rr-display');
-  if (!isNaN(entry)&&!isNaN(exit)&&!isNaN(sl)&&entry&&exit&&sl) {
-    const risk=Math.abs(entry-sl), reward=Math.abs(exit-entry);
-    if (risk===0) { display.textContent='— (SL = Entry)'; display.className='rr-display'; return; }
-    const ratio=(reward/risk).toFixed(2);
-    const isGood=parseFloat(ratio)>=1.5;
-    display.textContent='1 : '+ratio+(parseFloat(ratio)<1?' ⚠ Below 1:1':'');
-    display.className='rr-display '+(isGood?'good':'bad');
-  } else {
-    display.textContent='Enter entry, exit & SL';
-    display.className='rr-display';
-  }
-  autoPnl();
+// ── SETUP CUSTOM TAGS ────────────────────────────────
+function renderSetupTags() {
+  const wrap = document.getElementById('setup-tags-wrap');
+  const empty = document.getElementById('setup-empty');
+  if (!wrap) return;
+  const tags = userSetupTags.map(tag => {
+    const isSel = selectedSetup === tag;
+    return `<span class="custom-tag${isSel?' sel':''}" onclick="pickSetupTag('${tag.replace(/'/g,"\\'")}')">
+      ${tag}<span class="tag-del" onclick="event.stopPropagation();deleteSetupTag('${tag.replace(/'/g,"\\'")}')">✕</span>
+    </span>`;
+  }).join('');
+  wrap.innerHTML = tags || '';
+  if (empty) empty.style.display = userSetupTags.length ? 'none' : 'block';
+  if (!wrap.contains(empty) && empty) wrap.appendChild(empty);
+}
+
+window.pickSetupTag = function(tag) {
+  selectedSetup = selectedSetup === tag ? '' : tag;
+  renderSetupTags();
 };
+
+window.deleteSetupTag = async function(tag) {
+  userSetupTags = userSetupTags.filter(t => t !== tag);
+  if (selectedSetup === tag) selectedSetup = '';
+  renderSetupTags();
+  if (currentUser) await saveUserTags();
+};
+
+window.addSetupTag = async function() {
+  const input = document.getElementById('new-setup-input');
+  const tag = input.value.trim();
+  if (!tag || userSetupTags.includes(tag)) { input.value = ''; return; }
+  userSetupTags.push(tag);
+  selectedSetup = tag;
+  renderSetupTags();
+  input.value = '';
+  if (currentUser) await saveUserTags();
+};
+
+// ── SAVE / LOAD USER TAGS FROM FIRESTORE ─────────────
+async function saveUserTags() {
+  try {
+    await setDoc(doc(db, 'users', currentUser.uid), {
+      sessionTags: userSessionTags,
+      setupTags: userSetupTags
+    }, { merge: true });
+  } catch(e) { console.error('Failed to save tags:', e); }
+}
+
+async function loadUserTags() {
+  if (!currentUser) return;
+  try {
+    const snap = await getDoc(doc(db, 'users', currentUser.uid));
+    if (snap.exists()) {
+      const data = snap.data();
+      userSessionTags = data.sessionTags || [];
+      userSetupTags   = data.setupTags   || [];
+      renderSessionTags();
+      renderSetupTags();
+    }
+  } catch(e) { console.error('Failed to load tags:', e); }
+}
 
 // ── Indian instrument lot sizes ───────────────────────
 const LOT_SIZES = {
@@ -1486,67 +1507,6 @@ window.setEmo = function(type, val, btn) {
 };
 
 // ── ASSET CHANGE — update lot size tag ─────────────────
-window.onAssetChange = function() {
-  const asset = document.getElementById('f-asset').value.trim();
-  const ls = getLotSize(asset);
-  const tag = document.getElementById('lot-size-tag');
-  if (ls > 1) {
-    tag.textContent = '1 lot = '+ls+' units';
-    tag.style.display = 'inline';
-  } else {
-    tag.textContent = '';
-    tag.style.display = 'none';
-  }
-  autoPnl();
-};
-
-window.updateAssets = function() {
-  const market = document.getElementById('f-market').value;
-  const dl = document.getElementById('asset-list');
-  const map = {
-    'NSE/BSE':['NIFTY','BANKNIFTY','FINNIFTY','SENSEX','MIDCPNIFTY',
-               'RELIANCE','TCS','INFY','HDFCBANK','ICICIBANK','SBI',
-               'WIPRO','ADANIENT','BAJFINANCE','TATAMOTORS','AXISBANK',
-               'MARUTI','LT','KOTAKBANK','SUNPHARMA','TITAN','HCLTECH',
-               'TECHM','ONGC','IOC','NTPC','POWERGRID','COALINDIA'],
-    'MCX':['GOLD','GOLDMINI','SILVER','SILVERMINI','CRUDEOIL',
-           'CRUDEOILMINI','NATURALGAS','COPPER','ZINC','ALUMINIUM']
-  };
-  dl.innerHTML = (map[market]||[]).map(s=>`<option value="${s}">`).join('');
-  const sesEl = document.getElementById('f-session');
-  if (market==='NSE/BSE') sesEl.value='NSE (9:15am–3:30pm)';
-  else if (market==='MCX') sesEl.value='MCX Evening (5pm–11:30pm)';
-};
-
-// ── AUTO P&L with lot size precision ──────────────────
-window.autoPnl = function() {
-  const entry  = parseFloat(document.getElementById('f-entry').value);
-  const exit   = parseFloat(document.getElementById('f-exit').value);
-  const lots   = parseFloat(document.getElementById('f-size').value) || 1;
-  const asset  = document.getElementById('f-asset').value.trim();
-  const lotSize = getLotSize(asset);
-  const pnlEl  = document.getElementById('f-pnl');
-  const hint   = document.getElementById('pnl-hint');
-
-  if (!isNaN(entry) && !isNaN(exit) && entry && exit) {
-    const diff = direction === 'Short' ? entry - exit : exit - entry;
-    const grossPnl = diff * lots * lotSize;
-    pnlEl.value = grossPnl.toFixed(2);
-    pnlEl.classList.add('auto-calc');
-    document.getElementById('f-result').value = grossPnl > 0 ? 'Win' : grossPnl < 0 ? 'Loss' : 'Breakeven';
-    if (lotSize > 1) {
-      hint.textContent = `${diff > 0 ? '+' : ''}${diff.toFixed(2)} pts × ${lots} lot${lots>1?'s':''} × ${lotSize} units = ₹${grossPnl.toFixed(2)}`;
-    } else {
-      hint.textContent = `${diff > 0 ? '+' : ''}${diff.toFixed(2)} × ${lots} = ₹${grossPnl.toFixed(2)}`;
-    }
-    hint.className = 'pnl-hint ' + (grossPnl >= 0 ? 'pos' : 'neg');
-  } else {
-    pnlEl.classList.remove('auto-calc');
-    hint.textContent = '';
-    hint.className = 'pnl-hint';
-  }
-};
-
 // ── SCREENSHOT UPLOAD ──────────────────────────────────
 window.handleScreenshotFile = function(e) {
   const file = e.target.files[0];
@@ -1590,41 +1550,34 @@ window.saveTrade = async function() {
   if (trialExpired) { showUpgradeModal(); return; }
 
   const asset = document.getElementById('f-asset').value.trim();
-  const entry = parseFloat(document.getElementById('f-entry').value);
-  const exit  = parseFloat(document.getElementById('f-exit').value);
   const pnl   = parseFloat(document.getElementById('f-pnl').value);
 
-  if (!asset)                    { toast('Enter an asset / symbol.', true); return; }
-  if (!direction)                { toast('Select Long or Short.', true); return; }
-  if (isNaN(entry)||isNaN(exit)) { toast('Enter entry and exit prices.', true); return; }
-  if (isNaN(pnl))                { toast('P&L is required.', true); return; }
+  if (!asset)       { toast('Enter an asset / symbol.', true); return; }
+  if (!direction)   { toast('Select Long or Short.', true); return; }
+  if (isNaN(pnl))   { toast('P&L is required — enter your P&L from broker.', true); return; }
 
   const trade = {
-    datetime: document.getElementById('f-datetime').value || new Date().toISOString().slice(0,16),
-    market:   document.getElementById('f-market').value,
-    asset, direction,
-    instrument: instrumentType,
-    entry, exit,
-    lots:     parseFloat(document.getElementById('f-size').value) || 1,
-    lotSize:  getLotSize(asset),
+    datetime:        document.getElementById('f-datetime').value || new Date().toISOString().slice(0,16),
+    asset,
+    direction,
     pnl,
-    netPnl:   pnl,
-    currency: '₹',
-    result:   document.getElementById('f-result').value,
-    session:  document.getElementById('f-session').value,
-    setup:    document.getElementById('f-setup').value.trim(),
-    sl:       parseFloat(document.getElementById('f-sl').value) || 0,
-    tags:     [...selectedTags],
-    strike:   parseFloat(document.getElementById('f-strike').value) || 0,
-    expiry:   document.getElementById('f-expiry').value || '',
+    netPnl:          pnl,
+    currency:        '₹',
+    result:          document.getElementById('f-result').value,
+    session:         selectedSession || '',
+    setup:           selectedSetup   || '',
+    tradeIntent,
+    rulesFollowed,
+    marketCondition,
+    lesson:          document.getElementById('f-lesson').value.trim(),
     preEmo, postEmo,
-    notes:    document.getElementById('f-notes').value.trim(),
-    screenshot: screenshotBase64 || '',
-    createdAt: serverTimestamp()
+    notes:           document.getElementById('f-notes').value.trim(),
+    screenshot:      screenshotBase64 || '',
+    createdAt:       serverTimestamp()
   };
 
   const btn = document.getElementById('submit-btn');
-  btn.disabled=true; btn.textContent='Saving...';
+  btn.disabled = true; btn.textContent = 'Saving...';
 
   try {
     await addDoc(collection(db,'users',currentUser.uid,'trades'), trade);
@@ -1633,35 +1586,35 @@ window.saveTrade = async function() {
   } catch(e) {
     console.error(e); toast('Save failed. Try again.', true);
   } finally {
-    btn.disabled=false; btn.textContent='Save Trade →';
+    btn.disabled = false; btn.textContent = 'Save Trade →';
   }
 };
 
 function clearForm() {
-  ['f-entry','f-exit','f-size','f-pnl','f-asset','f-setup','f-notes',
-   'f-sl','f-strike','f-expiry'].forEach(id => {
-    const el = document.getElementById(id); if (el) el.value = '';
-  });
-  document.getElementById('f-size').value = '1';
-  document.getElementById('f-pnl').classList.remove('auto-calc');
+  document.getElementById('f-asset').value  = '';
+  document.getElementById('f-pnl').value    = '';
+  document.getElementById('f-notes').value  = '';
+  document.getElementById('f-lesson').value = '';
   document.getElementById('pnl-hint').textContent = '';
-  document.getElementById('pnl-hint').className = 'pnl-hint';
-  document.getElementById('lot-size-tag').textContent = '1 lot = ? units';
-  document.getElementById('actual-rr-display').textContent = 'Enter entry, exit & SL';
-  document.getElementById('actual-rr-display').className = 'rr-display';
-  document.getElementById('options-fields').classList.remove('show');
-  // Reset instrument to Futures
-  instrumentType = 'Futures';
-  document.querySelectorAll('.inst-btn').forEach(b => b.className='inst-btn');
-  document.getElementById('inst-fut').classList.add('sel-fut');
-  // Reset tags
-  selectedTags = [];
-  document.querySelectorAll('.trade-tag').forEach(b => b.classList.remove('sel'));
-  // Reset setup tags
-  document.querySelectorAll('.setup-tag').forEach(b => b.classList.remove('sel'));
-  direction=''; preEmo=''; postEmo='';
-  document.querySelectorAll('.dir-btn,.etag').forEach(b => b.classList.remove('sel'));
+  document.getElementById('pnl-hint').className   = 'pnl-hint';
   document.getElementById('f-datetime').value = new Date().toISOString().slice(0,16);
+  // Reset direction
+  direction = '';
+  document.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('sel'));
+  // Reset emotions
+  preEmo = ''; postEmo = '';
+  document.querySelectorAll('.etag').forEach(b => b.classList.remove('sel'));
+  // Reset session & setup selections (keep the tags, just deselect)
+  selectedSession = ''; selectedSetup = '';
+  renderSessionTags(); renderSetupTags();
+  // Reset awareness
+  tradeIntent = ''; rulesFollowed = ''; marketCondition = '';
+  ['aw-planned','aw-impulsive','aw-yes','aw-partial','aw-no',
+   'mkt-trending','mkt-sideways','mkt-volatile','mkt-news'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.className = 'toggle-btn';
+  });
+  // Reset result
+  document.getElementById('f-result').value = 'Win';
   removeScreenshot();
 }
 
@@ -1684,11 +1637,6 @@ window.openTradeModal = function(id) {
   const dirEl = document.getElementById('m-dir');
   dirEl.textContent = t.direction;
   dirEl.className = 'modal-field-val '+(t.direction==='Long'?'long':'short');
-  document.getElementById('m-market').textContent = (t.instrument||t.market||'—');
-  document.getElementById('m-entry').textContent = '₹'+t.entry;
-  document.getElementById('m-exit').textContent = '₹'+t.exit;
-  document.getElementById('m-qty').textContent = (t.lots||t.size||1)+' lot'+(((t.lots||t.size||1))>1?'s':'')+
-    (t.lotSize&&t.lotSize>1?' ('+((t.lots||t.size||1)*t.lotSize)+' units)':'');
   const pnlEl = document.getElementById('m-pnl');
   const pnl = parseFloat(t.pnl);
   pnlEl.textContent = fmtPnl(pnl,'₹');
@@ -1697,7 +1645,21 @@ window.openTradeModal = function(id) {
   resEl.textContent = t.result;
   resEl.className = 'modal-field-val '+(t.result==='Win'?'green':t.result==='Loss'?'red':'');
   document.getElementById('m-session').textContent = t.session||'—';
-  document.getElementById('m-setup').textContent = t.setup||'—';
+  document.getElementById('m-setup').textContent   = t.setup||'—';
+  // Self-awareness fields
+  const intentEl = document.getElementById('m-intent');
+  intentEl.textContent = t.tradeIntent ? (t.tradeIntent==='planned'?'✓ Planned':'⚡ Impulsive') : '—';
+  intentEl.className = 'modal-field-val'+(t.tradeIntent==='planned'?' green':t.tradeIntent==='impulsive'?' red':'');
+  const rulesEl = document.getElementById('m-rules');
+  rulesEl.textContent = t.rulesFollowed ? ({yes:'Yes ✓',partial:'Partially',no:'No ✗'}[t.rulesFollowed]||'—') : '—';
+  rulesEl.className = 'modal-field-val'+(t.rulesFollowed==='yes'?' green':t.rulesFollowed==='no'?' red':'');
+  document.getElementById('m-mktcond').textContent = t.marketCondition||'—';
+  // Lesson
+  const lessonWrap = document.getElementById('m-lesson-wrap');
+  if (t.lesson) {
+    document.getElementById('m-lesson').textContent = t.lesson;
+    lessonWrap.style.display = 'block';
+  } else { lessonWrap.style.display = 'none'; }
 
   // Emotions
   const emoWrap = document.getElementById('m-emotions');
