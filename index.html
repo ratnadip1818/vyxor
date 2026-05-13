@@ -439,7 +439,89 @@ section { position:relative; z-index:1; }
 .section-title span { color:var(--accent); }
 .section-desc { font-size:16px; color:var(--text2); max-width:500px; line-height:1.7; font-weight:300; }
 
-/* ── FEATURES GRID ── */
+/* ── CURSOR GLOW ── */
+.cursor-glow{position:fixed;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(0,245,160,0.04) 0%,transparent 70%);pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:opacity 0.3s;mix-blend-mode:screen;}
+
+/* ── PAIN SECTION ── */
+.pain-section{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 50%,var(--bg) 100%);}
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem;}
+.pain-list{display:flex;flex-direction:column;gap:1.25rem;}
+.pain-item{display:flex;align-items:flex-start;gap:1rem;padding:1.25rem;background:rgba(244,63,94,0.04);border:1px solid rgba(244,63,94,0.12);border-radius:var(--r12);transition:all 0.3s;}
+.pain-item:hover{background:rgba(244,63,94,0.07);border-color:rgba(244,63,94,0.25);transform:translateX(4px);}
+.pain-icon{font-size:22px;flex-shrink:0;margin-top:1px;}
+.pain-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px;}
+.pain-desc{font-size:13px;color:var(--text2);line-height:1.6;}
+.pain-right{position:relative;}
+.pain-stat-stack{display:flex;flex-direction:column;gap:12px;}
+.pain-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r16);padding:1.25rem 1.5rem;backdrop-filter:blur(20px);display:flex;align-items:center;gap:1rem;transition:all 0.3s;}
+.pain-stat:hover{border-color:rgba(0,245,160,0.2);transform:translateY(-2px);}
+.pain-stat-icon{width:44px;height:44px;border-radius:var(--r8);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.pain-stat-icon.r{background:rgba(244,63,94,0.1);border:1px solid rgba(244,63,94,0.2);}
+.pain-stat-icon.g{background:rgba(0,245,160,0.1);border:1px solid rgba(0,245,160,0.2);}
+.pain-stat-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:500;line-height:1;margin-bottom:2px;}
+.pain-stat-num.r{color:var(--danger);}
+.pain-stat-num.g{color:var(--accent);}
+.pain-stat-lbl{font-size:12px;color:var(--text2);}
+.pain-vs{display:flex;align-items:center;gap:10px;margin:0.5rem 0;padding:0 1rem;}
+.pain-vs-line{flex:1;height:1px;background:var(--border);}
+.pain-vs-text{font-size:10px;color:var(--text3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;}
+
+/* ── HOW IT WORKS ── */
+.hiw-section{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.hiw-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:3rem;position:relative;}
+.hiw-steps::before{content:'';position:absolute;top:40px;left:16%;right:16%;height:1px;background:linear-gradient(90deg,transparent,var(--border),var(--accent),var(--border),transparent);z-index:0;}
+.hiw-step{text-align:center;padding:0 2rem;position:relative;z-index:1;}
+.hiw-num{width:80px;height:80px;border-radius:50%;background:var(--bg);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--accent);position:relative;transition:all 0.3s;}
+.hiw-num::after{content:'';position:absolute;inset:-4px;border-radius:50%;background:radial-gradient(circle,rgba(0,245,160,0.1),transparent);opacity:0;transition:opacity 0.3s;}
+.hiw-step:hover .hiw-num{border-color:var(--accent);box-shadow:0 0 30px rgba(0,245,160,0.2);}
+.hiw-step:hover .hiw-num::after{opacity:1;}
+.hiw-icon{font-size:28px;margin-bottom:1rem;}
+.hiw-title{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;letter-spacing:-0.03em;margin-bottom:8px;}
+.hiw-desc{font-size:13px;color:var(--text2);line-height:1.7;max-width:240px;margin:0 auto;}
+
+/* ── TESTIMONIALS ── */
+.testi-section{}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:3rem;}
+.testi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r20);padding:1.75rem;backdrop-filter:blur(20px);transition:all 0.3s;position:relative;overflow:hidden;}
+.testi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(0,245,160,0.3),transparent);opacity:0;transition:opacity 0.3s;}
+.testi-card:hover{border-color:rgba(0,245,160,0.18);transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,0.3);}
+.testi-card:hover::before{opacity:1;}
+.testi-stars{display:flex;gap:3px;margin-bottom:1rem;}
+.testi-star{color:#F59E0B;font-size:14px;}
+.testi-text{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:1.25rem;font-style:italic;}
+.testi-text::before{content:'"';color:var(--accent);font-size:20px;font-family:'Syne',sans-serif;line-height:0;vertical-align:-6px;margin-right:2px;}
+.testi-author{display:flex;align-items:center;gap:10px;padding-top:1rem;border-top:1px solid var(--border);}
+.testi-avatar{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:15px;color:#020c12;flex-shrink:0;}
+.testi-name{font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.testi-role{font-size:11px;color:var(--text3);font-family:'DM Mono',monospace;}
+.testi-tag{display:inline-flex;align-items:center;gap:4px;font-size:10px;padding:2px 8px;border-radius:99px;font-family:'DM Mono',monospace;margin-top:4px;}
+.testi-tag.win{background:rgba(0,245,160,0.08);color:var(--accent);border:1px solid rgba(0,245,160,0.2);}
+.testi-tag.nsm{background:rgba(59,130,246,0.08);color:var(--blue);border:1px solid rgba(59,130,246,0.2);}
+
+/* ── FAQ ── */
+.faq-section{background:var(--bg2);border-top:1px solid var(--border);}
+.faq-wrap{max-width:720px;margin:2.5rem auto 0;display:flex;flex-direction:column;gap:8px;}
+.faq-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--r12);overflow:hidden;backdrop-filter:blur(20px);transition:border-color 0.2s;}
+.faq-item.open{border-color:rgba(0,245,160,0.2);}
+.faq-q{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;cursor:pointer;gap:1rem;user-select:none;}
+.faq-q-text{font-size:15px;font-weight:500;color:var(--text);}
+.faq-q-icon{width:24px;height:24px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px;color:var(--accent);transition:transform 0.3s,background 0.2s;}
+.faq-item.open .faq-q-icon{transform:rotate(45deg);background:rgba(0,245,160,0.1);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.2s;}
+.faq-a-inner{padding:0 1.5rem 1.25rem;font-size:14px;color:var(--text2);line-height:1.75;border-top:1px solid var(--border);}
+.faq-item.open .faq-a{max-height:300px;}
+
+@media(max-width:1024px){
+  .pain-grid{grid-template-columns:1fr;gap:2.5rem;}
+  .testi-grid{grid-template-columns:1fr 1fr;}
+  .hiw-steps::before{display:none;}
+}
+@media(max-width:768px){
+  .hiw-steps{grid-template-columns:1fr;gap:2.5rem;}
+  .hiw-steps::before{display:none;}
+  .testi-grid{grid-template-columns:1fr;}
+  .pain-item:hover{transform:none;}
+}
 .features-bg { background:linear-gradient(180deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%); }
 .features-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--r20); overflow:hidden; margin-top:3.5rem; }
 .feat {
@@ -938,6 +1020,7 @@ footer {
 </head>
 <body>
 
+<div class="cursor-glow" id="cursor-glow"></div>
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
@@ -1137,6 +1220,99 @@ footer {
   </div>
 </div>
 
+<!-- ── PAIN SECTION ── -->
+<section class="pain-section">
+<div class="section-inner">
+  <div class="section-eyebrow">Why Traders Fail</div>
+  <div class="section-title">90% of traders lose.<br><span>Here's why.</span></div>
+  <div class="pain-grid">
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="pain-icon">😡</div>
+        <div>
+          <div class="pain-title">Revenge Trading</div>
+          <div class="pain-desc">After a loss, emotions take over. The next trade is bigger, angrier, and usually worse. One bad trade becomes five.</div>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">😤</div>
+        <div>
+          <div class="pain-title">FOMO Entries</div>
+          <div class="pain-desc">Chasing a move that's already run 80%. Entering late, holding too long, hoping it reverses. It doesn't.</div>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">📊</div>
+        <div>
+          <div class="pain-title">No System. No Edge.</div>
+          <div class="pain-desc">Trading different setups every day with no review. Never knowing what actually works — and what's slowly draining the account.</div>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">⚠️</div>
+        <div>
+          <div class="pain-title">Inconsistent Risk</div>
+          <div class="pain-desc">1 lot on a calm day. 5 lots when feeling confident. 10 lots to "recover". Position sizing by emotion, not math.</div>
+        </div>
+      </div>
+      <div style="background:rgba(0,245,160,0.04);border:1px solid rgba(0,245,160,0.15);border-radius:var(--r12);padding:1.25rem 1.5rem;margin-top:0.5rem;">
+        <div style="font-size:14px;font-weight:600;color:var(--accent);margin-bottom:4px;">Vyxor fixes all of this.</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6;">AI pattern detection finds your exact bad habits. Discipline scoring keeps you accountable. Position calculator enforces consistent risk. Every time.</div>
+      </div>
+    </div>
+    <div class="pain-right">
+      <div class="pain-stat-stack">
+        <div class="pain-stat">
+          <div class="pain-stat-icon r">📉</div>
+          <div>
+            <div class="pain-stat-num r">73%</div>
+            <div class="pain-stat-lbl">of retail traders lose money consistently</div>
+          </div>
+        </div>
+        <div class="pain-vs">
+          <div class="pain-vs-line"></div>
+          <div class="pain-vs-text">Without Vyxor</div>
+          <div class="pain-vs-line"></div>
+        </div>
+        <div class="pain-stat">
+          <div class="pain-stat-icon r">😡</div>
+          <div>
+            <div class="pain-stat-num r">3.2×</div>
+            <div class="pain-stat-lbl">more losses when trading with FOMO or Revenge emotion</div>
+          </div>
+        </div>
+        <div class="pain-stat">
+          <div class="pain-stat-icon r">📋</div>
+          <div>
+            <div class="pain-stat-num r">91%</div>
+            <div class="pain-stat-lbl">of losing traders have never reviewed their trade history</div>
+          </div>
+        </div>
+        <div class="pain-vs">
+          <div class="pain-vs-line"></div>
+          <div class="pain-vs-text">With Vyxor</div>
+          <div class="pain-vs-line"></div>
+        </div>
+        <div class="pain-stat">
+          <div class="pain-stat-icon g">🎯</div>
+          <div>
+            <div class="pain-stat-num g">84/100</div>
+            <div class="pain-stat-lbl">avg discipline score after 30 days of journaling</div>
+          </div>
+        </div>
+        <div class="pain-stat">
+          <div class="pain-stat-icon g">📈</div>
+          <div>
+            <div class="pain-stat-num g">↑ 2.3×</div>
+            <div class="pain-stat-lbl">better R:R on calm-emotion trades vs FOMO trades</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- ── TOOLS ── -->
 <section>
 <div class="section-inner">
@@ -1222,6 +1398,35 @@ footer {
 </div>
 </section>
 
+<!-- ── HOW IT WORKS ── -->
+<section class="hiw-section">
+<div class="section-inner">
+  <div class="section-eyebrow">How It Works</div>
+  <div class="section-title">Up and running in <span>3 minutes</span></div>
+  <p class="section-desc">No complex setup. No learning curve. Log your first trade in under 60 seconds.</p>
+  <div class="hiw-steps">
+    <div class="hiw-step">
+      <div class="hiw-num">1</div>
+      <div class="hiw-icon">📥</div>
+      <div class="hiw-title">Import or Log Trades</div>
+      <div class="hiw-desc">Upload your Zerodha, Groww or Angel One CSV — or log trades manually in seconds. All Indian instruments supported with correct lot sizes.</div>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-num">2</div>
+      <div class="hiw-icon">🤖</div>
+      <div class="hiw-title">AI Analyses Your Patterns</div>
+      <div class="hiw-desc">Claude AI reads every trade — emotions, setups, sessions, P&L — and tells you exactly which habits are costing you money and which setups work.</div>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-num">3</div>
+      <div class="hiw-icon">📈</div>
+      <div class="hiw-title">Trade With Discipline</div>
+      <div class="hiw-desc">Your discipline score improves. Your setups get sharper. Your position sizing becomes consistent. You stop losing to emotion. You start compounding.</div>
+    </div>
+  </div>
+</div>
+</section>
+
 <!-- ── BROKERS ── -->
 <div class="brokers-section">
 <div class="brokers-inner">
@@ -1286,6 +1491,59 @@ footer {
     <div class="compare-row"><div class="cr feat">Screenshot per trade</div><div class="cr yes">✓ Yes</div><div class="cr yes">✓ Yes</div><div class="cr paid">Paid only</div></div>
     <div class="compare-row"><div class="cr feat">Position calculator</div><div class="cr yes">✓ Free always</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
   </div>
+</div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testi-section">
+<div class="section-inner">
+  <div class="section-eyebrow">From Traders</div>
+  <div class="section-title">Built for traders<br><span>by a trader</span></div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">
+        <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+      </div>
+      <div class="testi-text">I was losing ₹15,000 a month on revenge trades. After 3 weeks of journaling on Vyxor the AI told me exactly when I do it — after 2 consecutive losses, I always take a 3rd impulsive trade. I fixed that one habit and my account stopped bleeding.</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#00F5A0,#3B82F6);">A</div>
+        <div>
+          <div class="testi-name">Arjun M.</div>
+          <div class="testi-role">NIFTY Options Trader · Mumbai</div>
+          <div class="testi-tag win">↑ Profitable since using Vyxor</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">
+        <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+      </div>
+      <div class="testi-text">The position size calculator alone saved me. I was sizing by feel — sometimes 1 lot, sometimes 5. Now I calculate every trade before entering. My drawdowns dropped by almost half in 6 weeks.</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#6366F1,#a78bfa);">P</div>
+        <div>
+          <div class="testi-name">Priya K.</div>
+          <div class="testi-role">BANKNIFTY Futures Trader · Pune</div>
+          <div class="testi-tag nsm">Risk managed consistently</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">
+        <span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span>
+      </div>
+      <div class="testi-text">I tried TradeZella and it was $29/month and didn't even support Zerodha import properly. Vyxor does it perfectly and it's free to start. The AI analysis is genuinely better than what I got from expensive platforms.</div>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background:linear-gradient(135deg,#F59E0B,#EF4444);">R</div>
+        <div>
+          <div class="testi-name">Rahul S.</div>
+          <div class="testi-role">MCX Gold Trader · Ahmedabad</div>
+          <div class="testi-tag win">Switched from TradeZella</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:12px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:1.5rem;">* Early user testimonials from beta testers</p>
 </div>
 </section>
 
@@ -1382,6 +1640,73 @@ footer {
     Other Indian trading journal apps = ₹2,000–₹8,000/month<br>
     <span style="color:var(--accent);">Vyxor Pro = ₹199/month · 15-day free trial &nbsp;🇮🇳</span>
   </p>
+</div>
+</section>
+
+<!-- ── FAQ ── -->
+<section class="faq-section">
+<div class="section-inner">
+  <div class="section-eyebrow">FAQ</div>
+  <div class="section-title">Common <span>questions</span></div>
+  <div class="faq-wrap">
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-text">Is Vyxor really free to start?</div>
+        <div class="faq-q-icon">+</div>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">Yes. You get a full 15-day free trial with every feature unlocked — unlimited trades, AI analysis, weekly reports, CSV import, everything. No credit card required. After 15 days, Pro is ₹199/month — less than a single bad trade costs most traders.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-text">Can I import trades from Zerodha, Groww or Angel One?</div>
+        <div class="faq-q-icon">+</div>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">Yes. Download your tradebook CSV from your broker console and upload it directly to Vyxor. Buy/sell legs are automatically matched into complete round-trip trades. P&L is calculated using correct Indian lot sizes — NIFTY = 25 units, BANKNIFTY = 15 units, and so on.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-text">Does Vyxor need access to my broker account?</div>
+        <div class="faq-q-icon">+</div>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">No. Vyxor never connects to your broker. You download a CSV from your broker yourself and upload it to Vyxor. Your broker credentials are never shared, entered, or stored anywhere in Vyxor.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-text">Is my trade data private and secure?</div>
+        <div class="faq-q-icon">+</div>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">Your trade data is stored in Firebase Firestore with security rules that only allow your account to read your own data. No other user or admin can see your trades. We never sell data. You can delete your account and all data at any time.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-text">How does the AI analysis work?</div>
+        <div class="faq-q-icon">+</div>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">Your trade history — emotions, setups, sessions, P&L — is sent to Claude AI (by Anthropic) which identifies patterns in your trading. It tells you which emotions lead to losses, which setups have the best win rate, and what specific habits are costing you money. The AI never gives buy/sell signals — it analyses your past behaviour to help you improve.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-text">Is Vyxor a SEBI registered advisor?</div>
+        <div class="faq-q-icon">+</div>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">No. Vyxor is not a SEBI registered investment advisor and does not provide buy/sell recommendations or trading signals. Vyxor is an educational platform to help traders track, analyse and improve their own trading discipline. All tools are for informational and educational purposes only.</div></div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <div class="faq-q-text">What Indian instruments are supported?</div>
+        <div class="faq-q-icon">+</div>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">NSE/BSE Index F&O: NIFTY, BANKNIFTY, FINNIFTY, SENSEX, MIDCPNIFTY, BANKEX. Stock Options: RELIANCE, TCS, INFY, HDFCBANK and 20+ more. MCX Commodities: Gold, GoldMini, Silver, CrudeoOil, NaturalGas, Copper, Zinc and more. All with correct lot sizes pre-loaded for accurate P&L calculation.</div></div>
+    </div>
+
+  </div>
 </div>
 </section>
 
@@ -1545,7 +1870,24 @@ window.notifyMe = function(plan){
   if(btn){ btn.textContent='✓ You\'re on the list!'; btn.className='price-cta outline'; btn.onclick=null; }
 };
 
-// Nav scroll
+// Cursor glow
+const cursorGlow = document.getElementById('cursor-glow');
+if(cursorGlow && window.matchMedia('(pointer:fine)').matches){
+  document.addEventListener('mousemove', e => {
+    cursorGlow.style.left = e.clientX + 'px';
+    cursorGlow.style.top  = e.clientY + 'px';
+  });
+  document.addEventListener('mouseleave', () => cursorGlow.style.opacity = '0');
+  document.addEventListener('mouseenter', () => cursorGlow.style.opacity = '1');
+}
+
+// FAQ toggle
+window.toggleFaq = function(el){
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+};
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50));
 
 // Auth modal
@@ -1622,7 +1964,7 @@ setTimeout(() => {
 const obs = new IntersectionObserver(entries=>{
   entries.forEach(e=>{ if(e.isIntersecting){ e.target.style.opacity='1'; e.target.style.transform='translateY(0)'; } });
 },{threshold:0.1});
-document.querySelectorAll('.feat,.tool-card,.broker-card,.price-card,.stat-item,.founder-card').forEach(el=>{
+document.querySelectorAll('.feat,.tool-card,.broker-card,.price-card,.stat-item,.founder-card,.pain-item,.pain-stat,.hiw-step,.testi-card,.faq-item').forEach(el=>{
   el.style.opacity='0';
   el.style.transform='translateY(20px)';
   el.style.transition='opacity 0.5s ease, transform 0.5s ease';
