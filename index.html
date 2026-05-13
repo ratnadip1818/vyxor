@@ -631,7 +631,52 @@ section { position:relative; z-index:1; }
 .cr.paid { color:var(--warn); }
 
 /* ── PRICING ── */
-.pricing-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-top:3.5rem; max-width:900px; margin-left:auto; margin-right:auto; }
+.pricing-toggle {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin:2rem 0 2.5rem;
+}
+.toggle-label { font-size:14px; color:var(--text2); font-weight:500; }
+.toggle-label.active { color:var(--text); }
+.toggle-switch {
+  width:44px; height:24px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid var(--border2);
+  border-radius:99px;
+  cursor:pointer;
+  position:relative;
+  transition:background 0.2s;
+}
+.toggle-switch.on { background:var(--accent); border-color:var(--accent); }
+.toggle-knob {
+  position:absolute;
+  width:18px; height:18px;
+  background:#fff;
+  border-radius:50%;
+  top:2px; left:2px;
+  transition:transform 0.2s;
+}
+.toggle-switch.on .toggle-knob { transform:translateX(20px); }
+.annual-save {
+  font-size:11px;
+  color:var(--accent);
+  background:rgba(0,245,160,0.08);
+  border:1px solid rgba(0,245,160,0.2);
+  padding:2px 10px;
+  border-radius:99px;
+  font-family:'DM Mono',monospace;
+}
+.pricing-grid {
+  display:grid;
+  grid-template-columns:1fr 1.1fr 1fr;
+  gap:16px;
+  margin-top:0;
+  max-width:960px;
+  margin-left:auto;
+  margin-right:auto;
+}
 .price-card {
   background:var(--surface);
   border:1px solid var(--border);
@@ -640,35 +685,44 @@ section { position:relative; z-index:1; }
   backdrop-filter:blur(20px);
   transition:all 0.3s;
   position:relative;
+  display:flex;
+  flex-direction:column;
 }
 .price-card.featured {
-  border-color:rgba(0,245,160,0.3);
+  border-color:rgba(0,245,160,0.35);
   background:rgba(0,245,160,0.04);
+  transform:scale(1.03);
 }
 .price-card.featured::before {
   content:'Most Popular';
   position:absolute;
-  top:-12px; left:50%; transform:translateX(-50%);
+  top:-13px; left:50%; transform:translateX(-50%);
   font-size:10px;
   font-family:'DM Mono', monospace;
   color:#020c12;
   background:var(--accent);
-  padding:3px 12px;
+  padding:3px 14px;
   border-radius:99px;
+  white-space:nowrap;
 }
-.price-card:hover { transform:translateY(-4px); }
-.price-plan { font-size:12px; font-family:'DM Mono', monospace; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px; }
-.price-amount { font-family:'Syne', sans-serif; font-weight:800; font-size:42px; letter-spacing:-0.05em; margin-bottom:4px; line-height:1; }
-.price-period { font-size:12px; color:var(--text3); font-family:'DM Mono', monospace; margin-bottom:1.5rem; }
-.price-desc { font-size:13px; color:var(--text2); margin-bottom:1.5rem; line-height:1.6; }
-.price-features { display:flex; flex-direction:column; gap:8px; margin-bottom:2rem; }
-.pf { font-size:13px; color:var(--text2); display:flex; align-items:flex-start; gap:8px; }
-.pf.yes::before { content:'✓'; color:var(--accent); flex-shrink:0; }
+.price-card:hover:not(.featured) { transform:translateY(-4px); }
+.price-plan { font-size:12px; font-family:'DM Mono', monospace; color:var(--text3); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:8px; }
+.price-amount-wrap { display:flex; align-items:baseline; gap:4px; margin-bottom:2px; }
+.price-amount { font-family:'Syne', sans-serif; font-weight:800; font-size:42px; letter-spacing:-0.05em; line-height:1; }
+.price-slash { font-size:14px; color:var(--text3); font-family:'DM Mono',monospace; text-decoration:line-through; display:none; }
+.price-slash.show { display:inline; }
+.price-period { font-size:12px; color:var(--text3); font-family:'DM Mono', monospace; margin-bottom:1.25rem; min-height:18px; }
+.price-desc { font-size:13px; color:var(--text2); margin-bottom:1.25rem; line-height:1.6; }
+.price-divider { height:1px; background:var(--border); margin-bottom:1.25rem; }
+.price-features { display:flex; flex-direction:column; gap:8px; margin-bottom:1.75rem; flex:1; }
+.pf { font-size:13px; color:var(--text2); display:flex; align-items:flex-start; gap:8px; line-height:1.5; }
+.pf.yes::before { content:'✓'; color:var(--accent); flex-shrink:0; font-weight:700; }
 .pf.no::before  { content:'—'; color:var(--text3); flex-shrink:0; }
+.pf.pro::before { content:'★'; color:var(--warn); flex-shrink:0; }
 .price-cta {
   display:block;
   width:100%;
-  padding:12px;
+  padding:13px;
   border-radius:var(--r8);
   text-align:center;
   font-family:'Outfit', sans-serif;
@@ -678,12 +732,15 @@ section { position:relative; z-index:1; }
   transition:all 0.2s;
   cursor:pointer;
   border:none;
+  margin-top:auto;
 }
 .price-cta.primary { background:var(--accent); color:#020c12; }
 .price-cta.primary:hover { background:var(--accent2); }
 .price-cta.outline { background:transparent; color:var(--text2); border:1px solid var(--border2); }
 .price-cta.outline:hover { border-color:rgba(255,255,255,0.3); color:var(--text); }
 .price-cta.dim { background:rgba(255,255,255,0.04); color:var(--text3); border:1px solid var(--border); cursor:not-allowed; }
+.price-annual-note { font-size:11px; color:var(--accent); font-family:'DM Mono',monospace; text-align:center; margin-top:8px; display:none; }
+.price-annual-note.show { display:block; }
 
 /* ── NEWSLETTER ── */
 .nl-section { background:var(--bg2); border-top:1px solid var(--border); }
@@ -848,7 +905,8 @@ footer {
   .ai-card { right:-5px; bottom:-20px; max-width:180px; }
   .features-grid { grid-template-columns:1fr 1fr; }
   .footer-top { grid-template-columns:1fr 1fr; }
-  .pricing-grid { grid-template-columns:1fr; max-width:400px; }
+  .pricing-grid { grid-template-columns:1fr; max-width:400px; margin-left:auto; margin-right:auto; }
+  .price-card.featured { transform:scale(1); }
 }
 @media(max-width:768px) {
   nav { padding:0 1.25rem; }
@@ -965,8 +1023,8 @@ footer {
       <a href="/position-size-calculator.html" class="btn-hero-secondary">Position Calculator</a>
     </div>
     <div class="hero-trust">
-      <div class="trust-item"><span class="trust-check">✓</span> No credit card</div>
-      <div class="trust-item"><span class="trust-check">✓</span> 30 free trades/month</div>
+      <div class="trust-item"><span class="trust-check">✓</span> 15-day free trial</div>
+      <div class="trust-item"><span class="trust-check">✓</span> No credit card needed</div>
       <div class="trust-item"><span class="trust-check">✓</span> NSE · BSE · MCX</div>
       <div class="trust-item"><span class="trust-check">✓</span> Not SEBI advisor</div>
     </div>
@@ -1072,7 +1130,7 @@ footer {
 <!-- ── STAT STRIP ── -->
 <div class="stat-strip">
   <div class="stat-strip-inner">
-    <div class="stat-item"><div class="stat-num">₹0</div><div class="stat-lbl">Cost to start</div></div>
+    <div class="stat-item"><div class="stat-num">15</div><div class="stat-lbl">Day free trial</div></div>
     <div class="stat-item"><div class="stat-num">30+</div><div class="stat-lbl">Indian instruments</div></div>
     <div class="stat-item"><div class="stat-num">3</div><div class="stat-lbl">Broker imports</div></div>
     <div class="stat-item"><div class="stat-num">AI</div><div class="stat-lbl">Pattern analysis</div></div>
@@ -1093,10 +1151,10 @@ footer {
       <div class="tool-desc">Log every trade, tag emotions, and let AI analyse your patterns. Find out exactly which habits are costing you money and which setups actually work.</div>
       <div class="tool-features">
         <div class="tool-feat">Import from Zerodha, Groww, Angel One — one click</div>
-        <div class="tool-feat">AI pattern detection powered by Claude</div>
-        <div class="tool-feat">Emotion tracking — pre and post trade</div>
+        <div class="tool-feat">AI pattern detection — Pro feature, powered by Claude</div>
+        <div class="tool-feat">Emotion tracking — pre and post trade (free)</div>
         <div class="tool-feat">Screenshot per trade, cloud synced across devices</div>
-        <div class="tool-feat">Instrument type — Futures, Options CE/PE, Equity</div>
+        <div class="tool-feat">15 trades/month free · Unlimited on Pro ₹199/month</div>
       </div>
       <span class="tool-link">Open Journal →</span>
     </a>
@@ -1207,23 +1265,26 @@ footer {
 <section>
 <div class="section-inner">
   <div class="section-eyebrow">Comparison</div>
-  <div class="section-title">₹0 vs <span>₹2,000–₹8,000/year</span></div>
-  <p class="section-desc">Every existing journal charges more than most Indian traders make in a good month. Vyxor is free.</p>
+  <div class="section-title">₹199/month vs <span>₹2,000–₹8,000/month</span></div>
+  <p class="section-desc">Indian trading journal apps charge ₹2,000 to ₹8,000 every month. Vyxor Pro is ₹199/month. Try everything free for 15 days first.</p>
   <div class="compare-table">
     <div class="compare-head">
       <div class="ch">Feature</div>
-      <div class="ch vyxor">Vyxor</div>
-      <div class="ch">TradeZella</div>
-      <div class="ch">Tradervue</div>
+      <div class="ch vyxor">Vyxor Pro</div>
+      <div class="ch">Indian App A</div>
+      <div class="ch">Indian App B</div>
     </div>
-    <div class="compare-row"><div class="cr feat">Price</div><div class="cr yes">Free to start</div><div class="cr paid">$29/month</div><div class="cr paid">$30/month</div></div>
+    <div class="compare-row"><div class="cr feat">Price</div><div class="cr yes">₹199/month</div><div class="cr paid">₹2,000–₹5,000/mo</div><div class="cr paid">₹3,000–₹8,000/mo</div></div>
+    <div class="compare-row"><div class="cr feat">Free trial</div><div class="cr yes">✓ 15 days full access</div><div class="cr paid">7 days limited</div><div class="cr no">✗ No</div></div>
     <div class="compare-row"><div class="cr feat">Zerodha CSV import</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
     <div class="compare-row"><div class="cr feat">NSE / BSE / MCX</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
     <div class="compare-row"><div class="cr feat">Indian lot sizes</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
     <div class="compare-row"><div class="cr feat">₹ currency default</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
     <div class="compare-row"><div class="cr feat">AI analysis</div><div class="cr yes">✓ Yes</div><div class="cr paid">Paid only</div><div class="cr no">✗ No</div></div>
+    <div class="compare-row"><div class="cr feat">Weekly AI report</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
     <div class="compare-row"><div class="cr feat">Emotion tracking</div><div class="cr yes">✓ Yes</div><div class="cr yes">✓ Yes</div><div class="cr no">✗ No</div></div>
     <div class="compare-row"><div class="cr feat">Screenshot per trade</div><div class="cr yes">✓ Yes</div><div class="cr yes">✓ Yes</div><div class="cr paid">Paid only</div></div>
+    <div class="compare-row"><div class="cr feat">Position calculator</div><div class="cr yes">✓ Free always</div><div class="cr no">✗ No</div><div class="cr no">✗ No</div></div>
   </div>
 </div>
 </section>
@@ -1254,59 +1315,73 @@ footer {
 <section>
 <div class="section-inner">
   <div class="section-eyebrow">Pricing</div>
-  <div class="section-title">Simple, <span>honest pricing</span></div>
-  <p class="section-desc">Start free. Upgrade when you're ready. No tricks.</p>
-  <div class="pricing-grid">
-    <div class="price-card">
-      <div class="price-plan">Free</div>
-      <div class="price-amount">₹0</div>
-      <div class="price-period">forever</div>
-      <div class="price-desc">For traders getting started. Everything you need to begin journaling.</div>
-      <div class="price-features">
-        <div class="pf yes">30 trade entries/month</div>
-        <div class="pf yes">Position size calculator</div>
-        <div class="pf yes">AI trade analysis</div>
-        <div class="pf yes">CSV import (Zerodha, Groww, Angel One)</div>
-        <div class="pf yes">Screenshot per trade</div>
-        <div class="pf yes">Cloud sync across devices</div>
-        <div class="pf no">Unlimited trades</div>
-        <div class="pf no">PDF export</div>
-      </div>
-      <a href="/journal.html" class="price-cta outline">Start Free →</a>
+  <div class="section-title">Try everything free.<br><span>Then ₹199/month.</span></div>
+  <p class="section-desc">15 days full access — no credit card. Every feature unlocked. Cancel or upgrade after.</p>
+
+  <!-- Monthly / Annual toggle -->
+  <div class="pricing-toggle">
+    <span class="toggle-label active" id="lbl-monthly">Monthly</span>
+    <div class="toggle-switch" id="billing-toggle" onclick="toggleBilling()">
+      <div class="toggle-knob"></div>
     </div>
-    <div class="price-card featured">
-      <div class="price-plan">Pro</div>
-      <div class="price-amount">₹199</div>
-      <div class="price-period">per month · coming soon</div>
-      <div class="price-desc">For serious traders who trade every day and need unlimited tracking.</div>
+    <span class="toggle-label" id="lbl-annual">Annual</span>
+    <span class="annual-save" id="annual-save-badge" style="display:none;">Save ₹889</span>
+  </div>
+
+  <div class="pricing-grid" style="grid-template-columns:1fr 1fr;max-width:720px;">
+
+    <!-- 15-day Trial -->
+    <div class="price-card">
+      <div class="price-plan">15-Day Free Trial</div>
+      <div class="price-amount-wrap">
+        <div class="price-amount">₹0</div>
+      </div>
+      <div class="price-period">no credit card required</div>
+      <div class="price-desc">Full access to every feature for 15 days. No restrictions. See if Vyxor works for you before paying anything.</div>
+      <div class="price-divider"></div>
       <div class="price-features">
         <div class="pf yes">Unlimited trade entries</div>
-        <div class="pf yes">Everything in Free</div>
-        <div class="pf yes">PDF trade report export</div>
-        <div class="pf yes">Weekly AI email digest</div>
-        <div class="pf yes">Advanced analytics</div>
-        <div class="pf yes">Priority AI analysis</div>
-        <div class="pf yes">Trade editing</div>
-        <div class="pf yes">Broker charges auto-deduction</div>
+        <div class="pf yes">AI trade analysis — fully enabled</div>
+        <div class="pf yes">Weekly AI performance report</div>
+        <div class="pf yes">CSV import — Zerodha, Groww, Angel One</div>
+        <div class="pf yes">Screenshot per trade</div>
+        <div class="pf yes">Cloud sync across devices</div>
+        <div class="pf yes">Position size calculator</div>
+        <div class="pf yes">All Indian instruments</div>
       </div>
-      <button class="price-cta dim">Coming Soon</button>
+      <a href="/journal.html" class="price-cta outline">Start 15-Day Trial →</a>
     </div>
-    <div class="price-card">
-      <div class="price-plan">Prop Firm</div>
-      <div class="price-amount">₹499</div>
-      <div class="price-period">per month · coming soon</div>
-      <div class="price-desc">For funded traders managing prop firm challenges.</div>
+
+    <!-- Pro — featured -->
+    <div class="price-card featured">
+      <div class="price-plan">Pro</div>
+      <div class="price-amount-wrap">
+        <div class="price-amount" id="pro-price">₹199</div>
+      </div>
+      <div class="price-period" id="pro-period">per month · coming soon</div>
+      <div class="price-desc">After your trial. Everything unlocked. Cancel anytime. Less than a cup of chai per day.</div>
+      <div class="price-divider"></div>
       <div class="price-features">
-        <div class="pf yes">Everything in Pro</div>
-        <div class="pf yes">Prop firm challenge tracker</div>
-        <div class="pf yes">Daily loss limit alerts</div>
-        <div class="pf yes">Max drawdown warnings</div>
-        <div class="pf yes">FTMO, Apex, MyFundedFx support</div>
-        <div class="pf yes">Challenge progress dashboard</div>
+        <div class="pf yes">Everything in Trial — forever</div>
+        <div class="pf pro">Unlimited trade entries</div>
+        <div class="pf pro">AI analysis after every trade</div>
+        <div class="pf pro">Weekly AI email report</div>
+        <div class="pf yes">PDF trade report export</div>
+        <div class="pf yes">Advanced P&L analytics</div>
+        <div class="pf yes">Trade editing</div>
+        <div class="pf yes">Priority support</div>
       </div>
-      <button class="price-cta dim">Coming Soon</button>
+      <button class="price-cta primary" id="pro-cta" onclick="notifyMe('pro')">Notify Me When Live</button>
+      <div class="price-annual-note" id="pro-annual-note">₹1,499/year = ₹125/month · Save ₹889</div>
     </div>
+
   </div>
+
+  <!-- Value anchor -->
+  <p style="text-align:center;font-size:13px;color:var(--text3);font-family:'DM Mono',monospace;margin-top:2rem;line-height:1.8;">
+    Other Indian trading journal apps = ₹2,000–₹8,000/month<br>
+    <span style="color:var(--accent);">Vyxor Pro = ₹199/month · 15-day free trial &nbsp;🇮🇳</span>
+  </p>
 </div>
 </section>
 
@@ -1315,7 +1390,7 @@ footer {
 <div class="section-inner">
   <div class="nl-box">
     <div class="nl-title">Start trading with<br><span>discipline today</span></div>
-    <p class="nl-desc">Free to start. No credit card. Built by a trader who couldn't afford the alternatives — now free for every Indian trader.</p>
+    <p class="nl-desc">15-day free trial. No credit card. Every feature unlocked. Then ₹199/month — less than a cup of chai per day.</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:2rem;">
       <a href="/journal.html" class="btn-hero-primary">Open Journal — Free →</a>
       <a href="/position-size-calculator.html" class="btn-hero-secondary">Position Calculator</a>
@@ -1433,6 +1508,42 @@ window.googleSignIn=window.googleSignIn||_n;
 window.emailLogin=window.emailLogin||_n;
 window.emailSignup=window.emailSignup||_n;
 window.doSignOut=window.doSignOut||_n;
+
+// Billing toggle — Monthly / Annual
+let isAnnual = false;
+window.toggleBilling = function(){
+  isAnnual = !isAnnual;
+  const tog  = document.getElementById('billing-toggle');
+  const lblM = document.getElementById('lbl-monthly');
+  const lblA = document.getElementById('lbl-annual');
+  const badge = document.getElementById('annual-save-badge');
+  const proPrice  = document.getElementById('pro-price');
+  const proPeriod = document.getElementById('pro-period');
+  const proNote   = document.getElementById('pro-annual-note');
+  if(!tog) return;
+  tog.classList.toggle('on', isAnnual);
+  lblM.classList.toggle('active', !isAnnual);
+  lblA.classList.toggle('active', isAnnual);
+  badge.style.display = isAnnual ? 'inline-flex' : 'none';
+  if(isAnnual){
+    proPrice.textContent  = '₹125';
+    proPeriod.textContent = 'per month · billed ₹1,499/year · coming soon';
+    proNote.classList.add('show');
+  } else {
+    proPrice.textContent  = '₹199';
+    proPeriod.textContent = 'per month · coming soon';
+    proNote.classList.remove('show');
+  }
+};
+
+// Notify me — pricing CTA
+window.notifyMe = function(plan){
+  const email = prompt('Enter your email — we\'ll notify you when Pro launches:');
+  if(!email || !email.includes('@')) return;
+  try{ new Image().src = 'https://script.google.com/macros/s/AKfycbzM3v6AA9ovWf-0dh3u_lg3DjIXvCg5--5rZGlEQbDEBsEmeAOzqJg6HmqrOqw6WWKoRA/exec?email='+encodeURIComponent(email)+'&source=pricing_'+plan+'&t='+Date.now(); }catch(x){}
+  const btn = document.getElementById(plan==='pro'?'pro-cta':'prop-cta');
+  if(btn){ btn.textContent='✓ You\'re on the list!'; btn.className='price-cta outline'; btn.onclick=null; }
+};
 
 // Nav scroll
 window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>50));
