@@ -287,14 +287,19 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
 .ai-loading{display:none;align-items:center;gap:10px;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:1rem;}
 .spinner{width:14px;height:14px;border:2px solid rgba(0,245,160,0.3);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0;}
 .ai-result{display:none;margin-top:1.5rem;}
-.ai-result-title{font-family:'Syne',sans-serif;font-weight:700;font-size:16px;margin-bottom:1rem;color:var(--accent);letter-spacing:-0.3px;}
-.ai-result-text{font-size:13.5px;color:var(--muted);line-height:1.9;}
-.ai-result-text .ai-section{background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:12px;padding:1rem 1.25rem;margin-bottom:10px;}
-.ai-result-text .ai-section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.ai-result-text .ai-section-body{font-size:13px;color:var(--muted);line-height:1.85;}
-.ai-result-text .ai-section-body p{margin:0 0 6px;}
-.ai-result-text .ai-highlight{color:var(--accent);font-weight:600;}
-.ai-result-text .ai-danger{color:var(--danger);font-weight:600;}
+.ai-result-title{font-family:'Syne',sans-serif;font-weight:700;font-size:17px;margin-bottom:1.25rem;color:var(--text);letter-spacing:-0.3px;}
+.ai-section{border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;margin-bottom:10px;background:rgba(255,255,255,0.015);}
+.ai-section-title{font-family:'Syne',sans-serif;font-weight:700;font-size:12px;color:var(--accent);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;}
+.ai-section-body{font-size:13.5px;color:var(--muted);line-height:1.85;}
+.ai-section-body p{margin:0 0 8px;}
+.ai-section-body p:last-child{margin:0;}
+.ai-section-body strong{color:var(--text);font-weight:600;}
+.ai-highlight{color:var(--accent);font-weight:600;}
+.ai-danger{color:var(--danger);font-weight:600;}
+.ai-bullet{display:flex;gap:10px;margin-bottom:7px;align-items:flex-start;}
+.ai-bullet-dot{color:var(--accent);flex-shrink:0;margin-top:2px;font-size:11px;}
+.ai-focus-box{background:rgba(0,245,160,0.06);border:1px solid rgba(0,245,160,0.2);border-radius:10px;padding:1rem 1.25rem;margin-bottom:10px;}
+.ai-focus-text{font-size:14px;color:var(--text);line-height:1.7;font-style:italic;}
 
 /* ── IMPORT ── */
 .import-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:2rem;backdrop-filter:blur(20px);margin-bottom:1.5rem;}
@@ -663,7 +668,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
     <button class="jtab active" onclick="switchTab('log')">📝 Log Trade</button>
     <button class="jtab" onclick="switchTab('history')">📋 History</button>
     <button class="jtab" onclick="switchTab('analytics')">📊 Analytics</button>
-    <button class="jtab" onclick="switchTab('ai')">🤖 AI Coach</button>
+    <button class="jtab" onclick="switchTab('ai')">AI Coach</button>
     <button class="jtab" onclick="switchTab('import')">📥 Import</button>
   </div>
 
@@ -927,8 +932,8 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
       <p class="ai-sub">Powered by Claude · Your personal trading coach</p>
       <p class="ai-desc">The AI reads all your trades and finds patterns you can't see yourself — which emotions cost you money, which sessions you perform best in, what habits are holding you back. The more trades you log, the sharper the insights.</p>
       <div class="ai-btns">
-        <button class="ai-btn" id="ai-btn" onclick="runAnalysis()">🤖 Analyse My Trades</button>
-        <button class="ai-btn story" id="story-btn" onclick="runStory()">📖 This Week's Report</button>
+        <button class="ai-btn" id="ai-btn" onclick="runAnalysis()">Analyse My Trades</button>
+        <button class="ai-btn story" id="story-btn" onclick="runStory()">This Week's Report</button>
       </div>
       <div class="ai-loading" id="ai-loading">
         <div class="spinner"></div>
@@ -1997,53 +2002,92 @@ window.renderAnalytics = function() {
 // ── AI (secure proxy) ──────────────────────────────────
 // ── FORMAT AI RESPONSE INTO STRUCTURED SECTIONS ────────
 function formatAIResponse(text) {
-  // Split on emoji section headers like "🪞 TRADER DNA" or "📊 KEY PATTERNS"
-  const lines = text.split('\n');
-  let html = '';
-  let currentSection = null;
-  let bodyLines = [];
+  // Step 1 — clean raw markdown noise
+  let cleaned = text
+    .replace(/^#{1,3}\s*/gm, '')          // remove ## headers
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>') // **bold**
+    .replace(/\*(.+?)\*/g, '<em>$1</em>') // *italic*
+    .replace(/^---+$/gm, '')               // remove --- dividers
+    .replace(/^___+$/gm, '');             // remove ___ dividers
 
-  const flushSection = () => {
-    if (!currentSection && bodyLines.length === 0) return;
-    if (currentSection) {
-      const body = bodyLines.join('\n').trim();
-      const bodyHtml = body
-        .split('\n')
-        .filter(l => l.trim())
-        .map(l => {
-          // Highlight ₹ numbers
-          l = l.replace(/(₹[\d,]+(\.\d{1,2})?)/g, '<span class="ai-highlight">$1</span>');
-          // Highlight % numbers
-          l = l.replace(/(\d+\.?\d*%)/g, '<span class="ai-highlight">$1</span>');
-          // Highlight negative/warning words
-          l = l.replace(/\b(FOMO|Revenge|revenge|impulsive|broke)\b/g, '<span class="ai-danger">$1</span>');
-          return `<p>${l}</p>`;
-        }).join('');
-      html += `<div class="ai-section"><div class="ai-section-title">${currentSection}</div><div class="ai-section-body">${bodyHtml}</div></div>`;
-      bodyLines = [];
-    } else if (bodyLines.length) {
-      // Pre-section text
-      const body = bodyLines.join(' ').trim();
-      if (body) html += `<div class="ai-section"><div class="ai-section-body"><p>${body}</p></div></div>`;
-      bodyLines = [];
-    }
-  };
+  // Step 2 — detect section headers
+  // Matches: "TRADER DNA", "🪞 TRADER DNA", "KEY PATTERNS", etc.
+  const sectionPattern = /^([🪞📊💸🎯📖🧠💡⚠️⚡🔍✅🏆📈📉🔥💰🧩]?\s*)(TRADER DNA|KEY PATTERNS|MONEY LEFT ON TABLE|TOP 3 IMPROVEMENTS|THIS WEEK'S FOCUS|TRADER DNA|PATTERNS|IMPROVEMENTS|FOCUS|SUMMARY)(.*)$/im;
 
-  const sectionRe = /^([🪞📊💸🎯📖🧠💡⚠️🔍✅❌🏆📈📉⚡🎪🔥💰🧩]+\s+[A-Z\s&]+)$/;
+  const lines = cleaned.split('\n');
+  const sections = [];
+  let current = null;
 
-  for (const line of lines) {
-    const trimmed = line.trim();
-    if (!trimmed) continue;
-    if (sectionRe.test(trimmed) || /^[🪞📊💸🎯📖🧠💡⚠️🔍✅❌🏆📈📉⚡🎪🔥💰🧩]/.test(trimmed) && trimmed.length < 60 && trimmed === trimmed.toUpperCase().replace(/[^A-Z0-9\s🪞📊💸🎯📖🧠💡⚠️🔍✅❌🏆📈📉⚡🎪🔥💰🧩]/g,'')) {
-      flushSection();
-      currentSection = trimmed;
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) continue;
+
+    // Check if line is a section header
+    const isHeader = (
+      /^[🪞📊💸🎯📖🧠💡⚠️⚡🔍✅🏆📈📉🔥💰🧩]/.test(line) ||
+      /^(TRADER DNA|KEY PATTERNS|MONEY LEFT ON TABLE|TOP 3 IMPROVEMENTS|THIS WEEK'S FOCUS)/i.test(line) ||
+      (/^[A-Z\s]{4,}$/.test(line) && line.length < 40)
+    ) && line.length < 60;
+
+    if (isHeader) {
+      if (current) sections.push(current);
+      // Clean the title — remove leading emoji if present
+      const title = line.replace(/^[🪞📊💸🎯📖🧠💡⚠️⚡🔍✅🏆📈📉🔥💰🧩]\s*/, '').trim();
+      current = { title, lines: [] };
+    } else if (current) {
+      current.lines.push(line);
     } else {
-      bodyLines.push(trimmed);
+      // Before first header — create a generic section
+      current = { title: null, lines: [line] };
     }
   }
-  flushSection();
+  if (current) sections.push(current);
 
-  return html || `<div class="ai-section"><div class="ai-section-body"><p>${text.replace(/\n/g,'</p><p>')}</p></div></div>`;
+  // Step 3 — if no sections detected, treat entire text as one block
+  if (sections.length === 0 || (sections.length === 1 && !sections[0].title)) {
+    return renderSingleBlock(cleaned);
+  }
+
+  // Step 4 — render each section as a card
+  return sections.map(sec => {
+    const bodyHtml = renderLines(sec.lines);
+    if (!bodyHtml && !sec.title) return '';
+
+    // Special treatment for THIS WEEK'S FOCUS — highlight box
+    if (sec.title && /focus/i.test(sec.title)) {
+      return `<div class="ai-focus-box"><div class="ai-section-title">${sec.title.toUpperCase()}</div><div class="ai-focus-text">${bodyHtml}</div></div>`;
+    }
+
+    return `<div class="ai-section">${sec.title ? `<div class="ai-section-title">${sec.title.toUpperCase()}</div>` : ''}<div class="ai-section-body">${bodyHtml}</div></div>`;
+  }).join('');
+}
+
+function renderLines(lines) {
+  if (!lines.length) return '';
+  return lines.map(line => {
+    // Highlight money amounts
+    line = line.replace(/([$₹€£¥][0-9,]+(\.[0-9]{1,2})?k?)/g, '<span class="ai-highlight">$1</span>');
+    // Highlight percentages
+    line = line.replace(/(\d+\.?\d*%)/g, '<span class="ai-highlight">$1</span>');
+    // Highlight danger words
+    line = line.replace(/\b(FOMO|Revenge|revenge|impulsive|Impulsive|broke rules|overtrading)\b/g, '<span class="ai-danger">$1</span>');
+
+    // Bullet points — lines starting with - or * or number.
+    if (/^[-•*]\s+/.test(line)) {
+      const content = line.replace(/^[-•*]\s+/, '');
+      return `<div class="ai-bullet"><span class="ai-bullet-dot">→</span><span>${content}</span></div>`;
+    }
+    if (/^\d+\.\s+/.test(line)) {
+      const content = line.replace(/^\d+\.\s+/, '');
+      return `<div class="ai-bullet"><span class="ai-bullet-dot">→</span><span>${content}</span></div>`;
+    }
+    return `<p>${line}</p>`;
+  }).join('');
+}
+
+function renderSingleBlock(text) {
+  const lines = text.split('\n').filter(l => l.trim());
+  return `<div class="ai-section"><div class="ai-section-body">${renderLines(lines)}</div></div>`;
 }
 
 async function callAI(prompt, maxTokens=1500) {
@@ -2069,40 +2113,40 @@ window.runAnalysis = async function() {
     `${t.datetime}|${t.asset}|${t.direction}|P&L:${t.currency||'₹'}${t.pnl}|${t.result}|Session:${t.session||'—'}|Setup:${t.setup||'—'}|Pre:${t.preEmo||'—'}|Post:${t.postEmo||'—'}|Intent:${t.tradeIntent||'—'}|Rules:${t.rulesFollowed||'—'}|Market:${t.marketCondition||'—'}|Lesson:${t.lesson||'—'}`
   ).join('\n');
 
-  const prompt = `You are an elite trading coach. Analyse this trader's journal data precisely.
+  const prompt = `You are an elite trading coach. Analyse this trader's journal data and return a structured report.
 
 TRADES:
 ${summary}
 
 SUMMARY: ${total} trades | ${((wins/total)*100).toFixed(1)}% win rate | Total P&L: ${totalPnl.toFixed(2)}
 
-Deep analysis in these sections:
+Return your analysis in EXACTLY these 5 sections. Use the exact section headers below. No markdown symbols like ** or ## or ---. No asterisks. Plain text only inside each section.
 
-🪞 TRADER DNA
-3-4 sentences. Specific personality and behaviour patterns from their actual data.
+TRADER DNA
+Write 3-4 sentences describing this trader's specific personality and behaviour patterns based on their actual data.
 
-📊 KEY PATTERNS
-4-5 patterns with exact numbers. Compare planned vs impulsive trades, rules followed vs broken, emotion win rates. e.g. "FOMO trades: 22% win rate vs 61% on calm trades."
+KEY PATTERNS
+List 4-5 specific patterns with exact numbers. Each on its own line starting with a dash. Compare emotions, intent (planned vs impulsive), rules followed vs broken. Example: - FOMO trades: 22% win rate vs 61% on calm trades
 
-💸 MONEY LEFT ON TABLE
-Exact amount each bad habit cost them. Show the math.
+MONEY LEFT ON TABLE
+List what each bad habit cost them in exact amounts with the math shown. Each item on its own line starting with a dash.
 
-🎯 TOP 3 IMPROVEMENTS
-3 specific, actionable changes based on their actual data.
+TOP 3 IMPROVEMENTS
+List exactly 3 specific actionable changes based on their actual data. Each on its own line starting with a dash.
 
-⚡ THIS WEEK'S FOCUS
-One powerful sentence. Make it memorable.
+THIS WEEK'S FOCUS
+Write one powerful memorable sentence only.
 
-Be direct. Use their currency symbol. Use their actual numbers. Reference their specific setups and sessions.`;
+Use their actual currency symbol and numbers. Be direct and specific.`;
 
   try {
     const text = await callAI(prompt,1500);
     document.getElementById('ai-result-title').textContent = 'Your Trading Analysis';
     document.getElementById('ai-result-text').innerHTML = formatAIResponse(text);
     result.style.display='block';
-    toast('Analysis ready 🤖');
+    toast('Analysis ready');
   } catch(e) { toast(e.message||'AI failed.', true); }
-  finally { btn.disabled=false; btn.textContent='🤖 Analyse My Trades'; loading.style.display='none'; }
+  finally { btn.disabled=false; btn.textContent='Analyse My Trades'; loading.style.display='none'; }
 };
 
 // ── WEEKLY REPORT HELPERS ────────────────────────────
@@ -2150,7 +2194,7 @@ window.runStory = async function() {
       const existingDoc = await getDoc(doc(db, 'users', currentUser.uid, 'weeklyReports', weekId));
       if (existingDoc.exists()) {
         const data = existingDoc.data();
-        document.getElementById('ai-result-title').textContent = `📖 Week of ${getWeekLabel(weekId)}`;
+        document.getElementById('ai-result-title').textContent = `Week of ${getWeekLabel(weekId)}`;
         document.getElementById('ai-result-text').innerHTML = formatAIResponse(data.report);
         result.style.display = 'block';
         toast('Loaded this week\'s saved report ✓');
@@ -2169,15 +2213,14 @@ window.runStory = async function() {
   const totalPnl = wt.reduce((s, t) => s + (parseFloat(t.pnl) || 0), 0);
   const winRate = ((wins / wt.length) * 100).toFixed(0);
 
-  const prompt = `Write a 200-250 word weekly trading narrative for an Indian trader.
+  const prompt = `Write a 200-250 word weekly trading narrative. Second person ("You..."). Plain text only — no asterisks, no markdown, no bold symbols.
 
-Week: ${wt.length} trades | ${wins} wins | ${losses} losses | ${winRate}% win rate | P&L: ₹${totalPnl.toFixed(2)}
+Week: ${wt.length} trades | ${wins} wins | ${losses} losses | ${winRate}% win rate | P&L: ${t.currency||'₹'}${totalPnl.toFixed(2)}
 
 Trades:
-${wt.map(t => `${t.asset} ${t.direction} ${t.result} ₹${t.pnl} (${t.preEmo || '—'})`).join('\n')}
+${wt.map(t => `${t.asset} ${t.direction} ${t.result} ${t.currency||'₹'}${t.pnl} (${t.preEmo||'—'}) intent:${t.tradeIntent||'—'}`).join('\n')}
 
-Include: overall tone of the week, best + worst moment, one defining pattern you noticed, one specific thing to focus on next week.
-Second person ("You..."). Honest, coach-like, specific. Mention ₹ values. Reference Indian markets (NSE/BSE/MCX).`;
+Cover: overall tone of the week, best and worst moment, one defining behavioral pattern, one specific focus for next week. Honest, coach-like, specific. Use their actual numbers.`;
 
   try {
     const text = await callAI(prompt, 800);
@@ -2202,7 +2245,7 @@ Second person ("You..."). Honest, coach-like, specific. Mention ₹ values. Refe
       } catch(e) { console.error('Failed to save report:', e); }
     }
 
-    document.getElementById('ai-result-title').textContent = `📖 Week of ${getWeekLabel(weekId)}`;
+    document.getElementById('ai-result-title').textContent = `Week of ${getWeekLabel(weekId)}`;
     document.getElementById('ai-result-text').innerHTML = formatAIResponse(text);
     result.style.display = 'block';
 
