@@ -632,7 +632,23 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
     </div>
   </div>
 </div>
-
+<!-- ── UPGRADE MODAL ── -->
+<div id="upgrade-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(5,8,22,0.92);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:#0B1220;border:1px solid rgba(0,245,160,0.25);border-radius:20px;max-width:440px;width:100%;padding:2.5rem 2rem;position:relative;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,0.7);">
+    <div style="font-size:40px;margin-bottom:1rem;">⏰</div>
+    <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.05em;margin-bottom:8px;">Your 15-day trial has ended</div>
+    <p style="font-size:14px;color:#94A3B8;line-height:1.7;margin-bottom:1.5rem;">Upgrade to Vyxor Pro to keep logging trades, AI analysis and weekly reports. Less than a cup of chai per day.</p>
+    <div style="background:rgba(0,245,160,0.05);border:1px solid rgba(0,245,160,0.2);border-radius:12px;padding:1.25rem;margin-bottom:1.5rem;">
+      <div style="font-size:32px;font-family:'Syne',sans-serif;font-weight:800;color:#00F5A0;letter-spacing:-0.05em;">₹199<span style="font-size:14px;color:#94A3B8;font-weight:400;">/month</span></div>
+      <div style="font-size:12px;color:#475569;font-family:'DM Mono',monospace;margin-top:4px;">or ₹1,499/year · Save ₹889</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px;">
+      <button onclick="notifyUpgrade()" style="padding:13px;border-radius:10px;border:none;background:#00F5A0;color:#020c12;font-family:'Bricolage Grotesque',sans-serif;font-size:15px;font-weight:700;cursor:pointer;">Notify Me When Live →</button>
+      <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#94A3B8;font-family:'Bricolage Grotesque',sans-serif;font-size:14px;cursor:pointer;">Maybe Later</button>
+    </div>
+    <p style="font-size:11px;color:#475569;font-family:'DM Mono',monospace;margin-top:1rem;">🔒 Your trade data is safe and will not be deleted.</p>
+  </div>
+</div>
 
 <nav>
   <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
@@ -895,7 +911,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
       </div>
 
       <div class="form-footer">
-        <div class="free-note">Free plan · <span id="trades-left">30</span> trades remaining this month</div>
+        <div class="free-note" id="trial-note">15-day trial · <span id="trial-days-left">15</span> days remaining</div>
         <button class="submit-btn" id="submit-btn" onclick="saveTrade()">Save Trade →</button>
       </div>
     </div>
@@ -1152,7 +1168,7 @@ import {
   signOut, onAuthStateChanged, updateProfile
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
-  getFirestore, collection, addDoc, deleteDoc, doc, updateDoc,
+  getFirestore, collection, addDoc, deleteDoc, doc, updateDoc, getDoc, setDoc,
   query, orderBy, onSnapshot, serverTimestamp
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
@@ -1170,8 +1186,10 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const gp = new GoogleAuthProvider();
 
-const FREE_LIMIT = 30;
-let currentUser = null;
+const TRIAL_DAYS = 15;
+let currentUser  = null;
+let trialExpired = false;
+let trialDaysLeft = TRIAL_DAYS;
 let allTrades = [];
 let unsubscribe = null;
 let direction = '';
@@ -1418,13 +1436,14 @@ function clearAuthErr(id) {
 }
 
 // ── AUTH STATE ─────────────────────────────────────────
-onAuthStateChanged(auth, user => {
+onAuthStateChanged(auth, async user => {
   currentUser = user;
   if (user) {
     document.getElementById('auth-wall').style.display = 'none';
     document.getElementById('nav-user').style.display = 'flex';
     document.getElementById('nav-username').textContent =
       (user.displayName || user.email || 'Trader').split(' ')[0];
+    await initTrial(user);
     subscribeToTrades();
   } else {
     document.getElementById('auth-wall').style.display = 'flex';
@@ -1433,6 +1452,83 @@ onAuthStateChanged(auth, user => {
     renderAll();
   }
 });
+
+// ── TRIAL SYSTEM ───────────────────────────────────────
+async function initTrial(user) {
+  try {
+    const userRef = doc(db, 'users', user.uid);
+    const userSnap = await getDoc(userRef);
+    const now = new Date();
+
+    if (!userSnap.exists() || !userSnap.data().trialStarted) {
+      // New user or existing user without trial — set trial start to today
+      await setDoc(userRef, {
+        trialStarted: now.toISOString(),
+        plan: 'trial',
+        email: user.email || '',
+        displayName: user.displayName || ''
+      }, { merge: true });
+      trialExpired = false;
+      trialDaysLeft = TRIAL_DAYS;
+    } else {
+      // Existing user — check days elapsed
+      const trialStart = new Date(userSnap.data().trialStarted);
+      const plan = userSnap.data().plan || 'trial';
+      const daysElapsed = Math.floor((now - trialStart) / (1000 * 60 * 60 * 24));
+      trialDaysLeft = Math.max(0, TRIAL_DAYS - daysElapsed);
+
+      if (plan === 'pro') {
+        trialExpired = false;
+        trialDaysLeft = 999; // Pro user — unlimited
+      } else {
+        trialExpired = daysElapsed >= TRIAL_DAYS;
+      }
+    }
+    updateTrialUI();
+  } catch(e) {
+    console.error('Trial init error:', e);
+    trialExpired = false; // fail open — don't block on error
+  }
+}
+
+function updateTrialUI() {
+  const note = document.getElementById('trial-note');
+  const daysEl = document.getElementById('trial-days-left');
+  const submitBtn = document.getElementById('submit-btn');
+
+  if (trialExpired) {
+    if (note) note.innerHTML = '<span style="color:#FF4D6D;">⚠ Trial ended · Upgrade to Pro</span>';
+    if (submitBtn) {
+      submitBtn.textContent = 'Upgrade to Continue →';
+      submitBtn.onclick = () => showUpgradeModal();
+    }
+    // Show upgrade modal automatically once
+    if (!sessionStorage.getItem('upgradeShown')) {
+      setTimeout(() => { showUpgradeModal(); sessionStorage.setItem('upgradeShown','1'); }, 1500);
+    }
+  } else if (trialDaysLeft === 999) {
+    if (note) note.innerHTML = '✓ Pro plan · Unlimited trades';
+    if (note) note.style.color = 'var(--accent)';
+  } else {
+    if (daysEl) daysEl.textContent = trialDaysLeft;
+    if (note) {
+      note.innerHTML = `15-day trial · <span style="color:${trialDaysLeft <= 3 ? '#FF4D6D' : '#FFB020'}">${trialDaysLeft} day${trialDaysLeft === 1 ? '' : 's'} remaining</span>`;
+    }
+  }
+}
+
+function showUpgradeModal() {
+  const m = document.getElementById('upgrade-modal');
+  if (m) m.style.display = 'flex';
+}
+
+window.notifyUpgrade = function() {
+  const email = prompt('Enter your email — we\'ll notify you the moment Pro launches:');
+  if (!email || !email.includes('@')) return;
+  try { new Image().src = 'https://script.google.com/macros/s/AKfycbzM3v6AA9ovWf-0dh3u_lg3DjIXvCg5--5rZGlEQbDEBsEmeAOzqJg6HmqrOqw6WWKoRA/exec?email=' + encodeURIComponent(email) + '&source=journal_upgrade&t=' + Date.now(); } catch(x){}
+  toast('✓ You\'re on the list! We\'ll email you when Pro launches.');
+  document.getElementById('upgrade-modal').style.display = 'none';
+};
 
 // ── FIRESTORE REALTIME ─────────────────────────────────
 function subscribeToTrades() {
@@ -1586,10 +1682,7 @@ window.removeScreenshot = function() {
 // ── SAVE TRADE ─────────────────────────────────────────
 window.saveTrade = async function() {
   if (!currentUser) { toast('Please sign in first.', true); return; }
-
-  const monthStart = new Date(); monthStart.setDate(1); monthStart.setHours(0,0,0,0);
-  const thisMonth = allTrades.filter(t => new Date(t.datetime) >= monthStart).length;
-  if (thisMonth >= FREE_LIMIT) { toast('Free plan limit reached. Pro coming soon!', true); return; }
+  if (trialExpired) { showUpgradeModal(); return; }
 
   const asset = document.getElementById('f-asset').value.trim();
   const entry = parseFloat(document.getElementById('f-entry').value);
@@ -1859,7 +1952,7 @@ window.exportCSV = function() {
 };
 
 // ── RENDER ALL ─────────────────────────────────────────
-function renderAll() { renderStats(); renderHistory(); updateFreeLimit(); }
+function renderAll() { renderStats(); renderHistory(); }
 
 function renderStats() {
   const total = allTrades.length;
@@ -1879,11 +1972,7 @@ function renderStats() {
   document.getElementById('s-pf').textContent = pf || '—';
 }
 
-function updateFreeLimit() {
-  const ms = new Date(); ms.setDate(1); ms.setHours(0,0,0,0);
-  const used = allTrades.filter(t => new Date(t.datetime) >= ms).length;
-  document.getElementById('trades-left').textContent = Math.max(0, FREE_LIMIT-used);
-}
+// Trial UI updated in updateTrialUI()
 
 // ── RENDER HISTORY ─────────────────────────────────────
 window.renderHistory = function() {
@@ -1999,6 +2088,7 @@ async function callAI(prompt, maxTokens=1500) {
 
 window.runAnalysis = async function() {
   if (!allTrades.length) { toast('Log some trades first.', true); return; }
+  if (trialExpired) { showUpgradeModal(); return; }
   const btn=document.getElementById('ai-btn'), loading=document.getElementById('ai-loading'), result=document.getElementById('ai-result');
   btn.disabled=true; btn.textContent='Analysing...';
   loading.style.display='flex'; result.style.display='none';
