@@ -2208,15 +2208,6 @@ function renderSingleBlock(text) {
   return `<div class="ai-section"><div class="ai-section-body">${renderLines(lines)}</div></div>`;
 }
 
-async function callAI(prompt, maxTokens=1500) {
-  const res = await fetch('/api/claude', {
-    method:'POST', headers:{'Content-Type':'application/json'},
-    body: JSON.stringify({ prompt, maxTokens })
-  });
-  if (!res.ok) { const e=await res.json().catch(()=>({})); throw new Error(e.error||'AI error'); }
-  return (await res.json()).text;
-}
-
 window.runAnalysis = async function() {
   if (!allTrades.length) { toast('Log some trades first.', true); return; }
   if (!checkAIGate()) return;
@@ -2760,8 +2751,6 @@ function checkAIGate() {
 }
 
 // ── SERVER-SIDE TRIAL ENFORCEMENT ───────────────────────
-// Patch callAI to include uid token — server verifies trial status
-const _callAI = callAI;
 async function callAI(prompt, maxTokens=1500) {
   if (!currentUser) throw new Error('Sign in to use AI features.');
   let token = '';
