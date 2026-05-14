@@ -17,52 +17,111 @@
 <meta name="twitter:image" content="https://vyxor.in/og-image.png">
 <meta name="theme-color" content="#050816">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vyxor AI Trade Journal","url":"https://vyxor.in/journal.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"Free AI-powered trade journal built for Indian traders. Cloud sync, emotion tracking, pattern analysis."}</script>
 <style>
 :root{
-  --bg:#050816;--bg2:#0B1220;--bg3:#0d1628;
-  --card:rgba(15,23,42,0.85);
-  --border:rgba(255,255,255,0.07);
-  --accent:#00F5A0;--ah:#00D98B;
-  --blue:#3B82F6;--purple:#a78bfa;
-  --danger:#FF4D6D;--warn:#FFB020;
-  --text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;
+  --bg:#080B14;--bg2:#0C1018;--surface:#0E1320;--surface2:#131825;
+  --border:rgba(255,255,255,0.055);--border2:rgba(255,255,255,0.09);
+  --accent:#4F6EF7;--accent2:#6B85F8;
+  --pos:#22C55E;--neg:#EF4444;--warn:#F59E0B;
+  --danger:#EF4444;
+  --text:#F0F4FC;--text2:#6B7A99;--text3:#3D4760;
+  --muted:#6B7A99;--muted2:#3D4760;
+  --mono:'DM Mono',monospace;
+  --serif:'Instrument Serif',serif;
+  --sans:'DM Sans',sans-serif;
+  --card:#0E1320;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-html{scroll-behavior:smooth;}
-body{background:var(--bg);color:var(--text);font-family:'Bricolage Grotesque',sans-serif;min-height:100vh;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,160,0.015) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.015) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
-.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(120px);}
-.o1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,245,160,0.05) 0%,transparent 70%);top:-200px;right:-200px;}
-.o2{width:500px;height:500px;background:radial-gradient(circle,rgba(59,130,246,0.04) 0%,transparent 70%);bottom:-150px;left:-150px;}
-@keyframes pd{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.2;transform:scale(0.5)}}
-@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+html,body{height:100%;overflow:hidden;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased;}
+@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── NAV ── */
-nav{position:fixed;top:0;left:0;right:0;z-index:300;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;background:rgba(5,8,22,0.92);backdrop-filter:blur(28px);border-bottom:1px solid var(--border);}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;text-decoration:none;color:var(--text);display:flex;align-items:center;}
-.logo .v{color:var(--accent);}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 1px 7px;animation:pd 2s infinite;}
-.nav-links{display:flex;align-items:center;gap:2rem;list-style:none;}
-.nav-links a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;letter-spacing:0.01em;}
-.nav-links a:hover,.nav-links a.active{color:var(--text);}
-.nav-right{display:flex;align-items:center;gap:8px;}
-.nav-user{display:none;align-items:center;gap:10px;}
-.nav-username{font-size:13px;color:var(--muted);font-weight:500;}
-.btn-sm{padding:7px 14px;border-radius:7px;font-family:'Bricolage Grotesque',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;border:1px solid var(--border);background:transparent;color:var(--muted);}
-.btn-sm:hover{color:var(--text);border-color:var(--muted2);}
-.hamburger{display:none;background:transparent;border:none;color:var(--text);cursor:pointer;padding:8px;}
-.hamburger svg{width:22px;height:22px;}
-.mobile-menu{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(5,8,22,0.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1rem 1.5rem;z-index:299;}
-.mobile-menu.open{display:flex;flex-direction:column;gap:0.5rem;}
-.mobile-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
-.mobile-menu a:last-of-type{border-bottom:none;}
+@keyframes pd{0%,100%{opacity:1}50%{opacity:0.3}}
+.btn-sm{padding:6px 14px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
+.btn-sm:hover{color:var(--text);}
+/* ── APP SHELL ── */
+.app-shell{display:grid;grid-template-columns:54px 1fr;height:100vh;overflow:hidden;}
+/* ── SIDEBAR ── */
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;width:54px;transition:width 0.2s ease;overflow:hidden;z-index:100;position:relative;flex-shrink:0;}
+.sidebar:hover{width:200px;}
+.sb-logo{height:56px;display:flex;align-items:center;padding:0 13px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;overflow:hidden;}
+.sb-brand{font-family:var(--serif);font-size:20px;color:var(--text);text-decoration:none;flex-shrink:0;}
+.sb-brand span{color:var(--accent);}
+.sb-streak-badge{font-family:var(--mono);font-size:10px;color:var(--accent);background:rgba(79,110,247,0.1);border:1px solid rgba(79,110,247,0.2);border-radius:99px;padding:2px 7px;white-space:nowrap;opacity:0;transition:opacity 0.2s;}
+.sidebar:hover .sb-streak-badge{opacity:1;}
+.sb-nav{flex:1;padding:8px 0;overflow:hidden;}
+.sb-item{display:flex;align-items:center;gap:12px;padding:10px 16px;width:100%;background:none;border:none;color:var(--text2);cursor:pointer;transition:all 0.15s;text-decoration:none;white-space:nowrap;font-size:13px;font-family:var(--sans);}
+.sb-item svg{flex-shrink:0;opacity:0.55;transition:opacity 0.15s;}
+.sb-item:hover{color:var(--text);background:rgba(255,255,255,0.04);}
+.sb-item:hover svg{opacity:1;}
+.sb-item.active{color:var(--accent);background:rgba(79,110,247,0.08);}
+.sb-item.active svg{opacity:1;stroke:var(--accent);}
+.sb-label{opacity:0;transition:opacity 0.15s 0.05s;font-size:13px;font-weight:500;}
+.sidebar:hover .sb-label{opacity:1;}
+.sb-sep{height:1px;background:var(--border);margin:6px 0;}
+.sb-bottom{padding:8px 0;flex-shrink:0;border-top:1px solid var(--border);}
+.sb-user{display:flex;align-items:center;gap:10px;padding:10px 13px;overflow:hidden;}
+.sb-avatar{width:28px;height:28px;border-radius:50%;background:rgba(79,110,247,0.15);border:1px solid rgba(79,110,247,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--accent);flex-shrink:0;}
+.sb-user-info{opacity:0;transition:opacity 0.15s;white-space:nowrap;}
+.sidebar:hover .sb-user-info{opacity:1;}
+.sb-username{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px;}
+.sb-signout{background:none;border:none;color:var(--text2);font-size:11px;cursor:pointer;font-family:var(--sans);padding:0;transition:color 0.15s;}
+.sb-signout:hover{color:var(--text);}
+/* ── APP MAIN ── */
+.app-main{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+.app-topbar{height:56px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 1.75rem;flex-shrink:0;}
+.topbar-title{font-family:var(--serif);font-size:18px;color:var(--text);letter-spacing:-0.01em;}
+.topbar-right{display:flex;align-items:center;gap:14px;}
+.sync-indicator{display:flex;align-items:center;gap:6px;font-size:11px;font-family:var(--mono);color:var(--text2);}
+.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--pos);}
+.topbar-log-btn{padding:7px 16px;border-radius:7px;background:var(--accent);color:#fff;font-size:13px;font-weight:600;font-family:var(--sans);border:none;cursor:pointer;transition:opacity 0.15s;}
+.topbar-log-btn:hover{opacity:0.88;}
+/* ── PANELS ── */
+.panel{display:none;flex:1;overflow-y:auto;padding:1.5rem 1.75rem;}
+.panel.active{display:block;}
+/* ── DASHBOARD ── */
+.dash-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;}
+.dash-stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
+.ds-val{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--text);margin-bottom:4px;letter-spacing:-0.02em;}
+.ds-lbl{font-size:9px;font-family:var(--mono);color:var(--text2);text-transform:uppercase;letter-spacing:0.08em;}
+.dash-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:12px;margin-bottom:12px;}
+.dash-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
+.dash-card-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
+.dash-card-title{font-size:13px;font-weight:500;color:var(--text);}
+.dash-card-sub{font-size:11px;font-family:var(--mono);color:var(--text2);}
+.cal-nav{display:flex;gap:4px;}
+.cal-nav-btn{background:none;border:1px solid var(--border);border-radius:5px;padding:3px 5px;cursor:pointer;color:var(--text2);display:flex;align-items:center;transition:border-color 0.15s;}
+.cal-nav-btn:hover{border-color:var(--border2);color:var(--text);}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cal-dow{font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;text-align:center;padding-bottom:5px;}
+.cal-day{min-height:50px;border-radius:5px;padding:4px 5px;border:1px solid transparent;background:rgba(255,255,255,0.02);transition:border-color 0.15s;}
+.cal-day:hover{border-color:var(--border2);}
+.cal-day.empty{background:transparent;border-color:transparent;}
+.cal-day.today{border-color:rgba(79,110,247,0.3);}
+.cal-day-num{font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:2px;}
+.cal-day-pnl{font-family:var(--mono);font-size:10px;font-weight:500;line-height:1.3;}
+.cal-day-pnl.pos{color:var(--pos);}.cal-day-pnl.neg{color:var(--neg);}
+.cal-day-count{font-size:9px;color:var(--text3);}
+.cal-day.has-pos{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.12);}
+.cal-day.has-neg{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.12);}
+.dash-bottom-grid{display:grid;grid-template-columns:1fr 340px;gap:12px;margin-bottom:1rem;}
+.dash-trades-table{width:100%;border-collapse:collapse;font-size:12px;}
+.dash-trades-table th{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;padding:0 8px 8px;text-align:left;border-bottom:1px solid var(--border);}
+.dash-trades-table td{padding:9px 8px;border-bottom:1px solid rgba(255,255,255,0.025);color:var(--text2);}
+.dash-trades-table tr:last-child td{border-bottom:none;}
+.dash-trades-table tr:hover td{background:rgba(255,255,255,0.02);cursor:pointer;}
+.dash-see-all{background:none;border:none;font-size:11px;font-family:var(--mono);color:var(--accent);cursor:pointer;transition:opacity 0.15s;}
+.dash-see-all:hover{opacity:0.75;}
+.dash-insight-card{display:flex;flex-direction:column;}
+.dash-insight-body{flex:1;margin-bottom:14px;}
+.dash-insight-empty{font-size:13px;color:var(--text2);line-height:1.7;padding:0.5rem 0;}
+.dash-insight-text{font-size:13px;color:var(--text);line-height:1.8;}
+.dash-insight-btn{background:none;border:1px solid var(--border);border-radius:7px;padding:8px 14px;font-size:12px;font-family:var(--mono);color:var(--text2);cursor:pointer;text-align:left;transition:all 0.15s;align-self:flex-start;}
+.dash-insight-btn:hover{border-color:var(--accent);color:var(--accent);}
 
 /* ── AUTH WALL ── */
 .auth-wall{position:fixed;inset:0;z-index:500;background:rgba(5,8,22,0.97);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;padding:1rem;}
@@ -490,8 +549,6 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
 </style>
 </head>
 <body>
-<div class="orb o1"></div>
-<div class="orb o2"></div>
 
 <!-- ── AUTH WALL ── -->
 <div class="auth-wall" id="auth-wall">
@@ -663,134 +720,180 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
   </div>
 </div>
 
-<nav>
-  <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
-  <ul class="nav-links">
-    <li><a href="/journal.html" class="active">Journal</a></li>
-    <li><a href="/position-size-calculator.html">Calculator</a></li>
-    <li><a href="/blog.html">Blog</a></li>
-    <li><a href="/about.html">About</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="nav-user" id="nav-user">
-      <span class="nav-username" id="nav-username"></span>
-      <button class="btn-sm" onclick="doSignOut()">Sign Out</button>
-    </div>
-    <button class="hamburger" onclick="toggleMenu()" aria-label="Menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+<!-- ── SIDEBAR + APP SHELL ── -->
+<div class="app-shell">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sb-logo">
+    <a href="/index.html" class="sb-brand"><span>V</span></a>
+    <div class="sb-streak" id="sb-streak-badge" style="display:none;" title="Current streak"></div>
+  </div>
+
+  <nav class="sb-nav">
+    <button class="sb-item active" id="sb-dashboard" onclick="switchTab('dashboard')" title="Dashboard">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      <span class="sb-label">Dashboard</span>
     </button>
+    <button class="sb-item" id="sb-log" onclick="switchTab('log')" title="Log Trade">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      <span class="sb-label">Log Trade</span>
+    </button>
+    <button class="sb-item" id="sb-history" onclick="switchTab('history')" title="History">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+      <span class="sb-label">History</span>
+    </button>
+    <button class="sb-item" id="sb-analytics" onclick="switchTab('analytics')" title="Analytics">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <span class="sb-label">Analytics</span>
+    </button>
+
+    <div class="sb-sep"></div>
+
+    <button class="sb-item" id="sb-ai" onclick="switchTab('ai')" title="Journal AI">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      <span class="sb-label">Journal AI</span>
+    </button>
+    <button class="sb-item" id="sb-import" onclick="switchTab('import')" title="Import CSV">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span class="sb-label">Import</span>
+    </button>
+    <a class="sb-item" href="/position-size-calculator.html" title="Calculator" target="_blank">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
+      <span class="sb-label">Calculator</span>
+    </a>
+  </nav>
+
+  <div class="sb-bottom">
+    <div class="sb-sep"></div>
+    <div class="sb-user" id="sb-user">
+      <div class="sb-avatar" id="sb-avatar">?</div>
+      <div class="sb-user-info">
+        <div class="sb-username" id="sb-username-text">Loading...</div>
+        <button class="sb-signout" onclick="doSignOut()">Sign out</button>
+      </div>
+    </div>
   </div>
-</nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="/journal.html">Journal</a>
-  <a href="/position-size-calculator.html">Calculator</a>
-  <a href="/blog.html">Blog</a>
-  <a href="/about.html">About</a>
-</div>
+</aside>
 
-<!-- ── ONBOARDING OVERLAY ── -->
-<div class="onboarding-overlay" id="onboarding-overlay" style="display:none;">
-  <div class="onboarding-box">
+<!-- MAIN CONTENT -->
+<div class="app-main" id="app-main">
 
-    <!-- Progress dots -->
-    <div class="ob-progress">
-      <div class="ob-prog-dot done" id="ob-dot-1"></div>
-      <div class="ob-prog-dot" id="ob-dot-2"></div>
-      <div class="ob-prog-dot" id="ob-dot-3"></div>
-      <div class="ob-prog-dot" id="ob-dot-4"></div>
+  <!-- Top bar -->
+  <div class="app-topbar">
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <div class="topbar-right">
+      <div class="sync-indicator" id="sync-indicator">
+        <div class="sync-dot"></div>
+        <span id="sync-text">Synced</span>
+      </div>
+      <span id="sync-count" style="font-size:11px;color:var(--text2);font-family:var(--mono);"></span>
+      <button class="topbar-log-btn" onclick="switchTab('log')">+ Log Trade</button>
     </div>
-
-    <!-- Step 1: Markets -->
-    <div class="ob-step active" id="ob-step-1">
-      <div class="ob-eyebrow">Step 1 of 4</div>
-      <div class="ob-title">What do you trade?</div>
-      <div class="ob-sub">Select all that apply.</div>
-      <div class="ob-options" id="ob-markets">
-        <button class="ob-option" data-val="NSE/BSE" onclick="obToggle(this,'markets')">NSE / BSE</button>
-        <button class="ob-option" data-val="MCX" onclick="obToggle(this,'markets')">MCX</button>
-        <button class="ob-option" data-val="Forex" onclick="obToggle(this,'markets')">Forex</button>
-        <button class="ob-option" data-val="US Futures" onclick="obToggle(this,'markets')">US Futures</button>
-        <button class="ob-option" data-val="Crypto" onclick="obToggle(this,'markets')">Crypto</button>
-        <button class="ob-option" data-val="Equity" onclick="obToggle(this,'markets')">Equity</button>
-      </div>
-      <div class="ob-actions">
-        <button class="ob-btn-primary" id="ob-next-1" onclick="obNext(2)" disabled>Next →</button>
-      </div>
-    </div>
-
-    <!-- Step 2: Style -->
-    <div class="ob-step" id="ob-step-2">
-      <div class="ob-eyebrow">Step 2 of 4</div>
-      <div class="ob-title">How do you trade?</div>
-      <div class="ob-sub">Pick your primary style.</div>
-      <div class="ob-options" id="ob-styles">
-        <button class="ob-option" data-val="Intraday" onclick="obSelect(this,'style')">Intraday</button>
-        <button class="ob-option" data-val="Scalping" onclick="obSelect(this,'style')">Scalping</button>
-        <button class="ob-option" data-val="Swing" onclick="obSelect(this,'style')">Swing</button>
-        <button class="ob-option" data-val="Positional" onclick="obSelect(this,'style')">Positional</button>
-        <button class="ob-option" data-val="Mixed" onclick="obSelect(this,'style')">Mixed</button>
-      </div>
-      <div class="ob-actions">
-        <button class="ob-btn-skip" onclick="obNext(3)">Back</button>
-        <button class="ob-btn-primary" id="ob-next-2" onclick="obNext(3)" disabled>Next →</button>
-      </div>
-    </div>
-
-    <!-- Step 3: Strategy -->
-    <div class="ob-step" id="ob-step-3">
-      <div class="ob-eyebrow">Step 3 of 4</div>
-      <div class="ob-title">Your strategy</div>
-      <div class="ob-sub">Describe your trading approach in 2-3 lines. This helps your AI coach give better insights.</div>
-      <textarea class="ob-textarea" id="ob-strategy" rows="4" placeholder="e.g. I trade NIFTY intraday breakouts on 15min charts. I enter after confirmation candle and exit at fixed targets or when structure breaks."></textarea>
-      <div class="ob-actions">
-        <button class="ob-btn-skip" onclick="obNext(4)">Skip for now</button>
-        <button class="ob-btn-primary" onclick="obNext(4)">Next →</button>
-      </div>
-    </div>
-
-    <!-- Step 4: Done -->
-    <div class="ob-step" id="ob-step-4">
-      <div class="ob-done-icon">✓</div>
-      <div class="ob-done-title">You're all set.</div>
-      <div class="ob-done-sub">Your journal is ready. Log your first 10 trades to unlock AI insights.</div>
-      <div class="ob-done-info" id="ob-summary"></div>
-      <div class="ob-actions" style="justify-content:center;">
-        <button class="ob-btn-primary" onclick="obFinish()">Log My First Trade →</button>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- ── MAIN ── -->
-<div class="main">
-
-  <div class="sync-bar" id="sync-bar">
-    <div class="sync-left"><div class="sync-dot"></div><span id="sync-text">Synced to cloud</span></div>
-    <span id="sync-count" style="font-size:11px;color:var(--muted2);"></span>
   </div>
 
-  <!-- STATS -->
-  <div class="stats-row">
-    <div class="stat-card"><div class="stat-val" id="s-trades">0</div><div class="stat-lbl">Total Trades</div></div>
-    <div class="stat-card"><div class="stat-val green" id="s-winrate">0%</div><div class="stat-lbl">Win Rate</div></div>
-    <div class="stat-card"><div class="stat-val blue" id="s-pnl">₹0</div><div class="stat-lbl">Total P&L</div></div>
-    <div class="stat-card"><div class="stat-val green" id="s-avgwin">—</div><div class="stat-lbl">Avg Win</div></div>
-    <div class="stat-card"><div class="stat-val red" id="s-avgloss">—</div><div class="stat-lbl">Avg Loss</div></div>
-    <div class="stat-card" title="Discipline Score: Based on win rate, emotion quality, R:R consistency and revenge/FOMO trades"><div class="stat-val warn" id="s-discipline">—</div><div class="stat-lbl">Discipline Score</div></div>
-  </div>
+  <!-- ── DASHBOARD PANEL ── -->
+  <div class="panel active" id="panel-dashboard">
 
-  <!-- TABS -->
-  <div class="journal-tabs">
-    <button class="jtab active" onclick="switchTab('log')">📝 Log Trade</button>
-    <button class="jtab" onclick="switchTab('history')">📋 History</button>
-    <button class="jtab" onclick="switchTab('analytics')">📊 Analytics</button>
-    <button class="jtab" onclick="switchTab('ai')">Journal AI</button>
-    <button class="jtab" onclick="switchTab('import')">📥 Import</button>
+    <!-- Stats row -->
+    <div class="dash-stats">
+      <div class="dash-stat">
+        <div class="ds-val" id="s-pnl">—</div>
+        <div class="ds-lbl">Total P&L</div>
+      </div>
+      <div class="dash-stat">
+        <div class="ds-val" id="s-winrate">—</div>
+        <div class="ds-lbl">Win Rate</div>
+      </div>
+      <div class="dash-stat">
+        <div class="ds-val" id="s-streak">—</div>
+        <div class="ds-lbl">Streak</div>
+      </div>
+      <div class="dash-stat">
+        <div class="ds-val" id="s-discipline">—</div>
+        <div class="ds-lbl">Discipline</div>
+      </div>
+      <div class="dash-stat">
+        <div class="ds-val" id="s-trades">0</div>
+        <div class="ds-lbl">Trades</div>
+      </div>
+    </div>
+
+    <!-- Equity curve + Calendar -->
+    <div class="dash-grid">
+
+      <!-- Equity curve -->
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title">Equity Curve</div>
+          <div class="dash-card-sub">Cumulative P&L</div>
+        </div>
+        <div style="height:160px;position:relative;">
+          <canvas id="dash-equity-chart"></canvas>
+        </div>
+      </div>
+
+      <!-- Monthly calendar -->
+      <div class="dash-card dash-calendar-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title" id="cal-month-title">May 2026</div>
+          <div class="cal-nav">
+            <button class="cal-nav-btn" onclick="calPrev()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="cal-nav-btn" onclick="calNext()">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="cal-grid">
+          <div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div>
+          <div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div><div class="cal-dow">Sun</div>
+          <div id="cal-days"></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Recent trades + AI insight -->
+    <div class="dash-bottom-grid">
+
+      <!-- Recent trades -->
+      <div class="dash-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title">Recent Trades</div>
+          <button class="dash-see-all" onclick="switchTab('history')">See all →</button>
+        </div>
+        <table class="dash-trades-table">
+          <thead>
+            <tr>
+              <th>Asset</th><th>Dir</th><th>P&L</th><th>Emotion</th><th>Result</th>
+            </tr>
+          </thead>
+          <tbody id="dash-recent-trades">
+            <tr><td colspan="5" style="text-align:center;color:var(--text2);font-size:13px;padding:2rem 0;">No trades yet. Log your first trade.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- AI insight -->
+      <div class="dash-card dash-insight-card">
+        <div class="dash-card-header">
+          <div class="dash-card-title">Journal AI</div>
+          <div class="dash-card-sub">Latest insight</div>
+        </div>
+        <div class="dash-insight-body" id="dash-insight-body">
+          <div class="dash-insight-empty">Log 10 trades to unlock Journal AI insights.</div>
+        </div>
+        <button class="dash-insight-btn" onclick="switchTab('ai')">Open Journal AI →</button>
+      </div>
+
+    </div>
+
   </div>
 
   <!-- ── LOG PANEL ── -->
-  <div class="panel active" id="panel-log">
+  <div class="panel" id="panel-log">
     <div class="form-card">
       <div class="form-title">Log a <span>Trade</span></div>
 
@@ -1127,18 +1230,71 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
     </div>
   </div>
 
-</div><!-- /main -->
+</div><!-- /panel-import -->
 
-<footer class="journal-footer">
-  <div class="jf-logo"><span>V</span>yxor</div>
-  <div class="jf-links">
-    <a href="/privacy.html">Privacy</a>
-    <a href="/terms.html">Terms</a>
-    <a href="/disclaimer.html">Disclaimer</a>
-    <a href="mailto:hello@vyxor.in">Contact</a>
+</div><!-- /app-main -->
+</div><!-- /app-shell -->
+
+<!-- ── ONBOARDING OVERLAY ── -->
+<div class="onboarding-overlay" id="onboarding-overlay" style="display:none;">
+  <div class="onboarding-box">
+    <div class="ob-progress">
+      <div class="ob-prog-dot done" id="ob-dot-1"></div>
+      <div class="ob-prog-dot" id="ob-dot-2"></div>
+      <div class="ob-prog-dot" id="ob-dot-3"></div>
+      <div class="ob-prog-dot" id="ob-dot-4"></div>
+    </div>
+    <div class="ob-step active" id="ob-step-1">
+      <div class="ob-eyebrow">Step 1 of 4</div>
+      <div class="ob-title">What do you trade?</div>
+      <div class="ob-sub">Select all that apply.</div>
+      <div class="ob-options" id="ob-markets">
+        <button class="ob-option" data-val="NSE/BSE" onclick="obToggle(this,'markets')">NSE / BSE</button>
+        <button class="ob-option" data-val="MCX" onclick="obToggle(this,'markets')">MCX</button>
+        <button class="ob-option" data-val="Forex" onclick="obToggle(this,'markets')">Forex</button>
+        <button class="ob-option" data-val="US Futures" onclick="obToggle(this,'markets')">US Futures</button>
+        <button class="ob-option" data-val="Crypto" onclick="obToggle(this,'markets')">Crypto</button>
+        <button class="ob-option" data-val="Equity" onclick="obToggle(this,'markets')">Equity</button>
+      </div>
+      <div class="ob-actions"><button class="ob-btn-primary" id="ob-next-1" onclick="obNext(2)" disabled>Next →</button></div>
+    </div>
+    <div class="ob-step" id="ob-step-2">
+      <div class="ob-eyebrow">Step 2 of 4</div>
+      <div class="ob-title">How do you trade?</div>
+      <div class="ob-sub">Pick your primary style.</div>
+      <div class="ob-options" id="ob-styles">
+        <button class="ob-option" data-val="Intraday" onclick="obSelect(this,'style')">Intraday</button>
+        <button class="ob-option" data-val="Scalping" onclick="obSelect(this,'style')">Scalping</button>
+        <button class="ob-option" data-val="Swing" onclick="obSelect(this,'style')">Swing</button>
+        <button class="ob-option" data-val="Positional" onclick="obSelect(this,'style')">Positional</button>
+        <button class="ob-option" data-val="Mixed" onclick="obSelect(this,'style')">Mixed</button>
+      </div>
+      <div class="ob-actions">
+        <button class="ob-btn-skip" onclick="obNext(3)">Back</button>
+        <button class="ob-btn-primary" id="ob-next-2" onclick="obNext(3)" disabled>Next →</button>
+      </div>
+    </div>
+    <div class="ob-step" id="ob-step-3">
+      <div class="ob-eyebrow">Step 3 of 4</div>
+      <div class="ob-title">Your strategy</div>
+      <div class="ob-sub">Describe your trading approach in 2-3 lines.</div>
+      <textarea class="ob-textarea" id="ob-strategy" rows="4" placeholder="e.g. I trade NIFTY intraday breakouts on 15min charts..."></textarea>
+      <div class="ob-actions">
+        <button class="ob-btn-skip" onclick="obNext(4)">Skip for now</button>
+        <button class="ob-btn-primary" onclick="obNext(4)">Next →</button>
+      </div>
+    </div>
+    <div class="ob-step" id="ob-step-4">
+      <div class="ob-done-icon">✓</div>
+      <div class="ob-done-title">You're all set.</div>
+      <div class="ob-done-sub">Log your first 10 trades to unlock Journal AI insights.</div>
+      <div class="ob-done-info" id="ob-summary"></div>
+      <div class="ob-actions" style="justify-content:center;">
+        <button class="ob-btn-primary" onclick="obFinish()">Log My First Trade →</button>
+      </div>
+    </div>
   </div>
-  <div class="jf-copy">© 2026 Vyxor · vyxor.in</div>
-</footer>
+</div>
 
 <div class="toast" id="toast"></div>
 
@@ -1164,22 +1320,37 @@ window.editAutoResult  = function() {
 window.saveEditedTrade = _noop;
 window.handleScreenshotFile = _noop; window.handleScreenshotDrop = _noop;
 window.removeScreenshot = _noop;
-window.toggleMenu = () => document.getElementById('mobile-menu').classList.toggle('open');
+window.toggleMenu = () => {};
 window.authTab = (tab) => {
   ['login','signup'].forEach((t,i) => {
     document.querySelectorAll('.auth-tab')[i].classList.toggle('active', t===tab);
     document.getElementById(t+'-form').style.display = t===tab ? 'block' : 'none';
   });
 };
-window.switchTab = (tab) => {
-  const tabs = ['log','history','analytics','ai','import'];
-  document.querySelectorAll('.jtab').forEach((t,i) => t.classList.toggle('active', tabs[i]===tab));
+window.switchTab = function(tab) {
+  // Update panels
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   const panel = document.getElementById('panel-'+tab);
   if (panel) panel.classList.add('active');
-  if (tab==='analytics') window.renderAnalytics();
-  if (tab==='history')   window.renderHistory();
-  if (tab==='ai')        { if(typeof loadWeeklyReports==='function') loadWeeklyReports(); }
+
+  // Update sidebar active state
+  document.querySelectorAll('.sb-item').forEach(el => el.classList.remove('active'));
+  const sbItem = document.getElementById('sb-'+tab);
+  if (sbItem) sbItem.classList.add('active');
+
+  // Update topbar title
+  const titles = {
+    dashboard: 'Dashboard', log: 'Log Trade', history: 'History',
+    analytics: 'Analytics', ai: 'Journal AI', import: 'Import'
+  };
+  const titleEl = document.getElementById('topbar-title');
+  if (titleEl) titleEl.textContent = titles[tab] || tab;
+
+  // Trigger renders
+  if (tab === 'analytics') window.renderAnalytics();
+  if (tab === 'history')   window.renderHistory();
+  if (tab === 'ai')        { if(typeof loadWeeklyReports === 'function') loadWeeklyReports(); }
+  if (tab === 'dashboard') { if(typeof renderDashboard === 'function') renderDashboard(); }
 };
 </script>
 
@@ -1497,22 +1668,15 @@ onAuthStateChanged(auth, async user => {
   currentUser = user;
   if (user) {
     document.getElementById('auth-wall').style.display = 'none';
-    document.getElementById('nav-user').style.display = 'flex';
-    document.getElementById('nav-username').textContent =
-      (user.displayName || user.email || 'Trader').split(' ')[0];
-    // Streak badge in nav
-    let streakBadge = document.getElementById('streak-badge');
-    if (!streakBadge) {
-      streakBadge = document.createElement('span');
-      streakBadge.id = 'streak-badge';
-      streakBadge.className = 'streak-badge';
-      streakBadge.style.display = 'none';
-      document.getElementById('nav-username').after(streakBadge);
-    }
+    // Update sidebar user info
+    const firstName = (user.displayName || user.email || 'Trader').split(' ')[0];
+    const avatarEl = document.getElementById('sb-avatar');
+    const usernameEl = document.getElementById('sb-username-text');
+    if (avatarEl) avatarEl.textContent = firstName.charAt(0).toUpperCase();
+    if (usernameEl) usernameEl.textContent = firstName;
     await initTrial(user);
     subscribeToTrades();
     await loadUserTags();
-    // Save email + timezone so weekly email works for all users
     try {
       await setDoc(doc(db, 'users', user.uid), {
         email: user.email || '',
@@ -1524,7 +1688,6 @@ onAuthStateChanged(auth, async user => {
     await loadStreak(user);
   } else {
     document.getElementById('auth-wall').style.display = 'flex';
-    document.getElementById('nav-user').style.display = 'none';
     allTrades = [];
     renderAll();
   }
@@ -1990,7 +2153,184 @@ window.exportCSV = function() {
 };
 
 // ── RENDER ALL ─────────────────────────────────────────
-function renderAll() { renderStats(); renderHistory(); }
+function renderAll() { renderStats(); renderHistory(); renderDashboard(); }
+
+// ── CALENDAR STATE ───────────────────────────────────────
+let calYear = new Date().getFullYear();
+let calMonth = new Date().getMonth();
+
+window.calPrev = function() { calMonth--; if(calMonth<0){calMonth=11;calYear--;} renderCalendar(); };
+window.calNext = function() { calMonth++; if(calMonth>11){calMonth=0;calYear++;} renderCalendar(); };
+
+function renderCalendar() {
+  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const titleEl = document.getElementById('cal-month-title');
+  if (titleEl) titleEl.textContent = `${months[calMonth]} ${calYear}`;
+
+  const daysEl = document.getElementById('cal-days');
+  if (!daysEl) return;
+
+  // Build day map from trades
+  const dayMap = {};
+  allTrades.forEach(t => {
+    if (!t.datetime) return;
+    const d = new Date(t.datetime);
+    if (d.getFullYear() !== calYear || d.getMonth() !== calMonth) return;
+    const key = d.getDate();
+    if (!dayMap[key]) dayMap[key] = { pnl: 0, count: 0 };
+    dayMap[key].pnl += parseFloat(t.pnl) || 0;
+    dayMap[key].count++;
+  });
+
+  // First day of month (0=Sun, adjust to Mon=0)
+  const firstDay = new Date(calYear, calMonth, 1).getDay();
+  const offset = firstDay === 0 ? 6 : firstDay - 1;
+  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+  const today = new Date();
+
+  let html = '';
+  // Empty cells before first day
+  for (let i = 0; i < offset; i++) {
+    html += '<div class="cal-day empty"></div>';
+  }
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const isToday = today.getDate() === d && today.getMonth() === calMonth && today.getFullYear() === calYear;
+    const data = dayMap[d];
+    let cls = 'cal-day';
+    if (isToday) cls += ' today';
+    if (data) cls += data.pnl >= 0 ? ' has-pos' : ' has-neg';
+
+    html += `<div class="${cls}">
+      <div class="cal-day-num">${d}</div>
+      ${data ? `<div class="cal-day-pnl ${data.pnl >= 0 ? 'pos' : 'neg'}">${data.pnl >= 0 ? '+' : ''}${Math.abs(data.pnl) >= 1000 ? (data.pnl/1000).toFixed(1)+'k' : data.pnl.toFixed(0)}</div>
+      <div class="cal-day-count">${data.count}t</div>` : ''}
+    </div>`;
+  }
+
+  daysEl.style.display = 'contents';
+  daysEl.innerHTML = html;
+}
+
+// ── DASHBOARD RENDER ─────────────────────────────────────
+let dashEquityChart = null;
+
+function renderDashboard() {
+  renderCalendar();
+  renderDashStats();
+  renderDashEquity();
+  renderDashRecentTrades();
+  renderDashInsight();
+}
+
+function renderDashStats() {
+  if (!allTrades.length) return;
+  const wins = allTrades.filter(t => t.result === 'Win');
+  const totalPnl = allTrades.reduce((s,t) => s + (parseFloat(t.pnl)||0), 0);
+  const winRate = Math.round((wins.length / allTrades.length) * 100);
+  const cur = allTrades[0]?.currency || '₹';
+
+  const pnlEl = document.getElementById('s-pnl');
+  if (pnlEl) {
+    pnlEl.textContent = `${totalPnl >= 0 ? '+' : ''}${cur}${Math.abs(totalPnl).toLocaleString('en-IN', {maximumFractionDigits:0})}`;
+    pnlEl.style.color = totalPnl >= 0 ? 'var(--pos)' : 'var(--neg)';
+  }
+  const wrEl = document.getElementById('s-winrate');
+  if (wrEl) { wrEl.textContent = winRate + '%'; wrEl.style.color = winRate >= 50 ? 'var(--pos)' : 'var(--neg)'; }
+  const trEl = document.getElementById('s-trades');
+  if (trEl) trEl.textContent = allTrades.length;
+}
+
+function renderDashEquity() {
+  if (typeof Chart === 'undefined') { setTimeout(renderDashEquity, 400); return; }
+  const canvas = document.getElementById('dash-equity-chart');
+  if (!canvas) return;
+  if (dashEquityChart) { dashEquityChart.destroy(); }
+  const sorted = [...allTrades].sort((a,b) => new Date(a.datetime) - new Date(b.datetime));
+  let cum = 0;
+  const data = sorted.map(t => { cum += parseFloat(t.pnl)||0; return cum; });
+  const isPos = data[data.length-1] >= 0;
+  dashEquityChart = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: data.map((_,i) => i+1),
+      datasets: [{
+        data,
+        borderColor: isPos ? '#22C55E' : '#EF4444',
+        backgroundColor: isPos ? 'rgba(34,197,94,0.06)' : 'rgba(239,68,68,0.06)',
+        fill: true,
+        tension: 0.4,
+        pointRadius: 0,
+        borderWidth: 1.5
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { display: false },
+        y: { display: false }
+      }
+    }
+  });
+}
+
+function renderDashRecentTrades() {
+  const tbody = document.getElementById('dash-recent-trades');
+  if (!tbody) return;
+  const recent = [...allTrades].sort((a,b) => new Date(b.datetime) - new Date(a.datetime)).slice(0,6);
+  if (!recent.length) return;
+  tbody.innerHTML = recent.map(t => {
+    const pnl = parseFloat(t.pnl)||0;
+    const cur = t.currency || '₹';
+    const rb = t.result === 'Win' ? `<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(34,197,94,0.1);color:var(--pos);font-family:var(--mono);">Win</span>`
+             : t.result === 'Loss' ? `<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(239,68,68,0.1);color:var(--neg);font-family:var(--mono);">Loss</span>`
+             : `<span style="font-size:10px;padding:2px 7px;border-radius:4px;background:rgba(255,255,255,0.05);color:var(--text2);font-family:var(--mono);">BE</span>`;
+    return `<tr onclick="openTradeModal('${t.id}')">
+      <td style="font-weight:500;color:var(--text);">${esc(t.asset)}</td>
+      <td style="color:${t.direction==='Long'?'var(--pos)':'var(--neg)'};">${t.direction}</td>
+      <td style="font-family:var(--mono);color:${pnl>=0?'var(--pos)':'var(--neg)'};">${pnl>=0?'+':''}${cur}${Math.abs(pnl).toLocaleString('en-IN',{maximumFractionDigits:0})}</td>
+      <td style="font-family:var(--mono);">${esc(t.preEmo||'—')}</td>
+      <td>${rb}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderDashInsight() {
+  const body = document.getElementById('dash-insight-body');
+  if (!body) return;
+  if (allTrades.length < 10) {
+    body.innerHTML = `<div class="dash-insight-empty">Log ${10 - allTrades.length} more trade${10 - allTrades.length !== 1 ? 's' : ''} to unlock Journal AI insights.</div>`;
+    return;
+  }
+  // Quick behavioral insight from data
+  const withIntent = allTrades.filter(t => t.tradeIntent);
+  if (withIntent.length >= 3) {
+    const planned = withIntent.filter(t => t.tradeIntent === 'planned');
+    const impulsive = withIntent.filter(t => t.tradeIntent === 'impulsive');
+    const pWR = planned.length ? Math.round(planned.filter(t=>t.result==='Win').length/planned.length*100) : 0;
+    const iWR = impulsive.length ? Math.round(impulsive.filter(t=>t.result==='Win').length/impulsive.length*100) : 0;
+    if (pWR !== iWR) {
+      body.innerHTML = `<div class="dash-insight-text">Your planned trades win ${pWR}% of the time. Your impulsive trades win ${iWR}%. The difference is ${Math.abs(pWR-iWR)} percentage points.</div>`;
+      return;
+    }
+  }
+  // Fallback emotion insight
+  const withEmo = allTrades.filter(t => t.preEmo);
+  if (withEmo.length >= 5) {
+    const emoMap = {};
+    withEmo.forEach(t => { if(!emoMap[t.preEmo]) emoMap[t.preEmo]={wins:0,total:0}; emoMap[t.preEmo].total++; if(t.result==='Win') emoMap[t.preEmo].wins++; });
+    const sorted = Object.entries(emoMap).sort((a,b)=>b[1].total-a[1].total);
+    if (sorted.length >= 2) {
+      const top = sorted[0];
+      const wr = Math.round(top[1].wins/top[1].total*100);
+      body.innerHTML = `<div class="dash-insight-text">Your most common emotion is ${top[0]}. When trading with this mindset your win rate is ${wr}%.</div>`;
+      return;
+    }
+  }
+  body.innerHTML = `<div class="dash-insight-empty">Open Journal AI for your full behavioral analysis.</div>`;
+}
 
 function renderStats() {
   const total = allTrades.length;
@@ -2530,18 +2870,20 @@ window.toggleReport = function(weekId) {
 };
 
 window.switchTab = function(tab) {
-  const tabs = ['log','history','analytics','ai','import'];
-  document.querySelectorAll('.jtab').forEach((t,i) => t.classList.toggle('active', tabs[i]===tab));
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   const panel = document.getElementById('panel-'+tab);
   if (panel) panel.classList.add('active');
+  document.querySelectorAll('.sb-item').forEach(el => el.classList.remove('active'));
+  const sbItem = document.getElementById('sb-'+tab);
+  if (sbItem) sbItem.classList.add('active');
+  const titles = {dashboard:'Dashboard',log:'Log Trade',history:'History',analytics:'Analytics',ai:'Journal AI',import:'Import'};
+  const titleEl = document.getElementById('topbar-title');
+  if (titleEl) titleEl.textContent = titles[tab] || tab;
   if (tab==='analytics') window.renderAnalytics();
   if (tab==='history')   window.renderHistory();
   if (tab==='ai')        loadWeeklyReports();
+  if (tab==='dashboard') renderDashboard();
 };
-
-// ── MOBILE MENU ─────────────────────────────────────────
-window.toggleMenu = function() { document.getElementById('mobile-menu').classList.toggle('open'); };
 
 // ── CSV IMPORT SYSTEM ────────────────────────────────────
 const importState = { universal: [] };
@@ -2788,17 +3130,23 @@ async function loadStreak(user) {
     if (!snap.exists()) return;
     const data = snap.data();
     const streak = data.streak || 0;
-    const lastLogDate = data.lastLogDate || null;
-
-    if (streak > 0) {
-      const badge = document.getElementById('streak-badge');
-      if (badge) {
-        badge.innerHTML = `<span class="streak-num">${streak}</span> day streak`;
-        badge.style.display = 'inline-flex';
-        badge.title = `You have logged trades ${streak} day${streak===1?'':'s'} in a row`;
-      }
-    }
+    updateStreakBadge(streak);
+    // Update dashboard stat
+    const streakEl = document.getElementById('s-streak');
+    if (streakEl) streakEl.textContent = streak > 0 ? streak + ' day' + (streak === 1 ? '' : 's') : '—';
   } catch(e) { console.error('Streak load failed:', e); }
+}
+
+function updateStreakBadge(streak) {
+  const badge = document.getElementById('sb-streak-badge');
+  if (badge) {
+    if (streak > 0) {
+      badge.textContent = streak + ' day streak';
+      badge.style.display = 'block';
+    } else {
+      badge.style.display = 'none';
+    }
+  }
 }
 
 async function updateStreak() {
@@ -2811,26 +3159,19 @@ async function updateStreak() {
     const lastLogDate = data.lastLogDate || null;
     let streak = data.streak || 0;
 
-    if (lastLogDate === today) return; // already logged today
+    if (lastLogDate === today) return;
 
     const yesterday = new Date();
     yesterday.setDate(yesterday.getDate() - 1);
     const yStr = yesterday.toISOString().slice(0,10);
 
-    if (lastLogDate === yStr) {
-      streak += 1; // consecutive day
-    } else {
-      streak = 1; // streak broken, restart
-    }
+    streak = lastLogDate === yStr ? streak + 1 : 1;
 
     await setDoc(userRef, { streak, lastLogDate: today }, { merge: true });
+    updateStreakBadge(streak);
 
-    // Update badge
-    const badge = document.getElementById('streak-badge');
-    if (badge) {
-      badge.innerHTML = `<span class="streak-num">${streak}</span> day streak`;
-      badge.style.display = 'inline-flex';
-    }
+    const streakEl = document.getElementById('s-streak');
+    if (streakEl) streakEl.textContent = streak + ' day' + (streak === 1 ? '' : 's');
 
     if (streak > 1) toast(`${streak} day streak. Keep going.`);
   } catch(e) { console.error('Streak update failed:', e); }
