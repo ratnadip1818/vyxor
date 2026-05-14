@@ -1,6 +1,4 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
   "headers": [
     {
       "source": "/(.*)",
@@ -12,7 +10,18 @@
       ]
     }
   ],
-  "rewrites": [
-    { "source": "/blog/:path*", "destination": "/blog/:path*" }
+  "crons": [
+    {
+      "path": "/api/cron-weekly?region=india",
+      "schedule": "30 3 * * 0"
+    },
+    {
+      "path": "/api/cron-weekly?region=london",
+      "schedule": "0 8 * * 0"
+    },
+    {
+      "path": "/api/cron-weekly?region=newyork",
+      "schedule": "0 14 * * 0"
+    }
   ]
 }

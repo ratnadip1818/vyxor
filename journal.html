@@ -1512,6 +1512,14 @@ onAuthStateChanged(auth, async user => {
     await initTrial(user);
     subscribeToTrades();
     await loadUserTags();
+    // Save email + timezone so weekly email works for all users
+    try {
+      await setDoc(doc(db, 'users', user.uid), {
+        email: user.email || '',
+        displayName: user.displayName || '',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Kolkata'
+      }, { merge: true });
+    } catch(e) { console.error('Failed to save user meta:', e); }
     await checkOnboarding(user);
     await loadStreak(user);
   } else {
@@ -2753,7 +2761,10 @@ window.obFinish = async function() {
       onboardingComplete: true,
       tradingMarkets:  obState.markets,
       tradingStyle:    obState.style,
-      tradingStrategy: obState.strategy
+      tradingStrategy: obState.strategy,
+      timezone:        Intl.DateTimeFormat().resolvedOptions().timeZone || 'Asia/Kolkata',
+      email:           currentUser.email || '',
+      displayName:     currentUser.displayName || '',
     }, { merge: true });
   } catch(e) { console.error('Onboarding save failed:', e); }
   document.getElementById('onboarding-overlay').style.display = 'none';
