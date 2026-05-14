@@ -2,184 +2,134 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Terms of Service | Vyxor</title>
-<meta name="description" content="Vyxor terms of service — the rules for using our free trading discipline platform.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://vyxor.in/terms.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://vyxor.in/terms.html">
-<meta property="og:title" content="Terms of Service | Vyxor">
-<meta name="theme-color" content="#050816">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Terms of Service — Vyxor</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050816;--border:rgba(255,255,255,0.06);--accent:#00F5A0;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;--card:rgba(15,23,42,0.72);}
+:root{--bg:#060816;--bg2:#0B1020;--border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);--accent:#00F5A0;--text:#F1F5F9;--text2:#94A3B8;--text3:#475569;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,160,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.018) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
-@keyframes pd{0%,100%{opacity:1}50%{opacity:0.4}}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:62px;background:rgba(5,8,22,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;text-decoration:none;color:var(--text);}
-.logo .v{color:var(--accent);}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 1px 6px;animation:pd 2s infinite;}
-.nl{display:flex;align-items:center;gap:2rem;list-style:none;}
-.nl a{font-size:13px;color:var(--muted);text-decoration:none;}
-.nl a:hover{color:var(--text);}
-.pill{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);padding:4px 14px;border-radius:99px;}
-.hamburger{display:none;background:transparent;border:none;color:var(--text);cursor:pointer;padding:8px;}
-.hamburger svg{width:24px;height:24px;}
-.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(5,8,22,0.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1rem 1.5rem;z-index:199;}
-.mobile-menu.open{display:flex;flex-direction:column;gap:0.5rem;}
-.mobile-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
-.mobile-menu a:last-of-type{border-bottom:none;}
-
-.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:100px 2rem 5rem;width:100%;}
-.eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
-.eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,46px);letter-spacing:-1.5px;margin-bottom:0.5rem;}
-.updated{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;margin-bottom:2.5rem;}
-.intro-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:2.5rem;}
-.intro-box p{font-size:14px;color:var(--muted);line-height:1.75;margin:0;}
-h2{font-family:'Syne',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.3px;margin:2.25rem 0 0.75rem;}
-h2 span{color:var(--accent);}
-p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:0.75rem;font-weight:300;}
-ul.list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;padding-left:0.5rem;}
-ul.list li{font-size:14px;color:var(--muted);line-height:1.7;display:flex;gap:10px;}
-ul.list li::before{content:'·';color:var(--accent);flex-shrink:0;font-weight:700;font-size:18px;line-height:1;}
-strong{color:var(--text);font-weight:500;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.6;min-height:100vh;}
 a{color:var(--accent);text-decoration:none;}
 a:hover{text-decoration:underline;}
-.warn-box{background:rgba(255,176,32,0.05);border:1px solid rgba(255,176,32,0.2);border-radius:12px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
-.warn-box p{color:#FFB020;font-size:13px;margin:0;line-height:1.7;}
-.warn-box strong{color:#FFD580;}
-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.fl{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
-.fl span{color:var(--accent);}
-.fc{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
-.f-links{display:flex;gap:1rem;}
-.f-links a{font-size:12px;color:var(--muted2);text-decoration:none;font-family:'DM Mono',monospace;}
-.f-links a:hover{color:var(--muted);}
-@media(max-width:768px){nav{padding:0 1.25rem;}.nl{display:none;}.hamburger{display:flex;}.page{padding:90px 1.25rem 3rem;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;border-bottom:1px solid var(--border);background:rgba(6,8,22,0.95);backdrop-filter:blur(20px);}
+.nav-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.05em;color:var(--text);text-decoration:none;}
+.nav-brand span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--text2);font-family:'DM Mono',monospace;}
+.nav-back:hover{color:var(--text);text-decoration:none;}
+.page-wrap{max-width:760px;margin:0 auto;padding:7rem 2rem 5rem;}
+.page-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,4vw,42px);letter-spacing:-0.03em;margin-bottom:0.5rem;}
+.page-title span{color:var(--accent);}
+.page-updated{font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:3rem;}
+.section{margin-bottom:2.5rem;}
+.section h2{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:0.75rem;color:var(--text);}
+.section p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:0.75rem;}
+.section ul{list-style:none;padding:0;}
+.section ul li{font-size:15px;color:var(--text2);line-height:1.8;padding-left:16px;position:relative;margin-bottom:4px;}
+.section ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:11px;top:4px;}
+.highlight-box{background:rgba(0,245,160,0.05);border:1px solid rgba(0,245,160,0.15);border-radius:12px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.highlight-box p{color:var(--text);margin:0;font-size:14px;line-height:1.7;}
+.contact-line{font-size:14px;color:var(--text2);margin-top:2rem;}
+.contact-line a{color:var(--accent);}
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);}
 </style>
 </head>
 <body>
 <nav>
-  <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
-  <ul class="nl">
-    <li><a href="/journal.html">Journal</a></li>
-    <li><a href="/position-size-calculator.html">Calculator</a></li>
-    <li><a href="/blog.html">Blog</a></li>
-    <li><a href="/about.html">About</a></li>
-    <li><span class="pill">Free · vyxor.in</span></li>
-  </ul>
-  <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-  </button>
+  <a class="nav-brand" href="/"><span>V</span>yxor</a>
+  <a class="nav-back" href="/">← Back to home</a>
 </nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="/journal.html">Journal</a>
-  <a href="/position-size-calculator.html">Calculator</a>
-  <a href="/blog.html">Blog</a>
-  <a href="/about.html">About</a>
+<div class="page-wrap">
+  <h1 class="page-title">Terms of <span>Service</span></h1>
+  <div class="page-updated">Last updated: May 2026</div>
+
+  <div class="section">
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using Vyxor at vyxor.in, you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.</p>
+  </div>
+
+  <div class="section">
+    <h2>2. What Vyxor Is</h2>
+    <p>Vyxor is an educational platform for trade journaling, behavioral self-analysis, and pattern tracking. It includes a trading journal, AI-powered insights, and a position size calculator.</p>
+    <div class="highlight-box">
+      <p>Vyxor is an educational tool only. Nothing on this platform constitutes financial advice, investment advice, or trading recommendations. All trading decisions are entirely your own responsibility.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>3. User Accounts</h2>
+    <ul>
+      <li>You must provide accurate information when creating an account</li>
+      <li>You are responsible for maintaining the security of your account</li>
+      <li>You must be at least 18 years old to use the Service</li>
+      <li>One person may not maintain more than one free trial account</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>4. Free Trial</h2>
+    <p>Vyxor offers a 15-day free trial. During the trial you can log trades, view history, access analytics, and export your data as CSV. AI Coach and CSV import require a paid subscription.</p>
+    <p>After the trial ends, your logged trades are never deleted. You can continue logging trades and viewing your history without a paid plan.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. Subscriptions and Payments</h2>
+    <ul>
+      <li>Pro plan is $5/month — billed monthly</li>
+      <li>All payments are processed securely through Paddle</li>
+      <li>You will never be charged without your explicit consent</li>
+      <li>Subscriptions renew automatically each month until cancelled</li>
+      <li>You can cancel at any time from your account</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>6. What Pro Unlocks</h2>
+    <ul>
+      <li>AI Coach — behavioral pattern analysis powered by Claude AI</li>
+      <li>Weekly AI-written performance reports saved to your account</li>
+      <li>CSV import from any broker or platform</li>
+      <li>All future Pro features as they are released</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>7. Acceptable Use</h2>
+    <ul>
+      <li>Do not use the Service for any unlawful purpose</li>
+      <li>Do not attempt to reverse engineer or copy the platform</li>
+      <li>Do not share your account credentials with others</li>
+      <li>Do not use automated tools to scrape data from the Service</li>
+      <li>Do not interfere with the security or integrity of the Service</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Your Data</h2>
+    <p>Your trade data belongs to you. You can export it at any time using the CSV export feature. We do not sell your data. See our Privacy Policy for full details.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Disclaimer of Warranties</h2>
+    <p>The Service is provided as-is without warranties of any kind. Vyxor does not guarantee uninterrupted access, accuracy of AI insights, or fitness for any particular trading strategy or outcome.</p>
+  </div>
+
+  <div class="section">
+    <h2>10. Limitation of Liability</h2>
+    <p>Vyxor shall not be liable for any trading losses, financial decisions made based on platform insights, or indirect damages arising from use of the Service. AI analysis is for educational and self-reflection purposes only.</p>
+  </div>
+
+  <div class="section">
+    <h2>11. Termination</h2>
+    <p>We reserve the right to suspend accounts that violate these terms. You may cancel your subscription at any time.</p>
+  </div>
+
+  <div class="section">
+    <h2>12. Governing Law</h2>
+    <p>These terms are governed by the laws of India. Any disputes shall be subject to the jurisdiction of courts in Maharashtra, India.</p>
+  </div>
+
+  <div class="contact-line">Questions? Email us at <a href="mailto:hello@vyxor.in">hello@vyxor.in</a></div>
 </div>
-
-<div class="page">
-  <div class="eyebrow">Legal</div>
-  <h1>Terms of Service</h1>
-  <p class="updated">Last updated: May 12, 2026</p>
-
-  <div class="intro-box">
-    <p>These Terms of Service ("Terms") govern your use of Vyxor (vyxor.in). By accessing or using the platform, you agree to these Terms. If you do not agree, please do not use Vyxor.</p>
-  </div>
-
-  <h2>1. About <span>Vyxor</span></h2>
-  <p>Vyxor is a free trading discipline platform that provides educational tools including a position size calculator, AI-powered trade journal, and related resources. Vyxor is operated as an independent brand by a founder based in Ahilyanagar, Maharashtra, India. Contact: <a href="mailto:hello@vyxor.in">hello@vyxor.in</a></p>
-
-  <h2>2. Eligibility</h2>
-  <p>You must be at least 18 years old to use Vyxor. By using the platform, you represent that you are 18 or older and have the legal capacity to enter into this agreement.</p>
-
-  <h2>3. Account <span>registration</span></h2>
-  <p>The Position Size Calculator does not require an account. The AI Trade Journal requires you to create an account using email/password or Google sign-in. You are responsible for:</p>
-  <ul class="list">
-    <li>Providing accurate registration information</li>
-    <li>Maintaining the security of your account credentials</li>
-    <li>All activity that occurs under your account</li>
-    <li>Notifying us immediately of any unauthorized access</li>
-  </ul>
-
-  <h2>4. Acceptable <span>use</span></h2>
-  <p>You agree to use Vyxor only for lawful purposes. You agree NOT to:</p>
-  <ul class="list">
-    <li>Use Vyxor for any illegal activity</li>
-    <li>Attempt to reverse-engineer, scrape, or copy the platform</li>
-    <li>Use automated systems (bots, scrapers) to access Vyxor</li>
-    <li>Abuse our AI endpoints or attempt to bypass rate limits</li>
-    <li>Upload malicious content, viruses, or harmful code</li>
-    <li>Impersonate any person or misrepresent your identity</li>
-    <li>Interfere with the security or operation of the platform</li>
-  </ul>
-  <p>Violations may result in immediate account termination without notice.</p>
-
-  <h2>5. Free <span>service</span></h2>
-  <p>Vyxor is currently free to use. We reserve the right to introduce paid features in the future, but core tools (position calculator, basic journaling) will remain accessible without payment. If paid features are introduced, separate terms will apply to those features and we will notify users in advance.</p>
-
-  <h2>6. Intellectual <span>property</span></h2>
-  <p>All content on Vyxor — including the platform code, design, logos, written content, and tools — is owned by Vyxor and protected by intellectual property laws. You may not copy, reproduce, distribute, or create derivative works without our written permission.</p>
-  <p><strong>Your trade data belongs to you.</strong> You retain ownership of any data you enter into the journal. By using Vyxor, you grant us a limited license to process and display this data solely for the purpose of operating the platform for you.</p>
-
-  <h2>7. AI-generated <span>content</span></h2>
-  <p>The AI Trade Journal uses third-party AI (Anthropic Claude) to generate analysis and insights based on your trade data. You understand that:</p>
-  <ul class="list">
-    <li>AI-generated content is provided "as is" and may contain errors or inaccuracies</li>
-    <li>AI analysis is for informational and educational purposes only</li>
-    <li>AI output should never be the sole basis for trading decisions</li>
-    <li>Vyxor is not responsible for any outcomes resulting from reliance on AI-generated content</li>
-  </ul>
-
-  <h2>8. No financial <span>advice</span></h2>
-  <p>Vyxor is an <strong>educational platform</strong>. We do not provide investment advice, trading signals, buy/sell recommendations, or financial advisory services. The founder of Vyxor is <strong>not</strong> a SEBI-registered investment advisor.</p>
-  <p>All tools and content are for informational and educational purposes only. See our <a href="/disclaimer.html">full Disclaimer</a> for complete details.</p>
-
-  <h2>9. Disclaimers and <span>limitation of liability</span></h2>
-  <div class="warn-box">
-    <p><strong>Trading involves substantial risk of loss.</strong> Vyxor provides tools to help traders manage risk and discipline. We do not guarantee profits, accuracy of calculations, or any specific outcome.</p>
-  </div>
-  <p>VYXOR IS PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED. To the maximum extent permitted by law, Vyxor and its founder shall not be liable for:</p>
-  <ul class="list">
-    <li>Any trading losses you incur</li>
-    <li>Errors or omissions in calculator outputs or AI analysis</li>
-    <li>Service interruptions or data loss</li>
-    <li>Indirect, incidental, or consequential damages</li>
-    <li>Decisions made based on information from Vyxor</li>
-  </ul>
-  <p>Our total aggregate liability shall not exceed ₹1,000 (or the amount you paid us in the past 12 months, whichever is greater).</p>
-
-  <h2>10. Termination</h2>
-  <p>You may stop using Vyxor and delete your account at any time by emailing <a href="mailto:hello@vyxor.in">hello@vyxor.in</a>.</p>
-  <p>We may suspend or terminate your account if you violate these Terms, abuse the platform, or for any reason at our discretion. Upon termination, your right to use Vyxor ends immediately.</p>
-
-  <h2>11. Changes to <span>service</span></h2>
-  <p>We reserve the right to modify, suspend, or discontinue any part of Vyxor at any time, with or without notice. We will make reasonable efforts to notify users of major changes, but are not obligated to do so.</p>
-
-  <h2>12. Changes to <span>these Terms</span></h2>
-  <p>We may update these Terms from time to time. Updates will be posted on this page with an updated "Last updated" date. Continued use of Vyxor after changes means you accept the new Terms.</p>
-
-  <h2>13. Governing <span>law</span></h2>
-  <p>These Terms are governed by the laws of India. Any disputes arising from these Terms or your use of Vyxor shall be subject to the exclusive jurisdiction of the courts of Ahilyanagar, Maharashtra, India.</p>
-
-  <h2>14. <span>Contact</span></h2>
-  <p>For any questions about these Terms:<br>Email: <a href="mailto:hello@vyxor.in">hello@vyxor.in</a></p>
-</div>
-
-<footer>
-  <div class="fl"><span>V</span>yxor</div>
-  <div class="f-links">
-    <a href="/privacy.html">Privacy</a>
-    <a href="/terms.html">Terms</a>
-    <a href="/disclaimer.html">Disclaimer</a>
-  </div>
-  <div class="fc">© 2026 Vyxor · vyxor.in</div>
-</footer>
+<footer>© 2026 Vyxor · <a href="/privacy.html">Privacy</a> · <a href="/refund.html">Refunds</a></footer>
 </body>
 </html>

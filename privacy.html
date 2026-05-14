@@ -2,183 +2,128 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy | Vyxor</title>
-<meta name="description" content="Vyxor privacy policy — how we collect, use, and protect your data. We collect minimal data and never sell it.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://vyxor.in/privacy.html">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://vyxor.in/privacy.html">
-<meta property="og:title" content="Privacy Policy | Vyxor">
-<meta property="og:description" content="How Vyxor handles your data.">
-<meta name="theme-color" content="#050816">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — Vyxor</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050816;--border:rgba(255,255,255,0.06);--accent:#00F5A0;--text:#F8FAFC;--muted:#94A3B8;--muted2:#4A5568;--card:rgba(15,23,42,0.72);}
+:root{--bg:#060816;--bg2:#0B1020;--border:rgba(255,255,255,0.06);--accent:#00F5A0;--text:#F1F5F9;--text2:#94A3B8;--text3:#475569;}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,245,160,0.018) 1px,transparent 1px),linear-gradient(90deg,rgba(0,245,160,0.018) 1px,transparent 1px);background-size:52px 52px;pointer-events:none;z-index:0;}
-@keyframes pd{0%,100%{opacity:1}50%{opacity:0.4}}
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;height:62px;background:rgba(5,8,22,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
-.logo{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.5px;text-decoration:none;color:var(--text);}
-.logo .v{color:var(--accent);}
-.dot{width:5px;height:5px;border-radius:50%;background:var(--accent);display:inline-block;margin:0 1px 6px;animation:pd 2s infinite;}
-.nl{display:flex;align-items:center;gap:2rem;list-style:none;}
-.nl a{font-size:13px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
-.nl a:hover{color:var(--text);}
-.pill{font-size:11px;font-family:'DM Mono',monospace;color:var(--accent);background:rgba(0,245,160,0.08);border:1px solid rgba(0,245,160,0.2);padding:4px 14px;border-radius:99px;}
-.hamburger{display:none;background:transparent;border:none;color:var(--text);cursor:pointer;padding:8px;}
-.hamburger svg{width:24px;height:24px;}
-.mobile-menu{display:none;position:fixed;top:62px;left:0;right:0;background:rgba(5,8,22,0.98);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:1rem 1.5rem;z-index:199;}
-.mobile-menu.open{display:flex;flex-direction:column;gap:0.5rem;}
-.mobile-menu a{font-size:15px;color:var(--muted);text-decoration:none;padding:10px 0;border-bottom:1px solid var(--border);}
-.mobile-menu a:last-of-type{border-bottom:none;}
-
-.page{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:100px 2rem 5rem;width:100%;}
-.eyebrow{font-family:'DM Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;display:flex;align-items:center;gap:8px;margin-bottom:1rem;}
-.eyebrow::before{content:'';width:24px;height:1px;background:var(--accent);}
-h1{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,46px);letter-spacing:-1.5px;margin-bottom:0.5rem;}
-.updated{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;margin-bottom:2.5rem;}
-.tl-dr{background:rgba(0,245,160,0.05);border:1px solid rgba(0,245,160,0.2);border-radius:12px;padding:1.5rem;margin-bottom:2.5rem;}
-.tl-dr-title{font-size:12px;font-weight:500;color:var(--accent);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
-.tl-dr ul{list-style:none;display:flex;flex-direction:column;gap:7px;}
-.tl-dr li{font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:flex-start;line-height:1.6;}
-.tl-dr li::before{content:'✓';color:var(--accent);flex-shrink:0;font-weight:700;}
-h2{font-family:'Syne',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.3px;margin:2.25rem 0 0.75rem;}
-h2 span{color:var(--accent);}
-p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:0.75rem;font-weight:300;}
-ul.list{list-style:none;display:flex;flex-direction:column;gap:6px;margin-bottom:1rem;padding-left:0.5rem;}
-ul.list li{font-size:14px;color:var(--muted);line-height:1.7;display:flex;gap:10px;padding-left:0;}
-ul.list li::before{content:'·';color:var(--accent);flex-shrink:0;font-weight:700;font-size:18px;line-height:1;}
-strong{color:var(--text);font-weight:500;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.6;min-height:100vh;}
 a{color:var(--accent);text-decoration:none;}
 a:hover{text-decoration:underline;}
-footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:1.5rem 2.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
-.fl{font-family:'Syne',sans-serif;font-weight:800;font-size:16px;}
-.fl span{color:var(--accent);}
-.fc{font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;}
-.f-links{display:flex;gap:1rem;}
-.f-links a{font-size:12px;color:var(--muted2);text-decoration:none;font-family:'DM Mono',monospace;}
-.f-links a:hover{color:var(--muted);text-decoration:none;}
-@media(max-width:768px){nav{padding:0 1.25rem;}.nl{display:none;}.hamburger{display:flex;}.page{padding:90px 1.25rem 3rem;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;border-bottom:1px solid var(--border);background:rgba(6,8,22,0.95);backdrop-filter:blur(20px);}
+.nav-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.05em;color:var(--text);text-decoration:none;}
+.nav-brand span{color:var(--accent);}
+.nav-back{font-size:13px;color:var(--text2);font-family:'DM Mono',monospace;}
+.nav-back:hover{color:var(--text);text-decoration:none;}
+.page-wrap{max-width:760px;margin:0 auto;padding:7rem 2rem 5rem;}
+.page-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(28px,4vw,42px);letter-spacing:-0.03em;margin-bottom:0.5rem;}
+.page-title span{color:var(--accent);}
+.page-updated{font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);margin-bottom:3rem;}
+.section{margin-bottom:2.5rem;}
+.section h2{font-family:'Syne',sans-serif;font-weight:700;font-size:18px;margin-bottom:0.75rem;color:var(--text);}
+.section p{font-size:15px;color:var(--text2);line-height:1.8;margin-bottom:0.75rem;}
+.section ul{list-style:none;padding:0;}
+.section ul li{font-size:15px;color:var(--text2);line-height:1.8;padding-left:16px;position:relative;margin-bottom:4px;}
+.section ul li::before{content:'→';position:absolute;left:0;color:var(--accent);font-size:11px;top:4px;}
+.highlight-box{background:rgba(0,245,160,0.05);border:1px solid rgba(0,245,160,0.15);border-radius:12px;padding:1.25rem 1.5rem;margin:1.5rem 0;}
+.highlight-box p{color:var(--text);margin:0;font-size:14px;line-height:1.7;}
+.contact-line{font-size:14px;color:var(--text2);margin-top:2rem;}
+.contact-line a{color:var(--accent);}
+footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-size:12px;font-family:'DM Mono',monospace;color:var(--text3);}
 </style>
 </head>
 <body>
 <nav>
-  <a href="/index.html" class="logo"><span class="v">V</span>yxor<span class="dot"></span></a>
-  <ul class="nl">
-    <li><a href="/journal.html">Journal</a></li>
-    <li><a href="/position-size-calculator.html">Calculator</a></li>
-    <li><a href="/blog.html">Blog</a></li>
-    <li><a href="/about.html">About</a></li>
-    <li><span class="pill">Free · vyxor.in</span></li>
-  </ul>
-  <button class="hamburger" onclick="document.getElementById('mobile-menu').classList.toggle('open')" aria-label="Menu">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-  </button>
+  <a class="nav-brand" href="/"><span>V</span>yxor</a>
+  <a class="nav-back" href="/">← Back to home</a>
 </nav>
-<div class="mobile-menu" id="mobile-menu">
-  <a href="/journal.html">Journal</a>
-  <a href="/position-size-calculator.html">Calculator</a>
-  <a href="/blog.html">Blog</a>
-  <a href="/about.html">About</a>
-</div>
+<div class="page-wrap">
+  <h1 class="page-title">Privacy <span>Policy</span></h1>
+  <div class="page-updated">Last updated: May 2026</div>
 
-<div class="page">
-  <div class="eyebrow">Legal</div>
-  <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: May 12, 2026</p>
-
-  <div class="tl-dr">
-    <div class="tl-dr-title">TL;DR — Plain English</div>
+  <div class="section">
+    <h2>1. What We Collect</h2>
+    <p>When you use Vyxor we collect:</p>
     <ul>
-      <li>We collect only what we need: your email (if you sign up) and your trade data (so we can show it back to you)</li>
-      <li>We never sell your data to anyone, ever</li>
-      <li>Your trade data is private — only you can see it</li>
-      <li>Calculator inputs stay in your browser — we never see them</li>
-      <li>You can delete your account and all data anytime by emailing us</li>
+      <li>Account information — email address and display name</li>
+      <li>Trade data — asset names, P&L, emotions, session tags, setup tags, screenshots, notes, and self-awareness fields you log</li>
+      <li>Usage data — which features you use and when you log in</li>
+      <li>Payment data — handled entirely by Paddle, we never see your card or bank details</li>
     </ul>
   </div>
 
-  <h2>1. Who <span>we are</span></h2>
-  <p>Vyxor ("we", "us", "our") is a free trading discipline platform operated as a brand by an independent founder based in Ahilyanagar, Maharashtra, India. This Privacy Policy explains how we collect, use, and protect data when you use vyxor.in.</p>
-  <p>Contact for privacy questions: <a href="mailto:hello@vyxor.in">hello@vyxor.in</a></p>
-
-  <h2>2. What data <span>we collect</span></h2>
-  <p>We collect only what is necessary for the platform to work:</p>
-  <ul class="list">
-    <li><strong>Email address</strong> — collected only when you voluntarily submit it through our notification form, or when you create an account.</li>
-    <li><strong>Account information</strong> — if you sign up for the AI Trade Journal, we collect your name and email through Firebase Authentication (a Google service). If you sign in with Google, we receive your name, email, and profile picture as provided by Google.</li>
-    <li><strong>Trade journal data</strong> — any trades you log in the AI Trade Journal (entry, exit, P&L, notes, emotions, etc.) are stored in our database (Firebase Firestore) and linked to your account.</li>
-  </ul>
-  <p>We do <strong>NOT</strong> collect: payment information, trading account credentials, broker logins, calculator inputs (these stay in your browser only), or any data you don't explicitly enter.</p>
-
-  <h2>3. How <span>we use your data</span></h2>
-  <ul class="list">
-    <li><strong>Email</strong> — to notify you about new Vyxor features and updates. We do not send marketing emails or promotional spam.</li>
-    <li><strong>Account info</strong> — to authenticate you and let you access your trade journal across devices.</li>
-    <li><strong>Trade data</strong> — to display your trades back to you and generate analytics and AI analysis on your own data. Only you can see your trade data.</li>
-  </ul>
-
-  <h2>4. Where data <span>is stored</span></h2>
-  <p>We use the following third-party services to operate Vyxor:</p>
-  <ul class="list">
-    <li><strong>Firebase Authentication (Google)</strong> — handles user sign-in and account credentials. Subject to Google's privacy policy.</li>
-    <li><strong>Firebase Firestore (Google)</strong> — stores your trade journal data. Data is encrypted in transit and at rest. Only your authenticated account can access your own data.</li>
-    <li><strong>Vercel</strong> — hosts the website. Vercel does not have access to your trade data.</li>
-    <li><strong>Anthropic API (Claude)</strong> — when you request AI analysis, anonymized trade summaries are sent to Anthropic to generate the response. No personally identifiable information is sent.</li>
-    <li><strong>Google Apps Script (Sheets)</strong> — email addresses submitted through notification forms are stored in a private Google Sheet.</li>
-  </ul>
-
-  <h2>5. Data <span>sharing</span></h2>
-  <p>We do not sell, trade, or transfer your personal data to third parties for marketing purposes. We do not share your data with advertisers, brokers, or signal providers.</p>
-  <p>Data is only shared with the service providers listed in Section 4, strictly for the purpose of operating the platform.</p>
-
-  <h2>6. Cookies and <span>local storage</span></h2>
-  <p>Vyxor uses minimal browser storage:</p>
-  <ul class="list">
-    <li>Authentication cookies set by Firebase, required to keep you signed in.</li>
-    <li>localStorage to remember small preferences (e.g. that you've subscribed to notifications, so we don't show the banner again).</li>
-  </ul>
-  <p>We do <strong>not</strong> use advertising cookies, tracking pixels, Google Analytics, Facebook Pixel, or any third-party advertising trackers.</p>
-
-  <h2>7. Your <span>rights</span></h2>
-  <p>You have the right to:</p>
-  <ul class="list">
-    <li>Request a copy of all data we hold about you</li>
-    <li>Request correction of inaccurate data</li>
-    <li>Request permanent deletion of your account and all associated data</li>
-    <li>Opt out of all email communications</li>
-    <li>Withdraw consent for data processing</li>
-  </ul>
-  <p>To exercise any of these rights, email <a href="mailto:hello@vyxor.in">hello@vyxor.in</a>. We will respond within 7 business days.</p>
-
-  <h2>8. Data <span>security</span></h2>
-  <p>We use industry-standard security measures including HTTPS encryption, Firebase's authentication system, Firestore security rules that prevent users from accessing each other's data, and a backend proxy that protects our AI API key from client-side exposure.</p>
-  <p>However, no system is 100% secure. We cannot guarantee absolute security but commit to notifying you promptly in the event of a data breach affecting your information.</p>
-
-  <h2>9. Children's <span>privacy</span></h2>
-  <p>Vyxor is not intended for users under the age of 18. Trading is a high-risk activity not suitable for minors. We do not knowingly collect data from anyone under 18. If you believe a minor has submitted information, please contact us and we will delete it.</p>
-
-  <h2>10. International <span>users</span></h2>
-  <p>Vyxor is operated from India but accessible globally. By using the platform, you consent to your data being processed in India and by the service providers listed in Section 4, who may store data in their own regional data centers.</p>
-
-  <h2>11. Changes to <span>this policy</span></h2>
-  <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated "Last updated" date. Material changes will be communicated by email to registered users. Continued use of Vyxor after changes means you accept the updated policy.</p>
-
-  <h2>12. <span>Contact</span></h2>
-  <p>For privacy questions, data requests, or concerns:<br>Email: <a href="mailto:hello@vyxor.in">hello@vyxor.in</a><br>Website: <a href="https://vyxor.in">vyxor.in</a></p>
-</div>
-
-<footer>
-  <div class="fl"><span>V</span>yxor</div>
-  <div class="f-links">
-    <a href="/privacy.html">Privacy</a>
-    <a href="/terms.html">Terms</a>
-    <a href="/disclaimer.html">Disclaimer</a>
+  <div class="section">
+    <h2>2. How We Use Your Data</h2>
+    <ul>
+      <li>To provide the journaling, analytics, and AI coaching features</li>
+      <li>To generate AI-powered insights from your trade history</li>
+      <li>To save and display your weekly performance reports</li>
+      <li>To maintain your trading streak and account preferences</li>
+      <li>To communicate important account and service updates</li>
+    </ul>
   </div>
-  <div class="fc">© 2026 Vyxor · vyxor.in</div>
-</footer>
+
+  <div class="section">
+    <h2>3. Data Storage</h2>
+    <p>Your data is stored securely using Google Firebase Firestore. Data is encrypted in transit and at rest.</p>
+    <div class="highlight-box">
+      <p>We never sell your personal data. We never share your trade data with third parties for any purpose. Your trading activity is completely private.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>4. AI Processing</h2>
+    <p>When you use the AI Coach feature, your trade data is sent to Anthropic's Claude API to generate insights. This data is used only to generate your analysis and is not stored or used for training by Anthropic under their API terms.</p>
+  </div>
+
+  <div class="section">
+    <h2>5. Payments</h2>
+    <p>All payments are processed by Paddle. When you upgrade to Pro, Paddle handles your payment information securely. Vyxor only receives confirmation that a payment was completed — never your card or bank details.</p>
+  </div>
+
+  <div class="section">
+    <h2>6. Cookies</h2>
+    <p>Vyxor uses only essential cookies required for authentication and session management. We do not use advertising cookies or tracking pixels.</p>
+  </div>
+
+  <div class="section">
+    <h2>7. Third-Party Services</h2>
+    <ul>
+      <li>Google Firebase — authentication and database storage</li>
+      <li>Anthropic Claude API — AI analysis generation</li>
+      <li>Paddle — payment processing and subscription management</li>
+      <li>Vercel — hosting and serverless API functions</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>8. Your Rights</h2>
+    <ul>
+      <li>Export your trade data anytime using the CSV export feature</li>
+      <li>Request deletion of your account and all associated data</li>
+      <li>Update your account information at any time</li>
+      <li>Your logged trades are never deleted regardless of your subscription status</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>9. Data Retention</h2>
+    <p>We retain your data for as long as your account is active. If you request account deletion, your data is permanently removed within 30 days.</p>
+  </div>
+
+  <div class="section">
+    <h2>10. Children's Privacy</h2>
+    <p>Vyxor is not intended for users under 18 years of age. We do not knowingly collect data from minors.</p>
+  </div>
+
+  <div class="section">
+    <h2>11. Changes to This Policy</h2>
+    <p>We may update this policy from time to time. We will notify you of significant changes via email or a notice on the platform.</p>
+  </div>
+
+  <div class="contact-line">Questions about your privacy? Email us at <a href="mailto:hello@vyxor.in">hello@vyxor.in</a></div>
+</div>
+<footer>© 2026 Vyxor · <a href="/terms.html">Terms</a> · <a href="/refund.html">Refunds</a></footer>
 </body>
 </html>
