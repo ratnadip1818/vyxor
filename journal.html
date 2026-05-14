@@ -19,6 +19,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%2300F5A0'>V</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&family=Bricolage+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vyxor AI Trade Journal","url":"https://vyxor.in/journal.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"Free AI-powered trade journal built for Indian traders. Cloud sync, emotion tracking, pattern analysis."}</script>
 <style>
 :root{
@@ -1585,12 +1586,73 @@ function showUpgradeModal() {
   if (m) m.style.display = 'flex';
 }
 
+// ── PADDLE PAYMENT INTEGRATION ───────────────────────────
+// Initialize Paddle with client-side token
+Paddle.Initialize({
+  token: 'live_2b2fee91b9d58ed68900bf782e0',
+  eventCallback: function(data) {
+    if (data.name === 'checkout.completed') {
+      handlePaymentSuccess(data);
+    }
+  }
+});
+
+async function handlePaymentSuccess(data) {
+  if (!currentUser) return;
+  try {
+    // Mark user as Pro in Firestore
+    await setDoc(doc(db, 'users', currentUser.uid), {
+      plan: 'pro',
+      planStarted: serverTimestamp(),
+      paddleCustomerId: data.data?.customer?.id || '',
+      paddleSubscriptionId: data.data?.subscription?.id || '',
+      paymentEmail: data.data?.customer?.email || currentUser.email || ''
+    }, { merge: true });
+
+    // Update local state
+    trialExpired = false;
+
+    // Close upgrade modal
+    const m = document.getElementById('upgrade-modal');
+    if (m) m.style.display = 'none';
+
+    // Update trial note
+    const note = document.getElementById('trial-note');
+    if (note) note.innerHTML = '<span style="color:var(--accent);font-size:12px;">Pro</span>';
+
+    toast('Welcome to Vyxor Pro! All features unlocked.');
+
+    // Reload to refresh state
+    setTimeout(() => window.location.reload(), 2000);
+  } catch(e) {
+    console.error('Failed to upgrade user:', e);
+    toast('Payment received! Refresh the page to access Pro features.');
+  }
+}
+
 window.startCheckout = function() {
-  // Replace YOUR_PADDLE_PRODUCT_ID with your actual Paddle checkout URL after Paddle approves
-  const PADDLE_CHECKOUT = 'https://buy.paddle.com/product/YOUR_PADDLE_PRODUCT_ID';
+  if (!currentUser) { toast('Please sign in first.', true); return; }
+
   const btn = document.getElementById('upgrade-pay-btn');
   if (btn) { btn.textContent = 'Opening checkout...'; btn.disabled = true; }
-  window.open(PADDLE_CHECKOUT, '_blank');
+
+  try {
+    Paddle.Checkout.open({
+      items: [{ priceId: 'pri_01krk332gbr6qd7xtmnkbf179g', quantity: 1 }],
+      customer: { email: currentUser.email || '' },
+      customData: { uid: currentUser.uid },
+      settings: {
+        displayMode: 'overlay',
+        theme: 'dark',
+        locale: 'en',
+        successUrl: 'https://vyxor.in/journal.html?upgraded=1'
+      }
+    });
+  } catch(e) {
+    console.error('Paddle error:', e);
+    toast('Could not open checkout. Please try again.', true);
+  }
+
   setTimeout(() => {
     if (btn) { btn.textContent = 'Upgrade to Pro — $5/month'; btn.disabled = false; }
   }, 3000);
@@ -2785,6 +2847,12 @@ async function callAI(prompt, maxTokens=1500) {
 
 // ── INIT ────────────────────────────────────────────────
 document.getElementById('f-datetime').value = new Date().toISOString().slice(0,16);
+
+// Handle post-payment redirect
+if (window.location.search.includes('upgraded=1')) {
+  setTimeout(() => toast('Welcome to Vyxor Pro! All features unlocked.'), 1000);
+  window.history.replaceState({}, '', '/journal.html');
+}
 
 </script>
 </body>
