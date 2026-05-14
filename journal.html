@@ -1052,6 +1052,10 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
         <button class="ai-btn" id="ai-btn" onclick="runAnalysis()">Analyse My Trades</button>
         <button class="ai-btn story" id="story-btn" onclick="runStory()">This Week's Report</button>
       </div>
+      <!-- Test upgrade button — remove after testing -->
+      <div id="test-upgrade-wrap" style="margin-top:1rem;display:none;">
+        <button onclick="window.showUpgradeModal()" style="padding:8px 16px;border-radius:8px;border:1px solid rgba(0,245,160,0.3);background:transparent;color:var(--accent);font-size:12px;font-family:'DM Mono',monospace;cursor:pointer;">Test Upgrade Modal</button>
+      </div>
       <div class="ai-loading" id="ai-loading">
         <div class="spinner"></div>
         <span id="ai-loading-text">Analysing your trades...</span>
@@ -1581,7 +1585,7 @@ function updateTrialUI() {
   }
 }
 
-function showUpgradeModal() {
+window.showUpgradeModal = function showUpgradeModal() {
   const m = document.getElementById('upgrade-modal');
   if (m) m.style.display = 'flex';
 }
@@ -2847,6 +2851,15 @@ async function callAI(prompt, maxTokens=1500) {
 
 // ── INIT ────────────────────────────────────────────────
 document.getElementById('f-datetime').value = new Date().toISOString().slice(0,16);
+
+// Expose for console testing
+window._testUpgrade = function() { trialExpired = true; window.showUpgradeModal(); };
+
+// Show test button if ?test=1 in URL
+if (window.location.search.includes('test=1')) {
+  const wrap = document.getElementById('test-upgrade-wrap');
+  if (wrap) wrap.style.display = 'block';
+}
 
 // Handle post-payment redirect
 if (window.location.search.includes('upgraded=1')) {
