@@ -640,14 +640,14 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
   <div style="background:#0B1220;border:1px solid rgba(0,245,160,0.25);border-radius:20px;max-width:460px;width:100%;padding:2.5rem 2rem;position:relative;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,0.7);">
     <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:transparent;border:none;color:#475569;font-size:18px;cursor:pointer;line-height:1;">✕</button>
     <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:22px;letter-spacing:-0.05em;margin-bottom:8px;">Your 15-day trial has ended</div>
-    <p style="font-size:14px;color:#94A3B8;line-height:1.7;margin-bottom:1.5rem;">Upgrade to Vyxor Pro to unlock AI Coach and CSV import. Your trade data is safe and waiting for you.</p>
+    <p style="font-size:14px;color:#94A3B8;line-height:1.7;margin-bottom:1.5rem;">Upgrade to Vyxor Pro to unlock Journal AI and CSV import. Your trade data is safe and waiting for you.</p>
 
     <!-- Price block -->
     <div style="background:rgba(0,245,160,0.05);border:1px solid rgba(0,245,160,0.2);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;">
       <div style="font-size:42px;font-family:'Syne',sans-serif;font-weight:800;color:#00F5A0;letter-spacing:-0.05em;">$5<span style="font-size:16px;color:#94A3B8;font-weight:400;">/month</span></div>
       <div style="font-size:12px;color:#475569;font-family:'DM Mono',monospace;margin-top:6px;margin-bottom:1rem;">Cancel anytime · 30-day money back guarantee</div>
       <div style="display:flex;flex-direction:column;gap:6px;text-align:left;margin-bottom:0;">
-        <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:#00F5A0;font-size:11px;">→</span> AI Coach — weekly reports and pattern analysis</div>
+        <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:#00F5A0;font-size:11px;">→</span> Journal AI — behavioral self-reflection and weekly summaries</div>
         <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:#00F5A0;font-size:11px;">→</span> CSV import from any broker</div>
         <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:#00F5A0;font-size:11px;">→</span> Unlimited access forever</div>
         <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:#00F5A0;font-size:11px;">→</span> All future features included</div>
@@ -785,7 +785,7 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
     <button class="jtab active" onclick="switchTab('log')">📝 Log Trade</button>
     <button class="jtab" onclick="switchTab('history')">📋 History</button>
     <button class="jtab" onclick="switchTab('analytics')">📊 Analytics</button>
-    <button class="jtab" onclick="switchTab('ai')">AI Coach</button>
+    <button class="jtab" onclick="switchTab('ai')">Journal AI</button>
     <button class="jtab" onclick="switchTab('import')">📥 Import</button>
   </div>
 
@@ -1045,12 +1045,15 @@ tbody td{padding:11px 14px;font-size:12px;font-family:'DM Mono',monospace;white-
   <!-- ── AI PANEL ── -->
   <div class="panel" id="panel-ai">
     <div class="ai-card">
-      <div class="ai-title">AI <span>Coach</span></div>
-      <p class="ai-sub">Powered by Claude · Your personal trading coach</p>
-      <p class="ai-desc">The AI reads all your trades and finds patterns you can't see yourself — which emotions cost you money, which sessions you perform best in, what habits are holding you back. The more trades you log, the sharper the insights.</p>
+      <div class="ai-title">Journal <span>AI</span></div>
+      <p class="ai-sub">Powered by Claude · Personal journal reflection tool</p>
+      <p class="ai-desc">The AI reads your journal entries — the emotions you logged, the setups you recorded, your behavioral patterns — and reflects them back to you as self-awareness insights. It does not recommend trades or provide financial advice. Everything is based entirely on your own past journal entries.</p>
+      <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted2);margin-bottom:1rem;padding:8px 12px;border:1px solid var(--border);border-radius:8px;line-height:1.6;">
+        For self-reflection only. Not financial advice. Not a SEBI registered advisor. All trading decisions are made solely by you.
+      </div>
       <div class="ai-btns">
-        <button class="ai-btn" id="ai-btn" onclick="runAnalysis()">Analyse My Trades</button>
-        <button class="ai-btn story" id="story-btn" onclick="runStory()">This Week's Report</button>
+        <button class="ai-btn" id="ai-btn" onclick="runAnalysis()">Analyse My Journal</button>
+        <button class="ai-btn story" id="story-btn" onclick="runStory()">This Week's Summary</button>
       </div>
       <!-- Test upgrade button — remove after testing -->
       <div id="test-upgrade-wrap" style="margin-top:1rem;display:block;">
@@ -2304,7 +2307,7 @@ window.runAnalysis = async function() {
     `${t.datetime}|${t.asset}|${t.direction}|P&L:${t.currency||'₹'}${t.pnl}|${t.result}|Session:${t.session||'—'}|Setup:${t.setup||'—'}|Pre:${t.preEmo||'—'}|Post:${t.postEmo||'—'}|Intent:${t.tradeIntent||'—'}|Rules:${t.rulesFollowed||'—'}|Market:${t.marketCondition||'—'}|Lesson:${t.lesson||'—'}`
   ).join('\n');
 
-  const prompt = `You are an elite trading coach. Analyse this trader's journal data and return a structured report.
+  const prompt = `You are a personal journal reflection assistant. Analyse this trader's journal data and return a structured report.
 
 TRADES:
 ${summary}
