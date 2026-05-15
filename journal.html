@@ -415,7 +415,9 @@ button, select, input, textarea { font-family:inherit; }
 .dash-left { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
 
 /* Equity card */
-.equity-card {
+.equity-card { transition: box-shadow 0.15s; }
+[data-theme="light"] .equity-card { box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+.equity-card_placeholder {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
@@ -437,7 +439,7 @@ button, select, input, textarea { font-family:inherit; }
   font-family: var(--mono); color: var(--pos);
   letter-spacing: -.04em;
 }
-.chart-h { height: 130px; position: relative; }
+.chart-h { height: 185px; position: relative; }
 
 /* Calendar card */
 .cal-card {
@@ -2651,6 +2653,11 @@ function subscribeToTrades() {
 }
 
 // ── FORM HELPERS ───────────────────────────────────────
+window.setResult = function(btn) {
+  document.querySelectorAll('.result-opt').forEach(b => b.classList.remove('sel'));
+  btn.classList.add('sel');
+};
+
 window.setDir = function(d, btn) {
   direction = d;
   document.querySelectorAll('.dir-btn').forEach(b => b.classList.remove('sel'));
@@ -3085,32 +3092,90 @@ function renderDashEquity() {
   const canvas = document.getElementById('dash-equity-chart');
   if (!canvas) return;
   if (dashEquityChart) { dashEquityChart.destroy(); }
+
   const sorted = [...allTrades].sort((a,b) => new Date(a.datetime) - new Date(b.datetime));
   let cum = 0;
-  const data = sorted.map(t => { cum += parseFloat(t.pnl)||0; return cum; });
-  const isPos = data[data.length-1] >= 0;
+  const data = [0, ...sorted.map(t => { cum += parseFloat(t.pnl)||0; return Math.round(cum*100)/100; })];
+  const labels = ['Start', ...sorted.map(t => t.datetime ? new Date(t.datetime).toLocaleDateString('en-IN',{day:'numeric',month:'short'}) : '')];
+
+  const totalPnl = data[data.length-1] || 0;
+  const isPos = totalPnl >= 0;
+  const eqStat = document.getElementById('eq-stat') || document.getElementById('dash-equity-stat');
+  if (eqStat) {
+    eqStat.textContent = (totalPnl>=0?'+':'')+globalCurrency+Math.abs(totalPnl).toLocaleString('en-IN',{maximumFractionDigits:0});
+    eqStat.style.color = isPos ? 'var(--pos)' : 'var(--neg)';
+  }
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const lineColor = isPos ? (isLight ? '#16A34A' : '#22C55E') : (isLight ? '#DC2626' : '#EF4444');
+  const ctx = canvas.getContext('2d');
+  const h = canvas.parentElement ? canvas.parentElement.offsetHeight || 160 : 160;
+  const gradient = ctx.createLinearGradient(0, 0, 0, h);
+  if (isPos) {
+    gradient.addColorStop(0, isLight ? 'rgba(22,163,74,0.15)' : 'rgba(34,197,94,0.18)');
+    gradient.addColorStop(0.65, isLight ? 'rgba(22,163,74,0.03)' : 'rgba(34,197,94,0.05)');
+    gradient.addColorStop(1, 'rgba(0,0,0,0)');
+  } else {
+    gradient.addColorStop(0, isLight ? 'rgba(220,38,38,0.12)' : 'rgba(239,68,68,0.15)');
+    gradient.addColorStop(0.65, isLight ? 'rgba(220,38,38,0.02)' : 'rgba(239,68,68,0.04)');
+    gradient.addColorStop(1, 'rgba(0,0,0,0)');
+  }
+
   dashEquityChart = new Chart(canvas, {
     type: 'line',
     data: {
-      labels: data.map((_,i) => i+1),
+      labels,
       datasets: [{
         data,
-        borderColor: '#3B82F6',
-        backgroundColor: 'rgba(59,130,246,0.08)',
+        borderColor: lineColor,
+        backgroundColor: gradient,
         fill: true,
-        tension: 0.4,
+        tension: 0.42,
         pointRadius: 0,
-        borderWidth: 1.5
+        pointHoverRadius: 5,
+        pointHoverBackgroundColor: lineColor,
+        pointHoverBorderColor: isLight ? '#fff' : '#1C2336',
+        pointHoverBorderWidth: 2,
+        borderWidth: 2.5
       }]
     },
     options: {
       responsive: true,
       maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
+      animation: { duration: 700, easing: 'easeInOutQuart' },
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            title: ctx => ctx[0].label,
+            label: ctx => ' ' + globalCurrency + ctx.parsed.y.toLocaleString('en-IN',{maximumFractionDigits:0})
+          },
+          backgroundColor: isLight ? '#fff' : '#1C2336',
+          borderColor: isLight ? 'rgba(0,0,0,0.08)' : 'rgba(255,255,255,0.07)',
+          borderWidth: 1,
+          titleColor: isLight ? '#94A3B8' : '#64748B',
+          bodyColor: isLight ? '#0F172A' : '#F9FAFB',
+          padding: { x: 12, y: 8 },
+          displayColors: false,
+          bodyFont: { family: 'DM Mono,monospace', size: 13, weight: '500' },
+          titleFont: { family: 'DM Mono,monospace', size: 10 }
+        }
+      },
       scales: {
         x: { display: false },
-        y: { display: false }
-      }
+        y: {
+          display: true,
+          position: 'right',
+          grid: { color: isLight ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.03)', drawBorder: false },
+          ticks: {
+            color: isLight ? '#CBD5E1' : '#374151',
+            font: { size: 9, family: 'DM Mono,monospace' },
+            maxTicksLimit: 4,
+            callback: v => globalCurrency+(Math.abs(v)>=1000?(v/1000).toFixed(0)+'k':v)
+          },
+          border: { display: false }
+        }
+      },
+      interaction: { mode: 'index', intersect: false }
     }
   });
 }
@@ -3130,7 +3195,7 @@ function renderDashRecentTrades() {
       <td style="font-weight:500;color:var(--text);">${esc(t.asset)}</td>
       <td style="color:${t.direction==='Long'?'var(--pos)':'var(--neg)'};">${t.direction}</td>
       <td style="font-family:var(--mono);color:${pnl>=0?'var(--pos)':'var(--neg)'};">${pnl>=0?'+':''}${cur}${Math.abs(pnl).toLocaleString('en-IN',{maximumFractionDigits:0})}</td>
-      <td style="font-family:var(--mono);">${esc(t.preEmo||'—')}</td>
+      <td style="font-family:var(--mono);">${(t.preEmo||'—').replace(/[\u{1F300}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]\s*/gu,'').trim()||'—'}</td>
       <td>${rb}</td>
     </tr>`;
   }).join('');
@@ -3251,7 +3316,7 @@ function renderStats() {
 window.renderHistory = function() {
   const body  = document.getElementById('history-body');
   const empty = document.getElementById('history-empty');
-  const fr = document.getElementById('f-res').value;
+  const frEl = document.getElementById('f-res'); const fr = frEl ? frEl.value : '';
   const filtered = allTrades.filter(t => (!fr || t.result === fr));
 
   if (!filtered.length) { body.innerHTML=''; empty.style.display='block'; return; }
@@ -3268,7 +3333,7 @@ window.renderHistory = function() {
       <td class="${pnl>=0?'td-p':'td-n'}">${fmtPnl(pnl, cur)}</td>
       <td style="color:var(--muted);font-size:11px">${esc(t.session||'—')}</td>
       <td style="color:var(--muted);font-size:11px">${esc(t.setup||'—')}</td>
-      <td>${esc(t.preEmo||'—')}</td>
+      <td>${(t.preEmo||'—').replace(/[\u{1F300}-\u{1FFFF}\u{2600}-\u{26FF}\u{2700}-\u{27BF}]\s*/gu,'').trim()||'—'}</td>
       <td><span class="result-badge ${rb}">${t.result}</span></td>
       <td>${t.screenshot?'<span class="has-img" title="Has screenshot">+</span>':'<span style="color:var(--muted2)">—</span>'}</td>
       <td onclick="event.stopPropagation()" style="display:flex;gap:5px;">
