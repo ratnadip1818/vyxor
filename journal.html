@@ -3316,11 +3316,16 @@ function renderStats() {
 window.renderHistory = function() {
   const body  = document.getElementById('history-body');
   const empty = document.getElementById('history-empty');
+  if (!body) return;
   const frEl = document.getElementById('f-res'); const fr = frEl ? frEl.value : '';
   const filtered = allTrades.filter(t => (!fr || t.result === fr));
 
-  if (!filtered.length) { body.innerHTML=''; empty.style.display='block'; return; }
-  empty.style.display = 'none';
+  if (!filtered.length) {
+    body.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
 
   body.innerHTML = filtered.map(t => {
     const pnl = parseFloat(t.pnl);
