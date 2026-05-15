@@ -2140,7 +2140,6 @@ window.switchTab = function(tab) {
 </script>
 
 <script type="module">
-<script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
   getAuth, GoogleAuthProvider, signInWithPopup,
@@ -3023,9 +3022,10 @@ function renderDashboard() {
 
 function renderDashStats() {
   if (!allTrades.length) return;
+  const total = allTrades.length;
   const wins = allTrades.filter(t => t.result === 'Win');
   const totalPnl = allTrades.reduce((s,t) => s + (parseFloat(t.pnl)||0), 0);
-  const winRate = Math.round((wins.length / allTrades.length) * 100);
+  const winRate = Math.round((wins.length / total) * 100);
   const cur = globalCurrency;
 
   const pnlEl = document.getElementById('s-pnl');
@@ -3034,9 +3034,50 @@ function renderDashStats() {
     pnlEl.style.color = totalPnl >= 0 ? 'var(--pos)' : 'var(--neg)';
   }
   const wrEl = document.getElementById('s-winrate');
-  if (wrEl) { wrEl.textContent = winRate + '%'; wrEl.style.color = winRate >= 50 ? 'var(--pos)' : 'var(--neg)'; }
+  if (wrEl) {
+    wrEl.textContent = total ? winRate+'%' : '—';
+    wrEl.style.color = winRate >= 50 ? 'var(--pos)' : 'var(--neg)';
+  }
   const trEl = document.getElementById('s-trades');
-  if (trEl) trEl.textContent = allTrades.length;
+  if (trEl) { trEl.textContent = total; }
+
+  // Update sidebar P&L strip
+  const sbPnl = document.getElementById('sb-pnl-val');
+  if (sbPnl) {
+    sbPnl.textContent = `${totalPnl >= 0 ? '+' : ''}${cur}${Math.abs(totalPnl).toLocaleString('en-IN', {maximumFractionDigits:0})}`;
+    sbPnl.style.color = totalPnl >= 0 ? 'var(--pos)' : 'var(--neg)';
+  }
+  const sbMeta = document.getElementById('sb-pnl-meta');
+  if (sbMeta) sbMeta.textContent = `${total} trade${total!==1?'s':''} · ${winRate}% win rate`;
+
+  // Update topbar tag
+  const sc = document.getElementById('sync-count');
+  if (sc) sc.textContent = `${total} trade${total!==1?'s':''}`;
+
+  // Update dash AI metrics
+  updateDashAIMetrics();
+}
+
+function updateDashAIMetrics() {
+  const withEmo = allTrades.filter(t => t.preEmo);
+  const calm = withEmo.filter(t => t.preEmo === 'Calm');
+  const fomo = withEmo.filter(t => t.preEmo === 'FOMO');
+  const calmWR = calm.length ? Math.round(calm.filter(t=>t.result==='Win').length/calm.length*100) : null;
+  const fomoWR = fomo.length ? Math.round(fomo.filter(t=>t.result==='Win').length/fomo.length*100) : null;
+  const calmEl = document.getElementById('dash-calm-wr');
+  const fomoEl = document.getElementById('dash-fomo-wr');
+  if (calmEl) calmEl.textContent = calmWR !== null ? calmWR+'% WR' : '—';
+  if (fomoEl) fomoEl.textContent = fomoWR !== null ? fomoWR+'% WR' : '—';
+
+  const withIntent = allTrades.filter(t => t.tradeIntent);
+  const planned = withIntent.filter(t => t.tradeIntent==='planned');
+  const impulsive = withIntent.filter(t => t.tradeIntent==='impulsive');
+  const planWR = planned.length ? Math.round(planned.filter(t=>t.result==='Win').length/planned.length*100) : null;
+  const impWR = impulsive.length ? Math.round(impulsive.filter(t=>t.result==='Win').length/impulsive.length*100) : null;
+  const planEl = document.getElementById('dash-plan-wr');
+  const impEl = document.getElementById('dash-imp-wr');
+  if (planEl) planEl.textContent = planWR !== null ? planWR+'% WR' : '—';
+  if (impEl) impEl.textContent = impWR !== null ? impWR+'% WR' : '—';
 }
 
 function renderDashEquity() {
