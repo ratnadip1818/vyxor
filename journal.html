@@ -55,29 +55,31 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .btn-sm{padding:6px 14px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
 .btn-sm:hover{color:var(--text);}
 /* ── APP SHELL ── */
-.app-shell{display:grid;grid-template-columns:54px 1fr;height:100vh;overflow:hidden;}
+.app-shell{display:grid;grid-template-columns:54px 1fr;height:100vh;overflow:hidden;position:relative;}
 /* ── SIDEBAR ── */
-.sidebar{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;width:54px;transition:width 0.2s ease;overflow:hidden;z-index:100;position:relative;flex-shrink:0;}
-.sidebar:hover{width:200px;}
-.sb-logo{height:56px;display:flex;align-items:center;padding:0 13px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;overflow:hidden;}
-.sb-brand{font-family:var(--sans);font-size:18px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;letter-spacing:-0.5px;}
+.sidebar{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;width:54px;min-width:54px;max-width:54px;transition:width 0.2s ease,max-width 0.2s ease;overflow:hidden;z-index:100;position:relative;flex-shrink:0;}
+.sidebar:hover{width:200px;min-width:200px;max-width:200px;}
+.sb-logo{height:56px;display:flex;align-items:center;padding:0 13px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;overflow:hidden;min-width:0;}
+.sb-brand{font-family:var(--sans);font-size:17px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;letter-spacing:-0.5px;opacity:0;transition:opacity 0.1s;}
+.sidebar:hover .sb-brand{opacity:1;}
 .sb-brand span{color:var(--accent);}
-.sb-streak-badge{font-family:var(--mono);font-size:10px;color:var(--accent);background:rgba(79,110,247,0.1);border:1px solid rgba(79,110,247,0.2);border-radius:99px;padding:2px 7px;white-space:nowrap;opacity:0;transition:opacity 0.2s;}
+.sb-streak-badge{font-family:var(--mono);font-size:10px;color:var(--accent);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:99px;padding:2px 7px;white-space:nowrap;opacity:0;transition:opacity 0.1s;flex-shrink:0;}
 .sidebar:hover .sb-streak-badge{opacity:1;}
 .sb-nav{flex:1;padding:8px 0;overflow:hidden;}
-.sb-item{display:flex;align-items:center;gap:12px;padding:10px 16px;width:100%;background:none;border:none;color:var(--text2);cursor:pointer;transition:all 0.15s;text-decoration:none;white-space:nowrap;font-size:13px;font-family:var(--sans);}
-.sb-item svg{flex-shrink:0;opacity:0.55;transition:opacity 0.15s;}
-.sb-item:hover{color:var(--text);background:rgba(255,255,255,0.04);}
-.sb-item:hover svg{opacity:1;}
-.sb-item.active{color:var(--accent);background:rgba(79,110,247,0.08);}
+.sb-item{display:flex;align-items:center;gap:11px;padding:9px 15px;width:100%;background:none;border:none;color:var(--text2);cursor:pointer;transition:all 0.12s;text-decoration:none;white-space:nowrap;font-size:13px;font-family:var(--sans);min-width:0;overflow:hidden;}
+.sb-item svg{flex-shrink:0;opacity:0.5;transition:opacity 0.12s;width:17px;height:17px;}
+.sb-item:hover{color:var(--text);background:rgba(59,130,246,0.06);}
+.sb-item:hover svg{opacity:0.9;}
+.sb-item.active{color:var(--accent);background:rgba(59,130,246,0.1);}
 .sb-item.active svg{opacity:1;stroke:var(--accent);}
-.sb-label{opacity:0;transition:opacity 0.15s 0.05s;font-size:13px;font-weight:500;}
+.sb-label{opacity:0;transition:opacity 0.1s;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;}
 .sidebar:hover .sb-label{opacity:1;}
-.sb-sep{height:1px;background:var(--border);margin:6px 0;}
+.sb-sep{height:1px;background:var(--border);margin:4px 0;}
 .sb-bottom{padding:8px 0;flex-shrink:0;border-top:1px solid var(--border);}
-.sb-user{display:flex;align-items:center;gap:10px;padding:10px 13px;overflow:hidden;}
-.sb-avatar{width:28px;height:28px;border-radius:50%;background:rgba(79,110,247,0.15);border:1px solid rgba(79,110,247,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--accent);flex-shrink:0;}
-.sb-user-info{opacity:0;transition:opacity 0.15s;white-space:nowrap;}
+.sb-user{display:flex;align-items:center;gap:10px;padding:9px 13px;overflow:hidden;cursor:pointer;min-width:0;}
+.sb-user:hover{background:rgba(59,130,246,0.04);}
+.sb-avatar{width:28px;height:28px;border-radius:50%;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--accent);flex-shrink:0;}
+.sb-user-info{opacity:0;transition:opacity 0.1s;white-space:nowrap;min-width:0;overflow:hidden;}
 .sidebar:hover .sb-user-info{opacity:1;}
 .sb-username{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px;}
 .sb-signout{background:none;border:none;color:var(--text2);font-size:11px;cursor:pointer;font-family:var(--sans);padding:0;transition:color 0.15s;}
@@ -239,7 +241,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14
 .screenshot-remove:hover{color:var(--neg);border-color:var(--neg);}
 /* ── FORM FOOTER ── */
 .form-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem;}
-.free-note{font-size:11px;color:var(--text3);font-family:var(--mono);}
+.free-note{font-size:11px;color:var(--text3);font-family:var(--mono);display:none;}
 .free-note span{color:var(--warn);}
 .submit-btn{padding:12px 32px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;}
 .submit-btn:hover{opacity:0.88;transform:translateY(-1px);}
@@ -651,8 +653,9 @@ tbody td{padding:11px 16px;font-size:12px;font-family:var(--mono);white-space:no
 <!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sb-logo">
-    <a href="/index.html" class="sb-brand"><span>V</span></a>
-    <div class="sb-streak" id="sb-streak-badge" style="display:none;" title="Current streak"></div>
+    <div style="width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;letter-spacing:-1px;">V</div>
+    <a href="/index.html" class="sb-brand"><span>V</span>yxor</a>
+    <div class="sb-streak-badge" id="sb-streak-badge" style="display:none;" title="Current streak"></div>
   </div>
 
   <nav class="sb-nav">
@@ -994,7 +997,7 @@ tbody td{padding:11px 16px;font-size:12px;font-family:var(--mono);white-space:no
       </div>
 
       <div class="form-footer">
-        <div class="free-note" id="trial-note">15-day trial · <span id="trial-days-left">15</span> days remaining</div>
+        <div class="free-note" id="trial-note"></div>
         <button class="submit-btn" id="submit-btn" onclick="saveTrade()">Save Trade →</button>
       </div>
     </div>
@@ -1085,82 +1088,121 @@ tbody td{padding:11px 16px;font-size:12px;font-family:var(--mono);white-space:no
 
   <!-- ── AI PANEL ── -->
   <div class="panel" id="panel-ai">
-    <div class="ai-card">
-      <div class="ai-title">AI <span>Insights</span></div>
-      <p class="ai-sub">Powered by Claude · Personal journal reflection tool</p>
-      <p class="ai-desc">The AI reads your journal entries — the emotions you logged, the setups you recorded, your behavioral patterns — and reflects them back to you as self-awareness insights. It does not recommend trades or provide financial advice. Everything is based entirely on your own past journal entries.</p>
-      <div style="font-size:11px;font-family:'DM Mono',monospace;color:var(--muted2);margin-bottom:1rem;padding:8px 12px;border:1px solid var(--border);border-radius:8px;line-height:1.6;">
-        For self-reflection only. Not financial advice. Not a SEBI registered advisor. All trading decisions are made solely by you.
+
+    <!-- AI Insights header card -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:12px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;">
+        <div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
+            <div style="width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;"></div>
+            <span style="font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">AI <span style="color:var(--accent);">Insights</span></span>
+          </div>
+          <div style="font-size:11px;font-family:var(--mono);color:var(--text3);">Powered by Claude · Self-reflection tool only</div>
+        </div>
+        <div style="font-size:10px;font-family:var(--mono);color:var(--accent);background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:5px;padding:3px 8px;">Claude AI</div>
       </div>
-      <div class="ai-btns">
+      <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:1rem;">Reads your journal entries — emotions, setups, patterns — and reflects them back as self-awareness insights. Based entirely on your own data. Does not recommend trades or provide financial advice.</p>
+      <div style="font-size:11px;font-family:var(--mono);color:var(--text3);padding:8px 12px;border:1px solid var(--border);border-radius:7px;margin-bottom:1.25rem;line-height:1.6;background:var(--bg2);">
+        For self-reflection only · Not financial advice · Not a SEBI registered advisor
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <button class="ai-btn" id="ai-btn" onclick="runAnalysis()">Analyse My Journal</button>
         <button class="ai-btn story" id="story-btn" onclick="runStory()">This Week's Summary</button>
       </div>
       <div class="ai-loading" id="ai-loading">
         <div class="spinner"></div>
-        <span id="ai-loading-text">Analysing your trades...</span>
+        <span id="ai-loading-text">Analysing your journal...</span>
       </div>
       <div class="ai-result" id="ai-result">
-        <div class="ai-result-title" id="ai-result-title">Your Trading Analysis</div>
+        <div class="ai-result-title" id="ai-result-title">Your Analysis</div>
         <div class="ai-result-text" id="ai-result-text"></div>
       </div>
     </div>
 
-    <!-- ── WEEKLY REPORT HISTORY ── -->
-    <div class="ai-card" style="margin-top:1rem;">
-      <div class="ai-title" style="font-size:18px;">Past <span>Weekly Reports</span></div>
-      <p class="ai-sub">Your previous reports — saved automatically</p>
-      <div id="reports-loading" style="font-size:12px;color:var(--muted2);font-family:'DM Mono',monospace;padding:0.5rem 0;">Loading reports...</div>
+    <!-- Weekly Reports -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+        <div>
+          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;">Weekly Reports</div>
+          <div style="font-size:11px;font-family:var(--mono);color:var(--text3);">Saved automatically every Sunday</div>
+        </div>
+      </div>
+      <div id="reports-loading" style="font-size:12px;color:var(--text3);font-family:var(--mono);padding:0.5rem 0;"></div>
       <div id="reports-list"></div>
     </div>
+
   </div>
 
   <!-- ── IMPORT PANEL ── -->
   <div class="panel" id="panel-import">
-    <div class="import-card">
-      <div class="import-title">Import <span>CSV</span></div>
-      <p class="import-sub">Export your trade history as a CSV from any platform and import it here. Vyxor reads the columns automatically — no configuration needed.</p>
+    <div style="max-width:680px;">
 
-      <div style="background:rgba(255,255,255,0.02);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1.25rem;">
-        <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:8px;font-family:'DM Mono',monospace;">What your CSV needs</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.9;">
-          Your CSV should have columns for: <span style="color:var(--text);">date/time, symbol/asset, buy/sell direction, and P&L or price data.</span><br>
-          Column names don't have to match exactly — Vyxor detects them automatically.<br>
-          <span style="color:var(--muted2);">Supported: any broker, any market — Indian, Forex, US Futures, Crypto, MCX.</span>
-        </div>
+      <!-- Header -->
+      <div style="margin-bottom:1.25rem;">
+        <div style="font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.3px;margin-bottom:4px;">Import <span style="color:var(--accent);">CSV</span></div>
+        <div style="font-size:13px;color:var(--text2);">Import your trade history from any broker or platform. Vyxor detects column formats automatically.</div>
       </div>
 
+      <!-- What your CSV needs -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;">
+        <div style="font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Required columns</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;"></div>Date / Time
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;"></div>Symbol / Asset
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;"></div>Buy / Sell direction
+          </div>
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);">
+            <div style="width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;"></div>P&L or price data
+          </div>
+        </div>
+        <div style="font-size:11px;font-family:var(--mono);color:var(--text3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">Column names don't need to match exactly — Vyxor auto-detects them.</div>
+      </div>
+
+      <!-- Drop zone -->
       <div class="drop-zone" id="u-drop" ondragover="dragOver(event,'u-drop')" ondragleave="dragLeave('u-drop')" ondrop="dropFile(event,'universal')">
         <input type="file" accept=".csv" onchange="fileSelected(event,'universal')">
-        <div class="drop-icon"></div>
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--text3);margin-bottom:10px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
         <div class="drop-text">Drop your CSV file here</div>
         <div class="drop-sub">or click to browse · any broker, any market</div>
       </div>
 
+      <!-- Preview -->
       <div class="preview-table-wrap" id="u-preview">
         <div class="preview-header">
           <span class="preview-title">Preview</span>
           <span class="preview-count" id="u-count">0 trades detected</span>
         </div>
-        <table class="preview-table">
-          <thead><tr><th>Date</th><th>Asset</th><th>Direction</th><th>P&L</th><th>Result</th></tr></thead>
-          <tbody id="u-preview-body"></tbody>
-        </table>
+        <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--border);">
+          <table class="preview-table" style="width:100%;">
+            <thead><tr><th>Date</th><th>Asset</th><th>Direction</th><th>P&L</th><th>Result</th></tr></thead>
+            <tbody id="u-preview-body"></tbody>
+          </table>
+        </div>
       </div>
 
+      <!-- Progress -->
       <div class="import-progress" id="u-progress">
         <div class="progress-bar-wrap"><div class="progress-bar" id="u-bar"></div></div>
         <div class="progress-text" id="u-progress-text">Importing trades...</div>
       </div>
+
+      <!-- Result -->
       <div class="import-result" id="u-result">
-        <div class="import-result-title"> Import Complete</div>
+        <div class="import-result-title">Import Complete</div>
         <div class="import-result-text" id="u-result-text"></div>
       </div>
-      <div class="import-actions">
+
+      <!-- Actions -->
+      <div class="import-actions" id="u-actions" style="display:none;">
         <button class="import-btn" id="u-import-btn" onclick="importTrades('universal')">Import to Journal</button>
         <button class="clear-btn" id="u-clear-btn" onclick="clearImport('universal')">Clear</button>
       </div>
-      <p class="import-note">Vyxor matches buy/sell pairs into complete trades automatically. Review the preview before importing.</p>
+
     </div>
   </div>
 
@@ -2202,8 +2244,8 @@ function renderDashEquity() {
       labels: data.map((_,i) => i+1),
       datasets: [{
         data,
-        borderColor: '#4F6EF7',
-        backgroundColor: 'rgba(79,110,247,0.06)',
+        borderColor: '#3B82F6',
+        backgroundColor: 'rgba(59,130,246,0.08)',
         fill: true,
         tension: 0.4,
         pointRadius: 0,
@@ -2397,14 +2439,14 @@ window.renderAnalytics = function() {
     const bp = parseFloat(best.pnl)||0;
     document.getElementById('bw-best-asset').textContent  = best.asset||'—';
     document.getElementById('bw-best-detail').textContent = best.direction + ' · ' + (best.session||'—');
-    document.getElementById('bw-best-pnl').textContent    = (bp>=0?'+':'')+fmtPnl(bp, besglobalCurrency);
+    document.getElementById('bw-best-pnl').textContent    = (bp>=0?'+':'')+fmtPnl(bp, globalCurrency);
     document.getElementById('bw-best-pnl').className      = 'bw-pnl '+(bp>=0?'td-p':'td-n');
   }
   if (worst && worst !== best) {
     const wp = parseFloat(worst.pnl)||0;
     document.getElementById('bw-worst-asset').textContent  = worst.asset||'—';
     document.getElementById('bw-worst-detail').textContent = worst.direction + ' · ' + (worst.session||'—');
-    document.getElementById('bw-worst-pnl').textContent    = (wp>=0?'+':'')+fmtPnl(wp, worsglobalCurrency);
+    document.getElementById('bw-worst-pnl').textContent    = (wp>=0?'+':'')+fmtPnl(wp, globalCurrency);
     document.getElementById('bw-worst-pnl').className      = 'bw-pnl '+(wp>=0?'td-p':'td-n');
   } else if (worst===best) {
     document.getElementById('bw-worst-asset').textContent  = 'Log more trades';
@@ -2423,7 +2465,7 @@ window.renderAnalytics = function() {
     document.getElementById('kpi-planned-detail').textContent = `Planned vs Impulsive win rate`;
     const pPnl = planned.reduce((s,t)=>s+(parseFloat(t.pnl)||0),0);
     const iPnl = impulsive.reduce((s,t)=>s+(parseFloat(t.pnl)||0),0);
-    document.getElementById('kpi-planned-pnl').textContent   = `Planned: ${pPnl>=0?'+':''}₹${Math.abs(pPnl).toFixed(0)} · Impulsive: ${iPnl>=0?'+':''}₹${Math.abs(iPnl).toFixed(0)}`;
+    document.getElementById('kpi-planned-pnl').textContent   = `Planned: ${pPnl>=0?'+':''}${globalCurrency}${Math.abs(pPnl).toFixed(0)} · Impulsive: ${iPnl>=0?'+':''}${globalCurrency}${Math.abs(iPnl).toFixed(0)}`;
     document.getElementById('kpi-planned-pnl').style.color   = pPnl >= iPnl ? 'var(--accent)' : 'var(--danger)';
   } else {
     document.getElementById('kpi-planned').textContent       = '—';
@@ -2439,7 +2481,7 @@ window.renderAnalytics = function() {
     document.getElementById('kpi-rules-detail').textContent = `Rules followed (${withRules.length} tagged)`;
     const yesPnl = withRules.filter(t=>t.rulesFollowed==='yes').reduce((s,t)=>s+(parseFloat(t.pnl)||0),0);
     const noPnl  = withRules.filter(t=>t.rulesFollowed==='no').reduce((s,t)=>s+(parseFloat(t.pnl)||0),0);
-    document.getElementById('kpi-rules-pnl').textContent   = `Followed: ${yesPnl>=0?'+':''}₹${Math.abs(yesPnl).toFixed(0)} · Broke: ${noPnl>=0?'+':''}₹${Math.abs(noPnl).toFixed(0)}`;
+    document.getElementById('kpi-rules-pnl').textContent   = `Followed: ${yesPnl>=0?'+':''}${globalCurrency}${Math.abs(yesPnl).toFixed(0)} · Broke: ${noPnl>=0?'+':''}${globalCurrency}${Math.abs(noPnl).toFixed(0)}`;
     document.getElementById('kpi-rules-pnl').style.color   = yesPnl >= 0 ? 'var(--accent)' : 'var(--danger)';
   } else {
     document.getElementById('kpi-rules').textContent       = '—';
@@ -2449,16 +2491,18 @@ window.renderAnalytics = function() {
   if (typeof Chart==='undefined') { setTimeout(window.renderAnalytics,400); return; }
   Object.values(charts).forEach(c => c&&c.destroy());
 
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
   const cOpts = { responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}} };
-  const gc='rgba(255,255,255,0.04)', tc='#94A3B8';
+  const gc = isLight ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.04)';
+  const tc = isLight ? '#64748B' : '#94A3B8';
 
   // Equity curve
   const byDate=[...allTrades].sort((a,b)=>new Date(a.datetime)-new Date(b.datetime));
   let cum=0;
   charts.equity = new Chart(document.getElementById('equity-chart'),{
     type:'line',
-    data:{ labels:byDate.map((_,i)=>i+1), datasets:[{ data:byDate.map(t=>{cum+=parseFloat(t.pnl)||0;return cum;}), borderColor:'#4F6EF7', backgroundColor:'rgba(79,110,247,0.07)', fill:true, tension:0.4, pointRadius:0, borderWidth:2 }] },
-    options:{ ...cOpts, scales:{ x:{display:false}, y:{grid:{color:gc},ticks:{color:tc,callback:v=>'₹'+v}} } }
+    data:{ labels:byDate.map((_,i)=>i+1), datasets:[{ data:byDate.map(t=>{cum+=parseFloat(t.pnl)||0;return cum;}), borderColor:'#3B82F6', backgroundColor: isLight ? 'rgba(59,130,246,0.08)' : 'rgba(59,130,246,0.07)', fill:true, tension:0.4, pointRadius:0, borderWidth:2 }] },
+    options:{ ...cOpts, scales:{ x:{display:false}, y:{grid:{color:gc},ticks:{color:tc,callback:v=>globalCurrency+(v>=1000?(v/1000).toFixed(1)+'k':v)}} } }
   });
 
   // Emotion win rate
@@ -2483,7 +2527,7 @@ window.renderAnalytics = function() {
   charts.session = new Chart(document.getElementById('session-chart'),{
     type:'bar',
     data:{ labels:sesKeys, datasets:[{ data:sesVals, backgroundColor:sesVals.map(v=>v>=0?'rgba(79,110,247,0.7)':'rgba(255,77,109,0.7)'), borderRadius:4 }] },
-    options:{ ...cOpts, scales:{ x:{grid:{display:false},ticks:{color:tc,font:{size:10}}}, y:{grid:{color:gc},ticks:{color:tc,callback:v=>'₹'+v}} } }
+    options:{ ...cOpts, scales:{ x:{grid:{display:false},ticks:{color:tc,font:{size:10}}}, y:{grid:{color:gc},ticks:{color:tc,callback:v=>globalCurrency+(v>=1000?(v/1000).toFixed(1)+'k':v)}} } }
   });
 
   // Setup win rate
@@ -3182,7 +3226,7 @@ function loadCurrencyPreference(userData) {
 }
 
 // ── THEME TOGGLE ─────────────────────────────────────────
-let currentTheme = localStorage.getItem('vyxor-theme') || 'dark';
+let currentTheme = localStorage.getItem('vyxor-theme') || 'light';
 
 function applyTheme(theme) {
   currentTheme = theme;
