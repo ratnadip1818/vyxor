@@ -2,721 +2,1390 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>AI Trade Journal — Vyxor</title>
-<meta name="description" content="Log every trade, track your emotions, find your patterns. Vyxor AI Trade Journal — free, cloud-synced, AI-powered.">
+<meta name="description" content="Log every trade, track emotions, get AI pattern analysis. Free forever.">
 <link rel="canonical" href="https://vyxor.in/journal.html">
-<meta property="og:type" content="website">
 <meta property="og:url" content="https://vyxor.in/journal.html">
 <meta property="og:title" content="AI Trade Journal — Vyxor">
-<meta property="og:description" content="Log every trade, track emotions, get AI pattern analysis. Free forever.">
-<meta property="og:image" content="https://vyxor.in/og-image.png">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="AI Trade Journal — Vyxor">
-<meta name="twitter:description" content="Log trades, track emotions, get AI analysis. Free.">
-<meta name="twitter:image" content="https://vyxor.in/og-image.png">
-<meta name="theme-color" content="#050816">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23050816'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia,serif' font-weight='900' font-size='20' fill='%234F6EF7'>V</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0B0F19">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230B0F19'/><text x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='800' font-size='18' fill='%233B82F6'>V</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Vyxor AI Trade Journal","url":"https://vyxor.in/journal.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"INR"},"description":"Free AI-powered trade journal built for Indian traders. Cloud sync, emotion tracking, pattern analysis."}</script>
 <style>
-:root{
-  /* Dark theme (default) */
-  --bg:#0B0F19;--bg2:#111827;--surface:#151B2E;--surface2:#1C2336;
-  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
-  --accent:#3B82F6;--accent2:#2563EB;
-  --pos:#22C55E;--neg:#EF4444;--warn:#F59E0B;--danger:#EF4444;
-  --text:#F9FAFB;--text2:#94A3B8;--text3:#4B5563;
-  --muted:#94A3B8;--muted2:#4B5563;
-  --card:#151B2E;
-  --mono:'DM Mono',monospace;
-  --serif:'Inter',system-ui,sans-serif;
-  --sans:'Inter',system-ui,sans-serif;
-  --shadow:0 1px 3px rgba(0,0,0,0.4);
+/* ═══════════════════════════════════════════
+   DESIGN TOKENS
+═══════════════════════════════════════════ */
+:root {
+  --bg:       #F8FAFC;
+  --bg2:      #F1F5F9;
+  --surface:  #FFFFFF;
+  --surface2: #F8FAFC;
+  --border:   rgba(0,0,0,0.07);
+  --border2:  rgba(0,0,0,0.12);
+  --accent:   #2563EB;
+  --accent-bg:rgba(37,99,235,0.08);
+  --pos:      #16A34A;
+  --pos-bg:   rgba(22,163,74,0.08);
+  --neg:      #DC2626;
+  --neg-bg:   rgba(220,38,38,0.08);
+  --warn:     #D97706;
+  --danger:   #DC2626;
+  --text:     #0F172A;
+  --text2:    #475569;
+  --text3:    #94A3B8;
+  --mono:     'DM Mono', 'Courier New', monospace;
+  --sans:     'Inter', system-ui, sans-serif;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow:    0 1px 3px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+  --radius:    8px;
+  --radius-lg: 12px;
+  --sidebar-w: 220px;
 }
-[data-theme="light"]{
-  --bg:#F8FAFC;--bg2:#F1F5F9;--surface:#FFFFFF;--surface2:#F8FAFC;
-  --border:rgba(0,0,0,0.07);--border2:rgba(0,0,0,0.12);
-  --accent:#2563EB;--accent2:#1D4ED8;
-  --pos:#16A34A;--neg:#DC2626;--warn:#D97706;--danger:#DC2626;
-  --text:#0F172A;--text2:#475569;--text3:#94A3B8;
-  --muted:#475569;--muted2:#94A3B8;
-  --card:#FFFFFF;
-  --shadow:0 1px 4px rgba(0,0,0,0.08),0 0 0 1px rgba(0,0,0,0.04);
+
+[data-theme="dark"] {
+  --bg:       #0B0F19;
+  --bg2:      #111827;
+  --surface:  #151B2E;
+  --surface2: #1C2336;
+  --border:   rgba(255,255,255,0.07);
+  --border2:  rgba(255,255,255,0.12);
+  --accent:   #3B82F6;
+  --accent-bg:rgba(59,130,246,0.1);
+  --pos:      #22C55E;
+  --pos-bg:   rgba(34,197,94,0.1);
+  --neg:      #EF4444;
+  --neg-bg:   rgba(239,68,68,0.1);
+  --warn:     #F59E0B;
+  --danger:   #EF4444;
+  --text:     #F9FAFB;
+  --text2:    #94A3B8;
+  --text3:    #4B5563;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow:    0 2px 8px rgba(0,0,0,0.4);
 }
-*{margin:0;padding:0;box-sizing:border-box;}
-html,body{height:100%;overflow:hidden;}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;-webkit-font-smoothing:antialiased;transition:background 0.2s,color 0.2s;}
-@keyframes fu{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes pd{0%,100%{opacity:1}50%{opacity:0.3}}
-.btn-sm{padding:6px 14px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text2);font-size:12px;cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
-.btn-sm:hover{color:var(--text);}
-/* ── APP SHELL ── */
-.app-shell{display:grid;grid-template-columns:54px 1fr;height:100vh;overflow:hidden;position:relative;}
-/* ── SIDEBAR ── */
-.sidebar{background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;width:54px;min-width:54px;max-width:54px;transition:width 0.2s ease,max-width 0.2s ease;overflow:hidden;z-index:100;position:relative;flex-shrink:0;}
-.sidebar:hover{width:200px;min-width:200px;max-width:200px;}
-.sb-logo{height:56px;display:flex;align-items:center;padding:0 13px;border-bottom:1px solid var(--border);flex-shrink:0;gap:10px;overflow:hidden;min-width:0;}
-.sb-brand{font-family:var(--sans);font-size:17px;font-weight:700;color:var(--text);text-decoration:none;flex-shrink:0;letter-spacing:-0.5px;opacity:0;transition:opacity 0.1s;}
-.sidebar:hover .sb-brand{opacity:1;}
-.sb-brand span{color:var(--accent);}
-.sb-streak-badge{font-family:var(--mono);font-size:10px;color:var(--accent);background:rgba(59,130,246,0.1);border:1px solid rgba(59,130,246,0.2);border-radius:99px;padding:2px 7px;white-space:nowrap;opacity:0;transition:opacity 0.1s;flex-shrink:0;}
-.sidebar:hover .sb-streak-badge{opacity:1;}
-.sb-nav{flex:1;padding:8px 0;overflow:hidden;}
-.sb-item{display:flex;align-items:center;gap:11px;padding:9px 15px;width:100%;background:none;border:none;color:var(--text2);cursor:pointer;transition:all 0.12s;text-decoration:none;white-space:nowrap;font-size:13px;font-family:var(--sans);min-width:0;overflow:hidden;}
-.sb-item svg{flex-shrink:0;opacity:0.5;transition:opacity 0.12s;width:17px;height:17px;}
-.sb-item:hover{color:var(--text);background:rgba(59,130,246,0.06);}
-.sb-item:hover svg{opacity:0.9;}
-.sb-item.active{color:var(--accent);background:rgba(59,130,246,0.1);}
-.sb-item.active svg{opacity:1;stroke:var(--accent);}
-.sb-label{opacity:0;transition:opacity 0.1s;font-size:13px;font-weight:500;overflow:hidden;text-overflow:ellipsis;}
-.sidebar:hover .sb-label{opacity:1;}
-.sb-sep{height:1px;background:var(--border);margin:4px 0;}
-.sb-bottom{padding:8px 0;flex-shrink:0;border-top:1px solid var(--border);}
-.sb-user{display:flex;align-items:center;gap:10px;padding:9px 13px;overflow:hidden;cursor:pointer;min-width:0;}
-.sb-user:hover{background:rgba(59,130,246,0.04);}
-.sb-avatar{width:28px;height:28px;border-radius:50%;background:rgba(59,130,246,0.12);border:1px solid rgba(59,130,246,0.2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--accent);flex-shrink:0;}
-.sb-user-info{opacity:0;transition:opacity 0.1s;white-space:nowrap;min-width:0;overflow:hidden;}
-.sidebar:hover .sb-user-info{opacity:1;}
-.sb-username{font-size:12px;font-weight:500;color:var(--text);margin-bottom:2px;}
-.sb-signout{background:none;border:none;color:var(--text2);font-size:11px;cursor:pointer;font-family:var(--sans);padding:0;transition:color 0.15s;}
-.sb-signout:hover{color:var(--text);}
-/* ── APP MAIN ── */
-.app-main{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
-.app-topbar{height:56px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 1.75rem;flex-shrink:0;background:var(--bg);}
-[data-theme="light"] .app-topbar{background:var(--surface);}
-[data-theme="light"] .sidebar{background:var(--bg2);}
-[data-theme="light"] .panel{background:var(--bg);}
-[data-theme="light"] body{background:var(--bg);}
-.topbar-title{font-family:var(--sans);font-size:15px;font-weight:600;color:var(--text);letter-spacing:-0.3px;}
-.topbar-right{display:flex;align-items:center;gap:10px;}
-.sync-indicator{display:flex;align-items:center;gap:6px;font-size:11px;font-family:var(--mono);color:var(--text2);}
-.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--pos);flex-shrink:0;}
-.topbar-log-btn{padding:7px 16px;border-radius:7px;background:var(--accent);color:#fff;font-size:13px;font-weight:500;font-family:var(--sans);border:none;cursor:pointer;transition:opacity 0.15s;}
-.topbar-log-btn:hover{opacity:0.88;}
-/* ── PANELS ── */
-.panel{display:none;flex:1;overflow-y:auto;padding:1.5rem 1.75rem;}
-.panel.active{display:block;}
-/* ── DASHBOARD ── */
-.dash-stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px;}
-.dash-stat{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 16px;}
-.ds-val{font-family:var(--mono);font-size:20px;font-weight:500;color:var(--text);margin-bottom:4px;letter-spacing:-0.04em;}
-.ds-lbl{font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;}
-.dash-grid{display:grid;grid-template-columns:1fr 1.7fr;gap:12px;margin-bottom:12px;}
-.dash-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:16px 18px;}
-.dash-card-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px;}
-.dash-card-title{font-size:11px;font-weight:500;color:var(--text);text-transform:uppercase;letter-spacing:0.08em;font-family:var(--mono);}
-.dash-card-sub{font-size:11px;font-family:var(--mono);color:var(--text2);}
-.cal-nav{display:flex;gap:4px;}
-.cal-nav-btn{background:none;border:1px solid var(--border);border-radius:5px;padding:3px 5px;cursor:pointer;color:var(--text2);display:flex;align-items:center;transition:border-color 0.15s;}
-.cal-nav-btn:hover{border-color:var(--border2);color:var(--text);}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
-.cal-dow{font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.06em;text-align:center;padding-bottom:5px;}
-.cal-day{min-height:50px;border-radius:5px;padding:4px 5px;border:1px solid transparent;background:rgba(255,255,255,0.02);transition:border-color 0.15s;}
-.cal-day:hover{border-color:var(--border2);}
-.cal-day.empty{background:transparent;border-color:transparent;}
-.cal-day.today{border-color:rgba(79,110,247,0.3);}
-.cal-day-num{font-family:var(--mono);font-size:9px;color:var(--text3);margin-bottom:2px;}
-.cal-day-pnl{font-family:var(--mono);font-size:10px;font-weight:500;line-height:1.3;}
-.cal-day-pnl.pos{color:var(--pos);}.cal-day-pnl.neg{color:var(--neg);}
-.cal-day-count{font-size:9px;color:var(--text3);}
-.cal-day.has-pos{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.12);}
-.cal-day.has-neg{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.12);}
-.dash-bottom-grid{display:grid;grid-template-columns:1fr 340px;gap:12px;margin-bottom:1rem;}
-.dash-trades-table{width:100%;border-collapse:collapse;font-size:12px;}
-.dash-trades-table th{font-family:var(--mono);font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.07em;padding:0 8px 8px;text-align:left;border-bottom:1px solid var(--border);}
-.dash-trades-table td{padding:9px 8px;border-bottom:1px solid rgba(255,255,255,0.025);color:var(--text2);}
-.dash-trades-table tr:last-child td{border-bottom:none;}
-.dash-trades-table tr:hover td{background:rgba(255,255,255,0.02);cursor:pointer;}
-.dash-see-all{background:none;border:none;font-size:11px;font-family:var(--mono);color:var(--accent);cursor:pointer;transition:opacity 0.15s;}
-.dash-see-all:hover{opacity:0.75;}
-.dash-insight-card{display:flex;flex-direction:column;}
-.dash-insight-body{flex:1;margin-bottom:14px;}
-.dash-insight-empty{font-size:13px;color:var(--text2);line-height:1.7;padding:0.5rem 0;}
-.dash-insight-text{font-size:13px;color:var(--text);line-height:1.8;}
-.dash-insight-btn{background:none;border:1px solid var(--border);border-radius:7px;padding:8px 14px;font-size:12px;font-family:var(--mono);color:var(--text2);cursor:pointer;text-align:left;transition:all 0.15s;align-self:flex-start;}
-.dash-insight-btn:hover{border-color:var(--accent);color:var(--accent);}
 
-/* ── AUTH WALL ── */
-.auth-wall{position:fixed;inset:0;z-index:500;background:rgba(5,8,22,0.97);backdrop-filter:blur(24px);display:flex;align-items:center;justify-content:center;padding:1rem;}
-.auth-box{background:#0B1220;border:1px solid rgba(79,110,247,0.2);border-radius:22px;padding:2.5rem 2rem;max-width:420px;width:100%;box-shadow:0 40px 100px rgba(0,0,0,0.7),0 0 60px rgba(79,110,247,0.04);text-align:center;animation:slideUp 0.5s ease both;}
-.auth-icon{font-size:40px;margin-bottom:1rem;}
-.auth-title{font-family:var(--sans);font-weight:700;font-size:22px;letter-spacing:-0.5px;margin-bottom:6px;}
-.auth-title span{color:var(--accent);}
-.auth-desc{font-size:14px;color:var(--muted);margin-bottom:1.5rem;line-height:1.7;}
-.auth-tabs{display:flex;margin-bottom:1.5rem;background:rgba(255,255,255,0.03);border-radius:9px;padding:3px;gap:3px;}
-.auth-tab{flex:1;padding:8px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-family:var(--sans);font-size:13px;cursor:pointer;transition:all 0.2s;}
-.auth-tab.active{background:rgba(79,110,247,0.1);color:var(--accent);border:1px solid rgba(79,110,247,0.2);}
-.google-btn{width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:12px;border-radius:10px;border:1px solid var(--border);background:rgba(255,255,255,0.04);color:var(--text);font-family:var(--sans);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.2s;margin-bottom:12px;}
-.google-btn:hover{border-color:rgba(255,255,255,0.15);background:rgba(255,255,255,0.07);transform:translateY(-1px);}
-.auth-or{display:flex;align-items:center;gap:12px;margin:10px 0;font-size:11px;color:var(--muted2);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:0.1em;}
-.auth-or::before,.auth-or::after{content:'';flex:1;height:1px;background:var(--border);}
-.auth-input{width:100%;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:9px;color:var(--text);font-family:var(--sans);font-size:14px;padding:11px 14px;outline:none;transition:all 0.2s;margin-bottom:8px;}
-.auth-input:focus{border-color:rgba(79,110,247,0.5);background:rgba(79,110,247,0.03);box-shadow:0 0 0 3px rgba(79,110,247,0.07);}
-.auth-submit{width:100%;padding:12px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-family:var(--sans);font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:4px;}
-.auth-submit:hover{background:var(--ah);transform:translateY(-1px);}
-.auth-err{font-size:12px;color:var(--danger);font-family:'DM Mono',monospace;margin-bottom:8px;padding:8px 12px;background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.2);border-radius:7px;display:none;text-align:left;}
-.auth-switch{font-size:12px;color:var(--muted2);margin-top:12px;font-family:'DM Mono',monospace;}
-.auth-switch a{color:var(--accent);cursor:pointer;}
-
-/* ── MAIN ── */
-.main{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding:84px 2rem 4rem;}
-
-/* ── SYNC BAR ── */
-.sync-bar{display:flex;align-items:center;justify-content:space-between;background:rgba(79,110,247,0.04);border:1px solid rgba(79,110,247,0.12);border-radius:10px;padding:9px 16px;margin-bottom:1.5rem;font-size:12px;font-family:'DM Mono',monospace;color:var(--muted);transition:all 0.3s;}
-.sync-bar.syncing{background:rgba(255,176,32,0.03);border-color:rgba(255,176,32,0.15);}
-.sync-bar.error{background:rgba(255,77,109,0.03);border-color:rgba(255,77,109,0.15);color:var(--danger);}
-.sync-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;}
-.sync-bar.syncing .sync-dot{background:var(--warn);animation:pd 1s infinite;}
-.sync-bar.error .sync-dot{background:var(--danger);}
-.sync-left{display:flex;align-items:center;gap:8px;}
-
-/* ── STATS ── */
-.stats-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-bottom:1.75rem;animation:fu 0.5s ease both;}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:1.1rem 1.25rem;backdrop-filter:blur(20px);transition:border-color 0.2s,transform 0.2s;}
-.stat-card:hover{border-color:rgba(79,110,247,0.2);transform:translateY(-1px);}
-.stat-val{font-family:'DM Mono',monospace;font-size:20px;font-weight:500;color:var(--text);margin-bottom:3px;line-height:1;}
-.stat-val.green{color:var(--pos);}
-.stat-val.red{color:var(--neg);}
-.stat-val.blue{color:var(--accent);}
-.stat-val.warn{color:var(--warn);}
-.stat-lbl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;}
-
-/* ── TABS ── */
-.journal-tabs{display:flex;gap:2px;background:rgba(11,18,32,0.8);border:1px solid var(--border);border-radius:12px;padding:4px;margin-bottom:1.75rem;overflow-x:auto;}
-.jtab{flex:1;min-width:max-content;padding:10px 16px;border-radius:9px;border:none;background:transparent;color:var(--muted);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;}
-.jtab.active{background:rgba(79,110,247,0.1);color:var(--accent);border:1px solid rgba(79,110,247,0.2);}
-.jtab:hover:not(.active){color:var(--text);background:rgba(255,255,255,0.03);}
-
-/* ── PANELS ── */
-.panel{display:none;animation:fu 0.35s ease both;}
-.panel.active{display:block;}
-
-/* ── FORM CARD — premium ── */
-.form-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2rem;}
-.form-title{font-family:var(--sans);font-size:18px;font-weight:600;letter-spacing:-0.4px;margin-bottom:2rem;}
-.form-title span{color:var(--accent);}
-.form-section{margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid var(--border);}
-.form-section:last-of-type{border-bottom:none;margin-bottom:0;padding-bottom:0;}
-.form-section-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:12px;font-family:var(--mono);}
-.form-row{display:grid;gap:12px;}
-.form-row.two{grid-template-columns:1fr 1fr;}
-.form-row.three{grid-template-columns:1fr 1fr 1fr;}
-.form-row.four{grid-template-columns:1fr 1fr 1fr 1fr;}
-.field label{display:block;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px;font-family:var(--mono);}
-.field input,.field select,.field textarea{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:14px;padding:10px 12px;outline:none;transition:border-color 0.15s,background 0.15s;}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:rgba(79,110,247,0.5);background:rgba(79,110,247,0.03);}
-.field input::placeholder,.field textarea::placeholder{color:var(--text3);}
-.field select option{background:var(--bg2);}
-.field textarea{resize:vertical;min-height:88px;line-height:1.6;}
-.pnl-hint{font-size:11px;font-family:var(--mono);margin-top:5px;min-height:14px;}
-.pnl-hint.pos{color:var(--pos);}.pnl-hint.neg{color:var(--neg);}
-/* ── DIRECTION TOGGLE ── */
-.dir-toggle{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-.dir-btn{padding:11px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;text-align:center;}
-.dir-btn:hover{border-color:var(--border2);color:var(--text);}
-.dir-btn.long.sel{border-color:rgba(34,197,94,0.4);background:rgba(34,197,94,0.06);color:var(--pos);font-weight:600;}
-.dir-btn.short.sel{border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.06);color:var(--neg);font-weight:600;}
-/* ── EMOTION TAGS ── */
-.etag-wrap{display:flex;flex-wrap:wrap;gap:6px;}
-.etag{padding:7px 14px;border-radius:7px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-family:var(--sans);font-size:12px;cursor:pointer;transition:all 0.15s;}
-.etag:hover{border-color:var(--border2);color:var(--text);}
-.etag.sel{border-color:rgba(79,110,247,0.4);background:rgba(79,110,247,0.08);color:var(--accent);}
-.etag.danger.sel{border-color:rgba(239,68,68,0.4);background:rgba(239,68,68,0.06);color:var(--neg);}
-.etag.warn.sel{border-color:rgba(245,158,11,0.4);background:rgba(245,158,11,0.06);color:var(--warn);}
-.etag.purple.sel{border-color:rgba(139,92,246,0.4);background:rgba(139,92,246,0.06);color:#8B5CF6;}
-/* ── SCREENSHOT ── */
-.screenshot-zone{border:1px dashed var(--border2);border-radius:10px;padding:1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;background:var(--bg2);}
-.screenshot-zone:hover,.screenshot-zone.drag-over{border-color:var(--accent);background:rgba(79,110,247,0.04);}
-.screenshot-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.screenshot-zone .sz-icon{font-size:24px;margin-bottom:6px;opacity:0.4;}
-.screenshot-zone .sz-text{font-size:13px;color:var(--text2);margin-bottom:3px;}
-.screenshot-zone .sz-sub{font-size:11px;color:var(--text3);font-family:var(--mono);}
-.screenshot-preview{position:relative;display:none;margin-top:10px;}
-.screenshot-preview img{width:100%;max-height:200px;object-fit:cover;border-radius:8px;border:1px solid var(--border);}
-.screenshot-remove{position:absolute;top:8px;right:8px;background:rgba(8,11,20,0.9);border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer;padding:4px 8px;font-size:11px;font-family:var(--mono);transition:all 0.2s;}
-.screenshot-remove:hover{color:var(--neg);border-color:var(--neg);}
-/* ── FORM FOOTER ── */
-.form-footer{display:flex;align-items:center;justify-content:space-between;margin-top:1.75rem;padding-top:1.5rem;border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem;}
-.free-note{font-size:11px;color:var(--text3);font-family:var(--mono);display:none;}
-.free-note span{color:var(--warn);}
-.submit-btn{padding:12px 32px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;}
-.submit-btn:hover{opacity:0.88;transform:translateY(-1px);}
-.submit-btn:disabled{opacity:0.4;cursor:not-allowed;transform:none;}
-/* ── HISTORY TABLE — premium ── */
-.history-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;flex-wrap:wrap;gap:1rem;}
-.history-title{font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.3px;}
-.history-actions{display:flex;gap:8px;align-items:center;}
-.filter-select{background:var(--surface);border:1px solid var(--border);border-radius:7px;color:var(--text2);font-family:var(--mono);font-size:11px;padding:7px 10px;outline:none;cursor:pointer;transition:border-color 0.15s;}
-.filter-select:hover{border-color:var(--border2);}
-.export-btn{padding:7px 14px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--text2);font-family:var(--mono);font-size:11px;cursor:pointer;transition:all 0.15s;}
-.export-btn:hover{border-color:var(--border2);color:var(--text);}
-.table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;overflow-x:auto;}
-table{width:100%;border-collapse:collapse;min-width:700px;}
-thead th{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;padding:12px 16px;text-align:left;border-bottom:1px solid var(--border);font-weight:400;font-family:var(--mono);background:var(--surface2);}
-tbody tr{border-bottom:1px solid rgba(255,255,255,0.025);transition:background 0.12s;cursor:pointer;}
-tbody tr:last-child{border-bottom:none;}
-tbody tr:hover{background:rgba(79,110,247,0.03);}
-tbody td{padding:11px 16px;font-size:12px;font-family:var(--mono);white-space:nowrap;color:var(--text2);}
-.td-long{color:var(--pos);}.td-short{color:var(--neg);}.td-p{color:var(--pos);}.td-n{color:var(--neg);}
-.result-badge{display:inline-flex;align-items:center;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:500;font-family:var(--mono);}
-.rb-win{background:rgba(34,197,94,0.08);border:1px solid rgba(34,197,94,0.2);color:var(--pos);}
-.rb-loss{background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:var(--neg);}
-.rb-be{background:rgba(255,255,255,0.05);border:1px solid var(--border);color:var(--text2);}
-.has-img{font-size:10px;color:var(--accent);font-family:var(--mono);}
-.act-btn{padding:4px 10px;border-radius:5px;font-size:10px;font-family:var(--mono);cursor:pointer;border:1px solid var(--border);background:transparent;color:var(--text3);transition:all 0.15s;}
-.act-btn.del:hover{border-color:rgba(239,68,68,0.3);color:var(--neg);background:rgba(239,68,68,0.05);}
-.empty-state{text-align:center;padding:3rem 1rem;}
-.empty-icon{font-size:2rem;margin-bottom:0.75rem;opacity:0.3;}
-.empty-text{font-size:13px;color:var(--text3);line-height:1.7;font-family:var(--mono);}
-/* ── ANALYTICS — premium ── */
-.bw-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px;}
-.bw-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
-.bw-lbl{font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;}
-.bw-asset{font-family:var(--mono);font-size:17px;font-weight:500;color:var(--text);margin-bottom:3px;}
-.bw-detail{font-size:11px;color:var(--text2);margin-bottom:6px;font-family:var(--mono);}
-.bw-pnl{font-size:12px;font-family:var(--mono);font-weight:500;}
-.analytics-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.25rem;}
-.chart-title{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px;letter-spacing:-0.2px;}
-.chart-title span{color:var(--accent);}
-.chart-sub{font-size:11px;color:var(--text2);font-family:var(--mono);margin-bottom:12px;}
-.chart-wrap{height:180px;position:relative;}
-/* ── JOURNAL AI — premium ── */
-.ai-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:12px;}
-.ai-title{font-family:var(--sans);font-size:18px;font-weight:600;letter-spacing:-0.4px;margin-bottom:4px;}
-.ai-title span{color:var(--accent);}
-.ai-sub{font-size:12px;color:var(--text3);font-family:var(--mono);margin-bottom:1rem;}
-.ai-desc{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:1rem;}
-.ai-disclaimer{font-size:11px;color:var(--text3);font-family:var(--mono);padding:8px 12px;border:1px solid var(--border);border-radius:7px;margin-bottom:1.25rem;line-height:1.6;}
-.ai-btns{display:flex;gap:10px;flex-wrap:wrap;}
-.ai-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;}
-.ai-btn:hover{opacity:0.88;}
-.ai-btn.story{background:transparent;border:1px solid var(--border);color:var(--text2);}
-.ai-btn.story:hover{border-color:var(--border2);color:var(--text);}
-.ai-loading{display:none;align-items:center;gap:10px;margin-top:1rem;font-size:13px;color:var(--text2);font-family:var(--mono);}
-.spinner{width:16px;height:16px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
-.ai-result{display:none;margin-top:1.5rem;}
-.ai-result-title{font-family:var(--serif);font-size:16px;margin-bottom:1rem;color:var(--text);}
-.ai-section{border:1px solid var(--border);border-radius:10px;padding:1.125rem 1.25rem;margin-bottom:8px;background:rgba(255,255,255,0.01);}
-.ai-section-title{font-family:var(--mono);font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px;}
-.ai-section-body{font-size:13.5px;color:var(--text2);line-height:1.85;}
-.ai-section-body p{margin:0 0 6px;}.ai-section-body p:last-child{margin:0;}
-.ai-section-body strong{color:var(--text);font-weight:500;}
-.ai-highlight{color:var(--pos);font-weight:500;}.ai-danger{color:var(--neg);font-weight:500;}
-.ai-bullet{display:flex;gap:8px;margin-bottom:6px;align-items:flex-start;}
-.ai-bullet-dot{color:var(--accent);flex-shrink:0;margin-top:2px;font-family:var(--mono);font-size:11px;}
-.ai-focus-box{background:rgba(79,110,247,0.04);border:1px solid rgba(79,110,247,0.15);border-radius:10px;padding:1rem 1.25rem;margin-bottom:8px;}
-.ai-focus-text{font-size:14px;color:var(--text);line-height:1.7;}
-/* ── WEEKLY REPORTS ── */
-.reports-title{font-family:var(--sans);font-size:15px;font-weight:600;letter-spacing:-0.3px;margin-bottom:1rem;padding-top:1.5rem;border-top:1px solid var(--border);}
-.reports-title span{color:var(--accent);}
-.report-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;transition:border-color 0.15s;}
-.report-card:hover{border-color:var(--border2);}
-.report-card-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;cursor:pointer;}
-.report-card-week{font-family:var(--mono);font-size:12px;color:var(--text);font-weight:500;}
-.report-card-stats{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;color:var(--text2);}
-.report-stat-pnl.pos{color:var(--pos);}.report-stat-pnl.neg{color:var(--neg);}
-.report-card-arrow{font-size:10px;color:var(--text3);transition:transform 0.2s;}
-.report-card.open .report-card-arrow{transform:rotate(180deg);}
-.report-card-body{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
-.report-card.open .report-card-body{max-height:500px;}
-.report-card-text{padding:0 16px 14px;font-size:13px;color:var(--text2);line-height:1.85;border-top:1px solid var(--border);padding-top:12px;}
-.report-this-week{border-color:rgba(79,110,247,0.2);}
-.report-new-badge{font-size:9px;font-family:var(--mono);color:#fff;background:var(--accent);padding:2px 7px;border-radius:99px;margin-left:8px;}
-/* ── IMPORT — premium ── */
-.import-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.75rem;}
-.import-title{font-family:var(--sans);font-size:18px;font-weight:600;letter-spacing:-0.4px;margin-bottom:0.5rem;}
-.import-title span{color:var(--accent);}
-.import-sub{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:1.25rem;}
-.drop-zone{border:1px dashed var(--border2);border-radius:10px;padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all 0.2s;position:relative;background:var(--bg2);margin-bottom:1rem;}
-.drop-zone:hover,.drop-zone.drag-over{border-color:var(--accent);background:rgba(79,110,247,0.04);}
-.drop-zone input[type="file"]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
-.drop-icon{font-size:28px;margin-bottom:8px;opacity:0.4;}
-.drop-text{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px;}
-.drop-sub{font-size:12px;color:var(--text3);font-family:var(--mono);}
-.import-note{font-size:11px;color:var(--text3);font-family:var(--mono);line-height:1.6;margin-top:1rem;}
-.preview-table-wrap{display:none;margin-bottom:1rem;}
-.preview-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
-.preview-title{font-size:12px;font-weight:500;color:var(--text);font-family:var(--mono);}
-.preview-count{font-size:11px;color:var(--accent);font-family:var(--mono);}
-.preview-table{width:100%;border-collapse:collapse;font-size:11px;font-family:var(--mono);}
-.preview-table th{color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;padding:6px 10px;border-bottom:1px solid var(--border);text-align:left;font-size:9px;}
-.preview-table td{padding:7px 10px;border-bottom:1px solid rgba(255,255,255,0.025);color:var(--text2);}
-.import-progress{display:none;margin-bottom:1rem;}
-.progress-bar-wrap{height:3px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:6px;}
-.progress-bar{height:100%;background:var(--accent);border-radius:99px;transition:width 0.2s;width:0%;}
-.progress-text{font-size:11px;color:var(--text2);font-family:var(--mono);}
-.import-result{display:none;background:rgba(34,197,94,0.05);border:1px solid rgba(34,197,94,0.15);border-radius:8px;padding:1rem;margin-bottom:1rem;}
-.import-result-title{font-size:13px;font-weight:500;color:var(--pos);margin-bottom:4px;font-family:var(--mono);}
-.import-result-text{font-size:12px;color:var(--text2);font-family:var(--mono);line-height:1.6;white-space:pre-wrap;}
-.import-actions{display:flex;gap:8px;}
-.import-btn{padding:10px 20px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:opacity 0.15s;}
-.import-btn:hover{opacity:0.88;}.import-btn:disabled{opacity:0.4;cursor:not-allowed;}
-.clear-btn{padding:10px 20px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-family:var(--sans);font-size:13px;cursor:pointer;transition:all 0.15s;}
-.clear-btn:hover{border-color:var(--border2);color:var(--text);}
-/* ── CUSTOM TAGS ── */
-.custom-tag-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;min-height:28px;}
-.custom-tag{display:inline-flex;align-items:center;gap:5px;padding:5px 11px;border-radius:7px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-size:12px;font-family:var(--mono);cursor:pointer;transition:all 0.15s;}
-.custom-tag:hover{border-color:var(--border2);color:var(--text);}
-.custom-tag.sel{background:rgba(79,110,247,0.08);border-color:rgba(79,110,247,0.3);color:var(--accent);}
-.tag-del{font-size:10px;color:var(--text3);opacity:0.6;}
-.custom-tag:hover .tag-del{opacity:1;}
-.tag-empty{font-size:12px;color:var(--text3);font-family:var(--mono);}
-.tag-add-row{display:flex;gap:6px;align-items:center;}
-.tag-add-input{flex:1;padding:7px 11px;border-radius:7px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:12px;font-family:var(--mono);outline:none;transition:border-color 0.15s;}
-.tag-add-input:focus{border-color:rgba(79,110,247,0.4);}
-.tag-add-input::placeholder{color:var(--text3);}
-.tag-add-btn{padding:7px 13px;border-radius:7px;border:1px solid var(--border);background:transparent;color:var(--text2);font-size:11px;font-family:var(--mono);cursor:pointer;transition:all 0.15s;white-space:nowrap;}
-.tag-add-btn:hover{border-color:var(--accent);color:var(--accent);}
-/* ── SELF AWARENESS ── */
-.awareness-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
-.awareness-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-family:var(--mono);margin-bottom:6px;}
-.toggle-btns{display:flex;gap:6px;flex-wrap:wrap;}
-.toggle-btn{padding:7px 14px;border-radius:7px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-size:12px;font-family:var(--sans);cursor:pointer;transition:all 0.15s;}
-.toggle-btn:hover{border-color:var(--border2);color:var(--text);}
-.toggle-btn.sel-plan{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.3);color:var(--pos);}
-.toggle-btn.sel-imp{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.3);color:var(--neg);}
-.toggle-btn.sel-yes{background:rgba(34,197,94,0.06);border-color:rgba(34,197,94,0.3);color:var(--pos);}
-.toggle-btn.sel-partial{background:rgba(245,158,11,0.06);border-color:rgba(245,158,11,0.3);color:var(--warn);}
-.toggle-btn.sel-no{background:rgba(239,68,68,0.06);border-color:rgba(239,68,68,0.3);color:var(--neg);}
-.toggle-btn.sel-mkt{background:rgba(79,110,247,0.06);border-color:rgba(79,110,247,0.3);color:var(--accent);}
-.lesson-input{width:100%;padding:9px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:13px;font-family:var(--sans);resize:none;transition:border-color 0.15s;}
-.lesson-input::placeholder{color:var(--text3);}
-.lesson-input:focus{outline:none;border-color:rgba(79,110,247,0.4);}
-/* ── MODALS — premium ── */
-.modal-overlay{position:fixed;inset:0;z-index:400;background:rgba(8,11,20,0.85);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:1rem;}
-.modal-overlay.open{display:flex;}
-.trade-modal,.edit-modal{background:var(--surface);border:1px solid var(--border2);border-radius:16px;max-width:600px;width:100%;max-height:88vh;overflow-y:auto;box-shadow:0 40px 80px rgba(0,0,0,0.6);transform:scale(0.97);transition:transform 0.2s;}
-.modal-overlay.open .trade-modal,.modal-overlay.open .edit-modal{transform:scale(1);}
-.modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);}
-.modal-asset{font-family:var(--sans);font-size:18px;font-weight:600;letter-spacing:-0.3px;}
-.modal-date{font-size:11px;font-family:var(--mono);color:var(--text2);}
-.modal-close{background:none;border:none;color:var(--text3);font-size:16px;cursor:pointer;transition:color 0.15s;line-height:1;padding:4px;}
-.modal-close:hover{color:var(--text);}
-.modal-body{padding:1.5rem;}
-.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:1.25rem;}
-.modal-field{background:var(--bg2);border-radius:8px;padding:10px 12px;}
-.modal-field-lbl{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-family:var(--mono);margin-bottom:4px;}
-.modal-field-val{font-size:13px;font-weight:500;color:var(--text);font-family:var(--mono);}
-.modal-field-val.green{color:var(--pos);}.modal-field-val.red{color:var(--neg);}
-.modal-field-val.long{color:var(--pos);}.modal-field-val.short{color:var(--neg);}
-.modal-section-title{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;font-family:var(--mono);margin:1rem 0 8px;}
-.modal-emotions{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem;}
-.modal-emotion-tag{font-size:11px;padding:4px 10px;border-radius:6px;background:var(--surface2);color:var(--text2);font-family:var(--mono);}
-.modal-screenshot{width:100%;border-radius:8px;border:1px solid var(--border);margin-bottom:1rem;}
-.modal-notes{font-size:13px;color:var(--text2);line-height:1.75;font-family:var(--sans);}
-.modal-edit-btn,.modal-delete-btn{width:100%;padding:10px;border-radius:8px;font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;margin-top:6px;}
-.modal-edit-btn{background:transparent;border:1px solid var(--border);color:var(--text2);}
-.modal-edit-btn:hover{border-color:var(--accent);color:var(--accent);}
-.modal-delete-btn{background:transparent;border:1px solid rgba(239,68,68,0.2);color:var(--neg);}
-.modal-delete-btn:hover{background:rgba(239,68,68,0.05);}
-.edit-modal-header{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.5rem;border-bottom:1px solid var(--border);}
-.edit-modal-title{font-family:var(--sans);font-size:16px;font-weight:600;letter-spacing:-0.3px;}
-.edit-modal-title span{color:var(--accent);}
-.edit-modal-body{padding:1.5rem;}
-.edit-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.edit-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
-.edit-field label{display:block;font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;font-family:var(--mono);}
-.edit-input{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:13px;padding:9px 12px;outline:none;transition:border-color 0.15s;}
-.edit-input:focus{border-color:rgba(79,110,247,0.4);}
-.edit-save-btn{width:100%;padding:11px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.15s;margin-top:0.75rem;}
-.edit-save-btn:hover{opacity:0.88;}
-/* ── ONBOARDING ── */
-.onboarding-overlay{position:fixed;inset:0;background:rgba(8,11,20,0.98);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem;}
-.onboarding-box{background:var(--surface);border:1px solid var(--border2);border-radius:20px;max-width:480px;width:100%;padding:2.5rem;box-shadow:0 40px 80px rgba(0,0,0,0.6);}
-.ob-progress{display:flex;gap:6px;margin-bottom:2rem;}
-.ob-prog-dot{flex:1;height:2px;background:var(--border2);border-radius:99px;transition:background 0.3s;}
-.ob-prog-dot.done,.ob-prog-dot.active{background:var(--accent);}
-.ob-step{display:none;animation:fu 0.3s ease both;}
-.ob-step.active{display:block;}
-.ob-eyebrow{font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:0.75rem;}
-.ob-title{font-family:var(--sans);font-size:22px;font-weight:600;letter-spacing:-0.5px;margin-bottom:8px;}
-.ob-sub{font-size:14px;color:var(--text2);margin-bottom:1.5rem;line-height:1.6;}
-.ob-options{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.5rem;}
-.ob-option{padding:9px 18px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text2);font-family:var(--sans);font-size:13px;cursor:pointer;transition:all 0.15s;}
-.ob-option:hover{border-color:var(--border2);color:var(--text);}
-.ob-option.sel{border-color:rgba(79,110,247,0.4);background:rgba(79,110,247,0.08);color:var(--accent);}
-.ob-textarea{width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:var(--sans);font-size:14px;padding:12px;outline:none;resize:vertical;min-height:100px;margin-bottom:1.5rem;transition:border-color 0.15s;line-height:1.6;}
-.ob-textarea:focus{border-color:rgba(79,110,247,0.4);}
-.ob-textarea::placeholder{color:var(--text3);}
-.ob-actions{display:flex;justify-content:flex-end;gap:10px;}
-.ob-btn-primary{padding:10px 24px;border-radius:8px;border:none;background:var(--accent);color:#fff;font-family:var(--sans);font-size:14px;font-weight:600;cursor:pointer;transition:opacity 0.15s;}
-.ob-btn-primary:hover{opacity:0.88;}.ob-btn-primary:disabled{opacity:0.35;cursor:not-allowed;}
-.ob-btn-skip{padding:10px 16px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-family:var(--sans);font-size:14px;cursor:pointer;transition:all 0.15s;}
-.ob-btn-skip:hover{border-color:var(--border2);color:var(--text);}
-.ob-done-icon{font-size:2rem;margin-bottom:1rem;color:var(--pos);}
-.ob-done-title{font-family:var(--sans);font-size:22px;font-weight:600;letter-spacing:-0.5px;margin-bottom:8px;}
-.ob-done-sub{font-size:14px;color:var(--text2);margin-bottom:1.5rem;line-height:1.6;}
-.ob-done-info,.ob-summary{font-size:13px;color:var(--text3);font-family:var(--mono);margin-bottom:1rem;}
-/* ── TOAST ── */
-.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface);border:1px solid var(--border2);color:var(--text);padding:10px 20px;border-radius:8px;font-size:13px;font-family:var(--mono);opacity:0;transition:all 0.25s;z-index:9999;pointer-events:none;white-space:nowrap;}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
-.toast.error{border-color:rgba(239,68,68,0.3);color:var(--neg);}
-/* ── RESPONSIVE ── */
-@media(max-width:1200px){.dash-stats{grid-template-columns:repeat(3,1fr);}}
-@media(max-width:900px){
-  .dash-stats{grid-template-columns:repeat(3,1fr);}
-  .dash-grid,.dash-bottom-grid{grid-template-columns:1fr;}
-  .analytics-grid,.bw-row{grid-template-columns:1fr 1fr;}
+/* ═══════════════════════════════════════════
+   RESET
+═══════════════════════════════════════════ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html, body { height:100%; overflow:hidden; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 13px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  transition: background .2s, color .2s;
 }
-@media(max-width:600px){
-  .app-shell{grid-template-columns:1fr;}
-  .sidebar{display:none;}
-  .dash-stats{grid-template-columns:1fr 1fr;}
-  .analytics-grid,.bw-row{grid-template-columns:1fr;}
-  .form-row.three,.form-row.two{grid-template-columns:1fr;}
-  .panel{padding:1rem;}
-  .app-topbar{padding:0 1rem;}
-  .modal-grid{grid-template-columns:1fr;}
+a { text-decoration:none; color:inherit; }
+button, select, input, textarea { font-family:inherit; }
+
+@keyframes fadeUp   { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+@keyframes spin     { to { transform: rotate(360deg); } }
+@keyframes pulse    { 0%,100% { opacity:1; } 50% { opacity:.4; } }
+
+/* ═══════════════════════════════════════════
+   SHELL
+═══════════════════════════════════════════ */
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════
+   SIDEBAR — Tradezella style
+═══════════════════════════════════════════ */
+.sidebar {
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sb-header {
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+
+.sb-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sb-logo-mark {
+  width: 30px; height: 30px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 15px; font-weight: 800; color: #fff;
+  letter-spacing: -1px; flex-shrink: 0;
+}
+
+.sb-logo-text {
+  font-size: 16px; font-weight: 700;
+  color: var(--text); letter-spacing: -0.4px;
+}
+
+.sb-pnl-strip {
+  margin: 10px 12px;
+  background: var(--pos-bg);
+  border: 1px solid rgba(22,163,74,0.2);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+  flex-shrink: 0;
+}
+[data-theme="dark"] .sb-pnl-strip {
+  border-color: rgba(34,197,94,0.15);
+}
+.sb-pnl-label {
+  font-size: 9px; font-family: var(--mono);
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: .1em; margin-bottom: 3px;
+}
+.sb-pnl-val {
+  font-size: 19px; font-weight: 600;
+  font-family: var(--mono); color: var(--pos);
+  letter-spacing: -0.5px;
+}
+.sb-pnl-meta {
+  font-size: 10px; color: var(--text3);
+  margin-top: 2px; font-family: var(--mono);
+}
+
+.sb-add-btn {
+  margin: 0 12px 12px;
+  display: flex; align-items: center; justify-content: center;
+  gap: 6px;
+  padding: 9px;
+  background: var(--accent);
+  color: #fff; border: none;
+  border-radius: var(--radius);
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: opacity .15s;
+  flex-shrink: 0;
+}
+.sb-add-btn:hover { opacity: .88; }
+.sb-add-btn svg { width:14px; height:14px; }
+
+.sb-section-label {
+  font-size: 9px; font-family: var(--mono);
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: 10px 16px 4px;
+}
+
+.sb-nav { flex: 1; overflow-y: auto; padding-bottom: 8px; }
+.sb-nav::-webkit-scrollbar { width: 0; }
+
+.sb-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 14px;
+  color: var(--text2); font-size: 13px; font-weight: 500;
+  cursor: pointer; transition: all .12s;
+  border: none; background: none; width: 100%;
+  text-align: left; border-radius: 0;
+  text-decoration: none;
+  position: relative;
+}
+.sb-item svg { width:16px; height:16px; flex-shrink:0; opacity:.6; }
+.sb-item:hover { background: var(--bg2); color: var(--text); }
+.sb-item:hover svg { opacity: .9; }
+.sb-item.active {
+  background: var(--accent-bg);
+  color: var(--accent);
+}
+.sb-item.active svg { opacity: 1; stroke: var(--accent); }
+.sb-item.active::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 3px; background: var(--accent);
+  border-radius: 0 2px 2px 0;
+}
+.sb-badge {
+  margin-left: auto;
+  font-size: 9px; font-family: var(--mono);
+  background: var(--accent-bg); color: var(--accent);
+  border-radius: 99px; padding: 2px 6px;
+}
+.sb-sep { height: 1px; background: var(--border); margin: 6px 12px; }
+
+.sb-footer {
+  border-top: 1px solid var(--border);
+  padding: 12px;
+  flex-shrink: 0;
+}
+.sb-user {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 8px; border-radius: var(--radius);
+  cursor: pointer; transition: background .12s;
+}
+.sb-user:hover { background: var(--bg2); }
+.sb-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--accent-bg); border: 1.5px solid var(--accent);
+  display: flex; align-items:center; justify-content:center;
+  font-size: 12px; font-weight: 700; color: var(--accent);
+  flex-shrink: 0;
+}
+.sb-user-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.sb-user-plan { font-size: 10px; color: var(--text3); font-family: var(--mono); }
+.sb-streak-pill {
+  margin-left: auto;
+  font-size: 10px; font-family: var(--mono);
+  background: rgba(245,158,11,.1); color: #D97706;
+  border: 1px solid rgba(245,158,11,.2);
+  border-radius: 99px; padding: 2px 7px;
+  display: none;
+}
+[data-theme="dark"] .sb-streak-pill {
+  background: rgba(245,158,11,.1); color: var(--warn);
+  border-color: rgba(245,158,11,.2);
+}
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT AREA
+═══════════════════════════════════════════ */
+.main {
+  display: flex; flex-direction: column;
+  height: 100vh; overflow: hidden;
+  background: var(--bg);
+}
+
+/* TOP BAR */
+.topbar {
+  height: 52px;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: var(--surface);
+  flex-shrink: 0;
+  gap: 12px;
+}
+
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.topbar-title {
+  font-size: 15px; font-weight: 600;
+  color: var(--text); letter-spacing: -.3px;
+}
+.topbar-tag {
+  font-size: 10px; font-family: var(--mono);
+  color: var(--text3); background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 99px; padding: 2px 8px;
+}
+
+.topbar-right { display: flex; align-items: center; gap: 8px; }
+
+.topbar-sync {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; font-family: var(--mono); color: var(--text3);
+}
+.sync-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--pos); flex-shrink: 0;
+}
+#sync-count {
+  font-size: 11px; font-family: var(--mono); color: var(--text3);
+}
+
+.topbar-select {
+  padding: 5px 8px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  font-size: 11px; font-family: var(--mono);
+  outline: none; cursor: pointer;
+  transition: border-color .15s;
+}
+.topbar-select:hover { border-color: var(--border2); }
+
+.topbar-icon-btn {
+  width: 30px; height: 30px;
+  display: flex; align-items:center; justify-content:center;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2); cursor: pointer;
+  transition: all .15s;
+}
+.topbar-icon-btn:hover { border-color: var(--border2); color: var(--text); }
+.topbar-icon-btn svg { width:14px; height:14px; }
+
+.btn-primary {
+  padding: 7px 16px;
+  background: var(--accent); color: #fff;
+  border: none; border-radius: var(--radius);
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: opacity .15s;
+  display: flex; align-items: center; gap: 5px;
+}
+.btn-primary:hover { opacity: .88; }
+.btn-primary svg { width: 13px; height: 13px; }
+
+/* ═══════════════════════════════════════════
+   PANELS
+═══════════════════════════════════════════ */
+.panel { display: none; flex: 1; overflow-y: auto; }
+.panel.active { display: flex; flex-direction: column; }
+.panel-inner { padding: 20px; flex: 1; }
+
+/* ═══════════════════════════════════════════
+   DASHBOARD — Tradezella style
+═══════════════════════════════════════════ */
+
+/* KPI strip */
+.kpi-strip {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.kpi-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  cursor: default;
+  transition: box-shadow .15s;
+  position: relative;
+  overflow: hidden;
+}
+.kpi-card:hover { box-shadow: var(--shadow); }
+.kpi-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2.5px;
+}
+.kpi-card.k-pnl::after   { background: var(--pos); }
+.kpi-card.k-wr::after    { background: var(--accent); }
+.kpi-card.k-pf::after    { background: #8B5CF6; }
+.kpi-card.k-str::after   { background: var(--warn); }
+.kpi-card.k-trd::after   { background: var(--text3); }
+
+.kpi-lbl {
+  font-size: 9px; font-family: var(--mono);
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: .1em; margin-bottom: 7px;
+}
+.kpi-val {
+  font-size: 22px; font-weight: 600;
+  font-family: var(--mono); letter-spacing: -.04em;
+  line-height: 1; margin-bottom: 5px;
+}
+.kpi-val.pos { color: var(--pos); }
+.kpi-val.acc { color: var(--accent); }
+.kpi-val.pur { color: #8B5CF6; }
+.kpi-val.warn { color: var(--warn); }
+.kpi-val.neu { color: var(--text); }
+.kpi-delta {
+  font-size: 10px; font-family: var(--mono);
+  color: var(--text3); display: flex; align-items:center; gap:3px;
+}
+.kpi-delta.up { color: var(--pos); }
+.kpi-delta.dn { color: var(--neg); }
+
+/* DASHBOARD BODY */
+.dash-body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 14px;
+  flex: 1;
+  min-height: 0;
+}
+
+/* LEFT COL */
+.dash-left { display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+
+/* Equity card */
+.equity-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+}
+.card-header {
+  display: flex; align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.card-title {
+  font-size: 12px; font-weight: 600;
+  color: var(--text); letter-spacing: -.1px;
+}
+.card-title span { color: var(--accent); }
+.card-sub { font-size: 10px; font-family: var(--mono); color: var(--text3); }
+.card-stat-big {
+  font-size: 20px; font-weight: 600;
+  font-family: var(--mono); color: var(--pos);
+  letter-spacing: -.04em;
+}
+.chart-h { height: 130px; position: relative; }
+
+/* Calendar card */
+.cal-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  flex: 1; min-height: 0;
+}
+.cal-head {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.cal-month-title {
+  font-size: 13px; font-weight: 600;
+  color: var(--text); letter-spacing: -.2px;
+}
+.cal-stats {
+  font-size: 10px; font-family: var(--mono); color: var(--text3);
+  display: flex; gap: 12px;
+}
+.cal-stats .pos { color: var(--pos); }
+.cal-stats .neg { color: var(--neg); }
+.cal-nav { display: flex; gap: 4px; }
+.cal-nav-btn {
+  width: 24px; height: 24px;
+  display: flex; align-items:center; justify-content:center;
+  border-radius: 5px; border: 1px solid var(--border);
+  background: none; cursor: pointer; color: var(--text3);
+  transition: all .12s;
+}
+.cal-nav-btn:hover { border-color: var(--border2); color: var(--text); }
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+}
+.cal-dow {
+  text-align: center;
+  font-size: 9px; font-family: var(--mono);
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: .06em; padding-bottom: 6px;
+}
+.cal-cell {
+  aspect-ratio: 1;
+  border-radius: 5px;
+  padding: 3px 4px;
+  font-size: 8.5px; font-family: var(--mono);
+  display: flex; flex-direction: column;
+  background: var(--bg2);
+  border: 1px solid transparent;
+  cursor: default; transition: border-color .12s;
+  min-height: 38px;
+}
+.cal-cell:hover { border-color: var(--border2); }
+.cal-cell.empty { background: transparent; }
+.cal-cell.today { border-color: var(--accent) !important; }
+.cal-cell.has-pos {
+  background: var(--pos-bg);
+  border-color: rgba(22,163,74,.15);
+}
+[data-theme="dark"] .cal-cell.has-pos { border-color: rgba(34,197,94,.15); }
+.cal-cell.has-neg {
+  background: var(--neg-bg);
+  border-color: rgba(220,38,38,.12);
+}
+[data-theme="dark"] .cal-cell.has-neg { border-color: rgba(239,68,68,.12); }
+.cal-num { color: var(--text3); font-size: 9px; margin-bottom: 2px; }
+.cal-pnl { font-size: 9px; font-weight: 500; line-height: 1.2; }
+.cal-pnl.pos { color: var(--pos); }
+.cal-pnl.neg { color: var(--neg); }
+.cal-trades-n { font-size: 8px; color: var(--text3); margin-top: 1px; }
+
+/* RIGHT COL */
+.dash-right { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+.dash-right::-webkit-scrollbar { width: 0; }
+
+/* Recent trades card */
+.trades-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  flex: 1;
+}
+.trades-card-head {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.trades-card-title { font-size: 12px; font-weight: 600; color: var(--text); }
+.see-all-btn {
+  font-size: 10px; font-family: var(--mono);
+  color: var(--accent); background: none; border: none;
+  cursor: pointer; transition: opacity .15s;
+}
+.see-all-btn:hover { opacity: .7; }
+.trade-list { overflow-y: auto; }
+.trade-row {
+  display: grid;
+  grid-template-columns: 1fr 50px 70px 60px 44px;
+  gap: 6px;
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(0,0,0,.035);
+  transition: background .1s; cursor: pointer;
+  align-items: center;
+}
+[data-theme="dark"] .trade-row { border-bottom-color: rgba(255,255,255,.04); }
+.trade-row:hover { background: var(--bg2); }
+.trade-row:last-child { border-bottom: none; }
+.trade-asset { font-size: 12px; font-weight: 600; color: var(--text); }
+.trade-dir { font-size: 11px; font-family: var(--mono); font-weight: 500; }
+.trade-dir.long { color: var(--pos); }
+.trade-dir.short { color: var(--neg); }
+.trade-pnl { font-size: 12px; font-family: var(--mono); font-weight: 500; }
+.trade-pnl.pos { color: var(--pos); }
+.trade-pnl.neg { color: var(--neg); }
+.trade-emo {
+  font-size: 10px; font-family: var(--mono);
+  color: var(--text3);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.result-pill {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 600; font-family: var(--mono);
+  padding: 2px 7px; border-radius: 4px;
+}
+.result-pill.win { background: var(--pos-bg); color: var(--pos); }
+.result-pill.loss { background: var(--neg-bg); color: var(--neg); }
+.result-pill.be { background: var(--bg2); color: var(--text3); }
+
+/* AI Insights dash card */
+.ai-dash-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+}
+.ai-dash-head {
+  display: flex; align-items: center; gap: 6px; margin-bottom: 10px;
+}
+.ai-live-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent); animation: pulse 2s infinite;
+}
+.ai-dash-title {
+  font-size: 12px; font-weight: 600; color: var(--text); flex: 1;
+}
+.ai-claude-badge {
+  font-size: 9px; font-family: var(--mono);
+  background: var(--accent-bg); color: var(--accent);
+  border: 1px solid rgba(37,99,235,.2);
+  border-radius: 4px; padding: 2px 6px;
+}
+[data-theme="dark"] .ai-claude-badge { border-color: rgba(59,130,246,.2); }
+.ai-insight-box {
+  background: var(--accent-bg);
+  border: 1px solid rgba(37,99,235,.15);
+  border-radius: var(--radius);
+  padding: 10px 12px; margin-bottom: 10px;
+}
+[data-theme="dark"] .ai-insight-box { border-color: rgba(59,130,246,.15); }
+.ai-insight-label {
+  font-size: 8px; font-family: var(--mono);
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: .1em; margin-bottom: 5px;
+}
+.ai-insight-text { font-size: 11px; color: var(--text2); line-height: 1.6; }
+.ai-insight-text strong { color: var(--text); font-weight: 600; }
+.ai-metrics-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+.ai-metric {
+  background: var(--bg2); border-radius: var(--radius);
+  padding: 8px 10px;
+}
+.ai-metric-lbl {
+  font-size: 8px; font-family: var(--mono);
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: 4px;
+}
+.ai-metric-val {
+  font-size: 15px; font-family: var(--mono); font-weight: 500;
+}
+.ai-metric-val.pos { color: var(--pos); }
+.ai-metric-val.neg { color: var(--neg); }
+.ai-metric-val.acc { color: var(--accent); }
+.ai-open-btn {
+  width: 100%; padding: 8px;
+  background: var(--accent-bg);
+  border: 1px solid rgba(37,99,235,.2);
+  border-radius: var(--radius);
+  color: var(--accent); font-size: 11px; font-weight: 500;
+  cursor: pointer; transition: all .15s; display: flex;
+  align-items: center; justify-content: center; gap: 5px;
+}
+[data-theme="dark"] .ai-open-btn { border-color: rgba(59,130,246,.2); }
+.ai-open-btn:hover { background: var(--accent); color: #fff; }
+
+/* ═══════════════════════════════════════════
+   LOG TRADE — Clean form
+═══════════════════════════════════════════ */
+.log-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 16px;
+  padding: 20px;
+  flex: 1;
+  min-height: 0;
+}
+
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow-y: auto;
+}
+.form-card::-webkit-scrollbar { width: 4px; }
+.form-card::-webkit-scrollbar-thumb { background: var(--border2); border-radius:2px; }
+
+.form-head {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--surface); z-index: 1;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.form-head-title {
+  font-size: 15px; font-weight: 600; color: var(--text);
+  letter-spacing: -.3px;
+}
+.form-head-title span { color: var(--accent); }
+.form-body { padding: 20px; }
+
+.form-section { margin-bottom: 22px; }
+.form-section:last-child { margin-bottom: 0; }
+.form-section-lbl {
+  font-size: 9px; font-family: var(--mono);
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: .12em; margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+.form-row { display: grid; gap: 10px; }
+.form-row.r2 { grid-template-columns: 1fr 1fr; }
+.form-row.r3 { grid-template-columns: 1fr 1fr 1fr; }
+.form-row.r4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+.fld label {
+  display: block;
+  font-size: 10px; font-family: var(--mono);
+  color: var(--text3); text-transform: uppercase;
+  letter-spacing: .08em; margin-bottom: 5px;
+}
+.fld input, .fld select, .fld textarea {
+  width: 100%;
+  padding: 9px 11px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text); font-size: 13px;
+  outline: none; transition: border-color .15s;
+  font-family: var(--sans);
+}
+.fld input:focus, .fld select:focus, .fld textarea:focus {
+  border-color: var(--accent);
+  background: var(--surface);
+}
+.fld input::placeholder, .fld textarea::placeholder { color: var(--text3); }
+.fld select option { background: var(--surface); }
+.fld textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+
+/* Direction toggle */
+.dir-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.dir-btn {
+  padding: 10px; border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--bg2); cursor: pointer;
+  font-size: 13px; font-weight: 500;
+  color: var(--text2); transition: all .15s; text-align: center;
+  font-family: var(--sans);
+}
+.dir-btn:hover { border-color: var(--border2); color: var(--text); }
+.dir-btn.long.sel {
+  border-color: var(--pos); background: var(--pos-bg);
+  color: var(--pos); font-weight: 600;
+}
+.dir-btn.short.sel {
+  border-color: var(--neg); background: var(--neg-bg);
+  color: var(--neg); font-weight: 600;
+}
+
+/* Result select */
+.result-sel {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.result-opt {
+  flex: 1; padding: 8px; border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--bg2); cursor: pointer;
+  font-size: 12px; font-weight: 500;
+  color: var(--text2); transition: all .15s; text-align: center;
+  font-family: var(--sans); min-width: 70px;
+}
+.result-opt:hover { border-color: var(--border2); color: var(--text); }
+.result-opt[data-v="Win"].sel { border-color: var(--pos); background: var(--pos-bg); color: var(--pos); }
+.result-opt[data-v="Loss"].sel { border-color: var(--neg); background: var(--neg-bg); color: var(--neg); }
+.result-opt[data-v="Breakeven"].sel { border-color: var(--warn); background: rgba(245,158,11,.08); color: var(--warn); }
+
+/* Emotion tags */
+.emo-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.emo-tag {
+  padding: 6px 12px; border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2); font-size: 12px;
+  cursor: pointer; transition: all .12s;
+  font-family: var(--sans);
+}
+.emo-tag:hover { border-color: var(--border2); color: var(--text); }
+.emo-tag.sel { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+.emo-tag.sel.neg-emo { border-color: var(--neg); background: var(--neg-bg); color: var(--neg); }
+.emo-tag.sel.warn-emo { border-color: var(--warn); background: rgba(245,158,11,.08); color: var(--warn); }
+
+/* Toggle pills (planned/rules) */
+.toggle-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.tpill {
+  padding: 7px 14px; border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2); font-size: 12px;
+  cursor: pointer; transition: all .12s; font-family: var(--sans);
+}
+.tpill:hover { border-color: var(--border2); color: var(--text); }
+.tpill.sel-plan { border-color: var(--pos); background: var(--pos-bg); color: var(--pos); }
+.tpill.sel-imp  { border-color: var(--neg); background: var(--neg-bg); color: var(--neg); }
+.tpill.sel-yes  { border-color: var(--pos); background: var(--pos-bg); color: var(--pos); }
+.tpill.sel-part { border-color: var(--warn); background: rgba(245,158,11,.08); color: var(--warn); }
+.tpill.sel-no   { border-color: var(--neg); background: var(--neg-bg); color: var(--neg); }
+.tpill.sel-mkt  { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+
+/* Custom tag */
+.tag-chip-wrap { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 6px; }
+.tag-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 10px; border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--bg2);
+  color: var(--text2); font-size: 11px; font-family: var(--mono);
+  cursor: pointer; transition: all .12s;
+}
+.tag-chip:hover { border-color: var(--border2); }
+.tag-chip.sel { border-color: var(--accent); background: var(--accent-bg); color: var(--accent); }
+.tag-chip-del { color: var(--text3); font-size: 10px; margin-left: 2px; }
+.tag-add-row { display: flex; gap: 6px; }
+.tag-add-input {
+  flex: 1; padding: 6px 10px;
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: 99px; color: var(--text);
+  font-size: 11px; font-family: var(--mono); outline: none;
+  transition: border-color .15s;
+}
+.tag-add-input:focus { border-color: var(--accent); }
+.tag-add-input::placeholder { color: var(--text3); }
+.tag-add-btn {
+  padding: 6px 12px; border-radius: 99px;
+  border: 1px solid var(--border); background: none;
+  color: var(--text2); font-size: 11px; font-family: var(--mono);
+  cursor: pointer; transition: all .12s;
+}
+.tag-add-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Screenshot */
+.ss-zone {
+  border: 1.5px dashed var(--border2);
+  border-radius: var(--radius); padding: 20px;
+  text-align: center; cursor: pointer; position: relative;
+  background: var(--bg2); transition: all .15s;
+}
+.ss-zone:hover, .ss-zone.drag-over {
+  border-color: var(--accent); background: var(--accent-bg);
+}
+.ss-zone input { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
+.ss-zone-icon { margin-bottom: 6px; color: var(--text3); }
+.ss-zone-text { font-size: 12px; color: var(--text2); margin-bottom: 3px; }
+.ss-zone-sub { font-size: 10px; font-family: var(--mono); color: var(--text3); }
+.ss-preview { display:none; margin-top:10px; position:relative; }
+.ss-preview img { width:100%;border-radius:6px;border:1px solid var(--border); }
+.ss-remove {
+  position:absolute;top:8px;right:8px;
+  background:rgba(0,0,0,.7);border:none;color:#fff;
+  border-radius:4px;padding:3px 7px;font-size:10px;
+  cursor:pointer;font-family:var(--mono);
+}
+
+/* P&L hint */
+.pnl-hint { font-size: 10px; font-family: var(--mono); margin-top: 4px; }
+.pnl-hint.pos { color: var(--pos); }
+.pnl-hint.neg { color: var(--neg); }
+
+/* Form right sidebar */
+.form-sidebar { display: flex; flex-direction: column; gap: 12px; }
+.form-side-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+}
+.form-side-title {
+  font-size: 11px; font-weight: 600; color: var(--text);
+  margin-bottom: 10px; letter-spacing: -.1px;
+}
+.form-side-sub {
+  font-size: 10px; color: var(--text3); font-family: var(--mono);
+  line-height: 1.6;
+}
+
+.save-btn {
+  width: 100%; padding: 11px;
+  background: var(--accent); color: #fff; border: none;
+  border-radius: var(--radius); font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: opacity .15s;
+}
+.save-btn:hover { opacity: .88; }
+.save-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ═══════════════════════════════════════════
+   HISTORY — Professional table
+═══════════════════════════════════════════ */
+.history-layout { padding: 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; min-height: 0; }
+.history-controls {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.history-title { font-size: 15px; font-weight: 600; color: var(--text); letter-spacing: -.3px; flex: 1; }
+.filter-sel {
+  padding: 6px 9px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text2);
+  font-size: 11px; font-family: var(--mono); outline: none; cursor: pointer;
+}
+.export-btn {
+  padding: 6px 12px; border-radius: var(--radius);
+  border: 1px solid var(--border); background: var(--surface);
+  color: var(--text2); font-size: 11px; font-family: var(--mono);
+  cursor: pointer; transition: all .15s;
+}
+.export-btn:hover { border-color: var(--border2); color: var(--text); }
+.table-wrap {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); overflow: hidden; overflow-x: auto;
+  flex: 1;
+}
+table { width: 100%; border-collapse: collapse; min-width: 700px; }
+thead th {
+  font-size: 9px; font-family: var(--mono); color: var(--text3);
+  text-transform: uppercase; letter-spacing: .1em;
+  padding: 10px 14px; text-align: left;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2); white-space: nowrap; font-weight: 400;
+}
+tbody tr { border-bottom: 1px solid var(--border); transition: background .1s; cursor: pointer; }
+tbody tr:last-child { border-bottom: none; }
+tbody tr:hover { background: var(--bg2); }
+tbody td { padding: 10px 14px; font-size: 11px; font-family: var(--mono); white-space: nowrap; color: var(--text2); }
+td.t-asset { font-size: 12px; font-weight: 600; color: var(--text); font-family: var(--sans); }
+td.t-long { color: var(--pos); font-weight: 500; }
+td.t-short { color: var(--neg); font-weight: 500; }
+td.t-pos { color: var(--pos); font-weight: 500; }
+td.t-neg { color: var(--neg); font-weight: 500; }
+.empty-row { text-align: center; padding: 2.5rem 1rem; color: var(--text3); font-family: var(--mono); font-size: 12px; }
+
+/* ═══════════════════════════════════════════
+   ANALYTICS
+═══════════════════════════════════════════ */
+.analytics-layout { padding: 20px; display: flex; flex-direction: column; gap: 14px; flex: 1; min-height: 0; }
+
+.an-kpi-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.an-kpi {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 14px 16px;
+}
+.an-kpi-lbl { font-size: 9px; font-family: var(--mono); color: var(--text3); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px; }
+.an-kpi-val { font-size: 17px; font-weight: 600; font-family: var(--mono); color: var(--text); margin-bottom: 3px; letter-spacing: -.03em; }
+.an-kpi-detail { font-size: 10px; font-family: var(--mono); color: var(--text3); }
+.an-kpi-pnl { font-size: 10px; font-family: var(--mono); margin-top: 3px; }
+
+.an-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+}
+.an-chart-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px;
+  display: flex; flex-direction: column;
+}
+.an-chart-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 2px; letter-spacing: -.1px; }
+.an-chart-title span { color: var(--accent); }
+.an-chart-sub { font-size: 10px; font-family: var(--mono); color: var(--text3); margin-bottom: 12px; }
+.an-chart-area { flex: 1; position: relative; min-height: 150px; }
+
+/* ═══════════════════════════════════════════
+   AI INSIGHTS PANEL
+═══════════════════════════════════════════ */
+.ai-layout { padding: 20px; display: flex; flex-direction: column; gap: 14px; flex: 1; min-height: 0; }
+.ai-main-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 20px;
+}
+.ai-panel-head {
+  display: flex; align-items: flex-start;
+  justify-content: space-between; margin-bottom: 14px;
+}
+.ai-panel-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+.ai-panel-title { font-size: 16px; font-weight: 600; color: var(--text); letter-spacing: -.3px; }
+.ai-panel-title span { color: var(--accent); }
+.ai-panel-sub { font-size: 11px; font-family: var(--mono); color: var(--text3); }
+.ai-disclaimer {
+  font-size: 11px; font-family: var(--mono); color: var(--text3);
+  padding: 8px 12px; border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 14px;
+  background: var(--bg2); line-height: 1.6;
+}
+.ai-btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.ai-btn-primary {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; background: var(--accent); color: #fff;
+  border: none; border-radius: var(--radius);
+  font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity .15s;
+}
+.ai-btn-primary:hover { opacity: .88; }
+.ai-btn-secondary {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 20px; background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  font-size: 13px; font-weight: 500; cursor: pointer; transition: all .15s;
+}
+.ai-btn-secondary:hover { border-color: var(--border2); color: var(--text); }
+
+.ai-loading-row { display: none; align-items: center; gap: 8px; padding: 10px 0; font-size: 12px; font-family: var(--mono); color: var(--text2); }
+.spinner { width: 14px; height: 14px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
+
+.ai-result { display: none; }
+.ai-result-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+.ai-section {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 12px 14px; margin-bottom: 8px;
+  background: var(--bg2);
+}
+.ai-section:last-child { margin-bottom: 0; }
+.ai-section-title {
+  font-size: 9px; font-family: var(--mono); color: var(--accent);
+  text-transform: uppercase; letter-spacing: .12em; margin-bottom: 8px;
+}
+.ai-section-body { font-size: 12.5px; color: var(--text2); line-height: 1.8; }
+.ai-section-body p { margin-bottom: 5px; }
+.ai-section-body p:last-child { margin-bottom: 0; }
+.ai-section-body strong { color: var(--text); font-weight: 500; }
+.ai-highlight { color: var(--pos); font-weight: 500; }
+.ai-danger { color: var(--neg); font-weight: 500; }
+.ai-bullet { display:flex;gap:8px;margin-bottom:5px;align-items:flex-start; }
+.ai-bullet-dot { color:var(--accent);flex-shrink:0;margin-top:2px;font-family:var(--mono);font-size:11px; }
+.ai-focus-box { background:var(--accent-bg);border:1px solid rgba(37,99,235,.15);border-radius:var(--radius);padding:12px;margin-bottom:8px; }
+[data-theme="dark"] .ai-focus-box { border-color:rgba(59,130,246,.15); }
+.ai-focus-text { font-size:13px;color:var(--text);line-height:1.7; }
+
+/* Weekly reports */
+.ai-reports-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 18px;
+}
+.ai-reports-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.ai-reports-sub { font-size: 10px; font-family: var(--mono); color: var(--text3); margin-bottom: 14px; }
+.report-item {
+  background: var(--bg2); border: 1px solid var(--border);
+  border-radius: var(--radius); margin-bottom: 8px; overflow: hidden;
+  transition: border-color .15s;
+}
+.report-item:hover { border-color: var(--border2); }
+.report-item-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 14px; cursor: pointer;
+}
+.report-item-week { font-size: 12px; font-weight: 500; font-family: var(--mono); color: var(--text); }
+.report-item-stats { display: flex; gap: 12px; font-size: 10px; font-family: var(--mono); color: var(--text3); }
+.report-item-arrow { font-size: 10px; color: var(--text3); transition: transform .2s; }
+.report-item.open .report-item-arrow { transform: rotate(180deg); }
+.report-item-body { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+.report-item.open .report-item-body { max-height: 500px; }
+.report-item-text { padding: 0 14px 12px; font-size: 12px; color: var(--text2); line-height: 1.8; border-top: 1px solid var(--border); padding-top: 10px; }
+.report-new { background: var(--accent); color: #fff; font-size: 9px; font-family: var(--mono); border-radius: 99px; padding: 2px 6px; margin-left: 6px; }
+.report-stat-pos { color: var(--pos); }
+.report-stat-neg { color: var(--neg); }
+
+/* ═══════════════════════════════════════════
+   IMPORT
+═══════════════════════════════════════════ */
+.import-layout { padding: 20px; flex: 1; display: flex; flex-direction: column; gap: 14px; max-width: 700px; min-height: 0; }
+.import-header { display: flex; flex-direction: column; gap: 3px; }
+.import-title { font-size: 16px; font-weight: 600; color: var(--text); letter-spacing: -.3px; }
+.import-title span { color: var(--accent); }
+.import-sub { font-size: 12px; color: var(--text2); }
+.import-hints {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 14px 16px;
+}
+.import-hints-title {
+  font-size: 10px; font-family: var(--mono); color: var(--text3);
+  text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px;
+}
+.import-hint-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.import-hint {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 12px; color: var(--text2);
+}
+.import-hint::before { content:''; width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0; }
+.import-hint-foot {
+  margin-top: 10px; padding-top: 10px;
+  border-top: 1px solid var(--border);
+  font-size: 10px; font-family: var(--mono); color: var(--text3);
+}
+.drop-zone {
+  border: 2px dashed var(--border2); border-radius: var(--radius-lg);
+  padding: 32px 20px; text-align: center; cursor: pointer; position: relative;
+  background: var(--bg2); transition: all .15s;
+}
+.drop-zone:hover, .drop-zone.drag-over {
+  border-color: var(--accent); background: var(--accent-bg);
+}
+.drop-zone input { position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%; }
+.drop-icon { color: var(--text3); margin-bottom: 10px; }
+.drop-text { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; }
+.drop-sub { font-size: 11px; font-family: var(--mono); color: var(--text3); }
+.preview-wrap { display:none; background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden; }
+.preview-head { display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid var(--border); }
+.preview-count { font-size:11px;font-family:var(--mono);color:var(--accent); }
+.preview-tbl { width:100%;border-collapse:collapse;font-size:11px;font-family:var(--mono); }
+.preview-tbl th { padding:7px 12px;border-bottom:1px solid var(--border);text-align:left;font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em; }
+.preview-tbl td { padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text2); }
+.preview-tbl tr:last-child td { border-bottom:none; }
+.import-progress-wrap { display:none; }
+.import-prog-bar-bg { height:3px;background:var(--border);border-radius:99px;overflow:hidden;margin-bottom:6px; }
+.import-prog-bar { height:100%;background:var(--accent);border-radius:99px;transition:width .2s;width:0%; }
+.import-prog-text { font-size:11px;font-family:var(--mono);color:var(--text2); }
+.import-result-wrap { display:none;background:var(--pos-bg);border:1px solid rgba(22,163,74,.2);border-radius:var(--radius);padding:12px; }
+.import-result-title { font-size:12px;font-weight:500;color:var(--pos);margin-bottom:4px;font-family:var(--mono); }
+.import-result-text { font-size:11px;font-family:var(--mono);color:var(--text2);line-height:1.6;white-space:pre-wrap; }
+.import-actions-row { display:flex;gap:8px;display:none; }
+.import-do-btn { padding:9px 18px;border-radius:var(--radius);border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s; }
+.import-do-btn:hover { opacity:.88; }
+.import-do-btn:disabled { opacity:.4;cursor:not-allowed; }
+.import-clear-btn { padding:9px 18px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:13px;cursor:pointer;transition:all .15s; }
+.import-clear-btn:hover { border-color:var(--border2);color:var(--text); }
+
+/* ═══════════════════════════════════════════
+   MODALS
+═══════════════════════════════════════════ */
+.modal-overlay {
+  position:fixed;inset:0;z-index:400;
+  background:rgba(0,0,0,.5);backdrop-filter:blur(6px);
+  display:none;align-items:center;justify-content:center;padding:1rem;
+}
+.modal-overlay.open { display:flex; }
+.trade-modal, .edit-modal {
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:var(--radius-lg);max-width:580px;width:100%;
+  max-height:88vh;overflow-y:auto;box-shadow:0 24px 60px rgba(0,0,0,.2);
+  animation: fadeUp .2s ease both;
+}
+.modal-header { display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border); }
+.modal-asset { font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.3px; }
+.modal-date { font-size:11px;font-family:var(--mono);color:var(--text3); }
+.modal-close { background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;line-height:1;padding:4px;transition:color .15s; }
+.modal-close:hover { color:var(--text); }
+.modal-body { padding:18px 20px; }
+.modal-grid { display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px; }
+.modal-field { background:var(--bg2);border-radius:var(--radius);padding:10px 12px; }
+.modal-field-lbl { font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px; }
+.modal-field-val { font-size:13px;font-weight:500;color:var(--text);font-family:var(--mono); }
+.modal-field-val.pos { color:var(--pos); }.modal-field-val.neg { color:var(--neg); }
+.modal-field-val.long { color:var(--pos); }.modal-field-val.short { color:var(--neg); }
+.modal-section-title { font-size:9px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.1em;margin:14px 0 8px; }
+.modal-emo-row { display:flex;gap:5px;flex-wrap:wrap;margin-bottom:12px; }
+.modal-emo-chip { font-size:11px;padding:4px 10px;border-radius:99px;background:var(--bg2);color:var(--text2);font-family:var(--mono); }
+.modal-ss { width:100%;border-radius:6px;border:1px solid var(--border);margin-bottom:12px; }
+.modal-notes { font-size:13px;color:var(--text2);line-height:1.75; }
+.modal-edit-btn { width:100%;padding:10px;border-radius:var(--radius);background:var(--bg2);border:1px solid var(--border);color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;margin-top:6px; }
+.modal-edit-btn:hover { border-color:var(--accent);color:var(--accent); }
+.modal-delete-btn { width:100%;padding:10px;border-radius:var(--radius);background:transparent;border:1px solid rgba(220,38,38,.2);color:var(--neg);font-size:13px;cursor:pointer;transition:all .15s;margin-top:6px; }
+.modal-delete-btn:hover { background:var(--neg-bg); }
+.edit-modal-header { display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--border); }
+.edit-modal-title { font-size:16px;font-weight:600;color:var(--text);letter-spacing:-.3px; }
+.edit-modal-title span { color:var(--accent); }
+.edit-modal-body { padding:18px 20px; }
+.edit-g2 { display:grid;grid-template-columns:1fr 1fr;gap:10px; }
+.edit-g3 { display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px; }
+.edit-field label { display:block;font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px; }
+.edit-input { width:100%;padding:9px 11px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px;outline:none;transition:border-color .15s; }
+.edit-input:focus { border-color:var(--accent); }
+.edit-save-btn { width:100%;padding:11px;border-radius:var(--radius);border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;margin-top:12px; }
+.edit-save-btn:hover { opacity:.88; }
+
+/* ═══════════════════════════════════════════
+   UPGRADE MODAL
+═══════════════════════════════════════════ */
+#upgrade-modal { display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,.65);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:1rem; }
+
+/* ═══════════════════════════════════════════
+   AUTH WALL
+═══════════════════════════════════════════ */
+.auth-wall { position:fixed;inset:0;z-index:500;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:1rem; }
+.auth-box { background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);max-width:400px;width:100%;padding:28px 24px;box-shadow:var(--shadow); animation: fadeUp .3s ease; }
+.auth-icon { font-size:28px;margin-bottom:14px;text-align:center; }
+.auth-title { font-size:20px;font-weight:700;color:var(--text);text-align:center;letter-spacing:-.4px;margin-bottom:4px; }
+.auth-title span { color:var(--accent); }
+.auth-desc { font-size:12px;color:var(--text3);text-align:center;margin-bottom:18px;line-height:1.6; }
+.auth-tabs { display:flex;background:var(--bg2);border-radius:var(--radius);padding:3px;gap:3px;margin-bottom:16px; }
+.auth-tab { flex:1;padding:8px;border-radius:6px;border:none;background:transparent;color:var(--text2);font-size:13px;font-weight:500;cursor:pointer;transition:all .12s; }
+.auth-tab.active { background:var(--surface);color:var(--text); }
+.auth-pane { display:none; }.auth-pane.active { display:block; }
+.google-btn { width:100%;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:13px;font-weight:500;cursor:pointer;transition:all .15s;margin-bottom:12px; }
+.google-btn:hover { border-color:var(--border2); }
+.auth-or { display:flex;align-items:center;gap:10px;margin:10px 0;font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.1em; }
+.auth-or::before,.auth-or::after { content:'';flex:1;height:1px;background:var(--border); }
+.auth-input { width:100%;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px;padding:10px 12px;outline:none;transition:border-color .15s;margin-bottom:8px; }
+.auth-input:focus { border-color:var(--accent); }
+.auth-input::placeholder { color:var(--text3); }
+.auth-submit { width:100%;padding:11px;border-radius:var(--radius);border:none;background:var(--accent);color:#fff;font-size:14px;font-weight:600;cursor:pointer;transition:opacity .15s;margin-top:4px; }
+.auth-submit:hover { opacity:.88; }
+.auth-err { font-size:11px;color:var(--neg);font-family:var(--mono);margin-bottom:8px;padding:8px 10px;background:var(--neg-bg);border:1px solid rgba(220,38,38,.2);border-radius:var(--radius);display:none; }
+.auth-switch { font-size:11px;color:var(--text3);text-align:center;margin-top:12px;font-family:var(--mono); }
+.auth-switch a { color:var(--accent);cursor:pointer; }
+
+/* ═══════════════════════════════════════════
+   ONBOARDING
+═══════════════════════════════════════════ */
+.onboarding-overlay { position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px); }
+.onboarding-box { background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);max-width:460px;width:100%;padding:28px;box-shadow:0 32px 80px rgba(0,0,0,.3);animation:fadeUp .3s ease; }
+.ob-prog { display:flex;gap:5px;margin-bottom:24px; }
+.ob-prog-dot { flex:1;height:2px;background:var(--border2);border-radius:99px;transition:background .3s; }
+.ob-prog-dot.done,.ob-prog-dot.active { background:var(--accent); }
+.ob-step { display:none; }.ob-step.active { display:block; }
+.ob-eyebrow { font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px; }
+.ob-title { font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.4px;margin-bottom:6px; }
+.ob-sub { font-size:13px;color:var(--text2);margin-bottom:16px;line-height:1.6; }
+.ob-options { display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px; }
+.ob-option { padding:8px 16px;border-radius:var(--radius);border:1.5px solid var(--border);background:var(--bg2);color:var(--text2);font-size:13px;cursor:pointer;transition:all .12s;font-family:var(--sans); }
+.ob-option:hover { border-color:var(--border2);color:var(--text); }
+.ob-option.sel { border-color:var(--accent);background:var(--accent-bg);color:var(--accent); }
+.ob-textarea { width:100%;background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:13px;padding:12px;outline:none;resize:vertical;min-height:88px;margin-bottom:20px;transition:border-color .15s;line-height:1.6; }
+.ob-textarea:focus { border-color:var(--accent); }
+.ob-textarea::placeholder { color:var(--text3); }
+.ob-actions { display:flex;justify-content:flex-end;gap:8px; }
+.ob-btn-primary { padding:9px 22px;border-radius:var(--radius);border:none;background:var(--accent);color:#fff;font-size:13px;font-weight:600;cursor:pointer;transition:opacity .15s; }
+.ob-btn-primary:hover { opacity:.88; }.ob-btn-primary:disabled { opacity:.35;cursor:not-allowed; }
+.ob-btn-skip { padding:9px 14px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;transition:all .15s; }
+.ob-btn-skip:hover { border-color:var(--border2);color:var(--text); }
+.ob-done-icon { font-size:28px;color:var(--pos);margin-bottom:12px; }
+.ob-done-title { font-size:22px;font-weight:700;color:var(--text);letter-spacing:-.4px;margin-bottom:6px; }
+.ob-done-sub { font-size:13px;color:var(--text2);margin-bottom:20px;line-height:1.6; }
+.ob-done-info { font-size:11px;font-family:var(--mono);color:var(--text3);margin-bottom:16px; }
+
+/* ═══════════════════════════════════════════
+   TOAST
+═══════════════════════════════════════════ */
+.toast { position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--text);color:var(--surface);padding:9px 18px;border-radius:var(--radius);font-size:12px;font-family:var(--mono);opacity:0;transition:all .22s;z-index:9999;pointer-events:none;white-space:nowrap; }
+.toast.show { opacity:1;transform:translateX(-50%) translateY(0); }
+.toast.error { background:var(--neg);color:#fff; }
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════ */
+@media (max-width:1100px) {
+  .kpi-strip { grid-template-columns: repeat(3,1fr); }
+  .dash-body { grid-template-columns: 1fr; }
+  .an-charts-grid { grid-template-columns: 1fr; }
+}
+@media (max-width:700px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { display: none; }
+  .log-layout { grid-template-columns: 1fr; }
+  .kpi-strip { grid-template-columns: 1fr 1fr; }
+  .an-kpi-row { grid-template-columns: 1fr 1fr; }
 }
 </style>
-</head>
-<body>
+<!-- ══════════════════════════════════════════
+     UPGRADE MODAL
+══════════════════════════════════════════ -->
+<div id="upgrade-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:1rem;">
+  <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);max-width:440px;width:100%;padding:28px 24px;position:relative;text-align:center;box-shadow:0 32px 80px rgba(0,0,0,.3);">
+    <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="position:absolute;top:14px;right:16px;background:transparent;border:none;color:var(--text3);font-size:18px;cursor:pointer;">✕</button>
+    <div style="font-size:18px;font-weight:700;color:var(--text);letter-spacing:-.3px;margin-bottom:6px;">Your 15-day trial has ended</div>
+    <p style="font-size:13px;color:var(--text2);margin-bottom:18px;line-height:1.6;">Upgrade to Vyxor Pro to unlock AI Insights and CSV import. Your trade data is safe.</p>
+    <div style="background:var(--pos-bg);border:1px solid rgba(22,163,74,.2);border-radius:var(--radius-lg);padding:16px;margin-bottom:18px;">
+      <div style="font-size:36px;font-weight:700;font-family:var(--mono);color:var(--pos);letter-spacing:-.06em;margin-bottom:4px;">$5<span style="font-size:14px;color:var(--text2);font-weight:400;">/month</span></div>
+      <div style="font-size:11px;font-family:var(--mono);color:var(--text3);margin-bottom:12px;">Cancel anytime · 30-day money back guarantee</div>
+      <div style="text-align:left;display:flex;flex-direction:column;gap:5px;">
+        <div style="font-size:12px;color:var(--text2);display:flex;gap:8px;"><span style="color:var(--pos);">✓</span> AI Insights — behavioral self-reflection</div>
+        <div style="font-size:12px;color:var(--text2);display:flex;gap:8px;"><span style="color:var(--pos);">✓</span> CSV import from any broker</div>
+        <div style="font-size:12px;color:var(--text2);display:flex;gap:8px;"><span style="color:var(--pos);">✓</span> Unlimited access forever</div>
+        <div style="font-size:12px;color:var(--text2);display:flex;gap:8px;"><span style="color:var(--pos);">✓</span> All future features</div>
+      </div>
+    </div>
+    <button onclick="startCheckout()" id="upgrade-pay-btn" style="width:100%;padding:13px;border-radius:var(--radius);border:none;background:var(--accent);color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:8px;transition:opacity .15s;">Upgrade to Pro — $5/month</button>
+    <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="width:100%;padding:10px;border-radius:var(--radius);border:1px solid var(--border);background:transparent;color:var(--text2);font-size:13px;cursor:pointer;">Continue with trial features</button>
+    <p style="font-size:10px;font-family:var(--mono);color:var(--text3);margin-top:10px;">Your logged trades will never be deleted.</p>
+  </div>
+</div>
 
-<!-- ── AUTH WALL ── -->
+<!-- ══════════════════════════════════════════
+     AUTH WALL
+══════════════════════════════════════════ -->
 <div class="auth-wall" id="auth-wall">
   <div class="auth-box">
-    <div class="auth-icon"></div>
-    <div class="auth-title">Vyxor <span>Journal</span></div>
-    <p class="auth-desc">Sign in to access your trade journal. Private, cloud-synced, AI-powered.</p>
+    <div class="auth-icon">📊</div>
+    <div class="auth-title"><span>V</span>yxor Journal</div>
+    <div class="auth-desc">Private. Cloud-synced. AI-powered.</div>
     <div class="auth-tabs">
       <button class="auth-tab active" onclick="authTab('login')">Sign In</button>
       <button class="auth-tab" onclick="authTab('signup')">Sign Up</button>
     </div>
-    <button class="google-btn" onclick="googleAuth()">
-      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-      Continue with Google
-    </button>
-    <div class="auth-or">or</div>
-    <div id="login-form">
-      <div class="auth-err" id="login-err"></div>
-      <input class="auth-input" type="email" id="login-email" placeholder="Email" autocomplete="email">
-      <input class="auth-input" type="password" id="login-pass" placeholder="Password" autocomplete="current-password">
+    <div class="auth-pane active" id="login-form">
+      <button class="google-btn" onclick="googleSignIn()">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Continue with Google
+      </button>
+      <div class="auth-or">or</div>
+      <div id="login-err" class="auth-err"></div>
+      <input type="email" id="login-email" class="auth-input" placeholder="Email address">
+      <input type="password" id="login-pass" class="auth-input" placeholder="Password">
       <button class="auth-submit" onclick="emailLogin()">Sign In</button>
-      <p class="auth-switch">New here? <a onclick="authTab('signup')">Create account</a></p>
     </div>
-    <div id="signup-form" style="display:none;">
-      <div class="auth-err" id="signup-err"></div>
-      <input class="auth-input" type="text" id="signup-name" placeholder="Your name" autocomplete="name">
-      <input class="auth-input" type="email" id="signup-email" placeholder="Email" autocomplete="email">
-      <input class="auth-input" type="password" id="signup-pass" placeholder="Password (min 6 chars)" autocomplete="new-password">
+    <div class="auth-pane" id="signup-form">
+      <button class="google-btn" onclick="googleSignIn()">
+        <svg width="16" height="16" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Continue with Google
+      </button>
+      <div class="auth-or">or</div>
+      <div id="signup-err" class="auth-err"></div>
+      <input type="text" id="signup-name" class="auth-input" placeholder="Full name">
+      <input type="email" id="signup-email" class="auth-input" placeholder="Email address">
+      <input type="password" id="signup-pass" class="auth-input" placeholder="Password (6+ characters)">
       <button class="auth-submit" onclick="emailSignup()">Create Account</button>
-      <p class="auth-switch">Already have an account? <a onclick="authTab('login')">Sign in</a></p>
     </div>
-    <p style="font-size:11px;color:var(--muted2);margin-top:12px;font-family:'DM Mono',monospace;"> Private. Cloud synced. Never sold.</p>
+    <div class="auth-switch">Private · Cloud synced · Never sold</div>
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════
+     APP SHELL
+══════════════════════════════════════════ -->
+<div class="shell">
 
-
-<div class="modal-overlay" id="trade-modal" onclick="closeTradeModal(event)">
-  <div class="trade-modal">
-    <div class="modal-header">
-      <div>
-        <div class="modal-asset" id="m-asset">—</div>
-        <div style="font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px;" id="m-date">—</div>
-      </div>
-      <button class="modal-close" onclick="closeTradeModal()"></button>
-    </div>
-    <div class="modal-body">
-      <div class="modal-grid">
-        <div class="modal-field"><div class="modal-field-lbl">Direction</div><div class="modal-field-val" id="m-dir">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">P&L</div><div class="modal-field-val" id="m-pnl">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Result</div><div class="modal-field-val" id="m-result">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Session</div><div class="modal-field-val" id="m-session">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Planned / Impulsive</div><div class="modal-field-val" id="m-intent">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Followed Rules</div><div class="modal-field-val" id="m-rules">—</div></div>
-        <div class="modal-field"><div class="modal-field-lbl">Market Condition</div><div class="modal-field-val" id="m-mktcond">—</div></div>
-        <div class="modal-field" style="grid-column:1/-1"><div class="modal-field-lbl">Setup</div><div class="modal-field-val" id="m-setup">—</div></div>
-        <div class="modal-field" id="m-lesson-wrap" style="grid-column:1/-1;display:none;"><div class="modal-field-lbl">Lesson learned</div><div class="modal-field-val" id="m-lesson" style="font-size:13px;line-height:1.6;font-weight:400;">—</div></div>
-      </div>
-      <div class="modal-section-title">Emotions</div>
-      <div class="modal-emotions" id="m-emotions"></div>
-      <div id="m-screenshot-wrap" style="display:none;">
-        <div class="modal-section-title">Chart Screenshot</div>
-        <img class="modal-screenshot" id="m-screenshot" src="" alt="Trade chart">
-      </div>
-      <div id="m-notes-wrap" style="display:none;">
-        <div class="modal-section-title">Notes</div>
-        <div class="modal-notes" id="m-notes"></div>
-      </div>
-      <button class="modal-edit-btn" id="m-edit-btn">️Edit This Trade</button>
-      <button class="modal-delete-btn" id="m-delete-btn">Delete This Trade</button>
+<!-- ╔══════════════════════════════╗
+     ║         SIDEBAR              ║
+     ╚══════════════════════════════╝ -->
+<aside class="sidebar">
+  <div class="sb-header">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">V</div>
+      <div class="sb-logo-text">Vyxor</div>
     </div>
   </div>
-</div>
 
-<!-- ── EDIT TRADE MODAL ── -->
-<div class="modal-overlay" id="edit-modal-overlay" onclick="closeEditModal(event)">
-  <div class="edit-modal">
-    <div class="edit-modal-header">
-      <div class="edit-modal-title">Edit <span>Trade</span></div>
-      <button class="modal-close" onclick="closeEditModal()"></button>
-    </div>
-    <div class="edit-modal-body">
-      <div class="edit-grid-2" style="margin-bottom:14px;">
-        <div class="edit-field">
-          <label>Date & Time</label>
-          <input class="edit-input" type="datetime-local" id="e-datetime">
-        </div>
-        <div class="edit-field">
-          <label>Asset / Symbol</label>
-          <input class="edit-input" type="text" id="e-asset" placeholder="e.g. NIFTY, EURUSD, GOLD">
-        </div>
-      </div>
-      <div class="edit-grid-3" style="margin-bottom:14px;">
-        <div class="edit-field">
-          <label>Direction</label>
-          <select class="edit-input" id="e-direction">
-            <option value="Long">↑ Long / Buy</option>
-            <option value="Short">↓ Short / Sell</option>
-          </select>
-        </div>
-        <div class="edit-field">
-          <label>P&L (₹)</label>
-          <input class="edit-input" type="number" id="e-pnl" step="0.01" placeholder="Type P&L" oninput="editAutoResult()">
-        </div>
-        <div class="edit-field">
-          <label>Result</label>
-          <select class="edit-input" id="e-result">
-            <option>Win</option><option>Loss</option><option>Breakeven</option>
-          </select>
-        </div>
-      </div>
-      <div class="edit-grid-2" style="margin-bottom:14px;">
-        <div class="edit-field">
-          <label>Session</label>
-          <input class="edit-input" type="text" id="e-session" placeholder="e.g. NSE Morning">
-        </div>
-        <div class="edit-field">
-          <label>Setup / Strategy</label>
-          <input class="edit-input" type="text" id="e-setup" placeholder="e.g. Breakout">
-        </div>
-      </div>
-      <div class="edit-grid-2" style="margin-bottom:14px;">
-        <div class="edit-field">
-          <label>Pre-Trade Emotion</label>
-          <input class="edit-input" type="text" id="e-preemo" placeholder="e.g. Calm">
-        </div>
-        <div class="edit-field">
-          <label>Post-Trade Emotion</label>
-          <input class="edit-input" type="text" id="e-postemo" placeholder="e.g. Proud">
-        </div>
-      </div>
-      <div class="edit-field" style="margin-bottom:14px;">
-        <label>Lesson learned</label>
-        <input class="edit-input" type="text" id="e-lesson" placeholder="What did this trade teach you?">
-      </div>
-      <div class="edit-field" style="margin-bottom:14px;">
-        <label>Notes</label>
-        <textarea class="edit-input" id="e-notes" rows="3" style="resize:vertical;" placeholder="Any extra context..."></textarea>
-      </div>
-      <button class="edit-save-btn" id="e-save-btn" onclick="saveEditedTrade()">Save Changes</button>
+  <div style="padding:10px 12px 0;">
+    <div class="sb-pnl-strip">
+      <div class="sb-pnl-label">Total P&L</div>
+      <div class="sb-pnl-val" id="sb-pnl-val">—</div>
+      <div class="sb-pnl-meta" id="sb-pnl-meta">— trades · —% win rate</div>
     </div>
   </div>
-</div>
-<!-- ── UPGRADE MODAL ── -->
-<div id="upgrade-modal" style="display:none;position:fixed;inset:0;z-index:999;background:rgba(5,8,22,0.95);backdrop-filter:blur(20px);align-items:center;justify-content:center;padding:1rem;">
-  <div style="background:#0B1220;border:1px solid rgba(79,110,247,0.2);border-radius:20px;max-width:460px;width:100%;padding:2.5rem 2rem;position:relative;text-align:center;box-shadow:0 40px 100px rgba(0,0,0,0.7);">
-    <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="position:absolute;top:16px;right:16px;background:transparent;border:none;color:#475569;font-size:18px;cursor:pointer;line-height:1;"></button>
-    <div style="font-family:var(--serif);font-weight:800;font-size:22px;letter-spacing:-0.05em;margin-bottom:8px;">Your 15-day trial has ended</div>
-    <p style="font-size:14px;color:#94A3B8;line-height:1.7;margin-bottom:1.5rem;">Upgrade to Vyxor Pro to unlock AI Insights and CSV import. Your trade data is safe and waiting for you.</p>
 
-    <!-- Price block -->
-    <div style="background:rgba(79,110,247,0.06);border:1px solid rgba(79,110,247,0.2);border-radius:14px;padding:1.5rem;margin-bottom:1.5rem;">
-      <div style="font-size:42px;font-family:var(--serif);font-weight:800;color:var(--accent);letter-spacing:-0.05em;">$5<span style="font-size:16px;color:#94A3B8;font-weight:400;">/month</span></div>
-      <div style="font-size:12px;color:#475569;font-family:'DM Mono',monospace;margin-top:6px;margin-bottom:1rem;">Cancel anytime · 30-day money back guarantee</div>
-      <div style="display:flex;flex-direction:column;gap:6px;text-align:left;margin-bottom:0;">
-        <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:var(--accent);font-size:11px;">→</span> AI Insights — behavioral self-reflection and weekly summaries</div>
-        <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:var(--accent);font-size:11px;">→</span> CSV import from any broker</div>
-        <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:var(--accent);font-size:11px;">→</span> Unlimited access forever</div>
-        <div style="font-size:13px;color:#94A3B8;display:flex;gap:8px;align-items:center;"><span style="color:var(--accent);font-size:11px;">→</span> All future features included</div>
-      </div>
-    </div>
-
-    <!-- CTA buttons -->
-    <div style="display:flex;flex-direction:column;gap:8px;">
-      <button onclick="startCheckout()" id="upgrade-pay-btn" style="padding:14px;border-radius:10px;border:none;background:var(--accent);color:#fff;font-family:var(--sans);font-size:15px;font-weight:700;cursor:pointer;transition:opacity 0.2s;">Upgrade to Pro — $5/month</button>
-      <button onclick="document.getElementById('upgrade-modal').style.display='none'" style="padding:11px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);background:transparent;color:#94A3B8;font-family:var(--sans);font-size:14px;cursor:pointer;">Continue with trial features</button>
-    </div>
-    <p style="font-size:11px;color:#475569;font-family:'DM Mono',monospace;margin-top:1rem;">Your logged trades will never be deleted.</p>
-  </div>
-</div>
-
-<!-- ── SIDEBAR + APP SHELL ── -->
-<div class="app-shell">
-
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-  <div class="sb-logo">
-    <div style="width:28px;height:28px;background:var(--accent);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0;letter-spacing:-1px;">V</div>
-    <a href="/index.html" class="sb-brand"><span>V</span>yxor</a>
-    <div class="sb-streak-badge" id="sb-streak-badge" style="display:none;" title="Current streak"></div>
-  </div>
+  <button class="sb-add-btn" onclick="switchTab('log')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Log a Trade
+  </button>
 
   <nav class="sb-nav">
-    <button class="sb-item active" id="sb-dashboard" onclick="switchTab('dashboard')" title="Dashboard">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-      <span class="sb-label">Dashboard</span>
+    <div class="sb-section-label">Main</div>
+    <button class="sb-item active" id="sb-dashboard" onclick="switchTab('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Dashboard
     </button>
-    <button class="sb-item" id="sb-log" onclick="switchTab('log')" title="Log Trade">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-      <span class="sb-label">Log Trade</span>
+    <button class="sb-item" id="sb-log" onclick="switchTab('log')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+      Log Trade
     </button>
-    <button class="sb-item" id="sb-history" onclick="switchTab('history')" title="History">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
-      <span class="sb-label">History</span>
+    <button class="sb-item" id="sb-history" onclick="switchTab('history')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+      History
     </button>
-    <button class="sb-item" id="sb-analytics" onclick="switchTab('analytics')" title="Analytics">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      <span class="sb-label">Analytics</span>
+    <button class="sb-item" id="sb-analytics" onclick="switchTab('analytics')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      Analytics
     </button>
 
     <div class="sb-sep"></div>
+    <div class="sb-section-label">Intelligence</div>
 
-    <button class="sb-item" id="sb-ai" onclick="switchTab('ai')" title="AI Insights">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-      <span class="sb-label">AI Insights</span>
+    <button class="sb-item" id="sb-ai" onclick="switchTab('ai')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+      AI Insights
+      <span class="sb-badge">Claude</span>
     </button>
-    <button class="sb-item" id="sb-import" onclick="switchTab('import')" title="Import CSV">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      <span class="sb-label">Import</span>
+    <button class="sb-item" id="sb-import" onclick="switchTab('import')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Import CSV
     </button>
-    <a class="sb-item" href="/position-size-calculator.html" title="Calculator" target="_blank">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="10" y2="18"/><line x1="14" y1="18" x2="16" y2="18"/></svg>
-      <span class="sb-label">Calculator</span>
+    <a href="/position-size-calculator.html" class="sb-item" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="10" y2="10"/><line x1="14" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="10" y2="14"/><line x1="14" y1="14" x2="16" y2="14"/></svg>
+      Calculator
     </a>
   </nav>
 
-  <div class="sb-bottom">
-    <div class="sb-sep"></div>
-    <div class="sb-user" id="sb-user">
+  <div class="sb-footer">
+    <div class="sb-user">
       <div class="sb-avatar" id="sb-avatar">?</div>
-      <div class="sb-user-info">
-        <div class="sb-username" id="sb-username-text">Loading...</div>
-        <button class="sb-signout" onclick="doSignOut()">Sign out</button>
+      <div>
+        <div class="sb-user-name" id="sb-username-text">Loading...</div>
+        <div class="sb-user-plan">Vyxor Journal</div>
       </div>
+      <div class="sb-streak-pill" id="sb-streak-badge"></div>
     </div>
   </div>
 </aside>
 
-<!-- MAIN CONTENT -->
-<div class="app-main" id="app-main">
+<!-- ╔══════════════════════════════╗
+     ║         MAIN AREA            ║
+     ╚══════════════════════════════╝ -->
+<div class="main">
 
-  <!-- Top bar -->
-  <div class="app-topbar">
-    <div class="topbar-title" id="topbar-title">Dashboard</div>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-title" id="topbar-title">Dashboard</div>
+      <div class="topbar-tag" id="sync-count"></div>
+    </div>
     <div class="topbar-right">
-      <div class="sync-indicator" id="sync-indicator">
+      <div class="topbar-sync">
         <div class="sync-dot" id="sync-dot-el"></div>
         <span id="sync-text"></span>
       </div>
-      <span id="sync-count" style="font-size:11px;color:var(--text2);font-family:var(--mono);"></span>
-      <select id="global-currency" onchange="setGlobalCurrency(this.value)" title="Currency" style="padding:5px 8px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--text2);font-size:11px;font-family:var(--mono);outline:none;cursor:pointer;transition:border-color 0.15s;">
+      <select id="global-currency" class="topbar-select" onchange="setGlobalCurrency(this.value)" title="Currency">
         <option value="₹">₹ INR</option>
         <option value="$">$ USD</option>
         <option value="€">€ EUR</option>
@@ -725,496 +1394,571 @@ tbody td{padding:11px 16px;font-size:12px;font-family:var(--mono);white-space:no
         <option value="A$">A$ AUD</option>
         <option value="C$">C$ CAD</option>
       </select>
-      <button id="theme-toggle" onclick="toggleTheme()" title="Toggle theme" style="display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:7px;border:1px solid var(--border);background:var(--surface);color:var(--text2);cursor:pointer;transition:all 0.15s;flex-shrink:0;">
-        <svg id="theme-icon-dark" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <svg id="theme-icon-light" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <button class="topbar-icon-btn" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <svg id="theme-icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg id="theme-icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
       </button>
-      <button class="topbar-log-btn" onclick="switchTab('log')">+ Log Trade</button>
+      <button class="btn-primary" onclick="switchTab('log')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Log Trade
+      </button>
     </div>
   </div>
 
-  <!-- ── DASHBOARD PANEL ── -->
+  <!-- ════════════════════════
+       DASHBOARD PANEL
+  ════════════════════════ -->
   <div class="panel active" id="panel-dashboard">
+    <div class="panel-inner">
 
-    <!-- Stats row -->
-    <div class="dash-stats">
-      <div class="dash-stat">
-        <div class="ds-val" id="s-pnl">—</div>
-        <div class="ds-lbl">Total P&L</div>
-      </div>
-      <div class="dash-stat">
-        <div class="ds-val" id="s-winrate">—</div>
-        <div class="ds-lbl">Win Rate</div>
-      </div>
-      <div class="dash-stat">
-        <div class="ds-val" id="s-streak">—</div>
-        <div class="ds-lbl">Streak</div>
-      </div>
-      <div class="dash-stat">
-        <div class="ds-val" id="s-discipline">—</div>
-        <div class="ds-lbl">Discipline</div>
-      </div>
-      <div class="dash-stat">
-        <div class="ds-val" id="s-trades">0</div>
-        <div class="ds-lbl">Trades</div>
-      </div>
-    </div>
-
-    <!-- Equity curve + Calendar -->
-    <div class="dash-grid">
-
-      <!-- Equity curve -->
-      <div class="dash-card">
-        <div class="dash-card-header">
-          <div class="dash-card-title">Equity Curve</div>
-          <div class="dash-card-sub">Cumulative P&L</div>
+      <!-- KPI Strip -->
+      <div class="kpi-strip">
+        <div class="kpi-card k-pnl">
+          <div class="kpi-lbl">Total P&L</div>
+          <div class="kpi-val pos" id="s-pnl">—</div>
+          <div class="kpi-delta" id="s-pnl-delta">All time</div>
         </div>
-        <div style="height:160px;position:relative;">
-          <canvas id="dash-equity-chart"></canvas>
+        <div class="kpi-card k-wr">
+          <div class="kpi-lbl">Win Rate</div>
+          <div class="kpi-val acc" id="s-winrate">—</div>
+          <div class="kpi-delta" id="s-wr-delta">of all trades</div>
+        </div>
+        <div class="kpi-card k-pf">
+          <div class="kpi-lbl">Discipline</div>
+          <div class="kpi-val pur" id="s-discipline">—</div>
+          <div class="kpi-delta">behavior score</div>
+        </div>
+        <div class="kpi-card k-str">
+          <div class="kpi-lbl">Streak</div>
+          <div class="kpi-val warn" id="s-streak">—</div>
+          <div class="kpi-delta">current run</div>
+        </div>
+        <div class="kpi-card k-trd">
+          <div class="kpi-lbl">Trades</div>
+          <div class="kpi-val neu" id="s-trades">0</div>
+          <div class="kpi-delta" id="s-trades-delta">total logged</div>
         </div>
       </div>
 
-      <!-- Monthly calendar -->
-      <div class="dash-card dash-calendar-card">
-        <div class="dash-card-header">
-          <div class="dash-card-title" id="cal-month-title">May 2026</div>
-          <div class="cal-nav">
-            <button class="cal-nav-btn" onclick="calPrev()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-            </button>
-            <button class="cal-nav-btn" onclick="calNext()">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      <!-- Dashboard body -->
+      <div class="dash-body">
+
+        <!-- Left col -->
+        <div class="dash-left">
+
+          <!-- Equity curve -->
+          <div class="equity-card">
+            <div class="card-header">
+              <div>
+                <div class="card-title">Equity <span>Curve</span></div>
+                <div class="card-sub">Cumulative P&L</div>
+              </div>
+              <div class="card-stat-big" id="dash-equity-stat">—</div>
+            </div>
+            <div class="chart-h">
+              <canvas id="dash-equity-chart" role="img" aria-label="Equity curve chart showing cumulative P&L over trades"></canvas>
+            </div>
+          </div>
+
+          <!-- Calendar -->
+          <div class="cal-card">
+            <div class="cal-head">
+              <div>
+                <div class="cal-month-title" id="cal-month-title">May 2026</div>
+                <div class="cal-stats" id="cal-stats"></div>
+              </div>
+              <div class="cal-nav">
+                <button class="cal-nav-btn" onclick="calPrev()" aria-label="Previous month">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                </button>
+                <button class="cal-nav-btn" onclick="calNext()" aria-label="Next month">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="cal-grid">
+              <div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div>
+              <div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div><div class="cal-dow">Sun</div>
+              <div id="cal-days" style="display:contents;"></div>
+            </div>
+          </div>
+
+        </div><!-- /dash-left -->
+
+        <!-- Right col -->
+        <div class="dash-right">
+
+          <!-- Recent trades -->
+          <div class="trades-card">
+            <div class="trades-card-head">
+              <div class="trades-card-title">Recent Trades</div>
+              <button class="see-all-btn" onclick="switchTab('history')">View all →</button>
+            </div>
+            <div class="trade-list">
+              <div class="trade-row" style="grid-template-columns:1fr 50px 70px 60px 44px;">
+                <div style="font-size:9px;font-family:var(--mono);color:var(--text3);">ASSET</div>
+                <div style="font-size:9px;font-family:var(--mono);color:var(--text3);">DIR</div>
+                <div style="font-size:9px;font-family:var(--mono);color:var(--text3);">P&L</div>
+                <div style="font-size:9px;font-family:var(--mono);color:var(--text3);">EMOTION</div>
+                <div style="font-size:9px;font-family:var(--mono);color:var(--text3);">RESULT</div>
+              </div>
+              <div id="dash-recent-trades">
+                <div style="text-align:center;padding:20px;font-size:12px;font-family:var(--mono);color:var(--text3);">No trades yet</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI dash card -->
+          <div class="ai-dash-card">
+            <div class="ai-dash-head">
+              <div class="ai-live-dot"></div>
+              <div class="ai-dash-title">AI Insights</div>
+              <div class="ai-claude-badge">Claude</div>
+            </div>
+            <div class="ai-insight-box">
+              <div class="ai-insight-label">Pattern detected</div>
+              <div class="ai-insight-text" id="dash-insight-body">
+                <span style="color:var(--text3);">Log 10 trades to unlock AI behavioral insights.</span>
+              </div>
+            </div>
+            <div class="ai-metrics-grid">
+              <div class="ai-metric">
+                <div class="ai-metric-lbl">Calm trades</div>
+                <div class="ai-metric-val acc" id="dash-calm-wr">—</div>
+              </div>
+              <div class="ai-metric">
+                <div class="ai-metric-lbl">FOMO trades</div>
+                <div class="ai-metric-val neg" id="dash-fomo-wr">—</div>
+              </div>
+              <div class="ai-metric">
+                <div class="ai-metric-lbl">Planned</div>
+                <div class="ai-metric-val pos" id="dash-plan-wr">—</div>
+              </div>
+              <div class="ai-metric">
+                <div class="ai-metric-lbl">Impulsive</div>
+                <div class="ai-metric-val neg" id="dash-imp-wr">—</div>
+              </div>
+            </div>
+            <button class="ai-open-btn" onclick="switchTab('ai')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 1 1 7.072 0l-.548.547A3.374 3.374 0 0 0 14 18.469V19a2 2 0 1 1-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              Open full analysis
             </button>
           </div>
+
+        </div><!-- /dash-right -->
+      </div><!-- /dash-body -->
+    </div><!-- /panel-inner -->
+  </div><!-- /panel-dashboard -->
+
+  <!-- ════════════════════════
+       LOG TRADE PANEL
+  ════════════════════════ -->
+  <div class="panel" id="panel-log">
+    <div class="log-layout">
+
+      <div class="form-card">
+        <div class="form-head">
+          <div class="form-head-title">Log a <span>Trade</span></div>
         </div>
-        <div class="cal-grid">
-          <div class="cal-dow">Mon</div><div class="cal-dow">Tue</div><div class="cal-dow">Wed</div>
-          <div class="cal-dow">Thu</div><div class="cal-dow">Fri</div><div class="cal-dow">Sat</div><div class="cal-dow">Sun</div>
-          <div id="cal-days"></div>
+        <div class="form-body">
+
+          <!-- Trade Details -->
+          <div class="form-section">
+            <div class="form-section-lbl">Trade Details</div>
+            <div class="form-row r3" style="margin-bottom:10px;">
+              <div class="fld">
+                <label>Date & Time</label>
+                <input type="datetime-local" id="f-datetime">
+              </div>
+              <div class="fld">
+                <label>Asset / Symbol</label>
+                <input type="text" id="f-asset" placeholder="e.g. NIFTY, EURUSD, GOLD">
+              </div>
+              <div class="fld">
+                <label>P&L</label>
+                <div style="display:flex;gap:4px;">
+                  <select id="f-currency" style="width:72px;padding:9px 8px;border-radius:var(--radius);border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:12px;font-family:var(--mono);outline:none;" onchange="setGlobalCurrency(this.value);document.getElementById('global-currency').value=this.value;"></select>
+                  <input type="number" id="f-pnl" placeholder="0" style="flex:1;" oninput="updatePnlHint()">
+                </div>
+                <div class="pnl-hint" id="pnl-hint"></div>
+              </div>
+            </div>
+            <div class="form-row r2">
+              <div class="fld">
+                <label>Direction</label>
+                <div class="dir-toggle">
+                  <button class="dir-btn long sel" id="dir-long" onclick="setDir('Long')">↑ Long / Buy</button>
+                  <button class="dir-btn short" id="dir-short" onclick="setDir('Short')">↓ Short / Sell</button>
+                </div>
+              </div>
+              <div class="fld">
+                <label>Result</label>
+                <div class="result-sel">
+                  <button class="result-opt sel" data-v="Win" onclick="setResult(this)">Win</button>
+                  <button class="result-opt" data-v="Loss" onclick="setResult(this)">Loss</button>
+                  <button class="result-opt" data-v="Breakeven" onclick="setResult(this)">B/E</button>
+                </div>
+                <input type="hidden" id="f-result" value="Win">
+              </div>
+            </div>
+          </div>
+
+          <!-- Session & Setup -->
+          <div class="form-section">
+            <div class="form-section-lbl">Session & Setup</div>
+            <div class="form-row r2" style="margin-bottom:10px;">
+              <div class="fld">
+                <label>Session</label>
+                <div class="tag-chip-wrap" id="session-chips"></div>
+                <div class="tag-add-row">
+                  <input type="text" class="tag-add-input" id="session-input" placeholder="Add session...">
+                  <button class="tag-add-btn" onclick="addTag('session')">+ Add</button>
+                </div>
+                <input type="hidden" id="f-session" value="">
+              </div>
+              <div class="fld">
+                <label>Setup / Strategy</label>
+                <div class="tag-chip-wrap" id="setup-chips"></div>
+                <div class="tag-add-row">
+                  <input type="text" class="tag-add-input" id="setup-input" placeholder="Add setup...">
+                  <button class="tag-add-btn" onclick="addTag('setup')">+ Add</button>
+                </div>
+                <input type="hidden" id="f-setup" value="">
+              </div>
+            </div>
+          </div>
+
+          <!-- Emotions -->
+          <div class="form-section">
+            <div class="form-section-lbl">Emotion Tracking</div>
+            <div class="form-row r2">
+              <div class="fld">
+                <label>Before trade</label>
+                <div class="emo-wrap" id="pre-emo-wrap">
+                  <button class="emo-tag" onclick="setEmo('pre','Calm',this)">Calm</button>
+                  <button class="emo-tag" onclick="setEmo('pre','Focused',this)">Focused</button>
+                  <button class="emo-tag" onclick="setEmo('pre','Confident',this)">Confident</button>
+                  <button class="emo-tag neg-emo" onclick="setEmo('pre','FOMO',this)">FOMO</button>
+                  <button class="emo-tag neg-emo" onclick="setEmo('pre','Revenge',this)">Revenge</button>
+                  <button class="emo-tag warn-emo" onclick="setEmo('pre','Anxious',this)">Anxious</button>
+                  <button class="emo-tag warn-emo" onclick="setEmo('pre','Bored',this)">Bored</button>
+                </div>
+                <input type="text" class="fld input" id="f-pre-emo" placeholder="or type custom..." style="margin-top:6px;padding:7px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:12px;outline:none;width:100%;" oninput="this.value=this.value">
+              </div>
+              <div class="fld">
+                <label>After trade</label>
+                <div class="emo-wrap" id="post-emo-wrap">
+                  <button class="emo-tag" onclick="setEmo('post','Satisfied',this)">Satisfied</button>
+                  <button class="emo-tag" onclick="setEmo('post','Proud',this)">Proud</button>
+                  <button class="emo-tag neg-emo" onclick="setEmo('post','Frustrated',this)">Frustrated</button>
+                  <button class="emo-tag neg-emo" onclick="setEmo('post','Regret',this)">Regret</button>
+                  <button class="emo-tag neg-emo" onclick="setEmo('post','FOMO',this)">FOMO</button>
+                  <button class="emo-tag" onclick="setEmo('post','Surprised',this)">Surprised</button>
+                </div>
+                <input type="text" class="fld input" id="f-post-emo" placeholder="or type custom..." style="margin-top:6px;padding:7px 10px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:12px;outline:none;width:100%;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Self Awareness -->
+          <div class="form-section">
+            <div class="form-section-lbl">Self Awareness</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+              <div>
+                <div class="form-section-lbl" style="border:none;margin-bottom:8px;">Was this trade planned?</div>
+                <div class="toggle-pills">
+                  <button class="tpill" onclick="setAwareness('planned',this)">Planned</button>
+                  <button class="tpill" onclick="setAwareness('impulsive',this)">Impulsive</button>
+                </div>
+                <input type="hidden" id="f-intent" value="">
+              </div>
+              <div>
+                <div class="form-section-lbl" style="border:none;margin-bottom:8px;">Did you follow your rules?</div>
+                <div class="toggle-pills">
+                  <button class="tpill" onclick="setRules('yes',this)">Yes</button>
+                  <button class="tpill" onclick="setRules('partially',this)">Partially</button>
+                  <button class="tpill" onclick="setRules('no',this)">No</button>
+                </div>
+                <input type="hidden" id="f-rules" value="">
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div>
+                <div class="form-section-lbl" style="border:none;margin-bottom:8px;">Market condition</div>
+                <div class="toggle-pills">
+                  <button class="tpill" onclick="setMarket('Trending',this)">Trending</button>
+                  <button class="tpill" onclick="setMarket('Sideways',this)">Sideways</button>
+                  <button class="tpill" onclick="setMarket('Volatile',this)">Volatile</button>
+                  <button class="tpill" onclick="setMarket('News Day',this)">News Day</button>
+                </div>
+                <input type="hidden" id="f-market" value="">
+              </div>
+              <div class="fld">
+                <label>One lesson from this trade</label>
+                <textarea id="f-lesson" placeholder="What did you learn?" style="min-height:56px;"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Notes & Screenshot -->
+          <div class="form-section">
+            <div class="form-section-lbl">Notes & Screenshot</div>
+            <div class="form-row r2">
+              <div class="fld">
+                <label>Trade notes</label>
+                <textarea id="f-notes" placeholder="Any additional notes about this trade..."></textarea>
+              </div>
+              <div class="fld">
+                <label>Chart screenshot (optional)</label>
+                <div class="ss-zone" id="ss-zone" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleSSDrop(event)">
+                  <input type="file" accept="image/*" id="ss-input" onchange="handleSSChange(event)">
+                  <div class="ss-zone-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                  </div>
+                  <div class="ss-zone-text">Drop image here</div>
+                  <div class="ss-zone-sub">or click to browse</div>
+                </div>
+                <div class="ss-preview" id="ss-preview">
+                  <img id="ss-img" src="" alt="Chart screenshot">
+                  <button class="ss-remove" onclick="removeScreenshot()">Remove</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;padding-top:16px;border-top:1px solid var(--border);">
+            <div class="free-note" id="trial-note" style="flex:1;font-size:11px;font-family:var(--mono);color:var(--text3);"></div>
+            <button type="button" class="btn-primary" id="submit-btn" onclick="saveTrade()" style="padding:11px 28px;font-size:14px;">Save Trade</button>
+          </div>
+
+        </div><!-- /form-body -->
+      </div><!-- /form-card -->
+
+      <!-- Right sidebar -->
+      <div class="form-sidebar">
+        <div class="form-side-card">
+          <div class="form-side-title">Lot Size Calculator</div>
+          <div class="form-row" style="gap:8px;margin-bottom:8px;">
+            <div class="fld"><label>Lots</label><input type="number" id="f-lots" placeholder="1" min="0.01" step="0.01" oninput="calcPnl()"></div>
+            <div class="fld"><label>Lot Size</label><input type="number" id="f-lotsize" placeholder="75" oninput="calcPnl()"></div>
+          </div>
+          <div class="form-row r2" style="gap:8px;">
+            <div class="fld"><label>Entry</label><input type="number" id="f-entry" placeholder="0" step="any" oninput="calcPnl()"></div>
+            <div class="fld"><label>Exit</label><input type="number" id="f-exit" placeholder="0" step="any" oninput="calcPnl()"></div>
+          </div>
+        </div>
+
+        <div class="form-side-card">
+          <div class="form-side-title">Quick Stats</div>
+          <div id="form-quick-stats" class="form-side-sub">Log trades to see your running stats here.</div>
+        </div>
+
+        <div class="form-side-card" style="background:var(--accent-bg);border-color:rgba(37,99,235,.15);">
+          <div style="font-size:11px;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px;">AI Insights</div>
+          <div class="form-side-sub" style="color:var(--text2);">Log 10+ trades to unlock behavioral pattern analysis powered by Claude AI.</div>
         </div>
       </div>
 
-    </div>
+    </div><!-- /log-layout -->
+  </div><!-- /panel-log -->
 
-    <!-- Recent trades + AI insight -->
-    <div class="dash-bottom-grid">
-
-      <!-- Recent trades -->
-      <div class="dash-card">
-        <div class="dash-card-header">
-          <div class="dash-card-title">Recent Trades</div>
-          <button class="dash-see-all" onclick="switchTab('history')">See all →</button>
-        </div>
-        <table class="dash-trades-table">
+  <!-- ════════════════════════
+       HISTORY PANEL
+  ════════════════════════ -->
+  <div class="panel" id="panel-history">
+    <div class="history-layout">
+      <div class="history-controls">
+        <div class="history-title">Trade History</div>
+        <select class="filter-sel" id="filter-result" onchange="renderHistory()"><option value="">All results</option><option value="Win">Win</option><option value="Loss">Loss</option><option value="Breakeven">Breakeven</option></select>
+        <select class="filter-sel" id="filter-dir" onchange="renderHistory()"><option value="">All directions</option><option value="Long">Long</option><option value="Short">Short</option></select>
+        <select class="filter-sel" id="filter-session" onchange="renderHistory()"><option value="">All sessions</option></select>
+        <button class="export-btn" onclick="exportCSV()">Export CSV</button>
+      </div>
+      <div class="table-wrap">
+        <table>
           <thead>
             <tr>
-              <th>Asset</th><th>Dir</th><th>P&L</th><th>Emotion</th><th>Result</th>
+              <th>Date</th><th>Asset</th><th>Direction</th>
+              <th>P&L</th><th>Result</th><th>Session</th>
+              <th>Setup</th><th>Emotion</th><th>Screenshot</th><th>Actions</th>
             </tr>
           </thead>
-          <tbody id="dash-recent-trades">
-            <tr><td colspan="5" style="text-align:center;color:var(--text2);font-size:13px;padding:2rem 0;">No trades yet. Log your first trade.</td></tr>
+          <tbody id="history-tbody">
+            <tr><td colspan="10" class="empty-row">No trades logged yet.</td></tr>
           </tbody>
         </table>
       </div>
-
-      <!-- AI insight -->
-      <div class="dash-card dash-insight-card">
-        <div class="dash-card-header">
-          <div class="dash-card-title">AI Insights</div>
-          <div class="dash-card-sub">Latest insight</div>
-        </div>
-        <div class="dash-insight-body" id="dash-insight-body">
-          <div class="dash-insight-empty">Log 10 trades to unlock AI Insights.</div>
-        </div>
-        <button class="dash-insight-btn" onclick="switchTab('ai')">Open AI Insights →</button>
-      </div>
-
-    </div>
-
-  </div>
-
-  <!-- ── LOG PANEL ── -->
-  <div class="panel" id="panel-log">
-    <div class="form-card">
-      <div class="form-title">Log a <span>Trade</span></div>
-
-      <!-- SECTION 1: TRADE DETAILS -->
-      <div class="form-section">
-        <div class="form-section-label">Trade Details</div>
-        <div class="form-row three" style="margin-bottom:12px;">
-          <div class="field">
-            <label>Date & Time</label>
-            <input type="datetime-local" id="f-datetime">
-          </div>
-          <div class="field">
-            <label>Asset / Symbol</label>
-            <input type="text" id="f-asset" placeholder="e.g. NIFTY, EURUSD, GOLD">
-          </div>
-          <div class="field">
-            <label>P&L</label>
-            <div style="display:flex;gap:6px;align-items:center;">
-              <select id="f-currency" onchange="setGlobalCurrency(this.value);document.getElementById('global-currency').value=this.value;" style="width:72px;padding:9px 6px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:13px;font-family:'DM Mono',monospace;flex-shrink:0;outline:none;">
-                <option value="₹">₹ INR</option>
-                <option value="$">$ USD</option>
-                <option value="€">€ EUR</option>
-                <option value="£">£ GBP</option>
-                <option value="¥">¥ JPY</option>
-                <option value="A$">A$ AUD</option>
-                <option value="C$">C$ CAD</option>
-              </select>
-              <input type="number" id="f-pnl" step="0.01" placeholder="Type your P&L" oninput="autoResult()" style="flex:1;">
-            </div>
-            <div class="pnl-hint" id="pnl-hint"></div>
-          </div>
-        </div>
-        <div class="form-row two" style="margin-bottom:12px;">
-          <div class="field">
-            <label>Direction</label>
-            <div class="dir-toggle">
-              <button class="dir-btn long" id="dir-long" onclick="setDir('Long',this)">↑ LONG / BUY</button>
-              <button class="dir-btn short" id="dir-short" onclick="setDir('Short',this)">↓ SHORT / SELL</button>
-            </div>
-          </div>
-          <div class="field">
-            <label>Result</label>
-            <select id="f-result">
-              <option>Win</option><option>Loss</option><option>Breakeven</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 2: SESSION (custom tags) -->
-      <div class="form-section">
-        <div class="form-section-label">Session</div>
-        <div class="custom-tag-wrap" id="session-tags-wrap">
-          <span class="tag-empty" id="session-empty">No sessions yet — add yours below</span>
-        </div>
-        <div class="tag-add-row">
-          <input class="tag-add-input" type="text" id="new-session-input" placeholder="e.g. London Open, New York, NSE Morning, Tokyo..." onkeydown="if(event.key==='Enter')addSessionTag()">
-          <button class="tag-add-btn" onclick="addSessionTag()">+ Add</button>
-        </div>
-      </div>
-
-      <!-- SECTION 3: SETUP / STRATEGY (personal tags) -->
-      <div class="form-section">
-        <div class="form-section-label">Setup / Strategy</div>
-        <div class="custom-tag-wrap" id="setup-tags-wrap">
-          <span class="tag-empty" id="setup-empty">No setups yet — add yours below</span>
-        </div>
-        <div class="tag-add-row">
-          <input class="tag-add-input" type="text" id="new-setup-input" placeholder="What's your setup called? e.g. London Breakout, VWAP Reclaim, Gap Fill..." onkeydown="if(event.key==='Enter')addSetupTag()">
-          <button class="tag-add-btn" onclick="addSetupTag()">+ Add</button>
-        </div>
-      </div>
-
-      <!-- SECTION 4: SELF AWARENESS -->
-      <div class="form-section">
-        <div class="form-section-label">Self Awareness</div>
-        <div class="awareness-grid">
-          <div>
-            <div class="awareness-label">Was this trade planned or impulsive?</div>
-            <div class="toggle-btns">
-              <button class="toggle-btn" id="aw-planned" onclick="setAwareness('planned',this)">Planned</button>
-              <button class="toggle-btn" id="aw-impulsive" onclick="setAwareness('impulsive',this)">Impulsive</button>
-            </div>
-          </div>
-          <div>
-            <div class="awareness-label">Did you follow your rules?</div>
-            <div class="toggle-btns">
-              <button class="toggle-btn" id="aw-yes" onclick="setRules('yes',this)">Yes</button>
-              <button class="toggle-btn" id="aw-partial" onclick="setRules('partial',this)">Partially</button>
-              <button class="toggle-btn" id="aw-no" onclick="setRules('no',this)">No</button>
-            </div>
-          </div>
-        </div>
-        <div style="margin-bottom:12px;">
-          <div class="awareness-label">Market condition</div>
-          <div class="toggle-btns">
-            <button class="toggle-btn" id="mkt-trending" onclick="setMarketCondition('Trending',this)">Trending</button>
-            <button class="toggle-btn" id="mkt-sideways" onclick="setMarketCondition('Sideways',this)">↔ Sideways</button>
-            <button class="toggle-btn" id="mkt-volatile" onclick="setMarketCondition('Volatile',this)">Volatile</button>
-            <button class="toggle-btn" id="mkt-news" onclick="setMarketCondition('News Day',this)">News Day</button>
-          </div>
-        </div>
-        <div>
-          <div class="awareness-label">One lesson from this trade</div>
-          <textarea class="lesson-input" id="f-lesson" rows="2" placeholder="What did this trade teach you?"></textarea>
-        </div>
-      </div>
-
-      <!-- SECTION 5: EMOTIONS -->
-      <div class="form-section">
-        <div class="form-section-label">Emotions</div>
-        <div class="form-row two">
-          <div class="field">
-            <label>Pre-Trade</label>
-            <div class="etag-wrap" id="pre-emotions">
-              <button class="etag" onclick="setEmo('pre',' Calm',this)">Calm</button>
-              <button class="etag purple" onclick="setEmo('pre',' Focused',this)">Focused</button>
-              <button class="etag" onclick="setEmo('pre',' Confident',this)">Confident</button>
-              <button class="etag warn" onclick="setEmo('pre',' FOMO',this)">FOMO</button>
-              <button class="etag danger" onclick="setEmo('pre',' Revenge',this)">Revenge</button>
-              <button class="etag warn" onclick="setEmo('pre',' Anxious',this)">Anxious</button>
-              <button class="etag" onclick="setEmo('pre',' Bored',this)">Bored</button>
-            </div>
-          </div>
-          <div class="field">
-            <label>Post-Trade</label>
-            <div class="etag-wrap" id="post-emotions">
-              <button class="etag" onclick="setEmo('post',' Satisfied',this)">Satisfied</button>
-              <button class="etag purple" onclick="setEmo('post',' Surprised',this)">Surprised</button>
-              <button class="etag" onclick="setEmo('post',' Proud',this)">Proud</button>
-              <button class="etag danger" onclick="setEmo('post',' Frustrated',this)">Frustrated</button>
-              <button class="etag warn" onclick="setEmo('post',' Regret',this)">Regret</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SECTION 6: SCREENSHOT & NOTES -->
-      <div class="form-section">
-        <div class="form-section-label">Screenshot & Notes</div>
-        <div class="form-row two">
-          <div class="field">
-            <label>Chart Screenshot</label>
-            <div class="screenshot-zone" id="screenshot-zone" ondragover="event.preventDefault();this.classList.add('drag-over')" ondragleave="this.classList.remove('drag-over')" ondrop="handleScreenshotDrop(event)">
-              <input type="file" accept="image/*" onchange="handleScreenshotFile(event)">
-              <div class="sz-icon"></div>
-              <div class="sz-text">Drop chart screenshot here</div>
-              <div class="sz-sub">PNG, JPG, WebP · Click or drag</div>
-            </div>
-            <div class="screenshot-preview" id="screenshot-preview">
-              <img id="screenshot-img" src="" alt="Trade screenshot">
-              <button class="screenshot-remove" onclick="removeScreenshot()"> Remove</button>
-            </div>
-          </div>
-          <div class="field">
-            <label>Notes</label>
-            <textarea id="f-notes" placeholder="What happened? Any extra context..." style="min-height:160px;"></textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="form-footer">
-        <div class="free-note" id="trial-note"></div>
-        <button class="submit-btn" id="submit-btn" onclick="saveTrade()">Save Trade →</button>
-      </div>
     </div>
   </div>
 
-  <!-- ── HISTORY PANEL ── -->
-  <div class="panel" id="panel-history">
-    <div class="history-header">
-      <div class="history-title">Trade History</div>
-      <div class="history-actions">
-        <select class="filter-select" id="f-res" onchange="renderHistory()">
-          <option value="">All Results</option>
-          <option>Win</option><option>Loss</option><option>Breakeven</option>
-        </select>
-        <button class="export-btn" onclick="exportCSV()">Export CSV</button>
-      </div>
-    </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Date</th><th>Asset</th><th>Dir</th><th>P&L</th>
-            <th>Session</th><th>Setup</th><th>Emotion</th><th>Result</th><th>SS</th><th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="history-body"></tbody>
-      </table>
-      <div class="empty-state" id="history-empty" style="display:none;">
-        <div class="empty-icon"></div>
-        <div class="empty-text">No trades yet.<br>Switch to "Log Trade" and add your first trade.<br><br> Tip: Click any row to see full trade details.</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── ANALYTICS PANEL ── -->
+  <!-- ════════════════════════
+       ANALYTICS PANEL
+  ════════════════════════ -->
   <div class="panel" id="panel-analytics">
-    <!-- KPI row -->
-    <div class="bw-row">
-      <div class="bw-card">
-        <div class="bw-lbl">Best Trade</div>
-        <div class="bw-asset" id="bw-best-asset">—</div>
-        <div class="bw-detail" id="bw-best-detail">Log trades to see</div>
-        <div class="bw-pnl td-p" id="bw-best-pnl">—</div>
+    <div class="analytics-layout">
+      <div class="an-kpi-row">
+        <div class="an-kpi">
+          <div class="an-kpi-lbl">Best Trade</div>
+          <div class="an-kpi-val" id="bw-best-asset">—</div>
+          <div class="an-kpi-detail" id="bw-best-detail">Log trades to see</div>
+          <div class="an-kpi-pnl td-p" id="bw-best-pnl">—</div>
+        </div>
+        <div class="an-kpi">
+          <div class="an-kpi-lbl">Worst Trade</div>
+          <div class="an-kpi-val" id="bw-worst-asset">—</div>
+          <div class="an-kpi-detail" id="bw-worst-detail">Log trades to see</div>
+          <div class="an-kpi-pnl td-n" id="bw-worst-pnl">—</div>
+        </div>
+        <div class="an-kpi">
+          <div class="an-kpi-lbl">Planned vs Impulsive</div>
+          <div class="an-kpi-val" id="kpi-planned">—</div>
+          <div class="an-kpi-detail" id="kpi-planned-detail">Win rate comparison</div>
+          <div class="an-kpi-pnl" id="kpi-planned-pnl">—</div>
+        </div>
+        <div class="an-kpi">
+          <div class="an-kpi-lbl">Rules Followed</div>
+          <div class="an-kpi-val" id="kpi-rules">—</div>
+          <div class="an-kpi-detail" id="kpi-rules-detail">Of all logged trades</div>
+          <div class="an-kpi-pnl" id="kpi-rules-pnl">—</div>
+        </div>
       </div>
-      <div class="bw-card">
-        <div class="bw-lbl">Worst Trade</div>
-        <div class="bw-asset" id="bw-worst-asset">—</div>
-        <div class="bw-detail" id="bw-worst-detail">Log trades to see</div>
-        <div class="bw-pnl td-n" id="bw-worst-pnl">—</div>
-      </div>
-      <div class="bw-card">
-        <div class="bw-lbl">Planned vs Impulsive</div>
-        <div class="bw-asset" id="kpi-planned">—</div>
-        <div class="bw-detail" id="kpi-planned-detail">Win rate comparison</div>
-        <div class="bw-pnl" id="kpi-planned-pnl" style="font-size:11px;">—</div>
-      </div>
-      <div class="bw-card">
-        <div class="bw-lbl">Rules Followed</div>
-        <div class="bw-asset" id="kpi-rules">—</div>
-        <div class="bw-detail" id="kpi-rules-detail">Of all logged trades</div>
-        <div class="bw-pnl" id="kpi-rules-pnl" style="font-size:11px;">—</div>
-      </div>
-    </div>
-    <!-- Charts -->
-    <div class="analytics-grid">
-      <div class="chart-card">
-        <div class="chart-title">Equity <span>Curve</span></div>
-        <div class="chart-sub">Cumulative P&L over all trades</div>
-        <div class="chart-wrap"><canvas id="equity-chart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Emotion vs <span>Win Rate</span></div>
-        <div class="chart-sub">Which mindset makes you money</div>
-        <div class="chart-wrap"><canvas id="emotion-chart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">P&L by <span>Session</span></div>
-        <div class="chart-sub">Your best and worst sessions</div>
-        <div class="chart-wrap"><canvas id="session-chart"></canvas></div>
-      </div>
-      <div class="chart-card">
-        <div class="chart-title">Setup <span>Performance</span></div>
-        <div class="chart-sub">Win rate per strategy</div>
-        <div class="chart-wrap"><canvas id="setup-chart"></canvas></div>
+
+      <div class="an-charts-grid">
+        <div class="an-chart-card">
+          <div class="an-chart-title">Equity <span>Curve</span></div>
+          <div class="an-chart-sub">Cumulative P&L over all trades</div>
+          <div class="an-chart-area">
+            <canvas id="equity-chart" role="img" aria-label="Equity curve"></canvas>
+          </div>
+        </div>
+        <div class="an-chart-card">
+          <div class="an-chart-title">Emotion vs <span>Win Rate</span></div>
+          <div class="an-chart-sub">Which mindset makes you money</div>
+          <div class="an-chart-area">
+            <canvas id="emotion-chart" role="img" aria-label="Emotion win rate chart"></canvas>
+          </div>
+        </div>
+        <div class="an-chart-card">
+          <div class="an-chart-title">P&L by <span>Session</span></div>
+          <div class="an-chart-sub">Your best and worst sessions</div>
+          <div class="an-chart-area">
+            <canvas id="session-chart" role="img" aria-label="Session P&L chart"></canvas>
+          </div>
+        </div>
+        <div class="an-chart-card">
+          <div class="an-chart-title">Setup <span>Performance</span></div>
+          <div class="an-chart-sub">Win rate per strategy</div>
+          <div class="an-chart-area">
+            <canvas id="setup-chart" role="img" aria-label="Setup performance chart"></canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- ── AI PANEL ── -->
+  <!-- ════════════════════════
+       AI INSIGHTS PANEL
+  ════════════════════════ -->
   <div class="panel" id="panel-ai">
-
-    <!-- AI Insights header card -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:12px;">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1rem;">
-        <div>
-          <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;">
-            <div style="width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0;"></div>
-            <span style="font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.3px;">AI <span style="color:var(--accent);">Insights</span></span>
+    <div class="ai-layout">
+      <div class="ai-main-card">
+        <div class="ai-panel-head">
+          <div>
+            <div class="ai-panel-title-row">
+              <div class="ai-live-dot" style="width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite;flex-shrink:0;"></div>
+              <div class="ai-panel-title">AI <span>Insights</span></div>
+            </div>
+            <div class="ai-panel-sub">Powered by Claude · Personal journal reflection tool</div>
           </div>
-          <div style="font-size:11px;font-family:var(--mono);color:var(--text3);">Powered by Claude · Self-reflection tool only</div>
+          <div class="ai-claude-badge">Claude AI</div>
         </div>
-        <div style="font-size:10px;font-family:var(--mono);color:var(--accent);background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);border-radius:5px;padding:3px 8px;">Claude AI</div>
-      </div>
-      <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:1rem;">Reads your journal entries — emotions, setups, patterns — and reflects them back as self-awareness insights. Based entirely on your own data. Does not recommend trades or provide financial advice.</p>
-      <div style="font-size:11px;font-family:var(--mono);color:var(--text3);padding:8px 12px;border:1px solid var(--border);border-radius:7px;margin-bottom:1.25rem;line-height:1.6;background:var(--bg2);">
-        For self-reflection only · Not financial advice · Not a SEBI registered advisor
-      </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="ai-btn" id="ai-btn" onclick="runAnalysis()">Analyse My Journal</button>
-        <button class="ai-btn story" id="story-btn" onclick="runStory()">This Week's Summary</button>
-      </div>
-      <div class="ai-loading" id="ai-loading">
-        <div class="spinner"></div>
-        <span id="ai-loading-text">Analysing your journal...</span>
-      </div>
-      <div class="ai-result" id="ai-result">
-        <div class="ai-result-title" id="ai-result-title">Your Analysis</div>
-        <div class="ai-result-text" id="ai-result-text"></div>
-      </div>
-    </div>
-
-    <!-- Weekly Reports -->
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-        <div>
-          <div style="font-size:14px;font-weight:600;color:var(--text);margin-bottom:2px;">Weekly Reports</div>
-          <div style="font-size:11px;font-family:var(--mono);color:var(--text3);">Saved automatically every Sunday</div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:12px;">The AI reads your journal entries — the emotions you logged, the setups you recorded, your behavioral patterns — and reflects them back as self-awareness insights. Does not recommend trades or provide financial advice.</p>
+        <div class="ai-disclaimer">For self-reflection only · Not financial advice · Not a SEBI registered advisor</div>
+        <div class="ai-btn-row">
+          <button class="ai-btn-primary" id="ai-btn" onclick="runAnalysis()">Analyse My Journal</button>
+          <button class="ai-btn-secondary" id="story-btn" onclick="runStory()">This Week's Summary</button>
+        </div>
+        <div class="ai-loading-row" id="ai-loading">
+          <div class="spinner"></div>
+          <span id="ai-loading-text">Analysing your journal...</span>
+        </div>
+        <div class="ai-result" id="ai-result">
+          <div class="ai-result-title" id="ai-result-title">Your Analysis</div>
+          <div id="ai-result-text"></div>
         </div>
       </div>
-      <div id="reports-loading" style="font-size:12px;color:var(--text3);font-family:var(--mono);padding:0.5rem 0;"></div>
-      <div id="reports-list"></div>
-    </div>
 
+      <div class="ai-reports-card">
+        <div class="ai-reports-title">Weekly Reports</div>
+        <div class="ai-reports-sub">Saved automatically every Sunday</div>
+        <div id="reports-loading" style="font-size:11px;font-family:var(--mono);color:var(--text3);"></div>
+        <div id="reports-list"></div>
+      </div>
+    </div>
   </div>
 
-  <!-- ── IMPORT PANEL ── -->
+  <!-- ════════════════════════
+       IMPORT PANEL
+  ════════════════════════ -->
   <div class="panel" id="panel-import">
-    <div style="max-width:680px;">
-
-      <!-- Header -->
-      <div style="margin-bottom:1.25rem;">
-        <div style="font-size:16px;font-weight:600;color:var(--text);letter-spacing:-0.3px;margin-bottom:4px;">Import <span style="color:var(--accent);">CSV</span></div>
-        <div style="font-size:13px;color:var(--text2);">Import your trade history from any broker or platform. Vyxor detects column formats automatically.</div>
+    <div class="import-layout">
+      <div class="import-header">
+        <div class="import-title">Import <span>CSV</span></div>
+        <div class="import-sub">Import your trade history from any broker. Vyxor detects column formats automatically.</div>
       </div>
-
-      <!-- What your CSV needs -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1rem 1.25rem;margin-bottom:1rem;">
-        <div style="font-size:10px;font-family:var(--mono);color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px;">Required columns</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;"></div>Date / Time
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;"></div>Symbol / Asset
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;"></div>Buy / Sell direction
-          </div>
-          <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);">
-            <div style="width:5px;height:5px;border-radius:50%;background:var(--pos);flex-shrink:0;"></div>P&L or price data
-          </div>
+      <div class="import-hints">
+        <div class="import-hints-title">Required columns</div>
+        <div class="import-hint-grid">
+          <div class="import-hint">Date / Time</div>
+          <div class="import-hint">Symbol / Asset</div>
+          <div class="import-hint">Buy / Sell direction</div>
+          <div class="import-hint">P&L or price data</div>
         </div>
-        <div style="font-size:11px;font-family:var(--mono);color:var(--text3);margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">Column names don't need to match exactly — Vyxor auto-detects them.</div>
+        <div class="import-hint-foot">Column names don't need to match exactly — Vyxor auto-detects them. Supports all brokers.</div>
       </div>
-
-      <!-- Drop zone -->
       <div class="drop-zone" id="u-drop" ondragover="dragOver(event,'u-drop')" ondragleave="dragLeave('u-drop')" ondrop="dropFile(event,'universal')">
         <input type="file" accept=".csv" onchange="fileSelected(event,'universal')">
-        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--text3);margin-bottom:10px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <div class="drop-icon">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
         <div class="drop-text">Drop your CSV file here</div>
         <div class="drop-sub">or click to browse · any broker, any market</div>
       </div>
-
-      <!-- Preview -->
-      <div class="preview-table-wrap" id="u-preview">
-        <div class="preview-header">
-          <span class="preview-title">Preview</span>
+      <div class="preview-wrap" id="u-preview">
+        <div class="preview-head">
+          <span style="font-size:12px;font-weight:600;color:var(--text);">Preview</span>
           <span class="preview-count" id="u-count">0 trades detected</span>
         </div>
-        <div style="overflow-x:auto;border-radius:8px;border:1px solid var(--border);">
-          <table class="preview-table" style="width:100%;">
+        <div style="overflow-x:auto;">
+          <table class="preview-tbl">
             <thead><tr><th>Date</th><th>Asset</th><th>Direction</th><th>P&L</th><th>Result</th></tr></thead>
             <tbody id="u-preview-body"></tbody>
           </table>
         </div>
       </div>
-
-      <!-- Progress -->
-      <div class="import-progress" id="u-progress">
-        <div class="progress-bar-wrap"><div class="progress-bar" id="u-bar"></div></div>
-        <div class="progress-text" id="u-progress-text">Importing trades...</div>
+      <div class="import-progress-wrap" id="u-progress">
+        <div class="import-prog-bar-bg"><div class="import-prog-bar" id="u-bar"></div></div>
+        <div class="import-prog-text" id="u-progress-text">Importing trades...</div>
       </div>
-
-      <!-- Result -->
-      <div class="import-result" id="u-result">
+      <div class="import-result-wrap" id="u-result">
         <div class="import-result-title">Import Complete</div>
         <div class="import-result-text" id="u-result-text"></div>
       </div>
-
-      <!-- Actions -->
-      <div class="import-actions" id="u-actions" style="display:none;">
-        <button class="import-btn" id="u-import-btn" onclick="importTrades('universal')">Import to Journal</button>
-        <button class="clear-btn" id="u-clear-btn" onclick="clearImport('universal')">Clear</button>
+      <div class="import-actions-row" id="u-actions">
+        <button class="import-do-btn" id="u-import-btn" onclick="importTrades('universal')">Import to Journal</button>
+        <button class="import-clear-btn" id="u-clear-btn" onclick="clearImport('universal')">Clear</button>
       </div>
-
     </div>
   </div>
 
-</div><!-- /panel-import -->
+</div><!-- /main -->
+</div><!-- /shell -->
 
-</div><!-- /app-main -->
-</div><!-- /app-shell -->
-
-<!-- ── ONBOARDING OVERLAY ── -->
+<!-- ONBOARDING -->
 <div class="onboarding-overlay" id="onboarding-overlay" style="display:none;">
   <div class="onboarding-box">
-    <div class="ob-progress">
+    <div class="ob-prog">
       <div class="ob-prog-dot done" id="ob-dot-1"></div>
       <div class="ob-prog-dot" id="ob-dot-2"></div>
       <div class="ob-prog-dot" id="ob-dot-3"></div>
@@ -1253,15 +1997,15 @@ tbody td{padding:11px 16px;font-size:12px;font-family:var(--mono);white-space:no
     <div class="ob-step" id="ob-step-3">
       <div class="ob-eyebrow">Step 3 of 4</div>
       <div class="ob-title">Your strategy</div>
-      <div class="ob-sub">Describe your trading approach in 2-3 lines.</div>
-      <textarea class="ob-textarea" id="ob-strategy" rows="4" placeholder="e.g. I trade NIFTY intraday breakouts on 15min charts..."></textarea>
+      <div class="ob-sub">Describe your approach in 2-3 lines. Optional — helps AI give better insights.</div>
+      <textarea class="ob-textarea" id="ob-strategy" placeholder="e.g. I trade NIFTY intraday breakouts on 15min charts..."></textarea>
       <div class="ob-actions">
-        <button class="ob-btn-skip" onclick="obNext(4)">Skip for now</button>
+        <button class="ob-btn-skip" onclick="obNext(4)">Skip</button>
         <button class="ob-btn-primary" onclick="obNext(4)">Next →</button>
       </div>
     </div>
     <div class="ob-step" id="ob-step-4">
-      <div class="ob-done-icon"></div>
+      <div class="ob-done-icon">✓</div>
       <div class="ob-done-title">You're all set.</div>
       <div class="ob-done-sub">Log your first 10 trades to unlock AI Insights.</div>
       <div class="ob-done-info" id="ob-summary"></div>
@@ -1272,7 +2016,72 @@ tbody td{padding:11px 16px;font-size:12px;font-family:var(--mono);white-space:no
   </div>
 </div>
 
+<!-- MODALS -->
+<div class="modal-overlay" id="trade-modal-overlay">
+  <div class="trade-modal" id="trade-modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-asset" id="m-asset">—</div>
+        <div class="modal-date" id="m-date">—</div>
+      </div>
+      <button class="modal-close" onclick="closeTradeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-grid">
+        <div class="modal-field"><div class="modal-field-lbl">Direction</div><div class="modal-field-val" id="m-dir">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">P&L</div><div class="modal-field-val" id="m-pnl">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Result</div><div class="modal-field-val" id="m-result">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Session</div><div class="modal-field-val" id="m-session">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Setup</div><div class="modal-field-val" id="m-setup">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Intent</div><div class="modal-field-val" id="m-intent">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Rules Followed</div><div class="modal-field-val" id="m-rules">—</div></div>
+        <div class="modal-field"><div class="modal-field-lbl">Market</div><div class="modal-field-val" id="m-market">—</div></div>
+      </div>
+      <div class="modal-section-title">Emotions</div>
+      <div class="modal-emo-row">
+        <div class="modal-emo-chip" id="m-pre-emo">—</div>
+        <div style="font-size:10px;font-family:var(--mono);color:var(--text3);align-self:center;">before →</div>
+        <div class="modal-emo-chip" id="m-post-emo">—</div>
+        <div style="font-size:10px;font-family:var(--mono);color:var(--text3);align-self:center;">after</div>
+      </div>
+      <img class="modal-ss" id="m-screenshot" src="" alt="Chart" style="display:none;">
+      <div class="modal-section-title" id="m-notes-label" style="display:none;">Lesson / Notes</div>
+      <div class="modal-notes" id="m-notes"></div>
+      <button class="modal-edit-btn" id="m-edit-btn" onclick="openEditFromModal()">Edit This Trade</button>
+      <button class="modal-delete-btn" id="m-delete-btn">Delete Trade</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="edit-modal-overlay">
+  <div class="edit-modal" id="edit-modal">
+    <div class="edit-modal-header">
+      <div class="edit-modal-title">Edit <span>Trade</span></div>
+      <button class="modal-close" onclick="closeEditModal()">✕</button>
+    </div>
+    <div class="edit-modal-body">
+      <input type="hidden" id="edit-id">
+      <div class="edit-g2" style="margin-bottom:10px;">
+        <div class="edit-field"><label>Asset</label><input class="edit-input" id="edit-asset"></div>
+        <div class="edit-field"><label>P&L</label><input class="edit-input" type="number" id="edit-pnl"></div>
+      </div>
+      <div class="edit-g3" style="margin-bottom:10px;">
+        <div class="edit-field"><label>Direction</label><select class="edit-input" id="edit-direction"><option>Long</option><option>Short</option></select></div>
+        <div class="edit-field"><label>Result</label><select class="edit-input" id="edit-result"><option>Win</option><option>Loss</option><option>Breakeven</option></select></div>
+        <div class="edit-field"><label>Date</label><input class="edit-input" type="datetime-local" id="edit-datetime"></div>
+      </div>
+      <div class="edit-g2" style="margin-bottom:10px;">
+        <div class="edit-field"><label>Pre Emotion</label><input class="edit-input" id="edit-pre-emo"></div>
+        <div class="edit-field"><label>Post Emotion</label><input class="edit-input" id="edit-post-emo"></div>
+      </div>
+      <div class="edit-field" style="margin-bottom:10px;"><label>Notes</label><textarea class="edit-input" id="edit-notes" rows="3"></textarea></div>
+      <button class="edit-save-btn" onclick="saveEdit()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
+
 
 <script>
 // ── All functions stubbed before module loads ─────────
@@ -1330,6 +2139,7 @@ window.switchTab = function(tab) {
 };
 </script>
 
+<script type="module">
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
 import {
@@ -1864,7 +2674,7 @@ window.handleScreenshotFile = function(e) {
 
 window.handleScreenshotDrop = function(e) {
   e.preventDefault();
-  document.getElementById('screenshot-zone').classList.remove('drag-over');
+  document.getElementById('ss-zone').classList.remove('drag-over');
   const file = e.dataTransfer.files[0];
   if (file && file.type.startsWith('image/')) processScreenshot(file);
 };
@@ -1875,9 +2685,9 @@ function processScreenshot(file) {
   reader.onload = e => {
     screenshotBase64 = e.target.result;
     document.getElementById('screenshot-img').src = screenshotBase64;
-    document.getElementById('screenshot-preview').style.display = 'block';
-    document.querySelector('#screenshot-zone .sz-text').textContent = file.name;
-    document.querySelector('#screenshot-zone .sz-sub').textContent = (file.size/1024).toFixed(0)+' KB uploaded';
+    document.getElementById('ss-preview').style.display = 'block';
+    document.querySelector('#ss-zone .sz-text').textContent = file.name;
+    document.querySelector('#ss-zone .sz-sub').textContent = (file.size/1024).toFixed(0)+' KB uploaded';
     toast('Screenshot ready ');
   };
   reader.readAsDataURL(file);
@@ -1886,10 +2696,10 @@ function processScreenshot(file) {
 window.removeScreenshot = function() {
   screenshotBase64 = '';
   document.getElementById('screenshot-img').src = '';
-  document.getElementById('screenshot-preview').style.display = 'none';
-  document.querySelector('#screenshot-zone .sz-text').textContent = 'Drop chart screenshot here';
-  document.querySelector('#screenshot-zone .sz-sub').textContent = 'PNG, JPG, WebP · Click or drag';
-  const fi = document.querySelector('#screenshot-zone input[type="file"]');
+  document.getElementById('ss-preview').style.display = 'none';
+  document.querySelector('#ss-zone .sz-text').textContent = 'Drop chart screenshot here';
+  document.querySelector('#ss-zone .sz-sub').textContent = 'PNG, JPG, WebP · Click or drag';
+  const fi = document.querySelector('#ss-zone input[type="file"]');
   if (fi) fi.value = '';
 };
 
@@ -2997,8 +3807,8 @@ function showPreview(broker, trades) {
     </tr>`;
   }).join('')+(trades.length>10?`<tr><td colspan="5" style="text-align:center;color:var(--muted2);font-size:11px;padding:8px">+${trades.length-10} more trades</td></tr>`:'');
   document.getElementById('u-preview').style.display='block';
-  document.getElementById('u-import-btn').style.display='inline-flex';
-  document.getElementById('u-clear-btn').style.display='inline-flex';
+  document.getElementById('u-import-do-btn').style.display='inline-flex';
+  document.getElementById('u-import-clear-btn').style.display='inline-flex';
 }
 
 window.importTrades = async function(broker) {
@@ -3006,10 +3816,10 @@ window.importTrades = async function(broker) {
   if (trialExpired) { showUpgradeModal(); return; }
   const trades=importState.universal;
   if (!trades.length) { toast('No trades to import.',true); return; }
-  const btn=document.getElementById('u-import-btn');
+  const btn=document.getElementById('u-import-do-btn');
   const prog=document.getElementById('u-progress');
   const bar=document.getElementById('u-bar');
-  const progTxt=document.getElementById('u-progress-text');
+  const progTxt=document.getElementById('u-import-prog-text');
   const result=document.getElementById('u-result');
   const resTxt=document.getElementById('u-result-text');
   btn.disabled=true; prog.style.display='block';
@@ -3043,7 +3853,7 @@ window.importTrades = async function(broker) {
 
 window.clearImport = function(broker) {
   importState.universal=[];
-  ['u-preview','u-import-btn','u-clear-btn','u-result','u-progress'].forEach(id=>{
+  ['u-preview','u-import-do-btn','u-import-clear-btn','u-result','u-progress'].forEach(id=>{
     const el=document.getElementById(id); if(el) el.style.display='none';
   });
   const fi=document.querySelector('#u-drop input[type="file"]');
@@ -3264,6 +4074,8 @@ if (window.location.search.includes('upgraded=1')) {
   setTimeout(() => toast('Welcome to Vyxor Pro! All features unlocked.'), 1000);
   window.history.replaceState({}, '', '/journal.html');
 }
+
+</script>
 
 </script>
 </body>
